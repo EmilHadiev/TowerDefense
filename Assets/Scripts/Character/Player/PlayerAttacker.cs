@@ -4,7 +4,6 @@ using Zenject;
 
 public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackable
 {
-    private readonly IPlayer _player;
     private readonly IInput _input;
     private readonly PlayerStat _playerStat;
 

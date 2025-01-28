@@ -26,7 +26,7 @@ public class AmmunitionStorage : MonoBehaviour
 
     private void CreateTemplate()
     {
-        Bullet bullet = Instantiate(_bulletTemplate, _container);
+        Bullet bullet = Instantiate(_bulletTemplate);
         bullet.gameObject.SetActive(false);
         _pool.Add(bullet);
     }
@@ -35,10 +35,10 @@ public class AmmunitionStorage : MonoBehaviour
     {
         if (_pool.TryGet(out Bullet bullet))
         {
-            bullet.gameObject.SetActive(true);
             bullet.transform.parent = null;
             bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
+            bullet.gameObject.SetActive(true);
         }
-            
     }
 }

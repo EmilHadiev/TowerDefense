@@ -5,7 +5,7 @@ using Zenject;
 public class DesktopInput : IInput, ITickable
 {
     private const int AttackButton = 0;
-    private readonly Camera _camera;
+    private const float SpeeRotation = 25f;
     private readonly IPlayer _player;
 
     public event Action Attacked;
@@ -13,13 +13,12 @@ public class DesktopInput : IInput, ITickable
     public DesktopInput(IPlayer player)
     {
         _player = player;
-        _camera = Camera.main;
     }
 
     public void Tick()
     {
-        Rotate();
         Attack();
+        Rotate();
     }
 
     private void Attack()
@@ -30,29 +29,29 @@ public class DesktopInput : IInput, ITickable
 
     private void Rotate()
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out hit))
         {
-            Vector3 mousePosition = GetMousePoint(hit);
+            Vector3 targetPosition = GetTargetPosition(hit);
+            Quaternion targetRotation = GetTargetDirection(targetPosition);
 
-            Vector3 direction = GetDirection(mousePosition);
-
-            _player.Transform.rotation = Quaternion.LookRotation(direction);
+            _player.Transform.rotation = Quaternion.Slerp(_player.Transform.rotation, targetRotation, Time.deltaTime * SpeeRotation);
         }
     }
 
-    private Vector3 GetMousePoint(RaycastHit hit)
+    private Quaternion GetTargetDirection(Vector3 targetPosition)
     {
-        Vector3 mousePosition = hit.point;
-        mousePosition.y = _player.Transform.position.y;
-        return mousePosition;
+        Vector3 direction = (targetPosition - _player.Transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        return targetRotation;
     }
 
-    private Vector3 GetDirection(Vector3 mousePosition)
+    private Vector3 GetTargetPosition(RaycastHit hit)
     {
-        Vector3 direction = mousePosition - _player.Transform.position;
-        direction.Normalize();
-        return direction;
+        Vector3 targetPosition = hit.point;
+        targetPosition.y = _player.Transform.position.y;
+        return targetPosition;
     }
 }

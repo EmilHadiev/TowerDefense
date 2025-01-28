@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
     {
         _observer.Entered -= OnEntered;
         _observer.Exited -= OnExited;
+        ResetPosition();
     }
 
     private void Update()
@@ -60,7 +61,12 @@ public class Bullet : MonoBehaviour
 
     private void Hide()
     {
-        gameObject.SetActive(false);
         _tick = 0;
+        gameObject.SetActive(false);
+    }
+
+    private void ResetPosition()
+    {
+
     }
 }
