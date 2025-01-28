@@ -8,7 +8,7 @@ public class AmmunitionStorage : MonoBehaviour
     [SerializeField] private int _poolSize;
 
     private IAttackable _attacker;
-    private BulletPool _pool;
+    private IPool<Bullet> _pool;
 
     private void OnEnable() => _attacker.Attacked += OnAttacked;
     private void OnDisable() => _attacker.Attacked -= OnAttacked;

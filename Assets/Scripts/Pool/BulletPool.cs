@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class BulletPool
+public class BulletPool : IPool<Bullet>
 {
     private const int StartSize = 15;
 
