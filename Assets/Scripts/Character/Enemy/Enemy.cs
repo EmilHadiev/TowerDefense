@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Character.Enemy
+public class Enemy : MonoBehaviour, IHealth
 {
-    public class Enemy : MonoBehaviour
+    [SerializeField] private float _health;
+
+    public void TakeDamage(float damage)
     {
+        _health -= damage;
+        Debug.Log("Урон нанесен!");
 
-        // Use this for initialization
-        void Start()
-        {
+        if (_health <= 0)
+            Die();
+    }
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+    private void Die()
+    {
+        gameObject.SetActive(false);
     }
 }
