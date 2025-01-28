@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour, IHealth
             Die();
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void Die()
     {
         gameObject.SetActive(false);
