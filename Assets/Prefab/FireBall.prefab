@@ -4981,7 +4981,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5012,6 +5012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: fd0dc92f4ae7d0c4ebce8ecfda68a6c8, type: 2}
+  <Type>k__BackingField: 0
 --- !u!54 &4520321247019126630
 Rigidbody:
   m_ObjectHideFlags: 0
