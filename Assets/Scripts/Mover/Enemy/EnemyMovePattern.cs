@@ -35,7 +35,7 @@ public class EnemyMovePattern : IMover
 
     private void MoveToPlayer()
     {
-        Vector3 direction = _player.Transform.position - _enemy.position;
+        Vector3 direction = _enemy.position - _player.Transform.position;
         _enemy.Translate(direction * _speed * Time.deltaTime);
     }
 }
