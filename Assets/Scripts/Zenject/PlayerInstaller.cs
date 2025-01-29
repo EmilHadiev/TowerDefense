@@ -13,6 +13,12 @@ public class PlayerInstaller : MonoInstaller
         BindInput();
         BindPlayerAttacker();
         BindPlayerData();
+        BindCoinStorage();
+    }
+
+    private void BindCoinStorage()
+    {
+        Container.BindInterfacesTo<CoinStorage>().AsSingle();
     }
 
     private void BindPlayerData()

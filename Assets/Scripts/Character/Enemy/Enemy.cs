@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IHealth
     [SerializeField] private float _speed;
 
     private IPlayer _player;
+    private ICoinStorage _coinStorage;
     private IMover _mover;
 
     private void Start()
@@ -18,14 +19,21 @@ public class Enemy : MonoBehaviour, IHealth
     private void Update() => _mover.Update();
 
     [Inject]
-    private void Constructor(IPlayer player) => _player = player;
+    private void Constructor(IPlayer player, ICoinStorage coinStorage)
+    {
+        _player = player;
+        _coinStorage = coinStorage;
+    }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
 
         if (_health <= 0)
+        {
             Die();
+            _coinStorage.Add(1);
+        }
     }
 
     public void SetMover(IMover mover)
