@@ -5,13 +5,12 @@ using Zenject;
 public class DesktopInput : IInput, ITickable
 {
     private const int AttackButton = 0;
-    private const float SpeedRotation = 150f;
+    private const float SpeedRotation = 15f;
     private const float SmoothTime = 0.1f;
     private readonly IPlayer _player;
 
     public event Action Attacked;
 
-    private Vector3 _previousMousePosition;
     private Vector3 _smoothDirection;
     private Vector3 _smoothVelocity;
 
