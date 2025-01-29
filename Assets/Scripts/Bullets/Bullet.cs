@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
+[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletData _data;
@@ -24,7 +25,6 @@ public class Bullet : MonoBehaviour
     {
         _observer.Entered -= OnEntered;
         _observer.Exited -= OnExited;
-        ResetPosition();
     }
 
     private void Update()
@@ -63,10 +63,5 @@ public class Bullet : MonoBehaviour
     {
         _tick = 0;
         gameObject.SetActive(false);
-    }
-
-    private void ResetPosition()
-    {
-
     }
 }
