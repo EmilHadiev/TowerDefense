@@ -5,6 +5,7 @@
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletData _data;
+    [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;
     private IMover _mover;

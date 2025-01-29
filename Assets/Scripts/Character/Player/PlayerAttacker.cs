@@ -6,6 +6,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 {
     private readonly IInput _input;
     private readonly PlayerStat _playerStat;
+    private readonly ISoundContainer _soundContainer;
 
     private float _timeAfterAttack;
 
@@ -13,11 +14,12 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 
     public event Action Attacked;
 
-    public PlayerAttacker(IInput input, PlayerStat playerStat)
+    public PlayerAttacker(IInput input, PlayerStat playerStat, ISoundContainer soundContainer)
     {
         _input = input;
         _isAttacking = true;
         _playerStat = playerStat;
+        _soundContainer = soundContainer;
     }
 
     public void Initialize()
@@ -36,10 +38,21 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         {
             Debug.Log("Атака!");
             Attacked?.Invoke();
-            _timeAfterAttack = 0;
+            ResetTimer();
             StopAttack();
+            PlaySound();
         }
+    }
 
+    private void ResetTimer()
+    {
+        _timeAfterAttack = 0;
+    }
+
+    private void PlaySound()
+    {
+        Debug.Log("!");
+        _soundContainer.Play(BulletType.Fireball);
     }
 
     private void StopAttack()

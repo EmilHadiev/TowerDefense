@@ -4,6 +4,7 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
+    [SerializeField] private SoundContainer _soundContainer;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private bool _isDesktop;
 
@@ -14,6 +15,12 @@ public class PlayerInstaller : MonoInstaller
         BindPlayerAttacker();
         BindPlayerData();
         BindCoinStorage();
+        BindSoundContainer();
+    }
+
+    private void BindSoundContainer()
+    {
+        Container.BindInterfacesTo<SoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
     }
 
     private void BindCoinStorage()
