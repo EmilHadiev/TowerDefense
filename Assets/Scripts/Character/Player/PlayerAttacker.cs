@@ -51,7 +51,6 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 
     private void PlaySound()
     {
-        Debug.Log("!");
         _soundContainer.Play(BulletType.Fireball);
     }
 

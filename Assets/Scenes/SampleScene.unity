@@ -1783,6 +1783,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2610480963476838760, guid: b185c1c8f6ead68439d09e3155ff5151, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f1ffd1c869e8933469c06406fb8f1217, type: 2}
     - target: {fileID: 6728009267254461936, guid: b185c1c8f6ead68439d09e3155ff5151, type: 3}
       propertyPath: m_Name
       value: Skeleton
