@@ -2,26 +2,30 @@
 
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyMover))]
+[RequireComponent(typeof(CharacterAnimator))]
+[RequireComponent(typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyMover _mover;
+    [SerializeField] private CharacterAnimator _animator;
 
-    private IStateSwitcher _machine;
+    public IStateSwitcher StateMachine;
 
     public IMover Mover => _mover.Mover;
 
     private void OnValidate()
     {
         _mover ??= GetComponent<EnemyMover>();
+        _animator = GetComponent<CharacterAnimator>();
     }
 
     private void Awake()
     {
-        _machine = new EnemyStateMachine(Mover);
+        StateMachine = new EnemyStateMachine(Mover, _animator);
     }
 
     private void Start()
     {
-        _machine.SwitchTo<EnemyMoveState>();
+        StateMachine.SwitchTo<EnemyMoveState>();
     }
 }
