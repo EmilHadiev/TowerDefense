@@ -17,12 +17,17 @@ public class AmmunitionStorage : MonoBehaviour
     {
         _pool = new BulletPool();
 
-        for (int i = 0; i < _poolSize; i++)
-            CreateTemplate();
+        CreateBullets();
     }
 
     [Inject]
     private void Constructor(IAttackable attacker) => _attacker = attacker;
+
+    private void CreateBullets()
+    {
+        for (int i = 0; i < _poolSize; i++)
+            CreateTemplate();
+    }
 
     private void CreateTemplate()
     {
@@ -39,6 +44,10 @@ public class AmmunitionStorage : MonoBehaviour
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
             bullet.gameObject.SetActive(true);
+        }
+        else
+        {
+            CreateBullets();
         }
     }
 }
