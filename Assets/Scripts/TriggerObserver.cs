@@ -27,7 +27,7 @@ public class TriggerObserver : MonoBehaviour
         }
     }
 
-    public void Lock() => _isOn = false;
+    public void Lock() => _isOn = true;
 
-    public void UnLock() => _isOn = true;
+    public void UnLock() => _isOn = false;
 }
