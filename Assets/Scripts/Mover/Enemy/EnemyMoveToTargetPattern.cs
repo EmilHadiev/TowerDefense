@@ -28,5 +28,9 @@ public class EnemyMoveToTargetPattern : IMover
         MoveToPlayer();
     }
 
-    private void MoveToPlayer() => _agent.destination = _player.Transform.position;
+    private void MoveToPlayer()
+    {
+        _agent.destination = _player.Transform.position;
+        _agent.transform.LookAt(_player.Transform);
+    }
 }
