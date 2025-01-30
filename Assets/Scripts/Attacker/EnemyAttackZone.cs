@@ -24,13 +24,7 @@ public class EnemyAttackZone : MonoBehaviour
         _observer.Exited -= OnExited;
     }
 
-    private void OnEntered(Collider collider)
-    {
-        Debug.Log("Игрок атакует!");
-    }
+    private void OnEntered(Collider collider) => _enemy.StateMachine.SwitchTo<EnemyAttackState>();
 
-    private void OnExited(Collider collider)
-    {
-        
-    }
+    private void OnExited(Collider collider) => _enemy.StateMachine.SwitchTo<EnemyMoveState>();
 }
