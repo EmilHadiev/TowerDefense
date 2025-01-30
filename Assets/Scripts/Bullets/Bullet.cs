@@ -26,6 +26,8 @@ public class Bullet : MonoBehaviour
     {
         _observer.Entered -= OnEntered;
         _observer.Exited -= OnExited;
+
+        _tick = 0;
     }
 
     private void Update()
@@ -44,7 +46,10 @@ public class Bullet : MonoBehaviour
     private void OnEntered(Collider collider)
     {
         if (collider.TryGetComponent(out IHealth health))
+        {
             health.TakeDamage(_data.Damage);
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnExited(Collider collider)
@@ -60,9 +65,5 @@ public class Bullet : MonoBehaviour
             Hide();
     }
 
-    private void Hide()
-    {
-        _tick = 0;
-        gameObject.SetActive(false);
-    }
+    private void Hide() => gameObject.SetActive(false);
 }

@@ -2,15 +2,22 @@
 
 public class EnemyMoveState : IState
 {
-    private IStateSwitcher _switcher;
+    private readonly IStateSwitcher _switcher;
+    private readonly IMover _mover;
+
+    public EnemyMoveState(IStateSwitcher switcher, IMover mover)
+    {
+        _switcher = switcher;
+        _mover = mover;
+    }
 
     public void Enter()
     {
-        Debug.Log($"Enter state: {nameof(EnemyAttackState)}");
+        _mover.StartMove();
     }
 
     public void Exit()
     {
-        Debug.Log($"Exit state: {nameof(EnemyAttackState)}");
+        _mover.StopMove();
     }
 }

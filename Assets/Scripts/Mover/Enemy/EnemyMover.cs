@@ -8,6 +8,8 @@ public class EnemyMover : MonoBehaviour, IMovable
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _speed = 1f;
 
+    public IMover Mover => _mover;
+
     private IPlayer _player;
     private IMover _mover;
 
@@ -19,11 +21,12 @@ public class EnemyMover : MonoBehaviour, IMovable
             _agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Start()
+    private void Awake()
     {
         _agent.speed = _speed;
         _mover = new EnemyMoveToTargetPattern(_player, _agent, this);
         SetMover(_mover);
+        _mover.StopMove();
     }
 
     private void Update() => _mover.Update();

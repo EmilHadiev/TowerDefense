@@ -19,7 +19,7 @@ public class EnemyMoveToTargetPattern : IMover
 
     public void StartMove() => _isWorking = true;
 
-    public void StopMove() => _isWorking = true;
+    public void StopMove() => _isWorking = false;
 
     public void Update()
     {
