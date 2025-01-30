@@ -48,8 +48,14 @@ public class Bullet : MonoBehaviour
         if (collider.TryGetComponent(out IHealth health))
         {
             health.TakeDamage(_data.Damage);
-            gameObject.SetActive(false);
+            HideAfterCollided();
         }
+    }
+
+    private void HideAfterCollided()
+    {
+        _observer.UnLock();
+        Hide();
     }
 
     private void OnExited(Collider collider)
@@ -60,7 +66,11 @@ public class Bullet : MonoBehaviour
     private void UpdateLifeTime()
     {
         _tick += Time.deltaTime;
+        HideAfterDelay();
+    }
 
+    private void HideAfterDelay()
+    {
         if (_tick >= _data.LifeTime)
             Hide();
     }

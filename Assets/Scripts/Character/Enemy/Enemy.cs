@@ -6,6 +6,7 @@
 [RequireComponent(typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
 {
+    [field: SerializeField] public EnemyType Type { get; private set; }
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private CharacterAnimator _animator;
 
@@ -19,13 +20,9 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<CharacterAnimator>();
     }
 
-    private void Awake()
-    {
-        StateMachine = new EnemyStateMachine(Mover, _animator);
-    }
-
     private void Start()
     {
+        StateMachine = new EnemyStateMachine(Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
     }
 }

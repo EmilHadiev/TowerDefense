@@ -22,12 +22,6 @@ public class BulletMoverPattern : IMover
         if (_isMoving == false)
             return;
 
-        _bullet.Translate(GetDirection() * _data.Speed * Time.deltaTime, Space.World);
-    }
-
-    private Vector3 GetDirection()
-    {
-        Vector3 direction = (_bullet.forward).normalized;
-        return direction;
+        _bullet.Translate(_bullet.forward * _data.Speed * Time.deltaTime, Space.World);
     }
 }

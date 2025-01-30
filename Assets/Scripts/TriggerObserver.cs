@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class TriggerObserver : MonoBehaviour
 {
     public event Action<Collider> Entered;
@@ -13,7 +13,7 @@ public class TriggerObserver : MonoBehaviour
     {
         if (_isOn == false)
         {
-            _isOn = true;
+            Lock();
             Entered?.Invoke(other);
         }
     }
@@ -22,8 +22,12 @@ public class TriggerObserver : MonoBehaviour
     {
         if (_isOn)
         {
-            _isOn = false;
+            UnLock();
             Exited?.Invoke(other);
         }
     }
+
+    public void Lock() => _isOn = false;
+
+    public void UnLock() => _isOn = true;
 }
