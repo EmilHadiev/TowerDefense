@@ -2,5 +2,6 @@
 
 public interface IBulletMover : IMover
 {
-    Vector3 Direction { get; set; }
+    Vector3 Direction { get;}
+
 }

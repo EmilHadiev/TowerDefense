@@ -1,47 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BulletMover : MonoBehaviour
 {
-    [SerializeField] private BulletData _data; // Данные пули (скорость и т.д.)
-    private Vector3 _direction; // Направление движения пули
+    [SerializeField] private BulletData _data;
 
-    private bool _isCollided;
-    private Wall _previousWall;
+    private IBulletMover _mover;
+
+    public event Action<Vector3, ReflectiveObstacle> Collided;
+
+    private void Awake() => _mover = new BulletReflectMovePattern(_data, transform, this);
 
     private void OnEnable()
     {
-        // Инициализация направления при активации пули
-        _direction = transform.forward;
+        _mover.StartMove();
+        Collided?.Invoke(transform.forward, null);
     }
 
     private void OnDisable()
     {
-        _previousWall = null;
+        _mover.StopMove();
     }
 
     private void Update()
     {
         // Движение пули в текущем направлении
-        transform.Translate(_direction * _data.Speed * Time.deltaTime, Space.World);
+        _mover.Update();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.TryGetComponent(out Wall wall))
+        if (collision.collider.TryGetComponent(out ReflectiveObstacle wall))
         {
-            if (wall == _previousWall)
-                return;
-            _previousWall = wall;
-            // Получаем нормаль поверхности, с которой столкнулась пуля
             Vector3 normal = collision.contacts[0].normal;
+            var direction = Vector3.Reflect(_mover.Direction, normal).normalized;
 
-            // Обновляем направление движения пули после рикошета
-            _direction = Vector3.Reflect(_direction, normal).normalized;
-
-            transform.forward = _direction; // Обновляем forward, чтобы пуля смотрела в правильном направлении
-
-            _isCollided = true;
-            Debug.Log("Рикошет! Новое направление: " + _direction);
+            Collided?.Invoke(direction, wall);
         }
     }
 }
