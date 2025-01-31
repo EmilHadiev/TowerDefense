@@ -11,7 +11,7 @@ public class CoinStorage : ICoinStorage
         IsValidValue(coins);
 
         _coins += coins;
-        CoinsChanged?.Invoke(coins);
+        CoinsChanged?.Invoke(_coins);
     }
 
     public bool TrySpend(int coins)
@@ -22,7 +22,7 @@ public class CoinStorage : ICoinStorage
             return false;
 
         _coins -= coins;
-        CoinsChanged?.Invoke(coins);
+        CoinsChanged?.Invoke(_coins);
 
         return true;
     }

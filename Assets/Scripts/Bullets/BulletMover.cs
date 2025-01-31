@@ -24,7 +24,6 @@ public class BulletMover : MonoBehaviour
 
     private void Update()
     {
-        // Движение пули в текущем направлении
         _mover.Update();
     }
 

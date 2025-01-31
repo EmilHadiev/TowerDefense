@@ -4,6 +4,7 @@
 [RequireComponent(typeof(EnemyMover))]
 [RequireComponent(typeof(CharacterAnimator))]
 [RequireComponent(typeof(EnemyAttacker))]
+[RequireComponent(typeof(EnemyDieChecker))]
 public class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }
