@@ -2,19 +2,18 @@
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BulletMover))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletData _data;
     [field: SerializeField] public BulletType Type { get; private set; }
 
-    private TriggerObserver _observer;
-    private IMover _mover;
+    private TriggerObserver _observer;    
 
     private float _tick;
 
     private void Awake() => _observer = GetComponent<TriggerObserver>();
 
-    private void Start() => SetMover(new BulletMoverPattern(_data, transform));
 
     private void OnEnable()
     {
@@ -32,15 +31,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        _mover.Update();
         UpdateLifeTime();
-    }
-
-    private void SetMover(IMover mover)
-    {
-        _mover?.StopMove();
-        _mover = mover;
-        _mover.StartMove();
     }
 
     private void OnEntered(Collider collider)

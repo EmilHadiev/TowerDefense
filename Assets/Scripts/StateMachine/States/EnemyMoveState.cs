@@ -17,7 +17,6 @@ public class EnemyMoveState : IState
     {
         Debug.Log($"Enter state: {nameof(EnemyMoveState)}");
         _animator.StartRunning();
-        Debug.Log(_mover == null);
         _mover.StartMove();
     }
 

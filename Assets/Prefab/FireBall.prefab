@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8275298916539564963}
   - component: {fileID: 4520321247019126630}
   - component: {fileID: 5463997427530217923}
+  - component: {fileID: 1121137707541029015}
   m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
@@ -5037,7 +5038,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
@@ -5064,6 +5065,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1121137707541029015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270572509384493691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0595a5025585ad45a1d9cdcc2f0729d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: fd0dc92f4ae7d0c4ebce8ecfda68a6c8, type: 2}
 --- !u!1 &7890748736170058643
 GameObject:
   m_ObjectHideFlags: 0
