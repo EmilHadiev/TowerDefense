@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
+using System;
 
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyMover))]
@@ -11,9 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private CharacterAnimator _animator;
 
-    public IStateSwitcher StateMachine;
-
-    public IMover Mover => _mover.Mover;
+    public IStateSwitcher StateMachine { get; private set; }
 
     private void OnValidate()
     {
@@ -23,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        StateMachine = new EnemyStateMachine(Mover, _animator);
+        StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
     }
 }

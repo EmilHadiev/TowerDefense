@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 public class EnemyHealth : MonoBehaviour, IHealth
 {
-    private SkeletonStat _stat;
-    public float MaxHealth { get; private set; }
     private float _health;
+    private EnemyStat _stat;
+
+    public float MaxHealth { get; private set; }
 
     public event Action Died;
     public event Action<float, float> HealthChanged;
@@ -19,12 +19,6 @@ public class EnemyHealth : MonoBehaviour, IHealth
     }
 
     private void OnEnable() => HealthChanged?.Invoke(_health, MaxHealth);
-
-    [Inject]
-    private void Constructor(SkeletonStat stat)
-    {
-        _stat = stat;
-    }
 
     public void AddHealth(float healthPoints)
     {

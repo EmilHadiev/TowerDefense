@@ -9,11 +9,11 @@ public class EnemyMover : MonoBehaviour, IMovable
 
     private IPlayer _player;
     private IMover _mover;
-    private EnemyStat _stat;
+    private IEnemy _enemy;
 
     public IMover Mover => _mover;
 
-    public float Speed => _stat.Speed;
+    public float Speed => _enemy.Stat.Speed;
 
     private void OnValidate()
     {
@@ -24,6 +24,8 @@ public class EnemyMover : MonoBehaviour, IMovable
     private void Awake()
     {
         _mover = new EnemyMoveToTargetPattern(_player, _agent, this);
+        _enemy = GetComponent<Enemy>();
+        Debug.Log(_enemy.Stat == null);
         SetMover(_mover);
         _mover.StopMove();
     }
@@ -31,10 +33,9 @@ public class EnemyMover : MonoBehaviour, IMovable
     private void Update() => _mover.Update();
 
     [Inject]
-    private void Constructor(IPlayer player, SkeletonStat stat)
+    private void Constructor(IPlayer player)
     {
         _player = player;
-        _stat = stat;
     }
 
     public void SetMover(IMover mover)
