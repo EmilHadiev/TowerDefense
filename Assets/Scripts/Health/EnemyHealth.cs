@@ -10,12 +10,15 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private float _health;
 
     public event Action Died;
+    public event Action<float, float> HealthChanged;
 
-    private void Start()
+    private void Awake()
     {
         _health = _stat.Health;
         MaxHealth = _health;
     }
+
+    private void OnEnable() => HealthChanged?.Invoke(_health, MaxHealth);
 
     [Inject]
     private void Constructor(SkeletonStat stat)
@@ -26,6 +29,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void AddHealth(float healthPoints)
     {
         _health += healthPoints;
+        HealthChanged?.Invoke(_health, MaxHealth);
 
         if (_health >= MaxHealth)
             _health = MaxHealth;
@@ -34,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        HealthChanged?.Invoke(_health, MaxHealth);
 
         if (_health <= 0)
             Died?.Invoke();
