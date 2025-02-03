@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private void OnValidate()
     {
         _mover ??= GetComponent<EnemyMover>();
-        _animator = GetComponent<CharacterAnimator>();
+        _animator ??= GetComponent<CharacterAnimator>();
     }
 
     private void Start()

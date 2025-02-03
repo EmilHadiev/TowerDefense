@@ -16,9 +16,17 @@ public class EnemyMoveToTargetPattern : IMover
         _agent.speed = _movable.Speed;
     }
 
-    public void StartMove() => _isWorking = true;
+    public void StartMove()
+    {
+        _isWorking = true;
+        _agent.enabled = true;
+    }
 
-    public void StopMove() => _isWorking = false;
+    public void StopMove()
+    {
+        _isWorking = false;
+        _agent.enabled = false;
+    }
 
     public void Update()
     {
