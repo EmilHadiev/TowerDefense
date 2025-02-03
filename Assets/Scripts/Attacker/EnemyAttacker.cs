@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class EnemyAttacker : MonoBehaviour
@@ -9,16 +11,16 @@ public class EnemyAttacker : MonoBehaviour
 
     private Collider[] _hits = new Collider[1];
 
-    private IEnemy _enemy;
+    private EnemyStat _stat;
 
     private void Awake()
     {
-        _enemy = GetComponent<Enemy>();
+        _stat = GetComponent<Enemy>().Stat;
     }
 
     private void Hit()
     {
-        int hitCount = Physics.OverlapSphereNonAlloc(GetStartPoint(), _enemy.Stat.AttackRadius, _hits, _mask);
+        int hitCount = Physics.OverlapSphereNonAlloc(GetStartPoint(), _stat.AttackRadius, _hits, _mask);
 
         if (hitCount == 0)
             return;
@@ -27,7 +29,7 @@ public class EnemyAttacker : MonoBehaviour
             if (_hits[i].TryGetComponent(out IHealth playerHealth))
                 playerHealth.TakeDamage(0);
 
-        PhysicsDebug.DrawDebug(GetStartPoint(), _enemy.Stat.AttackRadius);
+        PhysicsDebug.DrawDebug(GetStartPoint(), _stat.AttackRadius);
     }
 
     private Vector3 GetStartPoint() => new Vector3(transform.position.x, transform.position.y + AdditionalY, transform.position.z) + transform.forward;

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 public class EnemyHealth : MonoBehaviour, IHealth
@@ -14,6 +16,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     private void Awake()
     {
+        _stat = GetComponent<Enemy>().Stat;
         _health = _stat.Health;
         MaxHealth = _health;
     }

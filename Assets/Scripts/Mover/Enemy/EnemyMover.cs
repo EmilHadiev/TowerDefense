@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System;
+using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
@@ -9,11 +11,11 @@ public class EnemyMover : MonoBehaviour, IMovable
 
     private IPlayer _player;
     private IMover _mover;
-    private IEnemy _enemy;
+    private EnemyStat _stat;
 
     public IMover Mover => _mover;
 
-    public float Speed => _enemy.Stat.Speed;
+    public float Speed => _stat.Speed;
 
     private void OnValidate()
     {
@@ -23,9 +25,8 @@ public class EnemyMover : MonoBehaviour, IMovable
 
     private void Awake()
     {
+        _stat = GetComponent<Enemy>().Stat;
         _mover = new EnemyMoveToTargetPattern(_player, _agent, this);
-        _enemy = GetComponent<Enemy>();
-        Debug.Log(_enemy.Stat == null);
         SetMover(_mover);
         _mover.StopMove();
     }

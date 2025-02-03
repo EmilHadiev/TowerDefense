@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private CharacterAnimator _animator;
 
     public IStateSwitcher StateMachine { get; private set; }
+    public EnemyStat Stat { get; private set; }
 
     private void OnValidate()
     {
@@ -26,5 +27,20 @@ public class Enemy : MonoBehaviour
     {
         StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
+    }
+
+    [Inject]
+    private void Constructor(IEnumerable<EnemyStat> stats)
+    {
+        foreach (var stat in stats)
+        {
+            if (stat.EnemyType == Type)
+            {
+                Stat = stat;
+                return;
+            }
+        }
+
+        throw new ArgumentNullException(nameof(stats));
     }
 }
