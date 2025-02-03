@@ -3,12 +3,18 @@
 public class EnemyAttacker : MonoBehaviour
 {
     [SerializeField] private LayerMask _mask;
-    [SerializeField] private float _damage;
     [SerializeField] private float _radius;
 
     private const float AdditionalY = 0.5f;
 
     private Collider[] _hits = new Collider[1];
+
+    private PlayerStat _stat;
+
+    private void Start()
+    {
+        
+    }
 
     private void Hit()
     {
@@ -19,7 +25,7 @@ public class EnemyAttacker : MonoBehaviour
 
         for (int i = 0; i < hitCount; i++)
             if (_hits[i].TryGetComponent(out IHealth playerHealth))
-                playerHealth.TakeDamage(_damage);
+                playerHealth.TakeDamage(0);
 
         PhysicsDebug.DrawDebug(GetStartPoint(), _radius);
     }

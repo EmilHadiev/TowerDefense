@@ -6,14 +6,14 @@ using Zenject;
 public class EnemyMover : MonoBehaviour, IMovable
 {
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private float _speed = 1f;
-
-    public IMover Mover => _mover;
 
     private IPlayer _player;
     private IMover _mover;
+    private EnemyStat _stat;
 
-    public float Speed => _speed;
+    public IMover Mover => _mover;
+
+    public float Speed => _stat.Speed;
 
     private void OnValidate()
     {
@@ -23,7 +23,6 @@ public class EnemyMover : MonoBehaviour, IMovable
 
     private void Awake()
     {
-        _agent.speed = _speed;
         _mover = new EnemyMoveToTargetPattern(_player, _agent, this);
         SetMover(_mover);
         _mover.StopMove();
@@ -32,7 +31,11 @@ public class EnemyMover : MonoBehaviour, IMovable
     private void Update() => _mover.Update();
 
     [Inject]
-    private void Constructor(IPlayer player) => _player = player;
+    private void Constructor(IPlayer player, SkeletonStat stat)
+    {
+        _player = player;
+        _stat = stat;
+    }
 
     public void SetMover(IMover mover)
     {

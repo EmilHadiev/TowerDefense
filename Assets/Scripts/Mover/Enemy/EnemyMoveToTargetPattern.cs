@@ -17,7 +17,7 @@ public class EnemyMoveToTargetPattern : IMover
     }
 
     public void StartMove()
-    {
+    {        
         _isWorking = true;
         _agent.enabled = true;
     }
