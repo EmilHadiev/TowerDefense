@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: SkeletonStat
-  m_EditorClassIdentifier: Assembly-CSharp::SkeletonStat
-  Health: 30
-  Damage: 10
-  Speed: 5
-  <EnemyType>k__BackingField: 0
+  m_Script: {fileID: 11500000, guid: 8e0fb465dd5d6b94686061f4762c48fe, type: 3}
+  m_Name: DemonKnightStat
+  m_EditorClassIdentifier: 
+  Health: 60
+  Damage: 15
+  Speed: 6
+  AttackRadius: 5
+  Point: 2
+  <EnemyType>k__BackingField: 1

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private int _size;
+    [SerializeField] private EnemyType _enemyType;
 
     private const int WaitingTime = 1;
 
@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateEnemy()
     {
-        Enemy enemy = _factory.Get(EnemyType.Skeleton);
+        Enemy enemy = _factory.Get(_enemyType);
         _pool.Add(enemy);
         enemy.gameObject.SetActive(false);
         SetPosition(enemy);

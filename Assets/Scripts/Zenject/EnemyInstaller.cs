@@ -5,7 +5,6 @@ public class EnemyInstaller : MonoInstaller
 {
     [SerializeField] private SkeletonStat _skeletonStat;
     [SerializeField] private DemonKnightStat _demonKnightStat;
-    [SerializeField] private EnemyStat[] _stats;
 
     public override void InstallBindings()
     {
