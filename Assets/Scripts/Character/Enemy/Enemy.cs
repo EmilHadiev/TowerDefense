@@ -8,6 +8,7 @@ using System;
 [RequireComponent(typeof(CharacterAnimator))]
 [RequireComponent(typeof(EnemyAttacker))]
 [RequireComponent(typeof(EnemyDieChecker))]
+[RequireComponent(typeof(EnemyViewer))]
 public class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }
