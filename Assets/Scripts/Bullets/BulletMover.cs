@@ -25,11 +25,18 @@ public class BulletMover : MonoBehaviour
     {
         if (collision.collider.TryGetComponent(out ReflectiveObstacle wall))
         {
-            Vector3 normal = collision.contacts[0].normal;
-            var direction = Vector3.Reflect(_mover.Direction, normal).normalized;
-
+            Vector3 direction = GetReflectedDirection(collision);
             Collided?.Invoke(direction, wall);
-            Debug.Log("Проверка");
         }
+    }
+
+    private Vector3 GetReflectedDirection(Collision collision)
+    {
+        Vector3 normal = collision.contacts[0].normal;
+
+        var direction = Vector3.Reflect(_mover.Direction, normal).normalized;
+        direction.y = 0;
+
+        return direction;
     }
 }

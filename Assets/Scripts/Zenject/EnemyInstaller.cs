@@ -7,6 +7,7 @@ public class EnemyInstaller : MonoInstaller
     [SerializeField] private DemonKnightStat _demonKnightStat;
     [SerializeField] private GolemStat _golemStat;
     [SerializeField] private BlackKnightStat _blackKnightStat;
+    [SerializeField] private ArmorKnightStat _armorKnightStat;
 
     public override void InstallBindings()
     {
@@ -19,5 +20,6 @@ public class EnemyInstaller : MonoInstaller
         Container.Bind<EnemyStat>().To<DemonKnightStat>().FromNewScriptableObject(_demonKnightStat).AsSingle();
         Container.Bind<EnemyStat>().To<GolemStat>().FromNewScriptableObject(_golemStat).AsSingle();
         Container.Bind<EnemyStat>().To<BlackKnightStat>().FromNewScriptableObject(_blackKnightStat).AsSingle();
+        Container.Bind<EnemyStat>().To<ArmorKnightStat>().FromNewScriptableObject(_armorKnightStat).AsSingle();
     }
 }

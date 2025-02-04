@@ -10,9 +10,9 @@ public class EnemyFactory : IEnemyFactory
         _instantiator = instantiator;
     }
 
-    public Enemy Get(EnemyType type)
+    public Enemy Get(EnemyType enemyType)
     {
-        switch (type)
+        switch (enemyType)
         {
             case EnemyType.Skeleton:
                 return GetEnemy(AssetPath.SkeletonPath);
@@ -22,8 +22,10 @@ public class EnemyFactory : IEnemyFactory
                 return GetEnemy(AssetPath.GolemPath);
             case EnemyType.BlackKnight:
                 return GetEnemy(AssetPath.BlackKnightPath);
+            case EnemyType.ArmorKnight:
+                return GetEnemy(AssetPath.ArmorKnightPath);
             default:
-                throw new ArgumentOutOfRangeException(nameof(type));
+                throw new ArgumentOutOfRangeException(nameof(enemyType));
         }
     }
 

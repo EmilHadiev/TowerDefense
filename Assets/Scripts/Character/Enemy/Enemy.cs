@@ -9,6 +9,7 @@ using System;
 [RequireComponent(typeof(EnemyAttacker))]
 [RequireComponent(typeof(EnemyDieChecker))]
 [RequireComponent(typeof(EnemyViewer))]
+[RequireComponent(typeof(EnemyAbility))]
 public class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }
@@ -22,6 +23,11 @@ public class Enemy : MonoBehaviour
     {
         _mover ??= GetComponent<EnemyMover>();
         _animator ??= GetComponent<CharacterAnimator>();
+    }
+
+    private void Awake()
+    {
+        
     }
 
     private void Start()
