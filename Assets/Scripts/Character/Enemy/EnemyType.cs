@@ -1,5 +1,8 @@
 ﻿public enum EnemyType
 {
     Skeleton = 0,
-    DemonKnight = 1
+    DemonKnight = 1,
+    Golem = 2,
+    BlackKnight = 3,
+    ArmorKnight = 4
 }

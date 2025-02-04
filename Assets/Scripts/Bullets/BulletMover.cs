@@ -29,6 +29,7 @@ public class BulletMover : MonoBehaviour
             var direction = Vector3.Reflect(_mover.Direction, normal).normalized;
 
             Collided?.Invoke(direction, wall);
+            Debug.Log("Проверка");
         }
     }
 }
