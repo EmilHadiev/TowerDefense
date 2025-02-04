@@ -86,8 +86,8 @@ GameObject:
   - component: {fileID: 7519054706941589544}
   - component: {fileID: 4338957514519173129}
   - component: {fileID: 5754698576894562380}
-  - component: {fileID: 6634251149459090386}
-  - component: {fileID: 2200785980347783559}
+  - component: {fileID: 4931084356165961201}
+  - component: {fileID: 4204489377448722027}
   m_Layer: 5
   m_Name: EnemyHealthCanvas
   m_TagString: Untagged
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
---- !u!114 &6634251149459090386
+  m_PresetInfoIsWorld: 0
+--- !u!114 &4931084356165961201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,22 +171,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1181724739725795347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc8830c691cce943bd37969d6c7f5c4, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7e6c6e4faa4e84db724bfc82a5d029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4204489377448722027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181724739725795347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0797aba452eb6b74d80bf9ab148a43bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _fillImage: {fileID: 4435073397392899944}
---- !u!114 &2200785980347783559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181724739725795347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010c0cee9eaa6a9449b2d92790279031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2451539348091733770
 GameObject:
   m_ObjectHideFlags: 0

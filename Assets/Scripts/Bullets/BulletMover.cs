@@ -17,15 +17,9 @@ public class BulletMover : MonoBehaviour
         Collided?.Invoke(transform.forward, null);
     }
 
-    private void OnDisable()
-    {
-        _mover.StopMove();
-    }
+    private void OnDisable() => _mover.StopMove();
 
-    private void Update()
-    {
-        _mover.Update();
-    }
+    private void Update() => _mover.Update();
 
     private void OnCollisionEnter(Collision collision)
     {

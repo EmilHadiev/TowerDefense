@@ -16,6 +16,8 @@ public class EnemyFactory : IEnemyFactory
         {
             case EnemyType.Skeleton:
                 return _instantiator.InstantiatePrefabResourceForComponent<Enemy>(AssetPath.SkeletonPath);
+            case EnemyType.DemonKnight:
+                return _instantiator.InstantiatePrefabResourceForComponent<Enemy>(AssetPath.DemonKnightPath);
             default:
                 throw new ArgumentOutOfRangeException(nameof(type));
         }

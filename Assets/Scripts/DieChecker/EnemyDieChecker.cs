@@ -32,6 +32,8 @@ public class EnemyDieChecker : MonoBehaviour
     private void OnDied()
     {
         _coinStorage.Add(Point);
+        Debug.Log(_coinStorage == null);
+        Debug.Log(Point);
         _health.AddHealth(_health.MaxHealth);
         _enemy.StateMachine.SwitchTo<EmptyState>();
         _isDead = true;
