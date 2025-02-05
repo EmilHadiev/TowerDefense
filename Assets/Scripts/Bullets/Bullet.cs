@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake() => _observer = GetComponent<TriggerObserver>();
 
+    public Color Color => _data.Color;
 
     private void OnEnable()
     {
