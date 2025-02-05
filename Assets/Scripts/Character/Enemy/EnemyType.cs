@@ -4,5 +4,6 @@
     DemonKnight = 1,
     Golem = 2,
     BlackKnight = 3,
-    ArmorKnight = 4
+    ArmorKnight = 4,
+    Turtle = 5
 }

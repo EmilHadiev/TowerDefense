@@ -5,4 +5,5 @@
     public const string BlackKnightPath = "Enemies/BlackKnight";
     public const string GolemPath = "Enemies/Golem";
     public const string ArmorKnightPath = "Enemies/ArmorKnight";
+    public const string TurtlePath = "Enemies/Turtle";
 }

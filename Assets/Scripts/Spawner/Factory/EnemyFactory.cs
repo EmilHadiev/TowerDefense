@@ -24,6 +24,8 @@ public class EnemyFactory : IEnemyFactory
                 return GetEnemy(AssetPath.BlackKnightPath);
             case EnemyType.ArmorKnight:
                 return GetEnemy(AssetPath.ArmorKnightPath);
+            case EnemyType.Turtle:
+                return GetEnemy(AssetPath.TurtlePath);
             default:
                 throw new ArgumentOutOfRangeException(nameof(enemyType));
         }

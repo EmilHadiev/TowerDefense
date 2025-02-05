@@ -278,6 +278,7 @@ MonoBehaviour:
   _golemStat: {fileID: 11400000, guid: 55a8197d71ea4bb44bf6df28f25e9808, type: 2}
   _blackKnightStat: {fileID: 11400000, guid: 84eb34d6fba09974ead81a592dd460b6, type: 2}
   _armorKnightStat: {fileID: 11400000, guid: d5838eb783548024eb5ab5d760dd74c9, type: 2}
+  _turtleStat: {fileID: 11400000, guid: 03c0592f0198d12439d897c4d341eaa3, type: 2}
 --- !u!1 &518150707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: 5
-  _enemyType: 4
+  _enemyType: 5
 --- !u!4 &1540520687
 Transform:
   m_ObjectHideFlags: 0
