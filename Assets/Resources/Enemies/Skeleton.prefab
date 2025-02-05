@@ -1575,8 +1575,8 @@ GameObject:
   - component: {fileID: 8397108404726835326}
   - component: {fileID: 2582265554806595349}
   - component: {fileID: 7743451987527197219}
-  - component: {fileID: 21375959503817345}
   - component: {fileID: 3789310872204302522}
+  - component: {fileID: 2460006713442163724}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
@@ -1777,18 +1777,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 1879895437239372830}
---- !u!114 &21375959503817345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728009267254461936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c992f3583147545a92d01aaa395f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3789310872204302522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1802,6 +1790,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 6030627538305647290}
+--- !u!114 &2460006713442163724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728009267254461936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac7434137b58da4698652d34966184c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6733065686197009453
 GameObject:
   m_ObjectHideFlags: 0

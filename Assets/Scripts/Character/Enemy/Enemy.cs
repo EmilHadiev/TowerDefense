@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using System;
 
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyMover))]
@@ -9,13 +9,14 @@ using System;
 [RequireComponent(typeof(EnemyAttacker))]
 [RequireComponent(typeof(EnemyDieChecker))]
 [RequireComponent(typeof(EnemyRenderViewer))]
-[RequireComponent(typeof(EnemyAbility))]
+[RequireComponent(typeof(EnemyAbilityContainer))]
 [RequireComponent(typeof(ParticleViewContainer))]
 public class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private CharacterAnimator _animator;
+    [SerializeField] private EnemyAbilityContainer _abilityContainer;
 
     public IStateSwitcher StateMachine { get; private set; }
     public EnemyStat Stat { get; private set; }
@@ -24,17 +25,14 @@ public class Enemy : MonoBehaviour
     {
         _mover ??= GetComponent<EnemyMover>();
         _animator ??= GetComponent<CharacterAnimator>();
-    }
-
-    private void Awake()
-    {
-        
+        _abilityContainer ??= GetComponent<EnemyAbilityContainer>();
     }
 
     private void Start()
     {
         StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
+        _abilityContainer.Ability.Activate();
     }
 
     [Inject]

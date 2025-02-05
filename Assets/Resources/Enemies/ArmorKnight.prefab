@@ -920,8 +920,8 @@ GameObject:
   - component: {fileID: 1616877276615032535}
   - component: {fileID: 7288332281830453612}
   - component: {fileID: 4830924275812763192}
-  - component: {fileID: 8293570535891875179}
   - component: {fileID: 8291573210159931057}
+  - component: {fileID: 604436838639613976}
   m_Layer: 6
   m_Name: ArmorKnight
   m_TagString: Untagged
@@ -1122,18 +1122,7 @@ MonoBehaviour:
   <Type>k__BackingField: 4
   _mover: {fileID: 2610802129494706603}
   _animator: {fileID: 4304645401701548883}
---- !u!114 &8293570535891875179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812026724909341604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c992f3583147545a92d01aaa395f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _abilityContainer: {fileID: 604436838639613976}
 --- !u!114 &8291573210159931057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,6 +1136,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 1533688535236723444}
+--- !u!114 &604436838639613976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812026724909341604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac7434137b58da4698652d34966184c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6144642258767119259
 GameObject:
   m_ObjectHideFlags: 0
