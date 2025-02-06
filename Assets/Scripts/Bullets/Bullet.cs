@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]

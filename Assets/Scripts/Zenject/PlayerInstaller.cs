@@ -20,7 +20,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindSoundContainer()
     {
-        Container.BindInterfacesTo<SoundContainer>().FromInstance(_soundContainer).AsSingle();
+        Container.BindInterfacesTo<SoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
     }
 
     private void BindCoinStorage()
