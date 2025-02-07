@@ -6,4 +6,6 @@
     public const string GolemPath = "Enemies/Golem";
     public const string ArmorKnightPath = "Enemies/ArmorKnight";
     public const string TurtlePath = "Enemies/Turtle";
+    public const string DragonPath = "Enemies/Dragon";
+    public const string SlimePath = "Enemies/Slime";
 }

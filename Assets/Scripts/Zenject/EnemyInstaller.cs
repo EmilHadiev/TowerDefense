@@ -9,6 +9,8 @@ public class EnemyInstaller : MonoInstaller
     [SerializeField] private BlackKnightStat _blackKnightStat;
     [SerializeField] private ArmorKnightStat _armorKnightStat;
     [SerializeField] private TurtleStat _turtleStat;
+    [SerializeField] private DragonStat _dragonStat;
+    [SerializeField] private SlimeStat _slimeStat;
 
     public override void InstallBindings()
     {
@@ -23,5 +25,7 @@ public class EnemyInstaller : MonoInstaller
         Container.Bind<EnemyStat>().To<BlackKnightStat>().FromNewScriptableObject(_blackKnightStat).AsSingle();
         Container.Bind<EnemyStat>().To<ArmorKnightStat>().FromNewScriptableObject(_armorKnightStat).AsSingle();
         Container.Bind<EnemyStat>().To<TurtleStat>().FromNewScriptableObject(_turtleStat).AsSingle();
+        Container.Bind<EnemyStat>().To<DragonStat>().FromNewScriptableObject(_dragonStat).AsSingle();
+        Container.Bind<EnemyStat>().To<SlimeStat>().FromNewScriptableObject(_slimeStat).AsSingle();
     }
 }

@@ -5,5 +5,7 @@
     Golem = 2,
     BlackKnight = 3,
     ArmorKnight = 4,
-    Turtle = 5
+    Turtle = 5,
+    Dragon = 6,
+    Slime = 8
 }

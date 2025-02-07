@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(SphereCollider))]
 public class TriggerObserver : MonoBehaviour
 {
     public event Action<Collider> Entered;
