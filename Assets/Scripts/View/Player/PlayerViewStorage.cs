@@ -5,18 +5,23 @@ using Zenject;
 public class PlayerViewStorage : MonoBehaviour
 {    
     [SerializeField] private ParticleView _attackParticle;
-
-    private const float RecoilDistance = 0.1f;
-    private const int Accelerator = 2;
+    [SerializeField] private ShakingPart _shakingPart;    
 
     private IAttackable _attackable;
     private PlayerStat _stat;
+    private PlayerAnimationsView _animationView;
+
+    private void OnValidate() => _shakingPart ??= GetComponentInChildren<ShakingPart>();
 
     private void OnEnable() => _attackable.Attacked += OnAttacked;
 
     private void OnDisable() => _attackable.Attacked -= OnAttacked;
 
-    private void Start() => _attackParticle.Stop();
+    private void Start()
+    {
+        _attackParticle.Stop();
+        _animationView = new PlayerAnimationsView(_shakingPart, _stat);
+    }
 
     [Inject]
     private void Constructor(IAttackable attackable, PlayerStat stat)
@@ -28,7 +33,7 @@ public class PlayerViewStorage : MonoBehaviour
     private void OnAttacked()
     {
         PlayParticle();
-        PlayAnimations();
+        _animationView.PlayAttack();
     }
 
     private void PlayParticle()
@@ -36,13 +41,5 @@ public class PlayerViewStorage : MonoBehaviour
         _attackParticle.Play();
     }
 
-    private void PlayAnimations()
-    {
-        transform.DOMoveZ(GetStartPosition(),GetDelay())
-            .SetLoops(2, LoopType.Yoyo);
-    }
-
-    private float GetDelay() => _stat.AttackSpeed / Accelerator;
-
-    private float GetStartPosition() => transform.position.z - RecoilDistance;
+    
 }
