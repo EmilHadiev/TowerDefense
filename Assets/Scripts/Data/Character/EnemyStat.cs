@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class EnemyStat : ScriptableObject
+[CreateAssetMenu(fileName = "EnemyStat", menuName = "Character/Stat/EnemyStats/Enemy")]
+public class EnemyStat : ScriptableObject
 {
     [SerializeField, Range(1f, 100f)] public float Health = 30;
     [SerializeField, Range(1f, 100f)] public float Damage = 10;

@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using UnityEngine;
 
 public class PlayerAnimationsView
 {
@@ -8,13 +7,11 @@ public class PlayerAnimationsView
 
     private readonly ShakingPart _shakingPart;
     private readonly PlayerStat _stat;
-    private readonly Vector3 _startPosition;
 
     public PlayerAnimationsView(ShakingPart shakingPart, PlayerStat stat)
     {
         _shakingPart = shakingPart;
         _stat = stat;
-        _startPosition = shakingPart.transform.position;
     }
 
     public void PlayAttack()
@@ -27,7 +24,6 @@ public class PlayerAnimationsView
 
     private float GetEndValue()
     {
-
         float localStartPositionZ = _shakingPart.transform.localPosition.z;
         return localStartPositionZ - RecoilDistance;
     }

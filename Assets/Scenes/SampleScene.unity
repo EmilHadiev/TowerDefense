@@ -295,15 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b630cc346a1df6c428ce71f5367f046e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonStat: {fileID: 11400000, guid: 4e7ea29c9e26e3c48a3d96149c953d36, type: 2}
-  _demonKnightStat: {fileID: 11400000, guid: dfbf75907fb52cf418dda9f49b2d6943, type: 2}
-  _golemStat: {fileID: 11400000, guid: 55a8197d71ea4bb44bf6df28f25e9808, type: 2}
-  _blackKnightStat: {fileID: 11400000, guid: 84eb34d6fba09974ead81a592dd460b6, type: 2}
-  _armorKnightStat: {fileID: 11400000, guid: d5838eb783548024eb5ab5d760dd74c9, type: 2}
-  _turtleStat: {fileID: 11400000, guid: 03c0592f0198d12439d897c4d341eaa3, type: 2}
-  _dragonStat: {fileID: 11400000, guid: b7b3674983c7d024ca6352df716890e1, type: 2}
-  _slimeStat: {fileID: 11400000, guid: 133060f18dbf4c64da64d9ba49cb4f87, type: 2}
-  _mageStat: {fileID: 11400000, guid: 597bc4e196cab1d4aa9a638cee51a6b5, type: 2}
   _stats:
   - {fileID: 11400000, guid: d5838eb783548024eb5ab5d760dd74c9, type: 2}
   - {fileID: 11400000, guid: 84eb34d6fba09974ead81a592dd460b6, type: 2}
@@ -2432,6 +2423,10 @@ PrefabInstance:
     - target: {fileID: 5132932080902350763, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645762335787635014, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
