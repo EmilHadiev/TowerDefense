@@ -19,8 +19,6 @@ public class EnemyExplosion : IDisableAbility
     {
         int countEnemies = Physics.OverlapSphereNonAlloc(_enemy.position, ExplosionRadius, _hits, LayerMask.GetMask(PlayerMask, EnemyMask));
 
-        Debug.Log(countEnemies);
-
         if (countEnemies > 0)
             AttackTargets(countEnemies);
 
