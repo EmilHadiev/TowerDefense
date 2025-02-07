@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyExplosion : IDisableAbility
+public class EnemyExplosion : IAbility
 {
     private const int ExplosionRadius = 5;
     private const string PlayerMask = "Player";

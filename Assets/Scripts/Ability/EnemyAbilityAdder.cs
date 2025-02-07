@@ -23,7 +23,7 @@ public class EnemyAbilityAdder : MonoBehaviour
         switch (type)
         {
             case EnemyType.ArmorKnight:
-                
+                _instantiator.InstantiateComponent<ArmorKnightAbility>(gameObject);
                 break;
             case EnemyType.Turtle:
                 _instantiator.InstantiateComponent<TurtleAbility>(gameObject);
