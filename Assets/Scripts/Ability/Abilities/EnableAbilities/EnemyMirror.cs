@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyMirror : IEnableAbility
+public class EnemyMirror : IAbility
 {
     private Transform _enemy;
 

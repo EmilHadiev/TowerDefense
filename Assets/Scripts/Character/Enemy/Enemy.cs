@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
     {
         StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
-        _abilityContainer.Ability.Activate();
     }
 
     [Inject]

@@ -38,6 +38,12 @@ public class EnemyHealth : MonoBehaviour, IHealth
         HealthChanged?.Invoke(_health, MaxHealth);
 
         if (_health <= 0)
-            Died?.Invoke();
+            Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("Конец?");
+        Died?.Invoke();
     }
 }

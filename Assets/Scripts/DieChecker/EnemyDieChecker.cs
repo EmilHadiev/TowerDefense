@@ -6,8 +6,6 @@ public class EnemyDieChecker : MonoBehaviour
     [SerializeField] private EnemyHealth _health;
     [SerializeField] private Enemy _enemy;
 
-    private const int Point = 1;
-
     private ICoinStorage _coinStorage;
 
     private bool _isDead;
