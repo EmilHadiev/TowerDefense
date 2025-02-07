@@ -13,11 +13,14 @@ public class EnemyRenderViewer : MonoBehaviour
         _renderer ??= GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
-    private void Awake()
+    private void Awake() => _propertyBlock = new MaterialPropertyBlock();
+
+    private void OnDisable() => ChangeColor();
+
+    private void ChangeColor()
     {
-        _propertyBlock = new MaterialPropertyBlock();
         Color = GetRandomColor();
-        SetColor(Color);        
+        SetColor(Color);
     }
 
     private void SetColor(Color color)

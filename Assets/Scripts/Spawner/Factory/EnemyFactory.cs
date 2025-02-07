@@ -28,6 +28,8 @@ public class EnemyFactory : IEnemyFactory
                 return GetEnemy(AssetPath.TurtlePath);
             case EnemyType.Dragon:
                 return GetEnemy(AssetPath.DragonPath);
+            case EnemyType.Slime:
+                return GetEnemy(AssetPath.SlimePath);
             default:
                 throw new ArgumentOutOfRangeException(nameof(enemyType));
         }

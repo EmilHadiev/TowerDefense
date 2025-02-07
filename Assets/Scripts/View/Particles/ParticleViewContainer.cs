@@ -44,7 +44,7 @@ public class ParticleViewContainer : MonoBehaviour
     {
         if (other.TryGetComponent(out Bullet bullet))
         {
-            Debug.Log("Проверка!");
+            Debug.Log("Попадании пули");
         }
     }
 }

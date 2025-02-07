@@ -43,7 +43,6 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     private void Die()
     {
-        Debug.Log("Конец?");
         Died?.Invoke();
     }
 }
