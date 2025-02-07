@@ -7,5 +7,6 @@
     ArmorKnight = 4,
     Turtle = 5,
     Dragon = 6,
-    Slime = 8
+    Slime = 8,
+    Mage = 9
 }

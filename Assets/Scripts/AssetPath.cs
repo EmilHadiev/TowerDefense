@@ -8,4 +8,5 @@
     public const string TurtlePath = "Enemies/Turtle";
     public const string DragonPath = "Enemies/Dragon";
     public const string SlimePath = "Enemies/Slime";
+    public const string MagePath = "Enemies/Mage";
 }
