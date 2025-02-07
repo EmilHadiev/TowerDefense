@@ -9,10 +9,12 @@ public class TurtleAbility : MonoBehaviour
     private IInstantiator _instantiator;
 
     private ParticleView _view;
+    private EnemyStat _stat;
 
     private void Awake()
     {
         _health = GetComponent<IHealth>();
+        _stat = GetComponent<Enemy>().Stat;
 
         if (_health == null)
             throw new ArgumentNullException(nameof(_health));
@@ -24,7 +26,7 @@ public class TurtleAbility : MonoBehaviour
 
     private void Start()
     {
-        _ability = new EnemyExplosion(transform);
+        _ability = new EnemyExplosion(transform, _stat);
         CreateExplosionParticle();
     }
 
@@ -39,11 +41,11 @@ public class TurtleAbility : MonoBehaviour
 
     private void OnDied()
     {        
-        Explode();
+        ExplodeView();
         _ability.Activate();
     }
 
-    private void Explode()
+    private void ExplodeView()
     {
         _view.transform.position = transform.position;
         _view.transform.rotation = transform.rotation;

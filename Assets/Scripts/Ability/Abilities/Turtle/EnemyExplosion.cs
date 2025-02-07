@@ -3,16 +3,19 @@
 public class EnemyExplosion : IAbility
 {
     private const int ExplosionRadius = 5;
+    private const int DamageMultiplier = 2;
     private const string PlayerMask = "Player";
     private const string EnemyMask = "Enemy";
 
     private readonly Transform _enemy;
+    private readonly EnemyStat _stat;
 
     private Collider[] _hits = new Collider[10];    
 
-    public EnemyExplosion(Transform enemy)
+    public EnemyExplosion(Transform enemy, EnemyStat stat)
     {
         _enemy = enemy;
+        _stat = stat;
     }
 
     public void Activate()
@@ -31,6 +34,6 @@ public class EnemyExplosion : IAbility
     {
         for (int i = 0; i < countEnemies; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(25);
+                health.TakeDamage(_stat.Damage * DamageMultiplier);
     }
 }
