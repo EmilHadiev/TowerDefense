@@ -28,8 +28,10 @@ public class EnemyAbilityAdder : MonoBehaviour
             case EnemyType.Turtle:
                 _instantiator.InstantiateComponent<TurtleAbility>(gameObject);
                 break;
-            default:
-                
+            case EnemyType.Mage:
+                _instantiator?.InstantiateComponent<MageAbility>(gameObject);
+                break;
+            default:                
                 break;
         }
     }
