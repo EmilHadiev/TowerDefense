@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce19921aee8e22e459530cfc79216f87, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d621641e5c7614bae26441beb1cb52, type: 3}
   m_Name: SkeletonStat
-  m_EditorClassIdentifier: Assembly-CSharp::SkeletonStat
+  m_EditorClassIdentifier: 
   Health: 30
   Damage: 10
   Speed: 5
