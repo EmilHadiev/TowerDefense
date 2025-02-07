@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 1357937928811168014}
   - component: {fileID: 8854588795500410442}
   - component: {fileID: 6598392185373518721}
-  - component: {fileID: 271917770897509953}
+  - component: {fileID: 6585961382923291743}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Untagged
@@ -615,6 +615,7 @@ MonoBehaviour:
   <Type>k__BackingField: 2
   _mover: {fileID: 2396013740489312280}
   _animator: {fileID: 3563763766408719682}
+  _abilityContainer: {fileID: 6585961382923291743}
 --- !u!114 &6598392185373518721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 4985563693225892510}
---- !u!114 &271917770897509953
+--- !u!114 &6585961382923291743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,9 +638,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1403733231031206565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac7434137b58da4698652d34966184c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dieChecker: {fileID: 6653193203103341570}
+  _health: {fileID: 4659129481117984893}
 --- !u!1 &1441107254731676383
 GameObject:
   m_ObjectHideFlags: 0

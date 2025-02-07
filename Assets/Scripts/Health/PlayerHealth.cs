@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private float _health;
 
     public event Action<float, float> HealthChanged;
+    public event Action Died;
 
     private float _maxHealth;
 
@@ -28,6 +29,12 @@ public class PlayerHealth : MonoBehaviour, IHealth
         HealthChanged?.Invoke(_health, _maxHealth);
 
         if (_health <= 0)
-            gameObject.SetActive(false);
+            Die();
+    }
+
+    private void Die()
+    {
+        Died?.Invoke();
+        gameObject.SetActive(false);
     }
 }

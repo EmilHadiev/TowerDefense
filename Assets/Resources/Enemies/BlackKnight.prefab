@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 5320337434855246048}
   - component: {fileID: 8201725491185972916}
   - component: {fileID: 8433255382179379414}
-  - component: {fileID: 5742558888024183466}
+  - component: {fileID: 7731534869500402405}
   m_Layer: 6
   m_Name: BlackKnight
   m_TagString: Untagged
@@ -581,6 +581,7 @@ MonoBehaviour:
   <Type>k__BackingField: 3
   _mover: {fileID: 1101058530842921377}
   _animator: {fileID: 5072564367502358179}
+  _abilityContainer: {fileID: 7731534869500402405}
 --- !u!114 &8433255382179379414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 5916803977817389150}
---- !u!114 &5742558888024183466
+--- !u!114 &7731534869500402405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,9 +604,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1841687886788959725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac7434137b58da4698652d34966184c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dieChecker: {fileID: 7651128500752718365}
+  _health: {fileID: 3817093368032567216}
 --- !u!1 &2035613617992209476
 GameObject:
   m_ObjectHideFlags: 0

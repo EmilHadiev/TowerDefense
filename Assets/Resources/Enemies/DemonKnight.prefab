@@ -1980,7 +1980,7 @@ GameObject:
   - component: {fileID: 4540998300497048116}
   - component: {fileID: 7226630901090576668}
   - component: {fileID: 3531161897161794188}
-  - component: {fileID: 4080494506165211051}
+  - component: {fileID: 7752828251985446626}
   m_Layer: 6
   m_Name: DemonKnight
   m_TagString: Untagged
@@ -2168,6 +2168,7 @@ MonoBehaviour:
   <Type>k__BackingField: 1
   _mover: {fileID: 4566553515132513285}
   _animator: {fileID: 3327575310860209167}
+  _abilityContainer: {fileID: 7752828251985446626}
 --- !u!114 &7226630901090576668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,7 +2195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 949898126374743886}
---- !u!114 &4080494506165211051
+--- !u!114 &7752828251985446626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2203,9 +2204,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8278252901586325055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac7434137b58da4698652d34966184c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dieChecker: {fileID: 2207903167141897556}
+  _health: {fileID: 7020014215522487946}
 --- !u!1 &8647128331072361629
 GameObject:
   m_ObjectHideFlags: 0
