@@ -9,8 +9,6 @@ public class BulletStorage : MonoBehaviour
     private IAttackable _attacker;
     private IPool<Bullet> _pool;
 
-    public Color CurrentBulletColor => _bulletTemplate.Color;
-
     private void OnEnable() => _attacker.Attacked += OnAttacked;
     private void OnDisable() => _attacker.Attacked -= OnAttacked;
 

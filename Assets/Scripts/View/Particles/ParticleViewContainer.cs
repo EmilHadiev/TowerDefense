@@ -1,11 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class ParticleViewContainer : MonoBehaviour
+public class ParticleViewContainer : MonoBehaviour, IParticleViewContainer
 {
     [SerializeField] private ParticleView _particleView;
 
     private IHealth _health;
+    private Color _currentColor;
 
     private void OnValidate()
     {
@@ -20,7 +21,16 @@ public class ParticleViewContainer : MonoBehaviour
 
     private void Start()
     {
-        _particleView.SetColor(Color.yellow);
+        SetDamageParticleColor(Color.yellow);
+    }
+
+    public void SetDamageParticleColor(Color color)
+    {
+        if (_currentColor == color)
+            Debug.Log("Тот же самый цвет!");
+
+        _currentColor = color;
+        _particleView.SetColor(color);
     }
 
     private void OnEnable()
@@ -28,7 +38,7 @@ public class ParticleViewContainer : MonoBehaviour
         _health.HealthChanged += OnHealthChanged;
         _particleView.Stop();
     }
-    
+
 
     private void OnDisable()
     {

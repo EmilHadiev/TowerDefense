@@ -42,7 +42,14 @@ public class Bullet : MonoBehaviour
         {
             health.TakeDamage(_data.Damage);
             HideAfterCollided();
+            ChangeTargetParticleDamageColor(collider);
         }
+    }
+
+    private void ChangeTargetParticleDamageColor(Collider collider)
+    {
+        if (collider.TryGetComponent(out IParticleViewContainer viewContainer))
+            viewContainer.SetDamageParticleColor(_data.Color);
     }
 
     private void HideAfterCollided()
