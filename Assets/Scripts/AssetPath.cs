@@ -11,4 +11,5 @@
     public const string MagePath = "Enemies/Mage";
 
     public const string ParticleExplosionPath = "Particles/Explosion";
+    public const string ParticleSpawnRunePath = "Particles/SpawnRune";
 }

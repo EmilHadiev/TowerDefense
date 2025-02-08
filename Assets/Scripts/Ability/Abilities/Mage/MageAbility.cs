@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class MageAbility : MonoBehaviour
 {
-    private const int WaitingTime = 1;
+    private const int WaitingTime = 2;
     private const int MaxEnemies = 2;
 
-    private EnemySpawnPosition[] _spawnPosition = new EnemySpawnPosition[MaxEnemies];
+    private EnemySpawnPosition[] _spawnPositions = new EnemySpawnPosition[MaxEnemies];
+    private EnemySpawnerAbility[] _spawners;
+    private EnemySpawnerAbilityView[] _views;
 
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _delay;
 
-    private EnemyFactory _factory;
     private IInstantiator _instantiator;
 
     private void Awake()
     {
         _delay = new WaitForSeconds(WaitingTime);
-        _spawnPosition = GetComponentsInChildren<EnemySpawnPosition>();
+        _spawnPositions = GetComponentsInChildren<EnemySpawnPosition>();
     }
 
     private void OnEnable()
@@ -31,20 +31,28 @@ public class MageAbility : MonoBehaviour
 
     private void OnDisable() => StopSpawn();
 
-    private void Start() => _factory = new EnemyFactory(_instantiator);
+    private void Start()
+    {
+        _spawners = new EnemySpawnerAbility[MaxEnemies];
+        _views = new EnemySpawnerAbilityView[MaxEnemies];
+
+        for (int i = 0; i < MaxEnemies; i++)
+        {
+            _spawners[i] = new EnemySpawnerAbility(_spawnPositions[i], _instantiator);
+            _views[i] = new EnemySpawnerAbilityView(_spawnPositions[i], _instantiator);
+        }
+    }
 
     private void StopSpawn()
     {
+        StopSpawnView();
+
         if (_spawnCoroutine != null)
             StopCoroutine(_spawnCoroutine);
     }
 
     [Inject]
-    private void Constructor(IInstantiator instantiator)
-    {
-        _instantiator = instantiator;
-        Debug.Log(_instantiator == null);
-    }
+    private void Constructor(IInstantiator instantiator) => _instantiator = instantiator;
 
     private IEnumerator SpawnCoroutine()
     {
@@ -57,8 +65,19 @@ public class MageAbility : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Enemy enemy = _factory.Get((EnemyType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EnemyType)).Length));
-        enemy.transform.position = _spawnPosition[0].transform.position;
-        enemy.transform.rotation = _spawnPosition[0].transform.rotation;
+        for (int i = 0; i < MaxEnemies; i++)
+        {
+            if (_spawners[i].TrySpawn())
+                _views[i].Show();
+        }
+    }
+
+    private void StopSpawnView()
+    {
+        if (_views == null)
+            return;
+
+        foreach (var view in _views)
+            view.Stop();
     }
 }

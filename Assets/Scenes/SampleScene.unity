@@ -529,6 +529,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 4903989986093316332, guid: 142b394e21edf1c42947ec16dc7a523c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5279143269928544598, guid: 142b394e21edf1c42947ec16dc7a523c, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1422,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072067113d458ea42b2a828e6638e168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 5
+  _size: 1
   _enemyType: 9
 --- !u!4 &1501565669
 Transform:
