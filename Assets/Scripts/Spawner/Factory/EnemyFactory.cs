@@ -1,40 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class EnemyFactory : IEnemyFactory
 {
-    private IInstantiator _instantiator;
+    private readonly IInstantiator _instantiator;
+    private readonly Dictionary<EnemyType, string> _enemyPaths;
 
     public EnemyFactory(IInstantiator instantiator)
     {
         _instantiator = instantiator;
+
+        _enemyPaths = new Dictionary<EnemyType, string>(10)
+        {
+            {EnemyType.Skeleton,    AssetPath.SkeletonPath},
+            {EnemyType.DemonKnight, AssetPath.DemonKnightPath},
+            {EnemyType.Golem,       AssetPath.GolemPath},
+            {EnemyType.BlackKnight, AssetPath.BlackKnightPath},
+            {EnemyType.ArmorKnight, AssetPath.ArmorKnightPath},
+            {EnemyType.Turtle,      AssetPath.TurtlePath },
+            {EnemyType.Dragon,      AssetPath.DragonPath},
+            {EnemyType.Slime,       AssetPath.SlimePath},
+            {EnemyType.Mage,        AssetPath.MagePath},
+        };
     }
 
     public Enemy Get(EnemyType enemyType)
     {
-        switch (enemyType)
-        {
-            case EnemyType.Skeleton:
-                return GetEnemy(AssetPath.SkeletonPath);
-            case EnemyType.DemonKnight:
-                return GetEnemy(AssetPath.DemonKnightPath);
-            case EnemyType.Golem:
-                return GetEnemy(AssetPath.GolemPath);
-            case EnemyType.BlackKnight:
-                return GetEnemy(AssetPath.BlackKnightPath);
-            case EnemyType.ArmorKnight:
-                return GetEnemy(AssetPath.ArmorKnightPath);
-            case EnemyType.Turtle:
-                return GetEnemy(AssetPath.TurtlePath);
-            case EnemyType.Dragon:
-                return GetEnemy(AssetPath.DragonPath);
-            case EnemyType.Slime:
-                return GetEnemy(AssetPath.SlimePath);
-            case EnemyType.Mage:
-                return GetEnemy(AssetPath.MagePath);
-            default:
-                throw new ArgumentOutOfRangeException(nameof(enemyType));
-        }
+        if (_enemyPaths.TryGetValue(enemyType, out string path))
+            return GetEnemy(path);
+
+        throw new ArgumentOutOfRangeException(nameof(enemyType));
     }
 
     private Enemy GetEnemy(string path) => _instantiator.InstantiatePrefabResourceForComponent<Enemy>(path);
