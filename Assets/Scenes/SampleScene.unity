@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072067113d458ea42b2a828e6638e168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 1
+  _size: 5
   _enemyType: 9
 --- !u!4 &1501565669
 Transform:

@@ -9,14 +9,15 @@ using Zenject;
 [RequireComponent(typeof(EnemyAttacker))]
 [RequireComponent(typeof(EnemyDieChecker))]
 [RequireComponent(typeof(EnemyRenderViewer))]
-[RequireComponent(typeof(EnemyAbilityAdder))]
 [RequireComponent(typeof(ParticleViewContainer))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private CharacterAnimator _animator;
-    [SerializeField] private EnemyAbilityAdder _abilityContainer;
+
+    private EnemyAbilityVisitor _visitor;
+    private IInstantiator _instantiator;
 
     public IStateSwitcher StateMachine { get; private set; }
     public EnemyStat Stat { get; private set; }
@@ -25,18 +26,23 @@ public class Enemy : MonoBehaviour
     {
         _mover ??= GetComponent<EnemyMover>();
         _animator ??= GetComponent<CharacterAnimator>();
-        _abilityContainer ??= GetComponent<EnemyAbilityAdder>();
+
     }
 
     private void Start()
     {
         StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
+
+        _visitor = new EnemyAbilityVisitor(_instantiator, gameObject);
+        AbilityAccept(_visitor);
     }
 
     [Inject]
-    private void Constructor(IEnumerable<EnemyStat> stats)
+    private void Constructor(IEnumerable<EnemyStat> stats, IInstantiator instantiator)
     {
+        _instantiator = instantiator;
+
         foreach (var stat in stats)
         {
             if (stat.EnemyType == Type)
@@ -48,4 +54,6 @@ public class Enemy : MonoBehaviour
 
         throw new ArgumentNullException(nameof(stats));
     }
+
+    protected abstract void AbilityAccept(IEnemyVisitor visitor);
 }

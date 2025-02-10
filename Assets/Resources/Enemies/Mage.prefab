@@ -398,9 +398,8 @@ GameObject:
   - component: {fileID: 2717139341394453092}
   - component: {fileID: 5047056576980081678}
   - component: {fileID: 7833382916172859058}
-  - component: {fileID: 5726389603688570572}
   - component: {fileID: 9191172778256690916}
-  - component: {fileID: 7747444197024693873}
+  - component: {fileID: 2744019473424104515}
   m_Layer: 6
   m_Name: Mage
   m_TagString: Untagged
@@ -572,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 1278329559045195698}
-  _enemy: {fileID: 7747444197024693873}
+  _enemy: {fileID: 2744019473424104515}
 --- !u!114 &7833382916172859058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,18 +585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 3407838892940632238}
---- !u!114 &5726389603688570572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800228524858163852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9191172778256690916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 3806583676431803088}
---- !u!114 &7747444197024693873
+--- !u!114 &2744019473424104515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -620,13 +607,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1800228524858163852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f784ec0fe78247aabb25591231afa, type: 3}
+  m_Script: {fileID: 11500000, guid: e69c05d3f3170da469d921bd22ee1fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 9
   _mover: {fileID: 3366226293278180937}
   _animator: {fileID: 2752868102498848157}
-  _abilityContainer: {fileID: 5726389603688570572}
 --- !u!1 &2194448728759348101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2598,7 @@ PrefabInstance:
     - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
       propertyPath: _enemy
       value: 
-      objectReference: {fileID: 7747444197024693873}
+      objectReference: {fileID: 2744019473424104515}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

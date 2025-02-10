@@ -14,20 +14,14 @@ public class ParticleViewContainer : MonoBehaviour, IParticleViewContainer
             throw new ArgumentNullException(nameof(_particleView));
     }
 
-    private void Awake()
-    {
-        _health = GetComponent<IHealth>();
-    }
+    private void Awake() => _health = GetComponent<IHealth>();
 
-    private void Start()
-    {
-        SetDamageParticleColor(Color.yellow);
-    }
+    private void Start() => SetDamageParticleColor(Color.yellow);
 
     public void SetDamageParticleColor(Color color)
     {
         if (_currentColor == color)
-            Debug.Log("Тот же самый цвет!");
+            return;
 
         _currentColor = color;
         _particleView.SetColor(color);
@@ -40,21 +34,7 @@ public class ParticleViewContainer : MonoBehaviour, IParticleViewContainer
     }
 
 
-    private void OnDisable()
-    {
-        _health.HealthChanged += OnHealthChanged;
-    }
+    private void OnDisable() => _health.HealthChanged += OnHealthChanged;
 
-    private void OnHealthChanged(float currentHealth, float maxHealth)
-    {
-        _particleView.Play();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Bullet bullet))
-        {
-            Debug.Log("Попадании пули");
-        }
-    }
+    private void OnHealthChanged(float currentHealth, float maxHealth) => _particleView.Play();
 }

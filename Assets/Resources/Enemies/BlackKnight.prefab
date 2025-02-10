@@ -378,9 +378,9 @@ GameObject:
   - component: {fileID: 2002445843073125499}
   - component: {fileID: 7651128500752718365}
   - component: {fileID: 5320337434855246048}
-  - component: {fileID: 8201725491185972916}
   - component: {fileID: 8433255382179379414}
-  - component: {fileID: 7731534869500402405}
+  - component: {fileID: 9010484618413438781}
+  - component: {fileID: 6302064683146258753}
   m_Layer: 6
   m_Name: BlackKnight
   m_TagString: Untagged
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 3817093368032567216}
-  _enemy: {fileID: 8201725491185972916}
+  _enemy: {fileID: 6302064683146258753}
 --- !u!114 &5320337434855246048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,22 +566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 1592168312373204885}
---- !u!114 &8201725491185972916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841687886788959725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f784ec0fe78247aabb25591231afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Type>k__BackingField: 3
-  _mover: {fileID: 1101058530842921377}
-  _animator: {fileID: 5072564367502358179}
-  _abilityContainer: {fileID: 7731534869500402405}
 --- !u!114 &8433255382179379414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,7 +579,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 5916803977817389150}
---- !u!114 &7731534869500402405
+--- !u!135 &9010484618413438781
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841687886788959725}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6302064683146258753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -604,11 +609,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1841687886788959725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
+  m_Script: {fileID: 11500000, guid: 65b69a39f932d50488c4d87d2d623352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dieChecker: {fileID: 7651128500752718365}
-  _health: {fileID: 3817093368032567216}
+  <Type>k__BackingField: 3
+  _mover: {fileID: 1101058530842921377}
+  _animator: {fileID: 5072564367502358179}
 --- !u!1 &2035613617992209476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,12 +2491,27 @@ PrefabInstance:
     - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
       propertyPath: _enemy
       value: 
-      objectReference: {fileID: 8201725491185972916}
+      objectReference: {fileID: 6302064683146258753}
+    - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+      propertyPath: _observer
+      value: 
+      objectReference: {fileID: 4894482371592262811}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+--- !u!114 &4894482371592262811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7468199385886801092, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+  m_PrefabInstance: {fileID: 2614601323789264991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364860557a1a63244839873e0839a9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8467717028870824196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5894000022812789083, guid: b65832872c5e47045a08f1b76a88801f, type: 3}

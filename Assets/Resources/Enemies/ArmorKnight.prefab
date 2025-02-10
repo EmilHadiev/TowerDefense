@@ -919,9 +919,9 @@ GameObject:
   - component: {fileID: 7764506644817304997}
   - component: {fileID: 1616877276615032535}
   - component: {fileID: 7288332281830453612}
-  - component: {fileID: 4830924275812763192}
   - component: {fileID: 8291573210159931057}
-  - component: {fileID: 4089698712606805161}
+  - component: {fileID: 5899039850109603379}
+  - component: {fileID: 8476269873838749812}
   m_Layer: 6
   m_Name: ArmorKnight
   m_TagString: Untagged
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 6781980774449164922}
-  _enemy: {fileID: 4830924275812763192}
+  _enemy: {fileID: 8476269873838749812}
 --- !u!114 &7288332281830453612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,22 +1107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 4980631195771935695}
---- !u!114 &4830924275812763192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812026724909341604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f784ec0fe78247aabb25591231afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Type>k__BackingField: 4
-  _mover: {fileID: 2610802129494706603}
-  _animator: {fileID: 4304645401701548883}
-  _abilityContainer: {fileID: 4089698712606805161}
 --- !u!114 &8291573210159931057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1120,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 1533688535236723444}
---- !u!114 &4089698712606805161
+--- !u!135 &5899039850109603379
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812026724909341604}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8476269873838749812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1145,11 +1150,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5812026724909341604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
+  m_Script: {fileID: 11500000, guid: b01733bbb7715e04892a2fc509c3a7d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dieChecker: {fileID: 1616877276615032535}
-  _health: {fileID: 6781980774449164922}
+  <Type>k__BackingField: 4
+  _mover: {fileID: 2610802129494706603}
+  _animator: {fileID: 4304645401701548883}
 --- !u!1 &6144642258767119259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1826,7 @@ PrefabInstance:
     - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
       propertyPath: _enemy
       value: 
-      objectReference: {fileID: 4830924275812763192}
+      objectReference: {fileID: 8476269873838749812}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

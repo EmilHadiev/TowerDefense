@@ -714,8 +714,8 @@ GameObject:
   - component: {fileID: 7191830960456674038}
   - component: {fileID: 7890797243087991084}
   - component: {fileID: 4109530695644644}
-  - component: {fileID: 6175312900398753903}
-  - component: {fileID: 1892970155395864586}
+  - component: {fileID: 9221036849570089925}
+  - component: {fileID: 3088665863194876682}
   m_Layer: 6
   m_Name: Turtle
   m_TagString: Untagged
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 4479356662177489641}
-  _enemy: {fileID: 6175312900398753903}
+  _enemy: {fileID: 3088665863194876682}
 --- !u!114 &7890797243087991084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +914,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 4420339313199947294}
---- !u!114 &6175312900398753903
+--- !u!135 &9221036849570089925
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569285854475398561}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3088665863194876682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -923,27 +944,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569285854475398561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f784ec0fe78247aabb25591231afa, type: 3}
+  m_Script: {fileID: 11500000, guid: 20f3bdda97daabb44a6f35f53dfa2fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 5
   _mover: {fileID: 2083637499403432218}
   _animator: {fileID: 6915746654432976904}
-  _abilityContainer: {fileID: 1892970155395864586}
---- !u!114 &1892970155395864586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5569285854475398561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dieChecker: {fileID: 7191830960456674038}
-  _health: {fileID: 4479356662177489641}
 --- !u!1 &6075969978157893723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,7 +1385,7 @@ PrefabInstance:
     - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
       propertyPath: _enemy
       value: 
-      objectReference: {fileID: 6175312900398753903}
+      objectReference: {fileID: 3088665863194876682}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

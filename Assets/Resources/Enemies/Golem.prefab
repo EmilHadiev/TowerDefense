@@ -412,9 +412,9 @@ GameObject:
   - component: {fileID: 3719551871191010331}
   - component: {fileID: 6653193203103341570}
   - component: {fileID: 1357937928811168014}
-  - component: {fileID: 8854588795500410442}
   - component: {fileID: 6598392185373518721}
-  - component: {fileID: 6585961382923291743}
+  - component: {fileID: 8395666357384620800}
+  - component: {fileID: 9180260784619648480}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Untagged
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 4659129481117984893}
-  _enemy: {fileID: 8854588795500410442}
+  _enemy: {fileID: 9180260784619648480}
 --- !u!114 &1357937928811168014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,22 +600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6207353682873759523}
---- !u!114 &8854588795500410442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403733231031206565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690f784ec0fe78247aabb25591231afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Type>k__BackingField: 2
-  _mover: {fileID: 2396013740489312280}
-  _animator: {fileID: 3563763766408719682}
-  _abilityContainer: {fileID: 6585961382923291743}
 --- !u!114 &6598392185373518721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +613,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleView: {fileID: 4985563693225892510}
---- !u!114 &6585961382923291743
+--- !u!135 &8395666357384620800
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403733231031206565}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9180260784619648480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -638,11 +643,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1403733231031206565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b45273ffa6dd84e925ff4a58291bde, type: 3}
+  m_Script: {fileID: 11500000, guid: 65b69a39f932d50488c4d87d2d623352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dieChecker: {fileID: 6653193203103341570}
-  _health: {fileID: 4659129481117984893}
+  <Type>k__BackingField: 2
+  _mover: {fileID: 2396013740489312280}
+  _animator: {fileID: 3563763766408719682}
 --- !u!1 &1441107254731676383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,12 +2418,27 @@ PrefabInstance:
     - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
       propertyPath: _enemy
       value: 
-      objectReference: {fileID: 8854588795500410442}
+      objectReference: {fileID: 9180260784619648480}
+    - target: {fileID: 6832138235368716075, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+      propertyPath: _observer
+      value: 
+      objectReference: {fileID: 78427721292728049}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+--- !u!114 &78427721292728049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7468199385886801092, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
+  m_PrefabInstance: {fileID: 7400256813773421109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364860557a1a63244839873e0839a9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3997313650573865838 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5894000022812789083, guid: b65832872c5e47045a08f1b76a88801f, type: 3}
