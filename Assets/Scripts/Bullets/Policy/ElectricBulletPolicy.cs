@@ -4,7 +4,7 @@ public class ElectricBulletPolicy : IBulletPolicy
 {
     private const int Radius = 5;
     private const int MaxEnemies = 5;
-    private const float RadiusDamagePercentage = 15;
+    private const float RadiusDamagePercentage = 20;
     private const string EnemyMask = "Enemy";
 
     private readonly LayerMask _enemyMask;
