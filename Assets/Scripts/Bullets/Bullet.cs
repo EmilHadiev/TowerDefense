@@ -33,7 +33,8 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        _bulletPolicy = new FireballBullet();
+        //_bulletPolicy = new FireballBulletPolicy(_data);
+        _bulletPolicy = new ElectricBulletPolicy(transform, _data);
     }
 
     private void Update() => UpdateLifeTime();

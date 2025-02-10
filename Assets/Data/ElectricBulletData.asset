@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e362bfa008880d74b9ac0ca98be88006, type: 3}
-  m_Name: FireballBulletData
+  m_Name: ElectricBulletData
   m_EditorClassIdentifier: 
-  Speed: 25
-  Damage: 10
-  LifeTime: 3
-  <Color>k__BackingField: {r: 0.69803923, g: 0.40392157, b: 0.19215687, a: 1}
+  Speed: 30
+  Damage: 5
+  LifeTime: 2
+  <Color>k__BackingField: {r: 0.44313726, g: 0.73333335, b: 0.9019608, a: 1}
