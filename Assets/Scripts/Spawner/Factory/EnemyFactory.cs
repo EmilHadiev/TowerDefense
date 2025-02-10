@@ -23,6 +23,9 @@ public class EnemyFactory : IEnemyFactory
             {EnemyType.Slime,       AssetPath.SlimePath},
             {EnemyType.Mage,        AssetPath.MagePath},
         };
+
+        if (_enemyPaths.Count != Enum.GetValues(typeof(EnemyType)).Length)
+            throw new ArgumentOutOfRangeException(nameof(_enemyPaths));
     }
 
     public Enemy Get(EnemyType enemyType)
