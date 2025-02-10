@@ -43,6 +43,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     private void Die()
     {
+        _health = 0;
         Died?.Invoke();
     }
 }

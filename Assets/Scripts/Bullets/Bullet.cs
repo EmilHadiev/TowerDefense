@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
@@ -10,12 +9,13 @@ public class Bullet : MonoBehaviour
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;    
+    private IBulletPolicy _bulletPolicy;
 
     private float _tick;
 
-    private void Awake() => _observer = GetComponent<TriggerObserver>();
-
     public Color Color => _data.Color;
+
+    private void Awake() => _observer = GetComponent<TriggerObserver>();
 
     private void OnEnable()
     {
@@ -31,18 +31,21 @@ public class Bullet : MonoBehaviour
         _tick = 0;
     }
 
-    private void Update()
+    private void Start()
     {
-        UpdateLifeTime();
+        _bulletPolicy = new FireballBullet();
     }
+
+    private void Update() => UpdateLifeTime();
 
     private void OnEntered(Collider collider)
     {
         if (collider.TryGetComponent(out IHealth health))
         {
             health.TakeDamage(_data.Damage);
-            HideAfterCollided();
             ChangeTargetParticleDamageColor(collider);
+            _bulletPolicy.Accept(collider);
+            HideAfterCollided();
         }
     }
 
