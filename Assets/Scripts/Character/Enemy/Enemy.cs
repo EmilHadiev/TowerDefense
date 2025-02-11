@@ -10,6 +10,7 @@ using Zenject;
 [RequireComponent(typeof(EnemyDieChecker))]
 [RequireComponent(typeof(EnemyRenderViewer))]
 [RequireComponent(typeof(ParticleViewContainer))]
+[RequireComponent(typeof(NegativeEffectContainer))]
 public abstract class Enemy : MonoBehaviour
 {
     [field: SerializeField] public EnemyType Type { get; private set; }

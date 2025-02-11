@@ -12,10 +12,11 @@ public class EnemyMover : MonoBehaviour, IMovable
     private IPlayer _player;
     private IMover _mover;
     private EnemyStat _stat;
+    private SpeedProperty _speedProperty;
 
     public IMover Mover => _mover;
 
-    public float Speed => _stat.Speed;
+    public SpeedProperty Speed => _speedProperty;
 
     private void OnValidate()
     {
@@ -26,7 +27,8 @@ public class EnemyMover : MonoBehaviour, IMovable
     private void Awake()
     {
         _stat = GetComponent<Enemy>().Stat;
-        _mover = new EnemyMoveToTargetPattern(_player, _agent, this);
+        _speedProperty = new SpeedProperty(_stat.Speed);
+        _mover = new EnemyMoveToTargetPattern(_player, _agent, _speedProperty);
         SetMover(_mover);
         _mover.StopMove();
     }

@@ -2,10 +2,9 @@
 
 public class IceBulletEffect : IBulletEffectHandler
 {
-    private const float DecelerationPercentage = 50;
-
     public void HandleEffect(Collider enemy)
     {
-        
+        if (enemy.TryGetComponent(out INegativeEffectContainer container))
+            container.Activate<FreezingEffect>();
     }
 }

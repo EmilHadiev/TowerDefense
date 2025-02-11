@@ -34,7 +34,8 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         //_bulletPolicy = new FireballBulletPolicy(_data);
-        _bulletEffect = new ElectricBulletEffect(transform, _data);
+        //_bulletEffect = new ElectricBulletEffect(transform, _data);
+        _bulletEffect = new IceBulletEffect();
     }
 
     private void Update() => UpdateLifeTime();
