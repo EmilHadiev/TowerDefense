@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
@@ -10,6 +13,8 @@ public class Bullet : MonoBehaviour
 
     private TriggerObserver _observer;    
     private IBulletEffectHandler _bulletEffect;
+
+    private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
 
     private float _tick;
 
@@ -33,12 +38,27 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        //_bulletPolicy = new FireballBulletPolicy(_data);
-        //_bulletEffect = new ElectricBulletEffect(transform, _data);
-        _bulletEffect = new IceBulletEffect();
+        _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
+        {
+            [typeof(IceBulletEffect)] = new IceBulletEffect(),
+            [typeof(FireballBulletEffect)] = new FireballBulletEffect(_data),
+            [typeof(ElectricBulletEffect)] = new ElectricBulletEffect(transform, _data),
+            [typeof(BulletBlackHoleEffect)] = new BulletBlackHoleEffect(transform),
+            [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
+        };
+
+        SetEffect<BulletBlackHoleEffect>();
     }
 
     private void Update() => UpdateLifeTime();
+
+    public void SetEffect<T>() where T : IBulletEffectHandler
+    {
+        if (_bulletEffects.TryGetValue(typeof(T), out IBulletEffectHandler handler))
+            _bulletEffect = handler;
+        else
+            throw new ArgumentOutOfRangeException(nameof(T));
+    }
 
     private void OnEntered(Collider collider)
     {

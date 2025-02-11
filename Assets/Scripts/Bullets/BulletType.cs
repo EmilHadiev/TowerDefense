@@ -2,5 +2,6 @@
 {
     Fireball,
     Electric,
-    Ice
+    Ice,
+    BlackHole
 }
