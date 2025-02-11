@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-public class FireballBulletPolicy : IBulletPolicy
+public class FireballBulletEffect : IBulletEffectHandler
 {
     private const float AdditionalPercentageDamage = 50;
     private readonly BulletData _data;
 
-    public FireballBulletPolicy(BulletData data)
+    public FireballBulletEffect(BulletData data)
     {
         _data = data;
     }
 
-    public void Accept(Collider enemy)
+    public void HandleEffect(Collider enemy)
     {
         if (enemy.TryGetComponent(out IHealth health))
             health.TakeDamage(GetAdditionalDamage());

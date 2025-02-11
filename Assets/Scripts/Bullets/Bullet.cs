@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;    
-    private IBulletPolicy _bulletPolicy;
+    private IBulletEffectHandler _bulletEffect;
 
     private float _tick;
 
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         //_bulletPolicy = new FireballBulletPolicy(_data);
-        _bulletPolicy = new ElectricBulletPolicy(transform, _data);
+        _bulletEffect = new ElectricBulletEffect(transform, _data);
     }
 
     private void Update() => UpdateLifeTime();
@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
         {
             health.TakeDamage(_data.Damage);
             ChangeTargetParticleDamageColor(collider);
-            _bulletPolicy.Accept(collider);
+            _bulletEffect.HandleEffect(collider);
             HideAfterCollided();
         }
     }

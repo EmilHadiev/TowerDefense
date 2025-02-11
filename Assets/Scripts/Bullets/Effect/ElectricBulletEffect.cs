@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ElectricBulletPolicy : IBulletPolicy
+public class ElectricBulletEffect : IBulletEffectHandler
 {
     private const int Radius = 5;
     private const int MaxEnemies = 5;
@@ -12,7 +12,7 @@ public class ElectricBulletPolicy : IBulletPolicy
     private readonly Transform _bullet;
     private readonly BulletData _data;
 
-    public ElectricBulletPolicy(Transform bullet, BulletData data)
+    public ElectricBulletEffect(Transform bullet, BulletData data)
     {
         _bullet = bullet;
         _data = data;
@@ -21,7 +21,7 @@ public class ElectricBulletPolicy : IBulletPolicy
         _hits = new Collider[MaxEnemies];
     }
 
-    public void Accept(Collider enemy) => CastChainLightning();
+    public void HandleEffect(Collider enemy) => CastChainLightning();
 
     private void CastChainLightning()
     {
