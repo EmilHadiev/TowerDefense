@@ -6,18 +6,23 @@ using Zenject;
 public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
 {
     private SpeedProperty _speed;
+    private EnemyRenderViewer _view;
 
     private Dictionary<Type, INegativeEffect> _negativeEffects;
     private ICoroutinePefrormer _pefrormer;
     private INegativeEffect _effect;
 
-    private void Awake() => _speed = GetComponent<IMovable>().Speed;
+    private void Awake()
+    {
+        _speed = GetComponent<IMovable>().Speed;
+        _view = GetComponent<EnemyRenderViewer>();
+    }
 
     private void Start()
     {
         _negativeEffects = new Dictionary<Type, INegativeEffect>(10)
         {
-            [typeof(FreezingEffect)] = new FreezingEffect(_pefrormer, _speed),
+            [typeof(FreezingEffect)] = new FreezingEffect(_pefrormer, _speed, _view),
         };
     }
 

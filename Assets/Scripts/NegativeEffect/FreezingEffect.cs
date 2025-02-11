@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class FreezingEffect : INegativeEffect
@@ -10,24 +9,29 @@ public class FreezingEffect : INegativeEffect
     private readonly ICoroutinePefrormer _pefrormer;
     private readonly WaitForSeconds _delay;
     private readonly SpeedProperty _speed;
+    private readonly EnemyRenderViewer _view;
+
+    private readonly Color _freezeColor = Color.blue;
+
+    private Color _startColor;
 
     private Coroutine _slowdownCoroutine;
 
     private float _defaultSpeed;
 
-    public FreezingEffect(ICoroutinePefrormer pefrormer, SpeedProperty speed)
+    public FreezingEffect(ICoroutinePefrormer pefrormer, SpeedProperty speed, EnemyRenderViewer view)
     {
         _delay = new WaitForSeconds(SlowdownDuration);
         _pefrormer = pefrormer;
         _speed = speed;
         _defaultSpeed = _speed.Speed;
+        _view = view;
     }
 
     public void StartEffect()
     {
         StopEffect();
 
-        Debug.Log("Замедляю на 50%");
         _slowdownCoroutine = _pefrormer.StartPerform(SlowdownCoroutine());
     }
 
@@ -37,7 +41,6 @@ public class FreezingEffect : INegativeEffect
             _pefrormer.StopPerform(_slowdownCoroutine);
 
         StopFreeze();
-        Debug.Log("Перестаю замедлять на 50%");
     }
 
     private IEnumerator SlowdownCoroutine()
@@ -47,9 +50,18 @@ public class FreezingEffect : INegativeEffect
         StopFreeze();
     }
 
-    private void StartFreeze() => _speed.Speed = GetFreezeSpeed();
+    private void StartFreeze()
+    {
+        _startColor = _view.Color;
+        _view.SetColor(_freezeColor);
+        _speed.Speed = GetFreezeSpeed();
+    }
 
-    private void StopFreeze() => _speed.Speed = _defaultSpeed;
+    private void StopFreeze()
+    {
+        _view.SetColor(_startColor);
+        _speed.Speed = _defaultSpeed;
+    }
 
     private float GetFreezeSpeed() => _speed.Speed / 100 * PercentageSlowdown;
 }

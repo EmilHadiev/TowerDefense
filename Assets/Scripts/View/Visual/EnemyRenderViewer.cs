@@ -23,7 +23,7 @@ public class EnemyRenderViewer : MonoBehaviour
         SetColor(Color);
     }
 
-    private void SetColor(Color color)
+    public void SetColor(Color color)
     {
         _propertyBlock.SetColor("_Color", color);
         _renderer.SetPropertyBlock(_propertyBlock);
