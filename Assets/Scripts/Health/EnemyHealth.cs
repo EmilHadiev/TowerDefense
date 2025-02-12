@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 public class EnemyHealth : MonoBehaviour, IHealth
@@ -10,6 +8,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private EnemyStat _stat;
 
     public float MaxHealth { get; private set; }
+
+    public bool IsAlive => _health > 0;
 
     public event Action Died;
     public event Action<float, float> HealthChanged;

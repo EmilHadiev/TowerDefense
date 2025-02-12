@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: IceBulletData
   m_EditorClassIdentifier: 
   Speed: 20
-  Damage: 5
+  Damage: 10
   LifeTime: 3
   <Color>k__BackingField: {r: 0.7254902, g: 0.9098039, b: 0.91764706, a: 1}

@@ -3,5 +3,5 @@
     Fireball,
     Electric,
     Ice,
-    BlackHole
+    Pushing
 }

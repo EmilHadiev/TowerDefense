@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
@@ -43,11 +42,11 @@ public class Bullet : MonoBehaviour
             [typeof(IceBulletEffect)] = new IceBulletEffect(),
             [typeof(FireballBulletEffect)] = new FireballBulletEffect(_data),
             [typeof(ElectricBulletEffect)] = new ElectricBulletEffect(transform, _data),
-            [typeof(BulletBlackHoleEffect)] = new BulletBlackHoleEffect(transform),
+            [typeof(BulletPushingEffect)] = new BulletPushingEffect(),
             [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
         };
 
-        SetEffect<BulletBlackHoleEffect>();
+        SetEffect<BulletPushingEffect>();
     }
 
     private void Update() => UpdateLifeTime();

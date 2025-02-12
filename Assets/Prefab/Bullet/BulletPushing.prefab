@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8338247864174447063}
   - component: {fileID: 1789773434517705490}
   m_Layer: 7
-  m_Name: BulletBlackHole
+  m_Name: BulletPushing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

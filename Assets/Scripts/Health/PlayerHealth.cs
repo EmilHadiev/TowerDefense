@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private float _maxHealth;
 
+    public bool IsAlive => _health > 0;
+
     private void Awake()
     {
         _maxHealth = _health;
