@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
             [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
         };
 
-        SetEffect<BulletPushingEffect>();
+        SetEffect<ElectricBulletEffect>();
     }
 
     private void Update() => UpdateLifeTime();

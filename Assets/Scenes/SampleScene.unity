@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &43809919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: 5
-  _enemyType: 0
+  _enemyType: 1
 --- !u!4 &43809920
 Transform:
   m_ObjectHideFlags: 0
@@ -651,7 +651,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: 0
     m_CustomResolution: -1
     m_Strength: 1
@@ -834,7 +834,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &799217008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: 5
-  _enemyType: 0
+  _enemyType: 5
 --- !u!4 &799217009
 Transform:
   m_ObjectHideFlags: 0
@@ -1009,7 +1009,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &889529453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: 5
-  _enemyType: 0
+  _enemyType: 9
 --- !u!4 &889529454
 Transform:
   m_ObjectHideFlags: 0
@@ -1428,8 +1428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072067113d458ea42b2a828e6638e168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: 1
-  _enemyType: 0
+  _size: 5
+  _enemyType: 4
 --- !u!4 &1501565669
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,7 +1461,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1540520686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,7 +1475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: 5
-  _enemyType: 0
+  _enemyType: 3
 --- !u!4 &1540520687
 Transform:
   m_ObjectHideFlags: 0
@@ -2100,6 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletTemplate: {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}
+  _playerViewStorage: {fileID: 0}
   _poolSize: 15
 --- !u!135 &1963403350
 SphereCollider:
@@ -2145,6 +2146,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea7abc753bda2f749bcc64f284d44122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1996267819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2231941909356463946, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+  m_PrefabInstance: {fileID: 8716898926285431583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6b92ea9edc1ce479680126196351fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1999643334
@@ -2438,7 +2450,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 350813342097143940, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
       propertyPath: m_Name
-      value: IceBullet
+      value: IceBullet_FIX_TRAIL!
       objectReference: {fileID: 0}
     - target: {fileID: 350813342097143940, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
       propertyPath: m_IsActive
@@ -2505,10 +2517,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCannon
       objectReference: {fileID: 0}
+    - target: {fileID: 1344936717572667537, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344936719049086373, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344936719067335877, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344936719067335877, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344936719067335877, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344936719067335877, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: _bulletTemplate
       value: 
-      objectReference: {fileID: 1789773434517705490, guid: 0229c757d6387fe40b50c8b1a7b8c8a1, type: 3}
+      objectReference: {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _playerViewStorage
+      value: 
+      objectReference: {fileID: 1996267819}
     - target: {fileID: 5132932080902350763, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2548,6 +2588,14 @@ PrefabInstance:
     - target: {fileID: 5132932080902350763, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537444765074541547, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830624607471338024, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

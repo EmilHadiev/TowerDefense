@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class PlayerViewStorage : MonoBehaviour
@@ -10,6 +9,8 @@ public class PlayerViewStorage : MonoBehaviour
     private IAttackable _attackable;
     private PlayerStat _stat;
     private PlayerAnimationsView _animationView;
+
+    private Color _currentColor;
 
     private void OnValidate() => _shakingPart ??= GetComponentInChildren<ShakingPart>();
 
@@ -30,6 +31,15 @@ public class PlayerViewStorage : MonoBehaviour
         _stat = stat;
     }
 
+    public void SetParticleViewColor(Color color)
+    {
+        if (_currentColor == color)
+            return;
+
+        _currentColor = color;
+        _attackParticle.SetColor(_currentColor);
+    }
+
     private void OnAttacked()
     {
         PlayParticle();
@@ -39,7 +49,5 @@ public class PlayerViewStorage : MonoBehaviour
     private void PlayParticle()
     {
         _attackParticle.Play();
-    }
-
-    
+    }    
 }

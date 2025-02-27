@@ -4,6 +4,7 @@ using Zenject;
 public class BulletStorage : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
 
     private IAttackable _attacker;
@@ -17,10 +18,13 @@ public class BulletStorage : MonoBehaviour
         _pool = new BulletPool();
 
         CreateBullets();
+        SetParticleColor(_bulletTemplate.Color);
     }
 
     [Inject]
     private void Constructor(IAttackable attacker) => _attacker = attacker;
+
+    private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
 
     private void CreateBullets()
     {

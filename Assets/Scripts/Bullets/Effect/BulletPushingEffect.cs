@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BulletPushingEffect : IBulletEffectHandler
 {
-    private const float Duration = 5f;
+    private const float Duration = 0.25f;
     private const int Force = 5;
 
     private Tween _currentTween;
