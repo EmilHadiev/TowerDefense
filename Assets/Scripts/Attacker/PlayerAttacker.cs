@@ -22,15 +22,9 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         _soundContainer = soundContainer;
     }
 
-    public void Initialize()
-    {
-        _input.Attacked += OnAttacked;
-    }
+    public void Initialize() => _input.Attacked += OnAttacked;
 
-    public void Dispose()
-    {
-        _input.Attacked -= OnAttacked;
-    }
+    public void Dispose() => _input.Attacked -= OnAttacked;
 
     private void OnAttacked()
     {
@@ -44,30 +38,20 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         }
     }
 
-    private void ResetTimer()
-    {
-        _timeAfterAttack = 0;
-    }
+    private void ResetTimer() => _timeAfterAttack = 0;
 
-    private void PlaySound()
-    {
-        _soundContainer.Play(BulletType.Fireball);
-    }
+    private void PlaySound() => _soundContainer.Play();
 
-    private void StopAttack()
-    {
-        _isAttacking = false;
-    }
+    private void StopAttack() => _isAttacking = false;
 
-    private void StartAttack()
-    {
-        _isAttacking = true;
-    }
+    private void StartAttack() => _isAttacking = true;
 
     public void Tick()
     {
         _timeAfterAttack += Time.deltaTime;
         if (_timeAfterAttack >= _playerStat.AttackSpeed)
             StartAttack();
-    }    
+    }
+
+    public void SetAttackSound(BulletType bulletType) => _soundContainer.SetBulletSound(bulletType);
 }

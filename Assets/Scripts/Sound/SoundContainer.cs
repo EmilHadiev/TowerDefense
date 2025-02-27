@@ -13,7 +13,7 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
         _audioSource ??= GetComponent<AudioSource>();
     }
 
-    public void Play(BulletType bulletType)
+    public void SetBulletSound(BulletType bulletType)
     {
         AudioClip clip = _sounds.FirstOrDefault(sound => sound.BulletType == bulletType).Clip;
 
@@ -21,8 +21,9 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
             throw new ArgumentNullException(nameof(bulletType));
 
         _audioSource.clip = clip;
-        _audioSource.Play();
     }
 
     public void Stop() => _audioSource.Stop();
+
+    public void Play() => _audioSource.Play();
 }

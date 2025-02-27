@@ -16,6 +16,7 @@ public class BulletStorage : MonoBehaviour
     private void Start()
     {
         _pool = new BulletPool();
+        _attacker.SetAttackSound(_bulletTemplate.Type);
 
         CreateBullets();
         SetParticleColor(_bulletTemplate.Color);
