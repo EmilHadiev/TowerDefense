@@ -2542,9 +2542,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _poolSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: _bulletTemplate
       value: 
-      objectReference: {fileID: 3298877593663232908, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
+      objectReference: {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
     - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: _playerViewStorage
       value: 

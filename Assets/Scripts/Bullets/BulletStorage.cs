@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class BulletStorage : MonoBehaviour
@@ -11,6 +10,7 @@ public class BulletStorage : MonoBehaviour
     private IAttackable _attacker;
     private IPool<Bullet> _pool;
     private ISoundContainer _soundContainer;
+    private BulletEffectSetter _effectSetter;
 
     private void OnEnable() => _attacker.Attacked += OnAttacked;
     private void OnDisable() => _attacker.Attacked -= OnAttacked;
@@ -18,9 +18,10 @@ public class BulletStorage : MonoBehaviour
     private void Start()
     {
         _pool = new BulletPool();
+        _effectSetter = new BulletEffectSetter(_soundContainer);
 
         CreateBullets();
-        SetParticleColor(_bulletTemplate.Color);
+        SetParticleColor(_bulletTemplate.Color);  
     }
 
     [Inject]
@@ -42,11 +43,9 @@ public class BulletStorage : MonoBehaviour
     {
         Bullet bullet = Instantiate(_bulletTemplate);
         bullet.gameObject.SetActive(false);
-        bullet.SetSound(SetBulletSound);
         _pool.Add(bullet);
+        _effectSetter.AddBullet(bullet);
     }
-
-    private void SetBulletSound(BulletType type) => _soundContainer.SetBulletSound(type);
 
     private void OnAttacked()
     {

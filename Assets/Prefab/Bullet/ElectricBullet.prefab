@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 77de8d60fd24abf4b82b6e39479c3a37, type: 2}
-  <Type>k__BackingField: 1
+  <Type>k__BackingField: 2
 --- !u!1001 &723311918961279560
 PrefabInstance:
   m_ObjectHideFlags: 0

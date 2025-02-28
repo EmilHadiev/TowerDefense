@@ -1,5 +1,6 @@
 ﻿public enum BulletType
 {
+    None,
     Fireball,
     Electric,
     Ice,

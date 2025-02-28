@@ -5014,7 +5014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: fd0dc92f4ae7d0c4ebce8ecfda68a6c8, type: 2}
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 1
 --- !u!54 &4520321247019126630
 Rigidbody:
   m_ObjectHideFlags: 0

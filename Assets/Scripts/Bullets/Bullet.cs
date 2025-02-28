@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     private TriggerObserver _observer;    
     private IBulletEffectHandler _bulletEffect;
+    private BulletEffectSetter _effectSetter;
 
     private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
 
@@ -19,7 +20,20 @@ public class Bullet : MonoBehaviour
 
     public Color Color => _data.Color;
 
-    private void Awake() => _observer = GetComponent<TriggerObserver>();
+    private void Awake()
+    {
+        _observer = GetComponent<TriggerObserver>();
+
+        _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
+        {
+            [typeof(EmptyEffect)] = new EmptyEffect(),
+            [typeof(IceBulletEffect)] = new IceBulletEffect(),
+            [typeof(FireballBulletEffect)] = new FireballBulletEffect(_data),
+            [typeof(ElectricBulletEffect)] = new ElectricBulletEffect(transform, _data),
+            [typeof(BulletPushingEffect)] = new BulletPushingEffect(),
+            [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
+        };
+    }
 
     private void OnEnable()
     {
@@ -35,20 +49,6 @@ public class Bullet : MonoBehaviour
         _tick = 0;
     }
 
-    private void Start()
-    {
-        _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
-        {
-            [typeof(IceBulletEffect)] = new IceBulletEffect(),
-            [typeof(FireballBulletEffect)] = new FireballBulletEffect(_data),
-            [typeof(ElectricBulletEffect)] = new ElectricBulletEffect(transform, _data),
-            [typeof(BulletPushingEffect)] = new BulletPushingEffect(),
-            [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
-        };
-
-        SetEffect<ElectricBulletEffect>();
-    }
-
     private void Update() => UpdateLifeTime();
 
     public void SetEffect<T>() where T : IBulletEffectHandler
@@ -58,8 +58,6 @@ public class Bullet : MonoBehaviour
         else
             throw new ArgumentOutOfRangeException(nameof(T));
     }
-
-    public void SetSound(Action<BulletType> setBulletSound) => setBulletSound?.Invoke(Type);
 
     private void OnEntered(Collider collider)
     {

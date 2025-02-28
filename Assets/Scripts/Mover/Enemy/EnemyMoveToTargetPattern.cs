@@ -47,9 +47,5 @@ public class EnemyMoveToTargetPattern : IMover
         _agent.transform.LookAt(_player.Transform);
     }
 
-    private void OnSpeedChanged(float speed)
-    {
-        _agent.speed = speed;
-        Debug.Log($"current speed : {_agent.speed} or {speed}");
-    }
+    private void OnSpeedChanged(float speed) => _agent.speed = speed;
 }
