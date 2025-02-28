@@ -4,7 +4,7 @@ public class ElectricBulletEffect : IBulletEffectHandler
 {
     private const int Radius = 5;
     private const int MaxEnemies = 5;
-    private const float RadiusDamagePercentage = 20;
+    private const float DamagePercentage = 50;
     private const string EnemyMask = "Enemy";
 
     private readonly LayerMask _enemyMask;
@@ -42,5 +42,5 @@ public class ElectricBulletEffect : IBulletEffectHandler
                 health.TakeDamage(GetRadiusDamage());
     }
 
-    private float GetRadiusDamage() => _data.Damage / 100 * RadiusDamagePercentage;
+    private float GetRadiusDamage() => _data.Damage / 100 * DamagePercentage;
 }

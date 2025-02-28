@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8439150891926796116}
   - component: {fileID: 8805677647056119547}
   - component: {fileID: 5043886182841252158}
-  - component: {fileID: 3298877593663232908}
+  - component: {fileID: 7184111560625082921}
   m_Layer: 7
   m_Name: IceBullet
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350813342097143940}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: -0.04703001, z: 0, w: 0.9988935}
+  m_LocalPosition: {x: 0, y: 0.75, z: -23.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: aca5ffbd34729b443a12298635f7f7f3, type: 2}
---- !u!114 &3298877593663232908
+--- !u!114 &7184111560625082921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
 --- !u!1 &5320334303017342673
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5335833032860821578, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -146,8 +146,8 @@ GameObject:
 --- !u!4 &3153808547359439973
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5335833032860821574, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320334303017342673}
   serializedVersion: 2
@@ -162,8 +162,8 @@ Transform:
 --- !u!198 &8015679016339665072
 ParticleSystem:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5335833032860821575, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320334303017342673}
   serializedVersion: 8
@@ -4898,8 +4898,8 @@ ParticleSystem:
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5335833032860821572, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320334303017342673}
   m_Enabled: 1
@@ -4971,8 +4971,8 @@ ParticleSystemRenderer:
 --- !u!114 &3091168232841151293
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 5335833032860821573, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5320334303017342673}
   m_Enabled: 1
@@ -5089,8 +5089,8 @@ MonoBehaviour:
 --- !u!1 &7585802712441240304
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3984675860580293267, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -5107,8 +5107,8 @@ GameObject:
 --- !u!4 &5725895345718485037
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3984675860580293264, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585802712441240304}
   serializedVersion: 2
@@ -5122,8 +5122,8 @@ Transform:
 --- !u!198 &1079149435529581860
 ParticleSystem:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3984675860580293270, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585802712441240304}
   serializedVersion: 8
@@ -9678,8 +9678,8 @@ ParticleSystem:
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3984675860580293265, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585802712441240304}
   m_Enabled: 1
@@ -9751,8 +9751,8 @@ ParticleSystemRenderer:
 --- !u!1 &8100688256299864583
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2589892459694129496, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -9770,8 +9770,8 @@ GameObject:
 --- !u!4 &6510837519191487911
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2589892459694129493, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100688256299864583}
   serializedVersion: 2
@@ -9786,8 +9786,8 @@ Transform:
 --- !u!198 &8834287379558918766
 ParticleSystem:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2589892459694129494, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100688256299864583}
   serializedVersion: 8
@@ -14522,8 +14522,8 @@ ParticleSystem:
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2589892459694129495, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100688256299864583}
   m_Enabled: 1
@@ -14595,8 +14595,8 @@ ParticleSystemRenderer:
 --- !u!114 &2758546554999365060
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4683484994950974173, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  m_PrefabInstance: {fileID: 2354649442965741813}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100688256299864583}
   m_Enabled: 1
@@ -14640,65 +14640,3 @@ MonoBehaviour:
     shakesDelay: 0
   animatedLights: []
   fadeOutReference: {fileID: 0}
---- !u!1001 &2354649442965741813
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3991071002020270843}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Name
-      value: IceParticle
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 0}

@@ -52,6 +52,4 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         if (_timeAfterAttack >= _playerStat.AttackSpeed)
             StartAttack();
     }
-
-    public void SetAttackSound(BulletType bulletType) => _soundContainer.SetBulletSound(bulletType);
 }

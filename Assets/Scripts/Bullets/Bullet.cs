@@ -59,6 +59,8 @@ public class Bullet : MonoBehaviour
             throw new ArgumentOutOfRangeException(nameof(T));
     }
 
+    public void SetSound(Action<BulletType> setBulletSound) => setBulletSound?.Invoke(Type);
+
     private void OnEntered(Collider collider)
     {
         if (collider.TryGetComponent(out IHealth health))

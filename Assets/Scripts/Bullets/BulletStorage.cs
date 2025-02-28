@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class BulletStorage : MonoBehaviour
@@ -9,6 +10,7 @@ public class BulletStorage : MonoBehaviour
 
     private IAttackable _attacker;
     private IPool<Bullet> _pool;
+    private ISoundContainer _soundContainer;
 
     private void OnEnable() => _attacker.Attacked += OnAttacked;
     private void OnDisable() => _attacker.Attacked -= OnAttacked;
@@ -16,14 +18,17 @@ public class BulletStorage : MonoBehaviour
     private void Start()
     {
         _pool = new BulletPool();
-        _attacker.SetAttackSound(_bulletTemplate.Type);
 
         CreateBullets();
         SetParticleColor(_bulletTemplate.Color);
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker) => _attacker = attacker;
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer)
+    {
+        _attacker = attacker;
+        _soundContainer = soundContainer;
+    }
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
 
@@ -37,8 +42,11 @@ public class BulletStorage : MonoBehaviour
     {
         Bullet bullet = Instantiate(_bulletTemplate);
         bullet.gameObject.SetActive(false);
+        bullet.SetSound(SetBulletSound);
         _pool.Add(bullet);
     }
+
+    private void SetBulletSound(BulletType type) => _soundContainer.SetBulletSound(type);
 
     private void OnAttacked()
     {
