@@ -2,27 +2,53 @@
 using UnityEngine;
 using Zenject;
 
-public class DesktopInput : IInput, ITickable
+public class DesktopInput : IInput, ITickable, IInitializable, IDisposable, IDesktopInput
 {
     private const int AttackButton = 0;
     private const float SpeedRotation = 15f;
     private const float SmoothTime = 0.1f;
-    private readonly IPlayer _player;
 
-    public event Action Attacked;
+    private readonly IPlayer _player;
+    private readonly InputSystem _inputSystem;
 
     private Vector3 _smoothDirection;
     private Vector3 _smoothVelocity;
 
+    public event Action Attacked;
+    public event Action<int> SwitchBulletButtonClicked;
+
     public DesktopInput(IPlayer player)
     {
         _player = player;
+        _inputSystem = new InputSystem();
+    }
+
+    public void Initialize()
+    {
+        _inputSystem.Enable();
+
+        _inputSystem.Player.SwitchToBullet0.performed += ctx => SwitchTo(0);
+        _inputSystem.Player.SwitchToBullet1.performed += ctx => SwitchTo(1);
+        _inputSystem.Player.SwitchToBullet2.performed += ctx => SwitchTo(2);
+        _inputSystem.Player.SwitchToBullet3.performed += ctx => SwitchTo(3);
+        _inputSystem.Player.SwitchToBullet4.performed += ctx => SwitchTo(4);
     }
 
     public void Tick()
     {
         Attack();
         Rotate();
+    }
+
+    public void Dispose()
+    {
+        _inputSystem.Player.SwitchToBullet0.performed -= ctx => SwitchTo(0);
+        _inputSystem.Player.SwitchToBullet1.performed -= ctx => SwitchTo(1);
+        _inputSystem.Player.SwitchToBullet2.performed -= ctx => SwitchTo(2);
+        _inputSystem.Player.SwitchToBullet3.performed -= ctx => SwitchTo(3);
+        _inputSystem.Player.SwitchToBullet4.performed -= ctx => SwitchTo(4);
+
+        _inputSystem.Disable();
     }
 
     private void Attack()
@@ -58,5 +84,11 @@ public class DesktopInput : IInput, ITickable
         Vector3 targetPosition = hit.point;
         targetPosition.y = _player.Transform.position.y;
         return targetPosition;
+    }
+
+    private void SwitchTo(int index)
+    {
+        Debug.Log(index);
+        SwitchBulletButtonClicked?.Invoke(index);
     }
 }

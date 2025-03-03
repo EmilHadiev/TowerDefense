@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class BulletStorage : MonoBehaviour
@@ -11,10 +12,20 @@ public class BulletStorage : MonoBehaviour
     private IAttackable _attacker;
     private IPool<Bullet> _pool;
     private ISoundContainer _soundContainer;
+    private IDesktopInput _desktopInput;
     private BulletEffectSetter _effectSetter;
 
-    private void OnEnable() => _attacker.Attacked += OnAttacked;
-    private void OnDisable() => _attacker.Attacked -= OnAttacked;
+    private void OnEnable()
+    {
+        _attacker.Attacked += OnAttacked;
+        _desktopInput.SwitchBulletButtonClicked += OnBulletClicked;
+    }
+
+    private void OnDisable()
+    {
+        _attacker.Attacked -= OnAttacked;
+        _desktopInput.SwitchBulletButtonClicked -= OnBulletClicked;
+    }
 
     private void Start()
     {
@@ -26,10 +37,11 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer)
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, IDesktopInput desktopInput)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
+        _desktopInput = desktopInput;
     }
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
@@ -61,5 +73,10 @@ public class BulletStorage : MonoBehaviour
         {
             CreateBullets(_additionalPoolSize);
         }
+    }
+
+    private void OnBulletClicked(int bulletIndex)
+    {
+        
     }
 }
