@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ElectricBulletEffect : IBulletEffectHandler
+public class SplashBulletEffect : IBulletEffectHandler
 {
     private const int Radius = 5;
     private const int MaxEnemies = 5;
@@ -12,7 +12,7 @@ public class ElectricBulletEffect : IBulletEffectHandler
     private readonly Transform _bullet;
     private readonly BulletData _data;
 
-    public ElectricBulletEffect(Transform bullet, BulletData data)
+    public SplashBulletEffect(Transform bullet, BulletData data)
     {
         _bullet = bullet;
         _data = data;

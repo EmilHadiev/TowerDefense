@@ -48,7 +48,7 @@ public class DesktopInput : IInput, ITickable
     {
         Vector3 direction = (targetPosition - _player.Transform.position).normalized;
         direction.y = 0; // Игнорируем наклон по оси Y
-        _smoothDirection = Vector3.SmoothDamp(_smoothDirection, direction, ref _smoothVelocity, SmoothTime); // Сглаживание
+        _smoothDirection = Vector3.SmoothDamp(_smoothDirection, direction, ref _smoothVelocity, SmoothTime);
         Quaternion targetRotation = Quaternion.LookRotation(_smoothDirection);
         return targetRotation;
     }
@@ -56,7 +56,7 @@ public class DesktopInput : IInput, ITickable
     private Vector3 GetTargetPosition(RaycastHit hit)
     {
         Vector3 targetPosition = hit.point;
-        targetPosition.y = _player.Transform.position.y; // Игнорируем высоту
+        targetPosition.y = _player.Transform.position.y;
         return targetPosition;
     }
 }

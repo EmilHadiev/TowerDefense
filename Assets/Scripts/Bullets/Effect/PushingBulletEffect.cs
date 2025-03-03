@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class BulletPushingEffect : IBulletEffectHandler
+public class PushingBulletEffect : IBulletEffectHandler
 {
     private const float Duration = 0.25f;
     private const int Force = 5;

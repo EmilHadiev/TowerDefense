@@ -25,19 +25,19 @@ public class BulletEffectSetter
         switch (type)
         {
             case BulletType.Fireball:
-                SetEffectHandler<FireballBulletEffect>();
+                SetEffectHandler<ExtraDamageBulletEffect>();
                 break;
             case BulletType.Electric:
-                SetEffectHandler<ElectricBulletEffect>();
+                SetEffectHandler<SplashBulletEffect>();
                 break;
             case BulletType.Ice:
-                SetEffectHandler<IceBulletEffect>();
+                SetEffectHandler<SlowdownBulletEffect>();
                 break;
             case BulletType.Pushing:
-                SetEffectHandler<BulletPushingEffect>();
+                SetEffectHandler<PushingBulletEffect>();
                 break;
             default:
-                SetEffectHandler<EmptyEffect>();
+                SetEffectHandler<EmptyBulletEffect>();
                 break;
         }
     }

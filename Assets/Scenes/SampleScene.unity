@@ -2099,9 +2099,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e294f1f4a1f2bb14a9ae1789474cc10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletTemplate: {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}
+  _bulletTemplate: {fileID: 0}
   _playerViewStorage: {fileID: 0}
   _poolSize: 15
+  _additionalPoolSize: 0
 --- !u!135 &1963403350
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2553,6 +2554,10 @@ PrefabInstance:
       propertyPath: _playerViewStorage
       value: 
       objectReference: {fileID: 1996267819}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _additionalPoolSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5132932080902350763, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

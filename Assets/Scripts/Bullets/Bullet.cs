@@ -26,12 +26,11 @@ public class Bullet : MonoBehaviour
 
         _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
         {
-            [typeof(EmptyEffect)] = new EmptyEffect(),
-            [typeof(IceBulletEffect)] = new IceBulletEffect(),
-            [typeof(FireballBulletEffect)] = new FireballBulletEffect(_data),
-            [typeof(ElectricBulletEffect)] = new ElectricBulletEffect(transform, _data),
-            [typeof(BulletPushingEffect)] = new BulletPushingEffect(),
-            [typeof(BulletEmptyEffect)] = new BulletEmptyEffect(),
+            [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
+            [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data),
+            [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
         };
     }
 

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class FireballBulletEffect : IBulletEffectHandler
+public class ExtraDamageBulletEffect : IBulletEffectHandler
 {
     private const float AdditionalPercentageDamage = 50;
     private readonly BulletData _data;
 
-    public FireballBulletEffect(BulletData data)
+    public ExtraDamageBulletEffect(BulletData data)
     {
         _data = data;
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EmptyEffect : IBulletEffectHandler
+public class EmptyBulletEffect : IBulletEffectHandler
 {
     public void HandleEffect(Collider enemy) { }
 }

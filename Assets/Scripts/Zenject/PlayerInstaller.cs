@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,12 +11,18 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindBulletSwitcher();
         BindPlayer();
         BindInput();
         BindPlayerAttacker();
         BindPlayerData();
         BindCoinStorage();
         BindSoundContainer();
+    }
+
+    private void BindBulletSwitcher()
+    {
+        
     }
 
     private void BindSoundContainer()

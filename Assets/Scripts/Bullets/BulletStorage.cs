@@ -6,6 +6,7 @@ public class BulletStorage : MonoBehaviour
     [SerializeField] private Bullet _bulletTemplate;
     [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
+    [SerializeField] private int _additionalPoolSize;
 
     private IAttackable _attacker;
     private IPool<Bullet> _pool;
@@ -20,7 +21,7 @@ public class BulletStorage : MonoBehaviour
         _pool = new BulletPool();
         _effectSetter = new BulletEffectSetter(_soundContainer);
 
-        CreateBullets();
+        CreateBullets(_poolSize);
         SetParticleColor(_bulletTemplate.Color);  
     }
 
@@ -33,9 +34,9 @@ public class BulletStorage : MonoBehaviour
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
 
-    private void CreateBullets()
+    private void CreateBullets(int poolSize)
     {
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < poolSize; i++)
             CreateTemplate();
     }
 
@@ -58,7 +59,7 @@ public class BulletStorage : MonoBehaviour
         }
         else
         {
-            CreateBullets();
+            CreateBullets(_additionalPoolSize);
         }
     }
 }

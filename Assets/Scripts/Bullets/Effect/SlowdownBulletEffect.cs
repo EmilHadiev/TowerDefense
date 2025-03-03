@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class IceBulletEffect : IBulletEffectHandler
+public class SlowdownBulletEffect : IBulletEffectHandler
 {
     public void HandleEffect(Collider enemy)
     {
