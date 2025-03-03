@@ -2099,7 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e294f1f4a1f2bb14a9ae1789474cc10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletTemplate: {fileID: 0}
+  _bulletTemplates: []
   _playerViewStorage: {fileID: 0}
   _poolSize: 15
   _additionalPoolSize: 0
@@ -2549,7 +2549,7 @@ PrefabInstance:
     - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: _bulletTemplate
       value: 
-      objectReference: {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
+      objectReference: {fileID: 1789773434517705490, guid: 0229c757d6387fe40b50c8b1a7b8c8a1, type: 3}
     - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: _playerViewStorage
       value: 
@@ -2558,6 +2558,30 @@ PrefabInstance:
       propertyPath: _additionalPoolSize
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.data[0]
+      value: 
+      objectReference: {fileID: 900796204734952575, guid: 81dd17839f87dab43b3b5c03c43c673f, type: 3}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.data[1]
+      value: 
+      objectReference: {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.data[2]
+      value: 
+      objectReference: {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.data[3]
+      value: 
+      objectReference: {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
+    - target: {fileID: 3519301720963133061, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
+      propertyPath: _bulletTemplates.Array.data[4]
+      value: 
+      objectReference: {fileID: 1789773434517705490, guid: 0229c757d6387fe40b50c8b1a7b8c8a1, type: 3}
     - target: {fileID: 5132932080902350763, guid: 5f46fc07acebd8c499a6afe4a4264bd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -43,7 +43,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 2783800062045417324}
   _sounds:
+  - <BulletType>k__BackingField: 0
+    <Clip>k__BackingField: {fileID: 8300000, guid: c41ffa734fb24c444b49cee4f812e171, type: 3}
   - <BulletType>k__BackingField: 2
     <Clip>k__BackingField: {fileID: 8300000, guid: baa982e37490d8f4db4a24e643f81d79, type: 3}
   - <BulletType>k__BackingField: 3

@@ -22,7 +22,6 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
         if (_bulletType == bulletType)
         {
             Play();
-            Debug.Log("Не буду ставить!");
             return;
         }
 

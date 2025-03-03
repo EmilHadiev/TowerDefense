@@ -1,19 +1,22 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
+using System;
+using System.Collections.Generic;
 
 public class BulletStorage : MonoBehaviour
 {
-    [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private Bullet[] _bulletTemplates;
     [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
     [SerializeField] private int _additionalPoolSize;
 
     private IAttackable _attacker;
-    private IPool<Bullet> _pool;
+    private List<IPool<Bullet>> _pool;
     private ISoundContainer _soundContainer;
     private IDesktopInput _desktopInput;
     private BulletEffectSetter _effectSetter;
+
+    private int _bulletIndex;
 
     private void OnEnable()
     {
@@ -29,11 +32,21 @@ public class BulletStorage : MonoBehaviour
 
     private void Start()
     {
-        _pool = new BulletPool();
+        _pool = new List<IPool<Bullet>>(10);
         _effectSetter = new BulletEffectSetter();
 
-        CreateBullets(_poolSize);
-        SetParticleColor(_bulletTemplate.Color);  
+        InitializeTemplatesAndPools();
+
+        SetEffect(_bulletIndex);
+    }
+
+    private void InitializeTemplatesAndPools()
+    {
+        for (int i = 0; i < _bulletTemplates.Length; i++)
+        {
+            _pool.Add(new BulletPool());
+            CreateBullets(_poolSize, i);
+        }
     }
 
     [Inject]
@@ -46,23 +59,23 @@ public class BulletStorage : MonoBehaviour
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
 
-    private void CreateBullets(int poolSize)
+    private void CreateBullets(int poolSize, int index)
     {
         for (int i = 0; i < poolSize; i++)
-            CreateTemplate();
+            CreateTemplate(_bulletTemplates[index], _pool[index]);
     }
 
-    private void CreateTemplate()
+    private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
-        Bullet bullet = Instantiate(_bulletTemplate);
+        Bullet bullet = Instantiate(template);
         bullet.gameObject.SetActive(false);
-        _pool.Add(bullet);
+        pool.Add(bullet);
         _effectSetter.AddBullet(bullet);
     }
 
     private void OnAttacked()
     {
-        if (_pool.TryGet(out Bullet bullet))
+        if (_pool[_bulletIndex].TryGet(out Bullet bullet))
         {
             bullet.transform.parent = null;
             bullet.transform.position = transform.position;
@@ -72,12 +85,24 @@ public class BulletStorage : MonoBehaviour
         }
         else
         {
-            CreateBullets(_additionalPoolSize);
+            CreateBullets(_additionalPoolSize, _bulletIndex);
         }
     }
 
     private void OnBulletClicked(int bulletIndex)
     {
+        if (bulletIndex < 0 || bulletIndex > _bulletTemplates.Length)
+            throw new ArgumentOutOfRangeException(nameof(bulletIndex));
+
+        _bulletIndex = bulletIndex;
+        SetEffect(_bulletIndex);
+
         _soundContainer.Play(BulletType.Switch);
+    }
+
+    private void SetEffect(int bulletIndex)
+    {
+        _effectSetter.SetBulletEffect(_bulletTemplates[bulletIndex].Type); 
+        SetParticleColor(_bulletTemplates[bulletIndex].Color);
     }
 }
