@@ -1,6 +1,5 @@
 ﻿public interface ISoundContainer
 {
-    void SetBulletSound(BulletType bulletType);
-    void Play();
+    void Play(BulletType bulletType);
     void Stop();
 }

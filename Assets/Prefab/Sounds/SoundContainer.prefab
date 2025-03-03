@@ -143,11 +143,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 2783800062045417324}
   _sounds:
-  - <BulletType>k__BackingField: 1
-    <Clip>k__BackingField: {fileID: 8300000, guid: baa982e37490d8f4db4a24e643f81d79, type: 3}
   - <BulletType>k__BackingField: 2
-    <Clip>k__BackingField: {fileID: 8300000, guid: f68f1adcd2f671f428d3fe35bfa26809, type: 3}
+    <Clip>k__BackingField: {fileID: 8300000, guid: baa982e37490d8f4db4a24e643f81d79, type: 3}
   - <BulletType>k__BackingField: 3
-    <Clip>k__BackingField: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
+    <Clip>k__BackingField: {fileID: 8300000, guid: f68f1adcd2f671f428d3fe35bfa26809, type: 3}
   - <BulletType>k__BackingField: 4
+    <Clip>k__BackingField: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
+  - <BulletType>k__BackingField: 5
     <Clip>k__BackingField: {fileID: 8300000, guid: c8e733a020541bd48b6beff16e8559bc, type: 3}
+  - <BulletType>k__BackingField: 1
+    <Clip>k__BackingField: {fileID: 8300000, guid: 20f72d2017a302643a3e25dfc7e2e8fd, type: 3}

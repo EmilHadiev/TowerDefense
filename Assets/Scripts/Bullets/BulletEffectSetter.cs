@@ -2,23 +2,18 @@
 
 public class BulletEffectSetter
 {
-    private readonly ISoundContainer _sound;
     private readonly List<Bullet> _bullets;
 
-    public BulletEffectSetter(ISoundContainer sound)
+    public BulletEffectSetter()
     {
-        _sound = sound;
         _bullets = new List<Bullet>(15);
     }
 
     public void AddBullet(Bullet bullet)
     {
         _bullets.Add(bullet);
-        SetBulletSound(bullet.Type);
         SetBulletEffect(bullet.Type);
     }
-
-    public void SetBulletSound(BulletType bulletType) => _sound.SetBulletSound(bulletType);
 
     public void SetBulletEffect(BulletType type)
     {

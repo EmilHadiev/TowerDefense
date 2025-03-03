@@ -30,7 +30,7 @@ public class BulletStorage : MonoBehaviour
     private void Start()
     {
         _pool = new BulletPool();
-        _effectSetter = new BulletEffectSetter(_soundContainer);
+        _effectSetter = new BulletEffectSetter();
 
         CreateBullets(_poolSize);
         SetParticleColor(_bulletTemplate.Color);  
@@ -68,6 +68,7 @@ public class BulletStorage : MonoBehaviour
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
             bullet.gameObject.SetActive(true);
+            _soundContainer.Play(bullet.Type);
         }
         else
         {
@@ -77,6 +78,6 @@ public class BulletStorage : MonoBehaviour
 
     private void OnBulletClicked(int bulletIndex)
     {
-        
+        _soundContainer.Play(BulletType.Switch);
     }
 }
