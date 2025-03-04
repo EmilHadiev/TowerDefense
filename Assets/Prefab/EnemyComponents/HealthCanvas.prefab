@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4931084356165961201}
   - component: {fileID: 4204489377448722027}
   m_Layer: 5
-  m_Name: EnemyHealthCanvas
+  m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4931084356165961201
 MonoBehaviour:
   m_ObjectHideFlags: 0

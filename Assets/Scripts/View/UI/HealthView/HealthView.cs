@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasRotator))]
-public class EnemyHealthView : MonoBehaviour
+public class HealthView : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
 

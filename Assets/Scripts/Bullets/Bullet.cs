@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
 
     private TriggerObserver _observer;    
     private IBulletEffectHandler _bulletEffect;
-    private BulletEffectSetter _effectSetter;
 
     private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
 
