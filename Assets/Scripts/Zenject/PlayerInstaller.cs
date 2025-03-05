@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -31,7 +30,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayerData()
     {
-        Container.Bind<PlayerStat>().FromScriptableObject(_playerStat).AsSingle();
+        Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
     }
 
     private void BindPlayerAttacker()

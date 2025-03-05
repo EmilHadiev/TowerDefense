@@ -1,17 +1,17 @@
 ﻿using System;
 
-public class SpeedProperty
+public class Property
 {
     public event Action<float> Changed;
 
     private float _value;
 
-    public SpeedProperty(float value)
+    public Property(float value)
     {
         _value = value;
     }
 
-    public float Speed
+    public float Value
     {
         get => _value;
         set

@@ -5,7 +5,7 @@ using Zenject;
 
 public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
 {
-    private SpeedProperty _speed;
+    private Property _speed;
     private EnemyRenderViewer _view;
 
     private Dictionary<Type, INegativeEffect> _negativeEffects;

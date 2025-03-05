@@ -8,7 +8,7 @@ public class FreezingEffect : INegativeEffect
 
     private readonly ICoroutinePefrormer _pefrormer;
     private readonly WaitForSeconds _delay;
-    private readonly SpeedProperty _speed;
+    private readonly Property _speed;
     private readonly EnemyRenderViewer _view;
 
     private readonly Color _freezeColor = Color.blue;
@@ -19,12 +19,12 @@ public class FreezingEffect : INegativeEffect
 
     private float _defaultSpeed;
 
-    public FreezingEffect(ICoroutinePefrormer pefrormer, SpeedProperty speed, EnemyRenderViewer view)
+    public FreezingEffect(ICoroutinePefrormer pefrormer, Property speed, EnemyRenderViewer view)
     {
         _delay = new WaitForSeconds(SlowdownDuration);
         _pefrormer = pefrormer;
         _speed = speed;
-        _defaultSpeed = _speed.Speed;
+        _defaultSpeed = _speed.Value;
         _view = view;
     }
 
@@ -54,14 +54,14 @@ public class FreezingEffect : INegativeEffect
     {
         _startColor = _view.Color;
         _view.SetColor(_freezeColor);
-        _speed.Speed = GetFreezeSpeed();
+        _speed.Value = GetFreezeSpeed();
     }
 
     private void StopFreeze()
     {
         _view.SetColor(_startColor);
-        _speed.Speed = _defaultSpeed;
+        _speed.Value = _defaultSpeed;
     }
 
-    private float GetFreezeSpeed() => _speed.Speed / 100 * PercentageSlowdown;
+    private float GetFreezeSpeed() => _speed.Value / 100 * PercentageSlowdown;
 }

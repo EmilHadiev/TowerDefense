@@ -1,23 +1,32 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float _health;
+    private PlayerStat _stat;
+
+    private float _maxHealth;
+    private float _health;
+    
+    public bool IsAlive => _health > 0;
 
     public event Action<float, float> HealthChanged;
     public event Action Died;
 
-    private float _maxHealth;
-
-    public bool IsAlive => _health > 0;
-
     private void Awake()
     {
+        _health = _stat.Health;
         _maxHealth = _health;
     }
 
     private void OnEnable() => HealthChanged?.Invoke(_health, _maxHealth);
+
+    [Inject]
+    private void Constructor(PlayerStat playerStat)
+    {
+        _stat = playerStat;
+    }
 
     public void AddHealth(float healthPoints)
     {

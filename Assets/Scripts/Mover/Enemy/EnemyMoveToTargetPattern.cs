@@ -5,16 +5,16 @@ public class EnemyMoveToTargetPattern : IMover
 {
     private readonly IPlayer _player;
     private readonly NavMeshAgent _agent;
-    private readonly SpeedProperty _speedProperty;
+    private readonly Property _speedProperty;
 
     private bool _isWorking;
 
-    public EnemyMoveToTargetPattern(IPlayer player, NavMeshAgent agent, SpeedProperty speedProperty)
+    public EnemyMoveToTargetPattern(IPlayer player, NavMeshAgent agent, Property speedProperty)
     {
         _player = player;
         _agent = agent;
         _speedProperty = speedProperty;
-        _agent.speed = _speedProperty.Speed;
+        _agent.speed = _speedProperty.Value;
     }
 
     public void StartMove()

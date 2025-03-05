@@ -1,6 +1,6 @@
 ﻿public interface IMovable
 {
-    SpeedProperty Speed { get; }
+    Property Speed { get; }
 
     void SetMover(IMover mover);
 }
