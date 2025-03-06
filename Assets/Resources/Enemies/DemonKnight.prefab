@@ -1876,6 +1876,7 @@ GameObject:
   - component: {fileID: 3531161897161794188}
   - component: {fileID: 4108408299697051582}
   - component: {fileID: 7052118289456682749}
+  - component: {fileID: 5512278686139476760}
   m_Layer: 6
   m_Name: DemonKnight
   m_TagString: Untagged
@@ -1899,8 +1900,9 @@ Transform:
   - {fileID: 2094145900921250269}
   - {fileID: 8229264441290922881}
   - {fileID: 5469618967635194216}
-  - {fileID: 7386471377836079674}
   - {fileID: 5623027055763777614}
+  - {fileID: 7386471377836079674}
+  - {fileID: 4108884860966935293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1936433792535083668
@@ -2073,7 +2075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdfa21c76920bf438235f0ac9e70d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleView: {fileID: 949898126374743886}
+  _damageImpact: {fileID: 949898126374743886}
+  _damageValue: {fileID: 5499268576396364299}
 --- !u!135 &4108408299697051582
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2110,6 +2113,18 @@ MonoBehaviour:
   <Type>k__BackingField: 1
   _mover: {fileID: 4566553515132513285}
   _animator: {fileID: 3327575310860209167}
+--- !u!114 &5512278686139476760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278252901586325055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3215c9b3acde148af9a2b502ea7ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8647128331072361629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,3 +2429,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4502131555909086296, guid: a2b582e84cef362468b2730881a9665f, type: 3}
   m_PrefabInstance: {fileID: 6411098776908060258}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6648280408987268339
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8458727562972235586}
+    m_Modifications:
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777462908284243299, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+      propertyPath: m_Name
+      value: TakeDamage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+--- !u!4 &4108884860966935293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7297765214764002830, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+  m_PrefabInstance: {fileID: 6648280408987268339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5499268576396364299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1158054491229863672, guid: 8a5c2420c170bdc4a9fc816e15246143, type: 3}
+  m_PrefabInstance: {fileID: 6648280408987268339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dc29130b0f36542a5fee21b6524002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

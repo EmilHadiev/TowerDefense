@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UpgradeView : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UpgradeView : MonoBehaviour
     [SerializeField] private Button _buyButton;
 
     private ICoinStorage _coinStorage;
+    private ISoundContainer _soundContainer;
     private Upgrader _upgrader;
 
     private void OnEnable()
@@ -23,9 +25,10 @@ public class UpgradeView : MonoBehaviour
         _buyButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(ICoinStorage coinStorage, Upgrader upgrader)
+    public void Initialize(ICoinStorage coinStorage, ISoundContainer soundContainer, Upgrader upgrader)
     {
         _coinStorage = coinStorage;
+        _soundContainer = soundContainer;
         _upgrader = upgrader;
         Show(upgrader.Data);
     }
@@ -41,8 +44,9 @@ public class UpgradeView : MonoBehaviour
     private void OnClicked()
     {
         if (_coinStorage.TrySpend(_upgrader.Data.Cost))
+        {
             _upgrader.Upgrade();
-        else
-            Debug.Log("SUCK");
+            _soundContainer.Play(SoundType.SpendCoin);
+        }
     }
 }

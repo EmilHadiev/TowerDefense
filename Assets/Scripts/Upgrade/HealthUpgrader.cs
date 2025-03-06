@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class HealthUpgrader : Upgrader
+﻿public class HealthUpgrader : Upgrader
 {
     protected override UpgradeType UpgradeType { get; }
 
@@ -9,9 +7,5 @@ public class HealthUpgrader : Upgrader
         UpgradeType = UpgradeType.Health;
     }
 
-    public override void Upgrade()
-    {
-        Stat.Health += Data.Value;
-        Debug.Log(Stat.Health);
-    }
+    public override void Upgrade() => Stat.Health.Value += Data.Value;
 }

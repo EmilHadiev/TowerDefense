@@ -24,6 +24,13 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 
     public void Dispose() => _input.Attacked -= OnAttacked;
 
+    public void Tick()
+    {
+        _timeAfterAttack += Time.deltaTime;
+        if (_timeAfterAttack >= _playerStat.AttackSpeed.Value)
+            StartAttack();
+    }
+
     private void OnAttacked()
     {
         if (_isAttacking)
@@ -40,11 +47,4 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     private void StopAttack() => _isAttacking = false;
 
     private void StartAttack() => _isAttacking = true;
-
-    public void Tick()
-    {
-        _timeAfterAttack += Time.deltaTime;
-        if (_timeAfterAttack >= _playerStat.AttackSpeed)
-            StartAttack();
-    }
 }

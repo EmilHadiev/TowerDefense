@@ -1,20 +1,39 @@
 ﻿using System;
 using UnityEngine;
 
-public class ParticleViewContainer : MonoBehaviour, IParticleViewContainer
+public class ParticleViewContainer : MonoBehaviour, IParticleColorChangable
 {
-    [SerializeField] private ParticleView _particleView;
+    [SerializeField] private ParticleView _damageImpact;
+    [SerializeField] private ParticleViewText _damageValue;
 
     private IHealth _health;
     private Color _currentColor;
 
     private void OnValidate()
     {
-        if (_particleView == null)
-            throw new ArgumentNullException(nameof(_particleView));
+        if (_damageImpact == null)
+            throw new ArgumentNullException(nameof(_damageImpact));
+
+        if (_damageValue == null)
+            throw new ArgumentNullException(nameof(_damageValue));
     }
 
     private void Awake() => _health = GetComponent<IHealth>();
+
+    private void OnEnable()
+    {
+        _health.HealthChanged += OnHealthChanged;
+        _health.DamageApplied += OnDamageApplied;
+
+        _damageValue.Stop();
+        _damageImpact.Stop();
+    }
+
+    private void OnDisable()
+    {
+        _health.HealthChanged -= OnHealthChanged;
+        _health.DamageApplied -= OnDamageApplied;
+    }
 
     private void Start() => SetDamageParticleColor(Color.yellow);
 
@@ -24,17 +43,27 @@ public class ParticleViewContainer : MonoBehaviour, IParticleViewContainer
             return;
 
         _currentColor = color;
-        _particleView.SetColor(color);
+        SetParticlesColor(color);
     }
 
-    private void OnEnable()
+    private void SetParticlesColor(Color color)
     {
-        _health.HealthChanged += OnHealthChanged;
-        _particleView.Stop();
+        _damageImpact.SetColor(color);
+        _damageValue.SetColor(color);
     }
 
+    private void OnHealthChanged(float currentHealth, float maxHealth) => PlayParticle(_damageImpact);
 
-    private void OnDisable() => _health.HealthChanged += OnHealthChanged;
+    private void OnDamageApplied(float damage)
+    {
+        damage = (float)Math.Round(damage, 2);
+        _damageValue.SetText(damage.ToString());
+        PlayParticle(_damageValue);
+    }
 
-    private void OnHealthChanged(float currentHealth, float maxHealth) => _particleView.Play();
+    private void PlayParticle(ParticleView particle)
+    {
+        particle.Stop();
+        particle.Play();
+    }
 }

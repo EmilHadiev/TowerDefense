@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
 
     private void ChangeTargetParticleDamageColor(Collider collider)
     {
-        if (collider.TryGetComponent(out IParticleViewContainer viewContainer))
+        if (collider.TryGetComponent(out IParticleColorChangable viewContainer))
             viewContainer.SetDamageParticleColor(_data.Color);
     }
 

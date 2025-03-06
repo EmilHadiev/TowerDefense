@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -13,6 +12,7 @@ public class UpgradeViewContainer : MonoBehaviour
     private UpgraderContainer _upgraderContainer;
     private PlayerStat _stat;
     private ICoinStorage _coinStorage;
+    private ISoundContainer _soundContainer;
 
     private void Awake()
     {
@@ -21,20 +21,21 @@ public class UpgradeViewContainer : MonoBehaviour
         CreateTemplates(_template);
     }
 
+    [Inject]
+    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, ISoundContainer soundContainer)
+    {
+        _stat = playerStat;
+        _coinStorage = coinStorage;
+        _soundContainer = soundContainer;
+    }
+
     private void CreateTemplates(UpgradeView template)
     {
         foreach (var upgrade in _upgraderContainer.Upgraders)
         {
             UpgradeView upgradeView = Instantiate(template, _container);
-            upgradeView.Initialize(_coinStorage, upgrade.Value);
+            upgradeView.Initialize(_coinStorage, _soundContainer, upgrade.Value);
             _views.Add(upgradeView);
         }
-    }
-
-    [Inject]
-    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage)
-    {
-        _stat = playerStat;
-        _coinStorage = coinStorage;
     }
 }

@@ -6,9 +6,11 @@ using UnityEngine;
 public class SoundContainer : MonoBehaviour, ISoundContainer
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private Sound[] _sounds;
+    [SerializeField] private BulletSound[] _bulletSounds;
+    [SerializeField] private GameSound[] _gameSounds;
 
     private BulletType _bulletType;
+    private bool _isReseted;
 
     private void OnValidate()
     {
@@ -19,24 +21,42 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
 
     public void Play(BulletType bulletType)
     {
-        if (_bulletType == bulletType)
+        if (_bulletType == bulletType && _isReseted == false)
         {
+            Debug.Log("Уже имею честь!");
             Play();
             return;
         }
 
         _bulletType = bulletType;
-
+        _isReseted = false;
         SetClip(_bulletType);
+        Play();
+    }
+
+    public void Play(SoundType soundType)
+    {
+        _isReseted = true;
+        SetClip(soundType);
         Play();
     }
 
     private void SetClip(BulletType bulletType)
     {
-        AudioClip clip = _sounds.FirstOrDefault(sound => sound.BulletType == bulletType).Clip;
+        AudioClip clip = _bulletSounds.FirstOrDefault(sound => sound.BulletType == bulletType).Clip;
 
         if (clip == null)
             throw new ArgumentNullException(nameof(bulletType));
+
+        _audioSource.clip = clip;
+    }
+
+    private void SetClip(SoundType soundType)
+    {
+        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.SoundType == soundType).Clip;
+
+        if (clip == null)
+            throw new ArgumentNullException(nameof(soundType));
 
         _audioSource.clip = clip;
     }

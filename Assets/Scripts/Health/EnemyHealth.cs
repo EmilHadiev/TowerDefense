@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public bool IsAlive => _health > 0;
 
     public event Action Died;
+    public event Action<float> DamageApplied;
     public event Action<float, float> HealthChanged;
 
     private void Awake()
@@ -34,8 +35,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
+        damage = (float)Math.Round(damage, 2);
         _health -= damage;
+
         HealthChanged?.Invoke(_health, MaxHealth);
+        DamageApplied?.Invoke(damage);
 
         if (_health <= 0)
             Die();

@@ -97,7 +97,7 @@ public class BulletStorage : MonoBehaviour
         _bulletIndex = bulletIndex;
         SetEffect(_bulletIndex);
 
-        _soundContainer.Play(BulletType.Switch);
+        _soundContainer.Play(SoundType.SwitchBullet);
     }
 
     private void SetEffect(int bulletIndex)

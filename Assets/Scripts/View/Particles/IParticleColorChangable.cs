@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IParticleViewContainer
+public interface IParticleColorChangable
 {
     void SetDamageParticleColor(Color color);
 }
