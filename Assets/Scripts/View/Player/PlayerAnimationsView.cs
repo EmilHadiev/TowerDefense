@@ -20,7 +20,7 @@ public class PlayerAnimationsView
             .SetLoops(2, LoopType.Yoyo);
     }
 
-    private float GetDuration() => _stat.AttackSpeed.Value / Accelerator;
+    private float GetDuration() => _stat.AttackSpeed / Accelerator;
 
     private float GetEndValue()
     {

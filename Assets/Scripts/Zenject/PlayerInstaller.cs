@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +17,12 @@ public class PlayerInstaller : MonoInstaller
         BindPlayerData();
         BindCoinStorage();
         BindSoundContainer();
+        BindBulletContainer();
+    }
+
+    private void BindBulletContainer()
+    {
+        Container.BindInterfacesAndSelfTo<BulletDataUpgraderContainer>().AsSingle();
     }
 
     private void BindSoundContainer()

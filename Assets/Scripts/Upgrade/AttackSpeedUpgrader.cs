@@ -11,8 +11,8 @@ public class AttackSpeedUpgrader : Upgrader
 
     public override void Upgrade()
     {
-        float total = Stat.AttackSpeed.Value / 100 * Data.Value;
+        float total = Stat.AttackSpeed / 100 * Data.Value;
         total = (float)Math.Round(total, 3);
-        Stat.AttackSpeed.Value -= total;
+        Stat.AttackSpeed -= total;
     }
 }
