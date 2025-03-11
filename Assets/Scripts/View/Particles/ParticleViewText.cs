@@ -7,5 +7,5 @@ public class ParticleViewText : ParticleView
 
     public void SetText(string text) => _text.UpdateText(text);
 
-    public new void SetColor(Color color) => _text.SetTextColor(color, color, color);
+    public new void SetColor(Color color) => _text.SetTextColor(color);
 }

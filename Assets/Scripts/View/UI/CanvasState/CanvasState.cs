@@ -5,10 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(GraphicRaycaster))]
 public abstract class CanvasState : MonoBehaviour 
 {
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
-
-    private Canvas _canvas;
 
     private void OnValidate() => _canvas ??= GetComponent<Canvas>();
 
@@ -26,13 +25,13 @@ public abstract class CanvasState : MonoBehaviour
 
     public virtual void Enter()
     {
-        Time.timeScale = 0;
         _canvas.enabled = true;
+        Time.timeScale = 0;
     }
 
     public virtual void Exit()
     {
-        Time.timeScale = 1;
         _canvas.enabled = false;
+        Time.timeScale = 1;
     }
 }

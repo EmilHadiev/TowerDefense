@@ -11,6 +11,7 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindAdvertising();
         BindPlayer();
         BindInput();
         BindPlayerAttacker();
@@ -18,6 +19,11 @@ public class PlayerInstaller : MonoInstaller
         BindCoinStorage();
         BindSoundContainer();
         BindBulletContainer();
+    }
+
+    private void BindAdvertising()
+    {
+        Container.BindInterfacesTo<YandexAdv>().AsSingle();
     }
 
     private void BindBulletContainer()
