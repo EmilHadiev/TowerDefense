@@ -86,9 +86,5 @@ public class DesktopInput : IInput, ITickable, IInitializable, IDisposable, IDes
         return targetPosition;
     }
 
-    private void SwitchTo(int index)
-    {
-        Debug.Log(index);
-        SwitchBulletButtonClicked?.Invoke(index);
-    }
+    private void SwitchTo(int index) => SwitchBulletButtonClicked?.Invoke(index);
 }

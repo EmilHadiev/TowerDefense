@@ -14,19 +14,16 @@ public class EnemyAbilityVisitor : IEnemyVisitor
     
     public void Visit(Mage enemy)
     {
-        Debug.Log("Это маг!");
         _instantiator?.InstantiateComponent<MageAbility>(_gameObject);
     }
 
     public void Visit(ArmorKnight armorKnight)
     {
-        Debug.Log("Это рыцарь");
         _instantiator.InstantiateComponent<ArmorKnightAbility>(_gameObject);
     }
 
     public void Visit(Turtle turtle)
     {
-        Debug.Log("Это черепаха");
         _instantiator.InstantiateComponent<TurtleAbility>(_gameObject);
     }
 

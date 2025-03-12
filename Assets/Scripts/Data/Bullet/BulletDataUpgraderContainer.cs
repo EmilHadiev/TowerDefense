@@ -20,7 +20,7 @@ class BulletDataUpgraderContainer : IInitializable, IDisposable
 
     public void Dispose()
     {
-        Debug.Log("Dispose");
+        Debug.Log("Dispose - но этот класс надо удалить ...");
     }
 
     public void Add(BulletData data) => _bulletsData.Add(data);

@@ -9,6 +9,18 @@ public class GlobalInstaller : MonoInstaller
     {
         BindCoroutinePerformer();
         BindSceneSwitcher();
+        BindSave();
+        BindCoinStorage();
+    }
+
+    private void BindSave()
+    {
+        Container.BindInterfacesTo<YandexSaver>().AsSingle();
+    }
+
+    private void BindCoinStorage()
+    {
+        Container.BindInterfacesTo<CoinStorage>().AsSingle();
     }
 
     private void BindSceneSwitcher()

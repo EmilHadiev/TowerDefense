@@ -2,7 +2,7 @@ using System;
 
 public class CoinStorage : ICoinStorage
 {
-    private int _coins;
+    public int Coins { get; private set; }
 
     public event Action<int> CoinsChanged;
 
@@ -10,19 +10,19 @@ public class CoinStorage : ICoinStorage
     {
         IsValidValue(coins);
 
-        _coins += coins;
-        CoinsChanged?.Invoke(_coins);
+        Coins += coins;
+        CoinsChanged?.Invoke(Coins);
     }
 
     public bool TrySpend(int coins)
     {
-        IsValidValue(_coins);
+        IsValidValue(Coins);
 
-        if (_coins - coins < 0)
+        if (Coins - coins < 0)
             return false;
 
-        _coins -= coins;
-        CoinsChanged?.Invoke(_coins);
+        Coins -= coins;
+        CoinsChanged?.Invoke(Coins);
 
         return true;
     }
