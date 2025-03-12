@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class GlobalInstaller : MonoInstaller
 {
     [SerializeField] private CoroutinePerformer _performer;
+    [SerializeField] private UpgradeData[] _data;
 
     public override void InstallBindings()
     {
@@ -11,11 +14,25 @@ public class GlobalInstaller : MonoInstaller
         BindSceneSwitcher();
         BindSave();
         BindCoinStorage();
+        BindData();
+    }
+
+    private void BindData()
+    {
+        List<UpgradeData> data = new List<UpgradeData>(_data.Length);
+
+        for (int i = 0; i < _data.Length; i++)
+        {
+            var stat = Instantiate(_data[i]);
+            data.Add(_data[i]);
+        }
+
+        Container.Bind<IEnumerable<UpgradeData>>().FromInstance(_data);
     }
 
     private void BindSave()
     {
-        Container.BindInterfacesTo<YandexSaver>().AsSingle();
+        Container.BindInterfacesTo<YandexSaver>().AsSingle().NonLazy();
     }
 
     private void BindCoinStorage()

@@ -4,12 +4,12 @@ using System.Linq;
 
 class UpgraderContainer
 {
-    private Dictionary<Type, Upgrader> _upgraders;
-    private readonly UpgradeData[] _data;
+    private readonly Dictionary<Type, Upgrader> _upgraders;
+    private readonly IEnumerable<UpgradeData> _data;
 
     public IReadOnlyDictionary<Type, Upgrader> Upgraders => _upgraders;
 
-    public UpgraderContainer(PlayerStat stat, UpgradeData[] data)
+    public UpgraderContainer(PlayerStat stat, IEnumerable<UpgradeData> data)
     {
         _upgraders = new Dictionary<Type, Upgrader>(3);
         _data = data;

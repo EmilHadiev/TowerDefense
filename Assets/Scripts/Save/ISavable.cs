@@ -1,15 +1,6 @@
-﻿namespace YG
+﻿public interface ISavable
 {
-    public partial class SavesYG
-    {
-        public int coins;
-    }
-}
-
-public interface ISavable
-{
-    public int Coins { get; set; }
-
+    void InitProgress();
     void LoadProgress();
 
     void SaveProgress();

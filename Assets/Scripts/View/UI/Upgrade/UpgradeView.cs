@@ -6,7 +6,7 @@ public class UpgradeView : MonoBehaviour
 {
     [SerializeField] private Image _upgradeImage;
     [SerializeField] private TMP_Text _upgradeNameText;
-    [SerializeField] private TMP_Text _upgradeValueText;
+    [SerializeField] private TMP_Text _upgradeDescriptionText;
     [SerializeField] private TMP_Text _costText;
     [SerializeField] private Button _buyButton;
 
@@ -36,8 +36,9 @@ public class UpgradeView : MonoBehaviour
     {
         _upgradeImage.sprite = data.Sprite;
         _upgradeNameText.text = data.Name;
-        _upgradeValueText.text = data.Value.ToString();
+        _upgradeDescriptionText.text = data.GetDescription();
         _costText.text = data.Cost.ToString();
+
     }
 
     private void OnClicked()
@@ -45,6 +46,8 @@ public class UpgradeView : MonoBehaviour
         if (_coinStorage.TrySpend(_upgrader.Data.Cost))
         {
             _upgrader.Upgrade();
+            _upgradeDescriptionText.text = _upgrader.Data.GetDescription();
+            _costText.text = _upgrader.Data.Cost.ToString();
             _soundContainer.Play(SoundType.SpendCoin);
         }
     }

@@ -17,17 +17,17 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private void Awake()
     {
-        _health = _stat.Health.Value;
+        _health = _stat.HealthProperty.Value;
         _maxHealth = _health;
     }
 
     private void OnEnable()
     {
-        _stat.Health.Changed += OnHealthChanged;
+        _stat.HealthProperty.Changed += OnHealthChanged;
         HealthChanged?.Invoke(_health, _maxHealth);
     }
 
-    private void OnDisable() => _stat.Health.Changed -= OnHealthChanged;
+    private void OnDisable() => _stat.HealthProperty.Changed -= OnHealthChanged;
 
     [Inject]
     private void Constructor(PlayerStat playerStat)

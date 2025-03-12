@@ -1,4 +1,7 @@
-﻿public abstract class Upgrader
+﻿using System;
+using UnityEngine;
+
+public abstract class Upgrader
 {
     protected readonly PlayerStat Stat;
 
@@ -13,4 +16,11 @@
     }
 
     public abstract void Upgrade();
+
+    protected int GetRaisePrice(int currentPrice)
+    {
+        int additionalPercent = Convert.ToInt32((float)currentPrice / 100 * Constants.AdditionalUpgradePercentage);
+        Debug.Log(additionalPercent);
+        return currentPrice + additionalPercent + Constants.AdditionalUpgradePrice;
+    }
 }

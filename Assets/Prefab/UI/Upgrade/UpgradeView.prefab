@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.05
+  m_fontSize: 23.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.35
+  m_fontSize: 53.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 271761162976285677}
   - component: {fileID: 8225230226409329942}
   m_Layer: 5
-  m_Name: UpgradeValueView
+  m_Name: UpgradeDescriptionView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeImage: {fileID: 8726318172211511583}
   _upgradeNameText: {fileID: 4708089636380735883}
-  _upgradeValueText: {fileID: 1317067322594818801}
+  _upgradeDescriptionText: {fileID: 1317067322594818801}
   _costText: {fileID: 1107688695105883388}
   _buyButton: {fileID: 5634716062994608476}
 --- !u!1 &5005530673053149647
@@ -740,7 +740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15900001, y: 0.08325532}
   m_AnchorMax: {x: 0.8411767, y: 0.21100001}
-  m_AnchoredPosition: {x: 0, y: -0.19999695}
+  m_AnchoredPosition: {x: 0, y: -0.19998169}
   m_SizeDelta: {x: -1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5209804755143993098
@@ -917,7 +917,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.15
+  m_fontSize: 31.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

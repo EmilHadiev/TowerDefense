@@ -7,5 +7,10 @@
         UpgradeType = UpgradeType.Health;
     }
 
-    public override void Upgrade() => Stat.Health.Value += Data.Value;
+    public override void Upgrade()
+    {
+        Stat.HealthProperty.Value += Data.Value;
+
+        Data.Cost = GetRaisePrice(Data.Cost);
+    }
 }

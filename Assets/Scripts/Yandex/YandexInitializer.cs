@@ -22,11 +22,13 @@ public class YandexInitializer : MonoBehaviour
 
     private void OnEnable()
     {
+        YG2.onDefaultSaves += OnDefaultSaveLoaded;
         YG2.onGetSDKData += OnSDKLoaded;
     }
 
     private void OnDisable()
     {
+        YG2.onDefaultSaves -= OnDefaultSaveLoaded;
         YG2.onGetSDKData -= OnSDKLoaded;
     }
 
@@ -66,5 +68,10 @@ public class YandexInitializer : MonoBehaviour
 
     private void SwitchScene(int sceneIndex) => _switcher.SwitchTo(sceneIndex);
 
-    private void OnSDKLoaded() => _savable.LoadProgress();
+    private void OnSDKLoaded()
+    {
+        _savable.LoadProgress();
+    }
+
+    private void OnDefaultSaveLoaded() => _savable.InitProgress();
 }
