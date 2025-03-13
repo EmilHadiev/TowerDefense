@@ -17,6 +17,8 @@ public abstract class Upgrader
 
     public abstract void Upgrade();
 
+    public abstract string GetUpgradeDescription();
+
     protected int GetRaisePrice(int currentPrice)
     {
         int additionalPercent = Convert.ToInt32((float)currentPrice / 100 * Constants.AdditionalUpgradePercentage);

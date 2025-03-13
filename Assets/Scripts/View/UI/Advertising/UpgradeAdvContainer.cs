@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Zenject;
+using UnityEngine;
+using YG;
 
 public class UpgradeAdvContainer : AdvertisingContainer
 {
+    [SerializeField] private RewardedAdvLockTimer _lockTimer;
+
     private const AdvType Type = AdvType.Coin;
     private ISoundContainer _soundContainer;
     private IEnumerable<UpgradeData> _data;
@@ -27,6 +31,7 @@ public class UpgradeAdvContainer : AdvertisingContainer
     protected override void OnClick()
     {
         Advertising.ShowRewardAdv(Type, _rewardValue);
+        Debug.Log(_lockTimer.timerComplete);
         _soundContainer.Play(SoundType.SpendCoin);
     }
 

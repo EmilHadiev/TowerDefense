@@ -1,4 +1,6 @@
-﻿public class HealthUpgrader : Upgrader
+﻿using System;
+
+public class HealthUpgrader : Upgrader
 {
     protected override UpgradeType UpgradeType { get; }
 
@@ -10,9 +12,10 @@
     public override void Upgrade()
     {
         Stat.HealthProperty.Value += Data.Value;
-        Stat.Health = Stat.HealthProperty.Value;
-        Stat.MaxHealth = Stat.HealthProperty.Value;
+        Stat.MaxHealth += Data.Value;
 
         Data.Cost = GetRaisePrice(Data.Cost);
     }
+
+    public override string GetUpgradeDescription() => $"{Stat.MaxHealth} > {Stat.MaxHealth + Data.Value}";
 }

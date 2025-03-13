@@ -40,20 +40,21 @@ public class UpgradeView : MonoBehaviour
     {
         _upgradeImage.sprite = data.Sprite;
         _upgradeNameText.text = data.Name;
-        _upgradeDescriptionText.text = data.GetDescription();
+        ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
         _costText.text = data.Cost.ToString();
-
     }
 
     private void OnClicked()
     {
         if (_coinStorage.TrySpend(_upgrader.Data.Cost))
         {
-            _upgrader.Upgrade();
-            _upgradeDescriptionText.text = _upgrader.Data.GetDescription();
+            _upgrader.Upgrade();            
             _costText.text = _upgrader.Data.Cost.ToString();
+            ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
             _updateReward?.Invoke();
             _soundContainer.Play(SoundType.SpendCoin);
         }
     }
+
+    private void ShowUpgradeDescription(string description) => _upgradeDescriptionText.text = description;
 }
