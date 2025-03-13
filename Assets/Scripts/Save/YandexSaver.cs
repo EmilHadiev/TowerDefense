@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using YG;
-using static UnityEditor.Progress;
 
 public class YandexSaver : ISavable, IDisposable
 {
     private readonly ICoinStorage _coinStorage;
     private readonly IEnumerable<UpgradeData> _data;
+    private readonly PlayerStat _playerStat;
+
+    private UpgradeItemsSaver _upgradeSaver;
 
     private int Coins
     {
@@ -17,19 +18,14 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    private List<SavesYG.UpgradeItem> _items = new List<SavesYG.UpgradeItem>(3);
-
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat)
     {
         _coinStorage = coinStorage;
         _data = data;
+        _playerStat = playerStat;
     }
 
-    public void Dispose()
-    {
-        SaveProgress();
-        ResetAllSavesAndProgress();
-    }
+    public void Dispose() => SaveProgress();
 
     public void InitProgress()
     {
@@ -40,6 +36,7 @@ public class YandexSaver : ISavable, IDisposable
     {
         LoadCoins();
         LoadUpgraders();
+        LoadPlayerStat();
     }
 
     public void ResetAllSavesAndProgress() => YG2.SetDefaultSaves();
@@ -54,6 +51,7 @@ public class YandexSaver : ISavable, IDisposable
     {
         SaveCoins();
         SaveUpgraders();
+        SavePlayerStat();
     }
 
     #region Coins
@@ -66,95 +64,31 @@ public class YandexSaver : ISavable, IDisposable
     #endregion
 
     #region Upgraders
-    private void LoadUpgraders()
-    {
-        InitItems();
-        SetCosts();
-    }
+    private void LoadUpgraders() => InitItems();
 
-    private void InitItems()
-    {
-        _items = YG2.saves.UpgradeItems;
-
-        if (_items.Count == 0 || _items == null)
-            FirstItemsInit();
-
-        if (_items.Count != _data.Count())
-            UpdateSourceItems(ref _items, _data);
-    }
-
-    private void FirstItemsInit()
-    {
-        foreach (var data in _data)
-        {
-            var item = new SavesYG.UpgradeItem() 
-            { 
-                Cost = data.Cost, 
-                Type = data.UpgradeType
-            };
-
-            _items.Add(item);
-        }
-    }
-
-    private void UpdateSourceItems(ref List<SavesYG.UpgradeItem> items, IEnumerable<UpgradeData> data)
-    {
-        AddMissingItem(items, data);
-        RemoveUnnecessaryItems(items, data);
-    }
-
-    private void RemoveUnnecessaryItems(List<SavesYG.UpgradeItem> items, IEnumerable<UpgradeData> data)
-    {
-        foreach (var upgrade in data)
-        {
-            if (items.Any(item => item.Type == upgrade.UpgradeType) == false)
-            {
-                var upgradeItem = new SavesYG.UpgradeItem()
-                {
-                    Cost = upgrade.Cost,
-                    Type = upgrade.UpgradeType
-                };
-
-                items.Add(upgradeItem);
-            }
-        }
-    }
-
-    private void AddMissingItem(List<SavesYG.UpgradeItem> items, IEnumerable<UpgradeData> data)
-    {
-        items.RemoveAll(item => data.Any(upgradeData => upgradeData.UpgradeType == item.Type) == false);
-    }
-
-    private void SetCosts()
-    {
-        foreach (var data in _data)
-            SetCost(data);
-    }
-
-    private void SetCost(UpgradeData data)
-    {
-        foreach (var item in _items)
-        {
-            if (data.UpgradeType == item.Type)
-            {
-                data.Cost = item.Cost;
-                return;
-            }
-        }
-    }
+    private void InitItems() => _upgradeSaver = new UpgradeItemsSaver(YG2.saves.UpgradeItems, _data);
 
     private void SaveUpgraders()
     {
-        for (int i = 0; i < _items.Count; i++)
-            UpdateCost(i);
+        Debug.Log(_upgradeSaver == null);
+        _upgradeSaver.SaveUpgraders();
     }
 
-    private void UpdateCost(int index)
+    #endregion
+
+    #region PlayerStat
+    private void LoadPlayerStat()
     {
-        foreach (var data in _data)
-            if (data.UpgradeType == _items[index].Type)
-                _items[index].Cost = data.Cost;
+        _playerStat.MaxHealth = YG2.saves.playerHealth;
+        _playerStat.Damage = YG2.saves.playerDamage;
+        _playerStat.AttackSpeed = YG2.saves.playerAttackSpeed;
     }
 
+    private void SavePlayerStat()
+    {
+        YG2.saves.playerHealth = _playerStat.MaxHealth;
+        YG2.saves.playerDamage = _playerStat.Damage;
+        YG2.saves.playerAttackSpeed = _playerStat.AttackSpeed;
+    }
     #endregion
 }

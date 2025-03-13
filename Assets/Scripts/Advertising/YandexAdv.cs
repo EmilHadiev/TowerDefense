@@ -7,14 +7,12 @@ public class YandexAdv : IAdvertising
     private const int Coins = 100;
 
     private readonly ICoinStorage _coinStorage;
-    private readonly ISoundContainer _soundContainer;
 
     public string RewardValue => Coins.ToString();
 
-    public YandexAdv(ICoinStorage coinStorage, ISoundContainer soundContainer)
+    public YandexAdv(ICoinStorage coinStorage)
     {
         _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
     }
 
     public void StickyBannerToggle(bool isOn) => YG2.StickyAdActivity(isOn);
@@ -33,7 +31,6 @@ public class YandexAdv : IAdvertising
             {
                 case AdvType.Coin:
                     _coinStorage.Add(TryConvertToInt(rewardValue));
-                    _soundContainer.Play(SoundType.SpendCoin);
                     break;
                 case AdvType.Resurrect:
                     Debug.Log("Доделать восркшение!");

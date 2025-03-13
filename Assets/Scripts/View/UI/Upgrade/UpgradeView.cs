@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UpgradeView : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UpgradeView : MonoBehaviour
     private ISoundContainer _soundContainer;
     private Upgrader _upgrader;
 
+    private Action _updateReward;
+
     private void OnEnable()
     {
         _buyButton.onClick.AddListener(OnClicked);
@@ -24,11 +27,12 @@ public class UpgradeView : MonoBehaviour
         _buyButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(ICoinStorage coinStorage, ISoundContainer soundContainer, Upgrader upgrader)
+    public void Initialize(ICoinStorage coinStorage, ISoundContainer soundContainer, Upgrader upgrader, Action updateReward)
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;
         _upgrader = upgrader;
+        _updateReward = updateReward;
         Show(upgrader.Data);
     }
 
@@ -48,6 +52,7 @@ public class UpgradeView : MonoBehaviour
             _upgrader.Upgrade();
             _upgradeDescriptionText.text = _upgrader.Data.GetDescription();
             _costText.text = _upgrader.Data.Cost.ToString();
+            _updateReward?.Invoke();
             _soundContainer.Play(SoundType.SpendCoin);
         }
     }

@@ -10,6 +10,8 @@
     public override void Upgrade()
     {
         Stat.HealthProperty.Value += Data.Value;
+        Stat.Health = Stat.HealthProperty.Value;
+        Stat.MaxHealth = Stat.HealthProperty.Value;
 
         Data.Cost = GetRaisePrice(Data.Cost);
     }

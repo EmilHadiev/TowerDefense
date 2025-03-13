@@ -5,4 +5,6 @@
     public const int UpgradeStartPrice = 10;
     public const int AdditionalUpgradePrice = 5;
     public const float AdditionalUpgradePercentage = 10;
+
+    public const float AdvUpgradeCoefficient = 0.9f;
 }

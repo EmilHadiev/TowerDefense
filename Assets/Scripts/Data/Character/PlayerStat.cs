@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerStat : ScriptableObject
 {
     [field: SerializeField, Range(1, 100f)] public float Health = 100;
+    [field: SerializeField, Range(1, 100f)] public float MaxHealth = 100;
     [field: SerializeField, Range(0.001f, 10f)] public float AttackSpeed = 0.2f;
     [field: SerializeField, Range(0.001f, 10f)] public float Damage = 10;
 
@@ -12,7 +13,7 @@ public class PlayerStat : ScriptableObject
 
     private void Awake()
     {
-        HealthProperty = new Property(Health);
+        HealthProperty = new Property(MaxHealth);
         DamageProperty = new Property(Damage);
     }
 }

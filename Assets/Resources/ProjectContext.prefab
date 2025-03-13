@@ -79,3 +79,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb0d39b80738e6545a3df4fd829022a6, type: 2}
   - {fileID: 11400000, guid: 2441d64f1d187b049a3bb3d0b4a83b2b, type: 2}
   - {fileID: 11400000, guid: b6ee0805f315fec469a5c21b5a87103d, type: 2}
+  _playerStat: {fileID: 11400000, guid: 5c36c3f28b4406247b387b6ac5dd53a5, type: 2}

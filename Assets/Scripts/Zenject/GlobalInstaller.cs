@@ -7,17 +7,20 @@ public class GlobalInstaller : MonoInstaller
 {
     [SerializeField] private CoroutinePerformer _performer;
     [SerializeField] private UpgradeData[] _data;
+    [SerializeField] private PlayerStat _playerStat;
 
     public override void InstallBindings()
     {
         BindCoroutinePerformer();
         BindSceneSwitcher();
+        BindAdvertising();
         BindSave();
         BindCoinStorage();
-        BindData();
+        BindUpgradeData();
+        BindPlayerData();
     }
 
-    private void BindData()
+    private void BindUpgradeData()
     {
         List<UpgradeData> data = new List<UpgradeData>(_data.Length);
 
@@ -48,5 +51,15 @@ public class GlobalInstaller : MonoInstaller
     private void BindCoroutinePerformer()
     {
         Container.BindInterfacesTo<CoroutinePerformer>().FromComponentInNewPrefab(_performer).AsSingle();
+    }
+
+    private void BindPlayerData()
+    {
+        Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
+    }
+
+    private void BindAdvertising()
+    {
+        Container.BindInterfacesTo<YandexAdv>().AsSingle();
     }
 }

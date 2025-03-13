@@ -5,9 +5,9 @@ using Zenject;
 
 public class UpgradeViewContainer : MonoBehaviour
 {
+    [SerializeField] private UpgradeAdvContainer _upgradeAdvContainer;
     [SerializeField] private UpgradeView _template;
     [SerializeField] private Transform _container;
-    //[SerializeField] private UpgradeData[] _data;
 
     private List<UpgradeView> _views;
     private UpgraderContainer _upgraderContainer;
@@ -37,7 +37,7 @@ public class UpgradeViewContainer : MonoBehaviour
         foreach (var upgrade in _upgraderContainer.Upgraders)
         {
             UpgradeView upgradeView = Instantiate(template, _container);
-            upgradeView.Initialize(_coinStorage, _soundContainer, upgrade.Value);
+            upgradeView.Initialize(_coinStorage, _soundContainer, upgrade.Value, _upgradeAdvContainer.UpdateReward);
             _views.Add(upgradeView);
         }
     }

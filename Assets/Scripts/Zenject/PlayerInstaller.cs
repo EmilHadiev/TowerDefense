@@ -5,23 +5,15 @@ public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
     [SerializeField] private SoundContainer _soundContainer;
-    [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private bool _isDesktop;
 
     public override void InstallBindings()
     {
-        BindAdvertising();
         BindPlayer();
         BindInput();
         BindPlayerAttacker();
-        BindPlayerData();
         BindSoundContainer();
         BindBulletContainer();
-    }
-
-    private void BindAdvertising()
-    {
-        Container.BindInterfacesTo<YandexAdv>().AsSingle();
     }
 
     private void BindBulletContainer()
@@ -32,11 +24,6 @@ public class PlayerInstaller : MonoInstaller
     private void BindSoundContainer()
     {
         Container.BindInterfacesTo<SoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
-    }
-
-    private void BindPlayerData()
-    {
-        Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
     }
 
     private void BindPlayerAttacker()

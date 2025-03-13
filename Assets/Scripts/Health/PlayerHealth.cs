@@ -17,17 +17,17 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private void Awake()
     {
-        _health = _stat.HealthProperty.Value;
-        _maxHealth = _health;
+        _maxHealth = _stat.MaxHealth;
+        _health = _maxHealth;
     }
 
     private void OnEnable()
     {
-        _stat.HealthProperty.Changed += OnHealthChanged;
+        _stat.HealthProperty.Changed += OnHealthUpgraded;
         HealthChanged?.Invoke(_health, _maxHealth);
     }
 
-    private void OnDisable() => _stat.HealthProperty.Changed -= OnHealthChanged;
+    private void OnDisable() => _stat.HealthProperty.Changed -= OnHealthUpgraded;
 
     [Inject]
     private void Constructor(PlayerStat playerStat)
@@ -47,6 +47,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         HealthChanged?.Invoke(_health, _maxHealth);
         DamageApplied?.Invoke(damage);
 
+        Debug.Log(_health + " кол-во здоровья!");
+
         if (_health <= 0)
             Die();
     }
@@ -57,7 +59,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         gameObject.SetActive(false);
     }
 
-    private void OnHealthChanged(float health)
+    private void OnHealthUpgraded(float health)
     {
         _health = health;
         _maxHealth = _health;

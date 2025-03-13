@@ -20,5 +20,7 @@ public abstract class AdvertisingContainer : MonoBehaviour
 
     private void OnDisable() => _button.onClick.RemoveListener(OnClick);
 
+    protected void SetText(string text) => _rewardValueText.text = text; 
+
     protected abstract void OnClick();
 }

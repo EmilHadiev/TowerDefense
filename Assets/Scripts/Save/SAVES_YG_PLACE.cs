@@ -5,6 +5,13 @@ using UnityEngine;
 using static YG.SavesYG;
 namespace YG
 {
+    [Serializable]
+    public class UpgradeItem
+    {
+        public int Cost;
+        public UpgradeType Type;
+    }
+
     public partial class SavesYG
     {
         #region Coins
@@ -12,41 +19,13 @@ namespace YG
         #endregion
 
         #region UpgradeData
-        //data
-        [Serializable]
-        public class UpgradeItem
-        {
-            public int Cost;
-            public UpgradeType Type;
-        }
-
         public List<UpgradeItem> UpgradeItems = new List<UpgradeItem>(3);
+        #endregion
 
-        /*public List<UpgradeItem> InitAndGetUpgradeItems()
-        {
-            if (UpgradeItems.Count == 0 || UpgradeItems == null)
-            {
-                Debug.Log("Устанваливаю новые значения!");
-                UpgradeItems = new List<UpgradeItem>(3)
-                {
-                    new UpgradeItem() { Cost = Constants.UpgradeStartPrice, Type = UpgradeType.Health },
-                    new UpgradeItem() { Cost = Constants.UpgradeStartPrice, Type = UpgradeType.AttackSpeed },
-                    new UpgradeItem() { Cost = Constants.UpgradeStartPrice, Type = UpgradeType.Damage }
-                };               
-            }
-
-            return UpgradeItems;
-        }*/
-
-        public void ShowSize()
-        {            
-            Debug.Log(UpgradeItems.Count);
-        }
-
-        private void SetCost(UpgradeData upgradeData, List<UpgradeItem> upgradeItems)
-        {
-            upgradeData.Cost = upgradeItems.FirstOrDefault(data => data.Type == upgradeData.UpgradeType).Cost;
-        }
+        #region PlayerData
+        public float playerHealth = 100;
+        public float playerAttackSpeed = 0.25f;
+        public float playerDamage = 0;
         #endregion
     }
 }
