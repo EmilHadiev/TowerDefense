@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -11,6 +12,8 @@ public abstract class UIState : MonoBehaviour
     [SerializeField] private Button _closeButton;
 
     private GameplayerMarkup _markup;
+
+    public event Action<UIState> Entered;
 
     private void OnValidate() => _canvas ??= GetComponent<Canvas>();
 
@@ -25,7 +28,8 @@ public abstract class UIState : MonoBehaviour
     }
 
     public virtual void Enter()
-    {
+    {        
+        Entered?.Invoke(this);
         _canvas.enabled = true;
         Time.timeScale = 0;
         _markup.Stop();
