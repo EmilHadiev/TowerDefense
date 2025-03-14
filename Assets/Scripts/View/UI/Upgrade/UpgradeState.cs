@@ -1,4 +1,4 @@
-﻿public class UpgradeState : CanvasState
+﻿public class UpgradeState : UIState
 {
 
 }

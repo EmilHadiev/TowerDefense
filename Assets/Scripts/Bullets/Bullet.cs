@@ -10,9 +10,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private BulletData _data;
     [field: SerializeField] public BulletType Type { get; private set; }
 
-    private BulletData _bulletData;
     private TriggerObserver _observer;    
     private IBulletEffectHandler _bulletEffect;
+    private PlayerStat _playerStat;
 
     private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
 
@@ -28,8 +28,8 @@ public class Bullet : MonoBehaviour
         {
             [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
             [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
-            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data),
-            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data, _playerStat),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
         };
     }
@@ -50,6 +50,8 @@ public class Bullet : MonoBehaviour
 
     private void Update() => UpdateLifeTime();
 
+    public void InitPlayerDamage(PlayerStat playerStat) => _playerStat = playerStat;
+
     public void SetEffect<T>() where T : IBulletEffectHandler
     {
         if (_bulletEffects.TryGetValue(typeof(T), out IBulletEffectHandler handler))
@@ -62,12 +64,14 @@ public class Bullet : MonoBehaviour
     {
         if (collider.TryGetComponent(out IHealth health))
         {
-            health.TakeDamage(_data.Damage);
+            health.TakeDamage(GetDamage());
             ChangeTargetParticleDamageColor(collider);
             _bulletEffect.HandleEffect(collider);
             HideAfterCollided();
         }
     }
+
+    private float GetDamage() => _data.Damage + _playerStat.Damage;
 
     private void ChangeTargetParticleDamageColor(Collider collider)
     {
@@ -99,4 +103,5 @@ public class Bullet : MonoBehaviour
     }
 
     private void Hide() => gameObject.SetActive(false);
+
 }

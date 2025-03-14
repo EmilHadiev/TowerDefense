@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using YG;
@@ -7,30 +6,14 @@ using Zenject;
 
 public class YandexInitializer : MonoBehaviour
 {
-    private const int StartScene = 1;
-
     private Coroutine _waitingCoroutine;
     private WaitForEndOfFrame _waitingFrame;
 
     private SceneSwitcher _switcher;
     private ISavable _savable;
+    private GameplayerMarkup _markup;
 
-    private void Awake()
-    {
-        YGInsides.LoadProgress();
-    }
-
-    private void OnEnable()
-    {
-        YG2.onDefaultSaves += OnDefaultSaveLoaded;
-        YG2.onGetSDKData += OnSDKLoaded;
-    }
-
-    private void OnDisable()
-    {
-        YG2.onDefaultSaves -= OnDefaultSaveLoaded;
-        YG2.onGetSDKData -= OnSDKLoaded;
-    }
+    private void Awake() => YGInsides.LoadProgress();
 
     private void Start()
     {
@@ -41,10 +24,11 @@ public class YandexInitializer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, ICoinStorage coinStorage)
+    private void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, ICoinStorage coinStorage, GameplayerMarkup markup)
     {
         _switcher = sceneSwitcher;
         _savable = savable;
+        _markup = markup;
     }
 
     private void StopPerform()
@@ -59,19 +43,19 @@ public class YandexInitializer : MonoBehaviour
             yield return _waitingCoroutine;
 
         OpenAuthDialog();
-        SwitchScene(StartScene);
-
-        Debug.Log("SCENE IS INIT");
+        LoadProgress();
+        StartGameplay();
+        SwitchToStartScene();
     }
 
-    private void OpenAuthDialog() => YG2.OpenAuthDialog();
-
-    private void SwitchScene(int sceneIndex) => _switcher.SwitchTo(sceneIndex);
-
-    private void OnSDKLoaded()
+    private void LoadProgress()
     {
         _savable.LoadProgress();
     }
 
-    private void OnDefaultSaveLoaded() => _savable.InitProgress();
+    private void OpenAuthDialog() => YG2.OpenAuthDialog();
+
+    private void SwitchToStartScene() => _switcher.SwitchTo(Constants.StartScene);
+
+    private void StartGameplay() => _markup.Start();
 }

@@ -1,6 +1,5 @@
 ﻿public interface ISavable
 {
-    void InitProgress();
     void LoadProgress();
 
     void SaveProgress();

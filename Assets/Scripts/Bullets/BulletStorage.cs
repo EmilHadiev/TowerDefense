@@ -15,6 +15,7 @@ public class BulletStorage : MonoBehaviour
     private ISoundContainer _soundContainer;
     private IDesktopInput _desktopInput;
     private BulletEffectSetter _effectSetter;
+    private PlayerStat _playerStat;
 
     private int _bulletIndex;
 
@@ -50,11 +51,12 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, IDesktopInput desktopInput)
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, IDesktopInput desktopInput, PlayerStat playerStat)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
         _desktopInput = desktopInput;
+        _playerStat = playerStat;
     }
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
@@ -68,6 +70,8 @@ public class BulletStorage : MonoBehaviour
     private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
         Bullet bullet = Instantiate(template);
+        bullet.InitPlayerDamage(_playerStat);
+        bullet.gameObject.SetActive(true);
         bullet.gameObject.SetActive(false);
         pool.Add(bullet);
         _effectSetter.AddBullet(bullet);

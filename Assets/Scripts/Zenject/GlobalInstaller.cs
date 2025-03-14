@@ -18,6 +18,12 @@ public class GlobalInstaller : MonoInstaller
         BindCoinStorage();
         BindUpgradeData();
         BindPlayerData();
+        BindGameplayMarkup();
+    }
+
+    private void BindGameplayMarkup()
+    {
+        Container.Bind<GameplayerMarkup>().AsSingle();
     }
 
     private void BindUpgradeData()

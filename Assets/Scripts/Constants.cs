@@ -1,5 +1,7 @@
 ﻿public static class Constants
 {
+    public const int StartScene = 1;
+
     public const float MaxAttackSpeed = 0.1f;
 
     public const int UpgradeStartPrice = 10;

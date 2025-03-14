@@ -11,14 +11,16 @@ public class SplashBulletEffect : IBulletEffectHandler
     private readonly Collider[] _hits;
     private readonly Transform _bullet;
     private readonly BulletData _data;
+    private readonly PlayerStat _playerStat;
 
-    public SplashBulletEffect(Transform bullet, BulletData data)
+    public SplashBulletEffect(Transform bullet, BulletData data, PlayerStat playerStat)
     {
         _bullet = bullet;
         _data = data;
 
         _enemyMask = LayerMask.GetMask(EnemyMask);
         _hits = new Collider[MaxEnemies];
+        _playerStat = playerStat;
     }
 
     public void HandleEffect(Collider enemy) => CastChainLightning();
@@ -42,5 +44,10 @@ public class SplashBulletEffect : IBulletEffectHandler
                 health.TakeDamage(GetRadiusDamage());
     }
 
-    private float GetRadiusDamage() => _data.Damage / 100 * DamagePercentage;
+    private float GetRadiusDamage() => GetDamage() / 100 * DamagePercentage;
+
+    private float GetDamage()
+    {
+        return _data.Damage + _playerStat.Damage;
+    }
 }

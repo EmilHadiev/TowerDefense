@@ -27,16 +27,13 @@ public class YandexSaver : ISavable, IDisposable
 
     public void Dispose() => SaveProgress();
 
-    public void InitProgress()
-    {
-        Debug.Log("Первый запуск!");
-    }
-
     public void LoadProgress()
     {
         LoadCoins();
         LoadUpgraders();
         LoadPlayerStat();
+
+        Debug.Log("Progress loaded...");
     }
 
     public void ResetAllSavesAndProgress() => YG2.SetDefaultSaves();
