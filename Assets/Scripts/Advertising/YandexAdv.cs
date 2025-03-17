@@ -1,18 +1,33 @@
 using System;
 using UnityEngine;
 using YG;
+using Zenject;
 
-public class YandexAdv : IAdvertising
+public class YandexAdv : IAdvertising, IInitializable, IDisposable
 {
     private const int Coins = 100;
 
     private readonly ICoinStorage _coinStorage;
+    private readonly GameplayerMarkup _markup;
 
     public string RewardValue => Coins.ToString();
 
-    public YandexAdv(ICoinStorage coinStorage)
+    public YandexAdv(ICoinStorage coinStorage, GameplayerMarkup markup)
     {
         _coinStorage = coinStorage;
+        _markup = markup;
+    }
+
+    public void Initialize()
+    {
+        YG2.onCloseRewardedAdv += OnRewardAdvClosed;
+        YG2.onErrorRewardedAdv += OnRewardAdvClosed;
+    }
+
+    public void Dispose()
+    {
+        YG2.onCloseRewardedAdv -= OnRewardAdvClosed;
+        YG2.onErrorRewardedAdv -= OnRewardAdvClosed;
     }
 
     public void StickyBannerToggle(bool isOn) => YG2.StickyAdActivity(isOn);
@@ -22,8 +37,10 @@ public class YandexAdv : IAdvertising
         throw new System.NotImplementedException();
     }
 
-    public void ShowRewardAdv(AdvType advType, string rewardValue)
+    public void ShowRewardAdv(AdvType advType, string rewardValue = "", Action callBack = null)
     {
+        _markup.Stop();
+
         string id = "";
         YG2.RewardedAdvShow(id, () =>
         {
@@ -38,6 +55,8 @@ public class YandexAdv : IAdvertising
                 default:
                     throw new ArgumentOutOfRangeException(nameof(advType));
             }
+
+            callBack?.Invoke();
         });
     }
 
@@ -48,4 +67,6 @@ public class YandexAdv : IAdvertising
 
         throw new ArgumentException(nameof(rewardValue));
     }
+
+    private void OnRewardAdvClosed() => _markup.Start();
 }

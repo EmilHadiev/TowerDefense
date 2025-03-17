@@ -42,16 +42,16 @@ public class YandexInitializer : MonoBehaviour
         while (YG2.isSDKEnabled == false)
             yield return _waitingCoroutine;
 
+        _savable.ResetAllSavesAndProgress();
+        Debug.Log("Прогресс пока что сбрасывается!");
+
         OpenAuthDialog();
         LoadProgress();
         StartGameplay();
         SwitchToStartScene();
     }
 
-    private void LoadProgress()
-    {
-        _savable.LoadProgress();
-    }
+    private void LoadProgress() => _savable.LoadProgress();
 
     private void OpenAuthDialog() => YG2.OpenAuthDialog();
 
