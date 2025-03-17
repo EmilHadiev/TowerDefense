@@ -19,11 +19,17 @@ public class GlobalInstaller : MonoInstaller
         BindUpgradeData();
         BindPlayerData();
         BindGameplayMarkup();
+        BindPause();
+    }
+
+    private void BindPause()
+    {
+        Container.Bind<Pause>().AsSingle();
     }
 
     private void BindGameplayMarkup()
     {
-        Container.Bind<GameplayerMarkup>().AsSingle();
+        Container.Bind<GameplayMarkup>().AsSingle();
     }
 
     private void BindUpgradeData()

@@ -1,6 +1,6 @@
 ﻿using YG;
 
-public class GameplayerMarkup
+public class GameplayMarkup
 {
     public void Start() => YG2.GameplayStart();
 

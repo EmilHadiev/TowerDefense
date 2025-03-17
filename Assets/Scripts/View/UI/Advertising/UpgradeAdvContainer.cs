@@ -24,6 +24,7 @@ public class UpgradeAdvContainer : AdvertisingContainer
         CalculatePrice();
         SetText(_rewardValue);
     }
+
     protected override void OnClick() => Advertising.ShowRewardAdv(Type, _rewardValue, PlaySpendCoin);
 
     private void PlaySpendCoin() => _soundContainer.Play(SoundType.SpendCoin);

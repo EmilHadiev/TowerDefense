@@ -11,7 +11,7 @@ public class YandexInitializer : MonoBehaviour
 
     private SceneSwitcher _switcher;
     private ISavable _savable;
-    private GameplayerMarkup _markup;
+    private GameplayMarkup _markup;
 
     private void Awake() => YGInsides.LoadProgress();
 
@@ -24,7 +24,7 @@ public class YandexInitializer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, ICoinStorage coinStorage, GameplayerMarkup markup)
+    private void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, ICoinStorage coinStorage, GameplayMarkup markup)
     {
         _switcher = sceneSwitcher;
         _savable = savable;

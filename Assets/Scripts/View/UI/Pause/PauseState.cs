@@ -37,6 +37,6 @@ public class PauseState : UIState
     private void Restart()
     {
         _switcher.Restart();
-        Time.timeScale = 1;
+        Pause.Start();
     }
 }
