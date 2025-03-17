@@ -9,4 +9,6 @@
     public const float AdditionalUpgradePercentage = 10;
 
     public const float AdvUpgradeCoefficient = 0.85f;
+
+    public const string RewardID = "lockTimer";
 }

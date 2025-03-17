@@ -17,8 +17,7 @@ public class YandexAdv : IAdvertising
 
     public void ShowRewardAdv(AdvType advType, string rewardValue = "", Action callBack = null)
     {
-        string id = "";
-        YG2.RewardedAdvShow(id, () =>
+        YG2.RewardedAdvShow(Constants.RewardID, () =>
         {
             switch (advType)
             {

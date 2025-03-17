@@ -42,8 +42,7 @@ public class YandexInitializer : MonoBehaviour
         while (YG2.isSDKEnabled == false)
             yield return _waitingCoroutine;
 
-        _savable.ResetAllSavesAndProgress();
-        Debug.Log("Прогресс пока что сбрасывается!");
+        ResetProgress();
 
         OpenAuthDialog();
         LoadProgress();
@@ -58,4 +57,10 @@ public class YandexInitializer : MonoBehaviour
     private void SwitchToStartScene() => _switcher.SwitchTo(Constants.StartScene);
 
     private void StartGameplay() => _markup.Start();
+
+    private void ResetProgress()
+    {
+        _savable.ResetAllSavesAndProgress();
+        Debug.Log("Прогресс пока что сбрасывается!");
+    }
 }
