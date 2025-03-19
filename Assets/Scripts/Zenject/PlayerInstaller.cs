@@ -5,7 +5,7 @@ public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
     [SerializeField] private SoundContainer _soundContainer;
-    [SerializeField] private bool _isDesktop;
+    [SerializeField] private EnvironmentData _envData;
 
     public override void InstallBindings()
     {
@@ -13,12 +13,6 @@ public class PlayerInstaller : MonoInstaller
         BindInput();
         BindPlayerAttacker();
         BindSoundContainer();
-        BindBulletContainer();
-    }
-
-    private void BindBulletContainer()
-    {
-        Container.BindInterfacesAndSelfTo<BulletDataUpgraderContainer>().AsSingle();
     }
 
     private void BindSoundContainer()
@@ -38,7 +32,9 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindInput()
     {
-        if (_isDesktop)
+        if (_envData.IsDesktop)
             Container.BindInterfacesTo<DesktopInput>().AsSingle();
+        else
+            Container.BindInterfacesTo<MobileInput>().AsSingle();
     }
 }

@@ -8,28 +8,58 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private CoroutinePerformer _performer;
     [SerializeField] private UpgradeData[] _data;
     [SerializeField] private PlayerStat _playerStat;
+    [SerializeField] private EnvironmentData _evnData;
 
     public override void InstallBindings()
     {
         BindCoroutinePerformer();
-        BindSceneSwitcher();
-        BindAdvertising();
-        BindSave();
+        BindSceneSwitcher();       
         BindCoinStorage();
         BindUpgradeData();
         BindPlayerData();
-        BindGameplayMarkup();
+        BindEnvironmentData();
+
+        #region DefferentPlatforms
+        BindAdvertising();
+        BindSave();
         BindPause();
+        BindGameplayMarkup();
+        #endregion
     }
 
+    #region DefferentPlatforms
     private void BindPause()
     {
-        Container.Bind<Pause>().AsSingle();
+        #if UNITY_WEBGL
+            Container.Bind<Pause>().To<YandexPause>().AsSingle();
+        #endif
     }
 
     private void BindGameplayMarkup()
     {
-        Container.Bind<GameplayMarkup>().AsSingle();
+        #if UNITY_WEBGL
+            Container.Bind<GameplayMarkup>().AsSingle();
+        #endif
+    }
+
+    private void BindSave()
+    {
+        #if UNITY_WEBGL
+            Container.BindInterfacesTo<YandexSaver>().AsSingle().NonLazy();
+        #endif
+    }
+
+    private void BindAdvertising()
+    {
+        #if UNITY_WEBGL
+            Container.BindInterfacesTo<YandexAdv>().AsSingle();
+        #endif
+    }
+    #endregion
+
+    private void BindEnvironmentData()
+    {
+        Container.Bind<EnvironmentData>().FromScriptableObject(_evnData).AsSingle();
     }
 
     private void BindUpgradeData()
@@ -43,11 +73,6 @@ public class GlobalInstaller : MonoInstaller
         }
 
         Container.Bind<IEnumerable<UpgradeData>>().FromInstance(_data);
-    }
-
-    private void BindSave()
-    {
-        Container.BindInterfacesTo<YandexSaver>().AsSingle().NonLazy();
     }
 
     private void BindCoinStorage()
@@ -68,10 +93,5 @@ public class GlobalInstaller : MonoInstaller
     private void BindPlayerData()
     {
         Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
-    }
-
-    private void BindAdvertising()
-    {
-        Container.BindInterfacesTo<YandexAdv>().AsSingle();
     }
 }

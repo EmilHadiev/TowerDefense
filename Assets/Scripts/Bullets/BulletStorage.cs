@@ -22,13 +22,13 @@ public class BulletStorage : MonoBehaviour
     private void OnEnable()
     {
         _attacker.Attacked += OnAttacked;
-        _desktopInput.SwitchBulletButtonClicked += OnBulletClicked;
+        //_desktopInput.SwitchBulletButtonClicked += OnBulletClicked;
     }
 
     private void OnDisable()
     {
         _attacker.Attacked -= OnAttacked;
-        _desktopInput.SwitchBulletButtonClicked -= OnBulletClicked;
+        //_desktopInput.SwitchBulletButtonClicked -= OnBulletClicked;
     }
 
     private void Start()
@@ -51,11 +51,12 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, IDesktopInput desktopInput, PlayerStat playerStat)
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
-        _desktopInput = desktopInput;
+        //_desktopInput = desktopInput;
+        Debug.Log("Вернуть сюда переключалку пуль!");
         _playerStat = playerStat;
     }
 

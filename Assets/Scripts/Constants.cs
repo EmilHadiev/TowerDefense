@@ -11,4 +11,7 @@
     public const float AdvUpgradeCoefficient = 0.85f;
 
     public const string RewardID = "lockTimer";
+
+    public const float SpeedRotation = 15f;
+    public const float SmoothTime = 0.1f;
 }

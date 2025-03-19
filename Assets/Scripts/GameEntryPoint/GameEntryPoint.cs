@@ -1,54 +1,65 @@
 using System.Collections;
 using UnityEngine;
 using YG;
-using YG.Insides;
-using Zenject;
 
-public class YandexInitializer : MonoBehaviour
+public class yandexGameEntryPoint : IEntryPoint
 {
     private Coroutine _waitingCoroutine;
-    private WaitForEndOfFrame _waitingFrame;
+    private readonly ICoroutinePefrormer _performer;
+    private readonly WaitForEndOfFrame _waitingFrame;
 
-    private SceneSwitcher _switcher;
-    private ISavable _savable;
-    private GameplayMarkup _markup;
+    private readonly EnvironmentData _envData;
+    private readonly SceneSwitcher _switcher;
+    private readonly ISavable _savable;
+    private readonly GameplayMarkup _markup;
 
-    private void Awake() => YGInsides.LoadProgress();
-
-    private void Start()
+    public yandexGameEntryPoint(SceneSwitcher sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
     {
         _waitingFrame = new WaitForEndOfFrame();
-
-        StopPerform();
-        _waitingCoroutine = StartCoroutine(AuthenticationCoroutine());
+        _switcher = sceneSwitcher;
+        _envData = envData;
+        _savable = savable;
+        _performer = performer;
+        _markup = markup;
     }
 
-    [Inject]
-    private void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, ICoinStorage coinStorage, GameplayMarkup markup)
+    public void Start()
     {
-        _switcher = sceneSwitcher;
-        _savable = savable;
-        _markup = markup;
+        StopPerform();
+        _waitingCoroutine = _performer.StartPerform(AuthenticationCoroutine());
     }
 
     private void StopPerform()
     {
         if (_waitingCoroutine != null)
-            StopCoroutine(_waitingCoroutine);
+            _performer.StopPerform(_waitingCoroutine);
     }
 
     private IEnumerator AuthenticationCoroutine()
     {
         while (YG2.isSDKEnabled == false)
-            yield return _waitingCoroutine;
+            yield return _waitingFrame;
 
         ResetProgress();
 
+        HideStickyBanners();
+
         OpenAuthDialog();
         LoadProgress();
-        StartGameplay();
+        SetEnvData();
         SwitchToStartScene();
+        StartGameplay();
     }
+
+    private void SetEnvData()
+    {
+        if (YG2.envir.isDesktop)
+            _envData.IsDesktop = true;
+        else
+            _envData.IsDesktop = false;
+    }
+
+    private void HideStickyBanners() => YG2.StickyAdActivity(false);
 
     private void LoadProgress() => _savable.LoadProgress();
 
@@ -56,7 +67,11 @@ public class YandexInitializer : MonoBehaviour
 
     private void SwitchToStartScene() => _switcher.SwitchTo(Constants.StartScene);
 
-    private void StartGameplay() => _markup.Start();
+    private void StartGameplay()
+    {
+        _markup.Ready();
+        _markup.Start();
+    }
 
     private void ResetProgress()
     {

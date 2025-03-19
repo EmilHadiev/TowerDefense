@@ -1,28 +1,19 @@
 ﻿using UnityEngine;
 
-public class Pause
+public abstract class Pause
 {
-    private readonly IAdvertising _advertising;
-    private readonly GameplayMarkup _markup;
+    protected readonly IAdvertising Advertising;
 
-    public Pause(IAdvertising advertising, GameplayMarkup markup)
+    public Pause(IAdvertising advertising)
     {
-        _advertising = advertising;
-        _markup = markup;
+        Advertising = advertising;
     }
 
-    public void Start()
-    {
-        _advertising.StickyBannerToggle(true);
-        _markup.Start();
-        Time.timeScale = 1;
-    }
+    public virtual void Start() => Time.timeScale = 1;
 
-    public void Stop()
+    public virtual void Stop()
     {
-        _advertising.ShowInterstitialAdv();
-        _advertising.StickyBannerToggle(false);
-        _markup.Stop();
         Time.timeScale = 0;
+        Advertising.ShowInterstitialAdv();
     }
 }
