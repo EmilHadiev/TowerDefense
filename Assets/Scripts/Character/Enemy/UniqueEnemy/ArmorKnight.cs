@@ -1,4 +1,4 @@
-﻿public class ArmorKnight : Enemy
-{
-    protected override void AbilityAccept(IEnemyVisitor visitor) => visitor.Visit(this);
-}
+﻿using UnityEngine;
+
+[RequireComponent(typeof(ArmorKnightAbility))]
+public class ArmorKnight : Enemy { }

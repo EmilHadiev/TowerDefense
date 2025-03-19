@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class EnemyAttackState : IState
+﻿public class EnemyAttackState : IState
 {
     private readonly IStateSwitcher _switcher;
     private readonly CharacterAnimator _animator;
@@ -11,15 +9,7 @@ public class EnemyAttackState : IState
         _animator = animator;
     }
 
-    public void Enter()
-    {
-        Debug.Log($"Enter state: {nameof(EnemyAttackState)}");
-        _animator.StartAttacking();
-    }
+    public void Enter() => _animator.StartAttacking();
 
-    public void Exit()
-    {
-        Debug.Log($"Exit state: {nameof(EnemyAttackState)}");
-        _animator.StopAttacking();
-    }
+    public void Exit() => _animator.StopAttacking();
 }

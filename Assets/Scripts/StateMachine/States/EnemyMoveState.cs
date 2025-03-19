@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class EnemyMoveState : IState
+﻿public class EnemyMoveState : IState
 {
     private readonly IStateSwitcher _switcher;
     private readonly IMover _mover;
@@ -15,14 +13,12 @@ public class EnemyMoveState : IState
 
     public void Enter()
     {
-        Debug.Log($"Enter state: {nameof(EnemyMoveState)}");
         _animator.StartRunning();
         _mover.StartMove();
     }
 
     public void Exit()
     {
-        Debug.Log($"Exit state: {nameof(EnemyMoveState)}");
         _animator.StopRunning();
         _mover.StopMove();
     }

@@ -1,4 +1,4 @@
-﻿public class Turtle : Enemy
-{
-    protected override void AbilityAccept(IEnemyVisitor visitor) => visitor.Visit(this);
-}
+﻿using UnityEngine;
+
+[RequireComponent(typeof(TurtleAbility))]
+public class Turtle : Enemy { }

@@ -17,21 +17,17 @@ public class TurtleAbility : MonoBehaviour
         _health = GetComponent<IHealth>();
         _stat = GetComponent<Enemy>().Stat;
 
-
         if (_health == null)
             throw new ArgumentNullException(nameof(_health));
+
+        CreateExplosionParticle();
+        CreateExplosionCountParticle();
+        _ability = new EnemyExplosion(transform, _stat, _explosionCountPrefab);
     }
 
     private void OnEnable() => _health.Died += OnDied;
 
     private void OnDisable() => _health.Died -= OnDied;
-
-    private void Start()
-    {
-        CreateExplosionParticle();
-        CreateExplosionCountParticle();
-        _ability = new EnemyExplosion(transform, _stat, _explosionCountPrefab);
-    }
 
     [Inject]
     private void Constructor(IInstantiator instantiator) => _instantiator = instantiator;

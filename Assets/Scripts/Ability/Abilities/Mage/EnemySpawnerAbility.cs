@@ -1,42 +1,34 @@
-using System;
 using UnityEngine;
 using Zenject;
 
 public class EnemySpawnerAbility
 {
-    private const EnemyType ProhibitedType = EnemyType.Mage;
+    private const EnemyType Type = EnemyType.Skeleton;
+
+    private readonly int _maxEnemies;
 
     private readonly IEnemyFactory _factory;
-    private readonly Transform _spanwer;
+    private readonly EnemySpawnPosition[] _spanwer;
     private readonly IPool<Enemy> _pool;
-    private readonly EnemyType _type;
 
-    public EnemySpawnerAbility(EnemySpawnPosition spawner, IInstantiator instantiator)
+    private int _previousSpawnPositionIndex = -1;
+
+    public EnemySpawnerAbility(EnemySpawnPosition[] spawnPositions, IInstantiator instantiator, int maxEnemies)
     {
         _factory = new EnemyFactory(instantiator);
-        _spanwer = spawner.transform;
-        _pool = new EnemyPool(1);
-        
-        _type = GetRandomEnemyType();
-        CreateEnemy();
+        _spanwer = spawnPositions;
+        _maxEnemies = maxEnemies;
+        _pool = new EnemyPool(_maxEnemies);
     }
 
-    private void CreateEnemy()
+    public void CreateEnemy()
     {
-        Enemy enemy = _factory.Get(_type);
-        enemy.gameObject.SetActive(false);
-        _pool.Add(enemy);
-    }
-
-    private EnemyType GetRandomEnemyType()
-    {
-        EnemyType[] enemyTypes = (EnemyType[])Enum.GetValues(typeof(EnemyType));
-        int randomIndex = UnityEngine.Random.Range(0, enemyTypes.Length);
-
-        while (enemyTypes[randomIndex] == ProhibitedType)
-            randomIndex = UnityEngine.Random.Range(0, enemyTypes.Length);
-
-        return enemyTypes[randomIndex];
+        for (int i = 0; i < _maxEnemies; i++)
+        {
+            Enemy enemy = _factory.Get(Type);
+            enemy.gameObject.SetActive(false);
+            _pool.Add(enemy);
+        }
     }
 
     public bool TrySpawn()
@@ -53,7 +45,20 @@ public class EnemySpawnerAbility
 
     private void SetPosition(Enemy enemy)
     {
-        enemy.transform.position = _spanwer.transform.position;
-        enemy.transform.rotation = _spanwer.transform.rotation;
+        int spawnPositionIndex = GetSpawnPositionIndex();
+
+        enemy.transform.position = _spanwer[spawnPositionIndex].transform.position;
+        enemy.transform.rotation = _spanwer[spawnPositionIndex].transform.rotation;
+    }
+
+    private int GetSpawnPositionIndex()
+    {
+        int spawnPositionIndex = Random.Range(0, _spanwer.Length);
+
+        while (_previousSpawnPositionIndex == spawnPositionIndex)
+            spawnPositionIndex = Random.Range(0, _spanwer.Length);
+
+        _previousSpawnPositionIndex = spawnPositionIndex;
+        return _previousSpawnPositionIndex;
     }
 }

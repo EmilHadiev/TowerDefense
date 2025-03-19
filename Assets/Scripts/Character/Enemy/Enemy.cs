@@ -17,9 +17,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private CharacterAnimator _animator;
 
-    private EnemyAbilityVisitor _visitor;
-    private IInstantiator _instantiator;
-
     public IStateSwitcher StateMachine { get; private set; }
     public EnemyStat Stat { get; private set; }
 
@@ -27,23 +24,17 @@ public abstract class Enemy : MonoBehaviour
     {
         _mover ??= GetComponent<EnemyMover>();
         _animator ??= GetComponent<CharacterAnimator>();
-
     }
 
     private void Start()
     {
         StateMachine = new EnemyStateMachine(_mover.Mover, _animator);
         StateMachine.SwitchTo<EnemyMoveState>();
-
-        _visitor = new EnemyAbilityVisitor(_instantiator, gameObject);
-        AbilityAccept(_visitor);
     }
 
     [Inject]
-    private void Constructor(IEnumerable<EnemyStat> stats, IInstantiator instantiator)
+    private void Constructor(IEnumerable<EnemyStat> stats)
     {
-        _instantiator = instantiator;
-
         foreach (var stat in stats)
         {
             if (stat.EnemyType == Type)
@@ -55,6 +46,4 @@ public abstract class Enemy : MonoBehaviour
 
         throw new ArgumentNullException(nameof(stats));
     }
-
-    protected abstract void AbilityAccept(IEnemyVisitor visitor);
 }
