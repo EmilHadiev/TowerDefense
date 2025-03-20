@@ -2,17 +2,25 @@
 
 public class EnemyPool : IPool<Enemy>
 {
-    private List<Enemy> _enemies;
+    private readonly List<Enemy> _enemies;
+    private readonly FPSCounter _counter;
 
-    public EnemyPool(int size = 15)
+    public EnemyPool(FPSCounter counter, int size = 15)
     {
         _enemies = new List<Enemy>(size);
+        _counter = counter;
     }
 
     public void Add(Enemy item) => _enemies.Add(item);
 
     public bool TryGet(out Enemy enemy)
     {
+        if (_counter.IsEnoughFPS == false)
+        {
+            enemy = null;
+            return false;
+        }
+
         for (int i = 0; i < _enemies.Count; i++)
         {
             if (_enemies[i].gameObject.activeInHierarchy == false)

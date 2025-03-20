@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,12 @@ public class PlayerInstaller : MonoInstaller
         BindInput();
         BindPlayerAttacker();
         BindSoundContainer();
+        BindOptimization();
+    }
+
+    private void BindOptimization()
+    {
+        Container.BindInterfacesAndSelfTo<FPSCounter>().AsSingle();
     }
 
     private void BindSoundContainer()

@@ -35,7 +35,6 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     {
         if (_isAttacking)
         {
-            Debug.Log("Атака!");
             Attacked?.Invoke();
             ResetTimer();
             StopAttack();

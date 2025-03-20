@@ -1,28 +1,25 @@
 using System;
-using TMPro;
 using UnityEngine;
+using Zenject;
 
-public class FPSCounter : MonoBehaviour
+public class FPSCounter : ITickable
 {
-    [SerializeField] private TMP_Text _text;
-
     private int _frameCount;
     private float _prevTime;
 
-    private int _currentFPS;
+    public int CurrentFPS { get; private set; }
+    public bool IsEnoughFPS => CurrentFPS >= Constants.MinFPS;
 
-    private void Update()
+    public void Tick()
     {
         _frameCount++;
         float timePassed = Time.realtimeSinceStartup - _prevTime;
 
         if (timePassed >= 1f)
         {
-            _currentFPS = Convert.ToInt32(_frameCount / timePassed);
+            CurrentFPS = Convert.ToInt32(_frameCount / timePassed);
             _frameCount = 0;
             _prevTime = Time.realtimeSinceStartup;
-
-            _text.text = _currentFPS.ToString();
         }
     }
 }

@@ -10,22 +10,24 @@ public class EnemySpawner : MonoBehaviour
     private const int WaitingTime = 1;
 
     private IInstantiator _instantiator;
+    private FPSCounter _fpsCounter;
     private IEnemyFactory _factory;
     private IPool<Enemy> _pool;
 
     private WaitForSeconds _delay;
 
     [Inject]
-    private void Constructor(IInstantiator instantiator)
+    private void Constructor(IInstantiator instantiator, FPSCounter fPSCounter)
     {
         _instantiator = instantiator;
+        _fpsCounter = fPSCounter;
     }
 
     private void Start()
     {
         _factory = new EnemyFactory(_instantiator);
         _delay = new WaitForSeconds(WaitingTime);
-        _pool = new EnemyPool();
+        _pool = new EnemyPool(_fpsCounter);
 
         CreateEnemies();
 

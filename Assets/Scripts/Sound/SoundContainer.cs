@@ -23,7 +23,6 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
     {
         if (_bulletType == bulletType && _isReseted == false)
         {
-            Debug.Log("Уже имею честь!");
             Play();
             return;
         }

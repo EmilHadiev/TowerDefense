@@ -14,4 +14,6 @@
 
     public const float SpeedRotation = 15f;
     public const float SmoothTime = 0.1f;
+
+    public const float MinFPS = 20;
 }

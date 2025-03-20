@@ -47,8 +47,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         HealthChanged?.Invoke(_health, _maxHealth);
         DamageApplied?.Invoke(damage);
 
-        Debug.Log(_health + " кол-во здоровья!");
-
         if (_health <= 0)
             Die();
     }

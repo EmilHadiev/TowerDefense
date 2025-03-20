@@ -9869,7 +9869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDynamic: 1
   text: 
-  size: 0.25
+  size: 0.5
   letterSpacing: 0.35
   backgroundColor: {r: 0.8980392, g: 0.1254902, b: 0.1254902, a: 1}
   color1: {r: 1, g: 1, b: 1, a: 1}

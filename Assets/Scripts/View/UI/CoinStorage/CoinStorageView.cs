@@ -1,7 +1,5 @@
-using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
-using YG;
 using Zenject;
 
 public class CoinStorageView : MonoBehaviour

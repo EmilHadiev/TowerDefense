@@ -13,7 +13,7 @@ public class MageAbility : MonoBehaviour
 
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _delay;
-
+    private FPSCounter _fpsCounter;
     private IInstantiator _instantiator;
 
     private void Awake()
@@ -36,7 +36,7 @@ public class MageAbility : MonoBehaviour
 
     private void InitSpawners()
     {
-        _spawners = new EnemySpawnerAbility(_spawnPositions, _instantiator, MaxEnemies);
+        _spawners = new EnemySpawnerAbility(_spawnPositions, _instantiator, MaxEnemies, _fpsCounter);
         _spawners.CreateEnemy();
     }
 
@@ -57,9 +57,9 @@ public class MageAbility : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInstantiator instantiator)
+    private void Constructor(IInstantiator instantiator, FPSCounter fPSCounter)
     {
-        Debug.Log("Construcotr");
+        _fpsCounter = fPSCounter;
         _instantiator = instantiator;
     }
 
