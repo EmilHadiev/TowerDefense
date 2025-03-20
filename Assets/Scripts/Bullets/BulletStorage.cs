@@ -13,7 +13,7 @@ public class BulletStorage : MonoBehaviour
     private IAttackable _attacker;
     private List<IPool<Bullet>> _pool;
     private ISoundContainer _soundContainer;
-    private IDesktopInput _desktopInput;
+    private IInputSystem _input;
     private BulletEffectSetter _effectSetter;
     private PlayerStat _playerStat;
 
@@ -22,13 +22,13 @@ public class BulletStorage : MonoBehaviour
     private void OnEnable()
     {
         _attacker.Attacked += OnAttacked;
-        //_desktopInput.SwitchBulletButtonClicked += OnBulletClicked;
+        _input.SwitchBulletButtonClicked += OnBulletClicked;
     }
 
     private void OnDisable()
     {
         _attacker.Attacked -= OnAttacked;
-        //_desktopInput.SwitchBulletButtonClicked -= OnBulletClicked;
+        _input.SwitchBulletButtonClicked -= OnBulletClicked;
     }
 
     private void Start()
@@ -51,11 +51,11 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat)
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat, IInputSystem inputSystem)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
-        //_desktopInput = desktopInput;
+        _input = inputSystem;
         Debug.Log("Вернуть сюда переключалку пуль!");
         _playerStat = playerStat;
     }

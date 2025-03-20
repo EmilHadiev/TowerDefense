@@ -13,4 +13,6 @@
     public const string ParticleExplosionPath = "Particles/Explosion";
     public const string ParticleExplosionCountPath = "Particles/ExplosionCount";
     public const string ParticleSpawnRunePath = "Particles/SpawnRune";
+
+    public const string MobileInputPath = "Input/Dynamic Joystick";
 }

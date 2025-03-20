@@ -11,6 +11,8 @@ public abstract class UIState : MonoBehaviour
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
+    private IInput _input;
+
     protected Pause Pause;
 
     public event Action<UIState> Entered;
@@ -22,18 +24,24 @@ public abstract class UIState : MonoBehaviour
     private void OnDisable() => Disable();
 
     [Inject]
-    private void Constructor(Pause pause) => Pause = pause;
+    private void Constructor(Pause pause, IInput input)
+    {
+        Pause = pause;
+        _input = input;
+    }
 
     public virtual void Enter()
     {        
         Entered?.Invoke(this);
         _canvas.enabled = true;
+        _input.Stop();
         Pause.Stop();
     }
 
     public virtual void Exit()
     {
         _canvas.enabled = false;
+        _input.Continue();
         Pause.Start();
     }
 

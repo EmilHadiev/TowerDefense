@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using Zenject;
 
 public class UIStateContainer : MonoBehaviour
 {

@@ -39,6 +39,8 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindInput()
     {
+        Container.BindInterfacesTo<NewInputSystem>().AsSingle();
+
         if (_envData.IsDesktop)
             Container.BindInterfacesTo<DesktopInput>().AsSingle();
         else
