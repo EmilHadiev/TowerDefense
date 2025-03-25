@@ -348,7 +348,7 @@ PlayerSettings:
     m_APIs: 10000000
     m_Automatic: 1
   - m_BuildTarget: WebGLSupport
-    m_APIs: 0b000000
+    m_APIs: 0b00000008000000
     m_Automatic: 1
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
@@ -661,10 +661,10 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     Stadia: DOTWEEN
-    Standalone: DOTWEEN;PLUGIN_YG_2;TMP_YG2
+    Standalone: DOTWEEN;PLUGIN_YG_2;TMP_YG2;YandexGamesPlatform_yg;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;StickyAdv_yg;Storage_yg
     VisionOS: DOTWEEN
     WebGL: DOTWEEN;PLUGIN_YG_2;TMP_YG2;YandexGamesPlatform_yg;RU_YG2;RewardedAdv_yg;StickyAdv_yg;Authorization_yg;Storage_yg;InterstitialAdv_yg;EnvirData_yg
-    Windows Store Apps: DOTWEEN
+    Windows Store Apps: DOTWEEN;PLUGIN_YG_2;YandexGamesPlatform_yg;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;StickyAdv_yg;Storage_yg;TMP_YG2
     XboxOne: DOTWEEN
     iPhone: DOTWEEN
     tvOS: DOTWEEN

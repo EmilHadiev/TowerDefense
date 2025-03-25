@@ -2,6 +2,8 @@
 {
     public const int StartScene = 1;
 
+    public const float EnemySpawnDelay = 0.5f;
+
     public const float MaxAttackSpeed = 0.1f;
 
     public const int UpgradeStartPrice = 10;
@@ -18,4 +20,6 @@
     public const float MinFPS = 20;
 
     public const string PlayerUIName = "PlayerUI";
+
+    public const int BulletPrice = 2000;
 }

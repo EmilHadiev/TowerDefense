@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System;
-using Zenject;
+﻿using System;
+using UnityEngine;
 
 public class UIStateContainer : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class UIStateContainer : MonoBehaviour
 
     private void OnValidate()
     {
-        _states = GetComponentsInChildren<UIState>();
+        _states ??= GetComponentsInChildren<UIState>();
     }
 
     private void OnEnable()

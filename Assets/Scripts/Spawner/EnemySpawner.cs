@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class EnemySpawner : MonoBehaviour
@@ -7,14 +6,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _size;
     [SerializeField] private EnemyType _enemyType;
 
-    private const int WaitingTime = 1;
-
     private IInstantiator _instantiator;
     private FPSCounter _fpsCounter;
     private IEnemyFactory _factory;
     private IPool<Enemy> _pool;
-
-    private WaitForSeconds _delay;
 
     [Inject]
     private void Constructor(IInstantiator instantiator, FPSCounter fPSCounter)
@@ -26,12 +21,9 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _factory = new EnemyFactory(_instantiator);
-        _delay = new WaitForSeconds(WaitingTime);
         _pool = new EnemyPool(_fpsCounter);
 
         CreateEnemies();
-
-        StartCoroutine(SpawnCoroutine());
     }
 
     private void CreateEnemies()
@@ -48,16 +40,7 @@ public class EnemySpawner : MonoBehaviour
         SetPosition(enemy);
     }
 
-    private IEnumerator SpawnCoroutine()
-    {
-        while (true)
-        {
-            yield return _delay;
-            SpawnEnemy();
-        }
-    }
-
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         if (_pool.TryGet(out Enemy enemy))
         {
