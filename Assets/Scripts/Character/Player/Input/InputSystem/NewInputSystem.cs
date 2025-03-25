@@ -16,23 +16,25 @@ class NewInputSystem : IInputSystem, IInitializable, IDisposable
     {
         _inputSystem.Enable();
 
-        _inputSystem.Player.SwitchToBullet0.performed += ctx => SwitchTo(0);
-        _inputSystem.Player.SwitchToBullet1.performed += ctx => SwitchTo(1);
-        _inputSystem.Player.SwitchToBullet2.performed += ctx => SwitchTo(2);
-        _inputSystem.Player.SwitchToBullet3.performed += ctx => SwitchTo(3);
-        _inputSystem.Player.SwitchToBullet4.performed += ctx => SwitchTo(4);
+        _inputSystem.Player.SwitchToBullet0.performed += ctx => SwitchBulletTo(0);
+        _inputSystem.Player.SwitchToBullet1.performed += ctx => SwitchBulletTo(1);
+        _inputSystem.Player.SwitchToBullet2.performed += ctx => SwitchBulletTo(2);
+        _inputSystem.Player.SwitchToBullet3.performed += ctx => SwitchBulletTo(3);
+        _inputSystem.Player.SwitchToBullet4.performed += ctx => SwitchBulletTo(4);
     }
 
     public void Dispose()
     {
-        _inputSystem.Player.SwitchToBullet0.performed -= ctx => SwitchTo(0);
-        _inputSystem.Player.SwitchToBullet1.performed -= ctx => SwitchTo(1);
-        _inputSystem.Player.SwitchToBullet2.performed -= ctx => SwitchTo(2);
-        _inputSystem.Player.SwitchToBullet3.performed -= ctx => SwitchTo(3);
-        _inputSystem.Player.SwitchToBullet4.performed -= ctx => SwitchTo(4);
+        _inputSystem.Player.SwitchToBullet0.performed -= ctx => SwitchBulletTo(0);
+        _inputSystem.Player.SwitchToBullet1.performed -= ctx => SwitchBulletTo(1);
+        _inputSystem.Player.SwitchToBullet2.performed -= ctx => SwitchBulletTo(2);
+        _inputSystem.Player.SwitchToBullet3.performed -= ctx => SwitchBulletTo(3);
+        _inputSystem.Player.SwitchToBullet4.performed -= ctx => SwitchBulletTo(4);
 
         _inputSystem.Disable();
     }
 
-    private void SwitchTo(int index) => SwitchBulletButtonClicked?.Invoke(index);
+    private void SwitchBulletTo(int index) => SwitchBulletButtonClicked?.Invoke(index);
+
+    public void SwitchTo(int bulletIndex) => SwitchBulletTo(bulletIndex);
 }

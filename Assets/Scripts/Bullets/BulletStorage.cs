@@ -37,8 +37,14 @@ public class BulletStorage : MonoBehaviour
         _effectSetter = new BulletEffectSetter();
 
         InitializeTemplatesAndPools();
+        InitializeEffects();
+    }
 
+    private void InitializeEffects()
+    {
         SetEffect(_bulletIndex);
+        _input.SwitchTo(0);
+        _soundContainer.Stop();
     }
 
     private void InitializeTemplatesAndPools()
@@ -56,7 +62,6 @@ public class BulletStorage : MonoBehaviour
         _attacker = attacker;
         _soundContainer = soundContainer;
         _input = inputSystem;
-        Debug.Log("Вернуть сюда переключалку пуль!");
         _playerStat = playerStat;
     }
 
