@@ -2,9 +2,9 @@
 
 public class MobilePlayerRotator : PlayerRotator
 {
-    private readonly Joystick _joystick;
+    private const int RotationSpeed = 5;
 
-    public MobilePlayerRotator(IPlayer player, Joystick joystick) : base(player)
+    public MobilePlayerRotator(IPlayer player) : base(player)
     {
     }
 
@@ -16,7 +16,7 @@ public class MobilePlayerRotator : PlayerRotator
         {
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
-            Player.Transform.rotation = Quaternion.Slerp(Player.Transform.rotation, targetRotation, Time.deltaTime * 10);
+            Player.Transform.rotation = Quaternion.Slerp(Player.Transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
         }
     }
 }

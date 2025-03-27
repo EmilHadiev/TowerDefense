@@ -22,15 +22,15 @@ public class PauseState : UIState
         _savable.SaveProgress();
     }
 
-    protected override void Enable()
+    protected override void OnStart()
     {
-        base.Enable();
+        base.OnStart();
         _restartButton.onClick.AddListener(Restart);
     }
 
-    protected override void Disable()
+    protected override void Destroy()
     {
-        base.Disable();
+        base.Destroy();
         _restartButton.onClick.RemoveListener(Restart);
     }
 

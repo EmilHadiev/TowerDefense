@@ -16,7 +16,7 @@ class MobileInput : IInput, ITickable
     public MobileInput(IPlayer player, IInstantiator instantitator)
     {
         _joystick = InstantiateJoystick(instantitator);
-        _rotator = new MobilePlayerRotator(player, _joystick);
+        _rotator = new MobilePlayerRotator(player);
     }
 
     public Joystick InstantiateJoystick(IInstantiator instantitator)

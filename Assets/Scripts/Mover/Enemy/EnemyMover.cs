@@ -22,6 +22,8 @@ public class EnemyMover : MonoBehaviour, IMovable
             _agent = GetComponent<NavMeshAgent>();
     }
 
+    private void OnDisable() => _mover?.StopMove();
+
     private void Awake()
     {
         _stat = GetComponent<Enemy>().Stat;
@@ -31,7 +33,11 @@ public class EnemyMover : MonoBehaviour, IMovable
         _mover.StopMove();
     }
 
-    private void Update() => _mover.Update();
+    private void Update()
+    {
+        if (Time.frameCount % 60 == 0)
+            _mover.Update();
+    }
 
     [Inject]
     private void Constructor(IPlayer player)

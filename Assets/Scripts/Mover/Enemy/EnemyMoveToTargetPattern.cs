@@ -27,7 +27,7 @@ public class EnemyMoveToTargetPattern : IMover
 
     public void StopMove()
     {
-        //_speedProperty.Changed -= OnSpeedChanged;
+        _speedProperty.Changed -= OnSpeedChanged;
 
         _isWorking = false;
         _agent.enabled = false;

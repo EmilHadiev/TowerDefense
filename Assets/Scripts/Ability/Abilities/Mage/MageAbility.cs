@@ -13,7 +13,7 @@ public class MageAbility : MonoBehaviour
 
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _delay;
-    private FPSCounter _fpsCounter;
+    private Optimizator _fpsCounter;
     private IInstantiator _instantiator;
 
     private void Awake()
@@ -57,7 +57,7 @@ public class MageAbility : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInstantiator instantiator, FPSCounter fPSCounter)
+    private void Constructor(IInstantiator instantiator, Optimizator fPSCounter)
     {
         _fpsCounter = fPSCounter;
         _instantiator = instantiator;

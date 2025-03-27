@@ -19,7 +19,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindOptimization()
     {
-        Container.BindInterfacesAndSelfTo<FPSCounter>().AsSingle();
+        Container.BindInterfacesAndSelfTo<Optimizator>().AsSingle();
     }
 
     private void BindSoundContainer()

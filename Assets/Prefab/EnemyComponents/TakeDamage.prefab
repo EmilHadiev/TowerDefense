@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2986327946686182761}
   - component: {fileID: 5414231962500837499}
   - component: {fileID: 2103818873873669292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4974,7 +4974,7 @@ GameObject:
   - component: {fileID: 5213267807027525208}
   - component: {fileID: 5907962365950366949}
   - component: {fileID: 6483523381282561915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MODEL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9937,7 +9937,7 @@ GameObject:
   - component: {fileID: 138865765440110784}
   - component: {fileID: 924359530796305901}
   - component: {fileID: 7968922497342149272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14902,7 +14902,7 @@ GameObject:
   - component: {fileID: 7391191996754828983}
   - component: {fileID: 5140013922582496935}
   - component: {fileID: 1158054491229863672}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TakeDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

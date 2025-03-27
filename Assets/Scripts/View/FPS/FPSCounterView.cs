@@ -9,7 +9,7 @@ public class FPSCounterView : MonoBehaviour
     [SerializeField] private TMP_Text _text;
 
     private WaitForSeconds _delay;
-    private FPSCounter _count;
+    private Optimizator _count;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class FPSCounterView : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(FPSCounter fPSCounter)
+    private void Constructor(Optimizator fPSCounter)
     {
         _count = fPSCounter;
     }

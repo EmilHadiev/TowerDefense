@@ -3,9 +3,9 @@
 public class EnemyPool : IPool<Enemy>
 {
     private readonly List<Enemy> _enemies;
-    private readonly FPSCounter _counter;
+    private readonly Optimizator _counter;
 
-    public EnemyPool(FPSCounter counter, int size = 15)
+    public EnemyPool(Optimizator counter, int size = 15)
     {
         _enemies = new List<Enemy>(size);
         _counter = counter;
