@@ -1,11 +1,9 @@
 ﻿public class EnemyAttackState : IState
 {
-    private readonly IStateSwitcher _switcher;
     private readonly CharacterAnimator _animator;
 
-    public EnemyAttackState(IStateSwitcher stateSwitcher, CharacterAnimator animator)
+    public EnemyAttackState(CharacterAnimator animator)
     {
-        _switcher = stateSwitcher;
         _animator = animator;
     }
 

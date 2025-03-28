@@ -13,13 +13,14 @@
     public const float AdvUpgradeCoefficient = 0.85f;
 
     public const string RewardID = "lockTimer";
+    public const string PlayerUIName = "PlayerUI";
+    public const string PlayerMask = "Player";
+    public const string ObstacleMask = "Obstacle";
 
     public const float SpeedRotation = 15f;
     public const float SmoothTime = 0.1f;
 
     public const float MinFPS = 20;
-
-    public const string PlayerUIName = "PlayerUI";
 
     public const int BulletPrice = 2000;
 }

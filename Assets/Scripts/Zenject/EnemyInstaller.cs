@@ -9,6 +9,7 @@ public class EnemyInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindEnemyStats();
+        BindEnemyUpgrader();
     }
 
     private void BindEnemyStats()
@@ -22,5 +23,10 @@ public class EnemyInstaller : MonoInstaller
         }
 
         Container.Bind<IEnumerable<EnemyStat>>().FromInstance(stats).AsSingle();
+    }
+
+    private void BindEnemyUpgrader()
+    {
+        Container.Bind<EnemyUpgrader>().AsSingle();
     }
 }

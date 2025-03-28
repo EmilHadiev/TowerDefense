@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 9221036849570089925}
   - component: {fileID: 3088665863194876682}
   - component: {fileID: 5702130399132640891}
+  - component: {fileID: 2890392047117536303}
   m_Layer: 6
   m_Name: Turtle
   m_TagString: Untagged
@@ -875,7 +876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
 --- !u!114 &7191830960456674038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +964,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d3215c9b3acde148af9a2b502ea7ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2890392047117536303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569285854475398561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14bd628cae4b8c459fc5d7a04739335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6075969978157893723

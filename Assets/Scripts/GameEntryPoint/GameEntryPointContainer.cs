@@ -28,7 +28,7 @@ public class GameEntryPointContainer : MonoBehaviour
     private void StartEntryPoint()
     {
         #if UNITY_WEBGL
-            _currentPoint = new yandexGameEntryPoint(_switcher, _savable, _markup, _envData, _performer);
+            _currentPoint = new YandexGameEntryPoint(_switcher, _savable, _markup, _envData, _performer);
             _currentPoint.Start();
         #endif
     }

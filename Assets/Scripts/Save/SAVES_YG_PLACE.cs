@@ -27,10 +27,14 @@ namespace YG
         public float playerAttackSpeed = 0.25f;
         public float playerDamage = 0;
         #endregion
+
+        #region EnemyLevelData
+        public int enemyLevel = 0;
+        #endregion
     }
 }
 
-public interface SAVES_YG_PLACE
+public sealed class SAVES_YG_PLACE
 {
 
 }

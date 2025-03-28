@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using YG;
 
-public class yandexGameEntryPoint : IEntryPoint
+public class YandexGameEntryPoint : IEntryPoint
 {
     private Coroutine _waitingCoroutine;
     private readonly ICoroutinePefrormer _performer;
@@ -13,7 +13,7 @@ public class yandexGameEntryPoint : IEntryPoint
     private readonly ISavable _savable;
     private readonly GameplayMarkup _markup;
 
-    public yandexGameEntryPoint(SceneSwitcher sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
+    public YandexGameEntryPoint(SceneSwitcher sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
     {
         _waitingFrame = new WaitForEndOfFrame();
         _switcher = sceneSwitcher;

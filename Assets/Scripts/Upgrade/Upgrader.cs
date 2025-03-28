@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Upgrader
 {
     protected readonly PlayerStat Stat;
+    private int _countOfUpgraders = 0;
 
     protected abstract UpgradeType UpgradeType { get; }
 
@@ -22,7 +23,8 @@ public abstract class Upgrader
     protected int GetRaisePrice(int currentPrice)
     {
         int additionalPercent = Convert.ToInt32((float)currentPrice / 100 * Constants.AdditionalUpgradePercentage);
-        Debug.Log(additionalPercent);
+        _countOfUpgraders++;
+        Debug.Log($"Количество улучшений: {_countOfUpgraders}");
         return currentPrice + additionalPercent + Constants.AdditionalUpgradePrice;
     }
 }

@@ -10,8 +10,8 @@ public class EnemyStateMachine : IStateSwitcher
     {
         _states = new Dictionary<Type, IState>()
         {
-            [typeof(EnemyAttackState)] = new EnemyAttackState(this, animator),
-            [typeof(EnemyMoveState)] = new EnemyMoveState(this, mover, animator),
+            [typeof(EnemyAttackState)] = new EnemyAttackState(animator),
+            [typeof(EnemyMoveState)] = new EnemyMoveState(mover, animator),
             [typeof(EmptyState)] = new EmptyState()
         };
     }

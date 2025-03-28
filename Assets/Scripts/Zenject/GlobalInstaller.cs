@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,6 +8,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private UpgradeData[] _data;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
+    [SerializeField] private EnemyLevelData _enemyLevel;
 
     public override void InstallBindings()
     {
@@ -18,6 +18,7 @@ public class GlobalInstaller : MonoInstaller
         BindUpgradeData();
         BindPlayerData();
         BindEnvironmentData();
+        BindEnemyData();
 
         #region DefferentPlatforms
         BindAdvertising();
@@ -93,5 +94,10 @@ public class GlobalInstaller : MonoInstaller
     private void BindPlayerData()
     {
         Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
+    }
+
+    private void BindEnemyData()
+    {
+        Container.Bind<EnemyLevelData>().FromNewScriptableObject(_enemyLevel).AsSingle();
     }
 }
