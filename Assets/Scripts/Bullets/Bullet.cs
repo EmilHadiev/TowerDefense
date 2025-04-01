@@ -10,19 +10,23 @@ public class Bullet : MonoBehaviour
     [SerializeField] private BulletData _data;
     [field: SerializeField] public BulletType Type { get; private set; }
 
-    private TriggerObserver _observer;    
+    private TriggerObserver _observer;
+    private IBulletMovable _movable;
     private IBulletEffectHandler _bulletEffect;
     private PlayerStat _playerStat;
 
     private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
 
     private float _tick;
+    private float _sumReflectedСoefficients;
+    private bool _isReflective;
 
     public Color Color => _data.Color;
 
     private void Awake()
     {
         _observer = GetComponent<TriggerObserver>();
+        _movable = GetComponent<BulletMover>();
 
         _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
         {
@@ -38,6 +42,8 @@ public class Bullet : MonoBehaviour
     {
         _observer.Entered += OnEntered;
         _observer.Exited += OnExited;
+
+        _movable.Reflected += OnReflected;
     }
 
     private void OnDisable()
@@ -45,7 +51,8 @@ public class Bullet : MonoBehaviour
         _observer.Entered -= OnEntered;
         _observer.Exited -= OnExited;
 
-        _tick = 0;
+        _movable.Reflected -= OnReflected;
+        ResetValues();
     }
 
     private void Update() => UpdateLifeTime();
@@ -71,7 +78,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private float GetDamage() => _data.Damage + _playerStat.Damage;
+    private float GetDamage() => _data.Damage + _playerStat.Damage + GetReflectedDamage();
 
     private void ChangeTargetParticleDamageColor(Collider collider)
     {
@@ -90,6 +97,10 @@ public class Bullet : MonoBehaviour
        
     }
 
+    private void OnReflected() => _sumReflectedСoefficients += Constants.ReflectedCoefficient;
+
+    private float GetReflectedDamage() => (_data.Damage + _playerStat.Damage) * _sumReflectedСoefficients;
+
     private void UpdateLifeTime()
     {
         _tick += Time.deltaTime;
@@ -104,4 +115,10 @@ public class Bullet : MonoBehaviour
 
     private void Hide() => gameObject.SetActive(false);
 
+    private void ResetValues()
+    {
+        _tick = 0;
+        _sumReflectedСoefficients = 0;
+        _isReflective = false;
+    }
 }

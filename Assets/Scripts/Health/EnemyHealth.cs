@@ -18,11 +18,14 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private void Awake()
     {
         _stat = GetComponent<Enemy>().Stat;
-        _health = _stat.Health;
-        MaxHealth = _health;
+        InitValue();
     }
 
-    private void OnEnable() => HealthChanged?.Invoke(_health, MaxHealth);
+    private void OnEnable()
+    {
+        InitValue();
+        HealthChanged?.Invoke(_health, MaxHealth);
+    }
 
     public void AddHealth(float healthPoints)
     {
@@ -49,5 +52,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
     {
         _health = 0;
         Died?.Invoke();
+    }
+
+    private void InitValue()
+    {
+        _health = _stat.Health;
+        MaxHealth = _health;
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-public class BulletMover : MonoBehaviour
+public class BulletMover : MonoBehaviour, IBulletMovable
 {
     [SerializeField] private BulletData _data;
 
     private IBulletMover _mover;
 
     public event Action<Vector3, ReflectiveObstacle> Collided;
+    public event Action Reflected;
 
     private void Awake() => _mover = new BulletReflectMovePattern(_data, transform, this);
 
@@ -27,6 +28,7 @@ public class BulletMover : MonoBehaviour
         {
             Vector3 direction = GetReflectedDirection(collision);
             Collided?.Invoke(direction, wall);
+            Reflected?.Invoke();
         }
     }
 
