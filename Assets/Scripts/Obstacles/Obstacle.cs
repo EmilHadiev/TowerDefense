@@ -4,5 +4,5 @@ using UnityEngine;
 [RequireComponent(typeof(ObstacleHealth))]
 public class Obstacle : MonoBehaviour
 {
-    
+
 }

@@ -7,7 +7,7 @@ public class EnemyDieChecker : MonoBehaviour
     [SerializeField] private Enemy _enemy;
 
     private ICoinStorage _coinStorage;
-
+    private EnemyCounter _counter;
     private bool _isDead;
 
     private void OnValidate()
@@ -25,11 +25,16 @@ public class EnemyDieChecker : MonoBehaviour
     private void OnDisable() => _health.Died -= OnDied;
 
     [Inject]
-    private void Constructor(ICoinStorage coinStorage) => _coinStorage = coinStorage;
+    private void Constructor(ICoinStorage coinStorage, EnemyCounter counter)
+    {
+        _coinStorage = coinStorage;
+        _counter = counter;
+    }
 
     private void OnDied()
     {
         _coinStorage.Add(_enemy.Stat.Point);
+        _counter.Remove();
         _health.AddHealth(_health.MaxHealth);
         _enemy.StateMachine.SwitchTo<EmptyState>();
         _isDead = true;

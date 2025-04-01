@@ -40,13 +40,16 @@ public class EnemySpawner : MonoBehaviour
         SetPosition(enemy);
     }
 
-    public void SpawnEnemy()
+    public bool TrySpawn()
     {
         if (_pool.TryGet(out Enemy enemy))
         {
             enemy.gameObject.SetActive(true);
             SetPosition(enemy);
+            return true;
         }
+
+        return false;
     }
 
     private void SetPosition(Enemy enemy)

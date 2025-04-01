@@ -14,6 +14,7 @@ public class MageAbility : MonoBehaviour
     private Coroutine _spawnCoroutine;
     private WaitForSeconds _delay;
     private Optimizator _fpsCounter;
+    private EnemyCounter _enemyCounter;
     private IInstantiator _instantiator;
 
     private void Awake()
@@ -21,7 +22,7 @@ public class MageAbility : MonoBehaviour
         _delay = new WaitForSeconds(WaitingTime);
         _spawnPositions = GetComponentsInChildren<EnemySpawnPosition>();
 
-        InitSpawners();
+        InitSpawner();
         InitViews();
     }
 
@@ -34,10 +35,10 @@ public class MageAbility : MonoBehaviour
 
     private void OnDisable() => StopSpawn();
 
-    private void InitSpawners()
+    private void InitSpawner()
     {
         _spawners = new EnemySpawnerAbility(_spawnPositions, _instantiator, MaxEnemies, _fpsCounter);
-        _spawners.CreateEnemy();
+        _spawners.CreateEnemies();
     }
 
     private void InitViews()
@@ -57,17 +58,18 @@ public class MageAbility : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInstantiator instantiator, Optimizator fPSCounter)
+    private void Constructor(IInstantiator instantiator, Optimizator fPSCounter, EnemyCounter counter)
     {
         _fpsCounter = fPSCounter;
         _instantiator = instantiator;
+        _enemyCounter = counter;
     }
 
     private IEnumerator SpawnCoroutine()
     {
         while (true)
         {
-            yield return _delay;
+            yield return _delay;            
             SpawnEnemy();
         }
     }
@@ -77,7 +79,10 @@ public class MageAbility : MonoBehaviour
         for (int i = 0; i < MaxEnemies; i++)
         {
             if (_spawners.TrySpawn())
+            {
                 _views[i].Show();
+                _enemyCounter.Add();
+            }
         }
     }
 

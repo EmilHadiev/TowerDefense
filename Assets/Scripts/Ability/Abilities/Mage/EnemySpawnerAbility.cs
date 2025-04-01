@@ -21,7 +21,7 @@ public class EnemySpawnerAbility
         _pool = new EnemyPool(fPSCounter,_maxEnemies);
     }
 
-    public void CreateEnemy()
+    public void CreateEnemies()
     {
         for (int i = 0; i < _maxEnemies; i++)
         {

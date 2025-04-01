@@ -23,15 +23,20 @@ class EnemyUpgrader
     {
         foreach (var stat in _stats)
         {
+            Debug.Log($"{stat.EnemyType} урон: {stat.Damage}, здоровье {stat.Health}");
+
             foreach (var data in _data)
-            {
-                Debug.Log($"{stat.EnemyType} урон: {stat.Damage}, здоровье {stat.Health}");
-                stat.Health = data.Value.Health;
-                stat.Damage = data.Value.Damage;
-                Debug.Log($"{stat.EnemyType} урон: {stat.Damage}, здоровье {stat.Health}");
+            {                
+                stat.Health = data.Value.Health();
+                stat.Damage = data.Value.Damage();                
             }
+
+            Debug.Log($"{stat.EnemyType} урон: {stat.Damage}, здоровье {stat.Health}");
+            Debug.Log(new string('-', 20));
         }
     }
+
+    public void LevelUp() => _level.Level++;
 
     private void InitData()
     {
@@ -46,8 +51,8 @@ class EnemyUpgrader
         private readonly float _startHealth;
         private readonly float _startDamage;
 
-        public float Damage => _startDamage + _data.Level;
-        public float Health => _startHealth + (_data.Level * ImprovementFactor);
+        public float Damage() => _startDamage + _data.Level;
+        public float Health() => _startHealth + (_data.Level * ImprovementFactor);
 
         public EnemyData(EnemyLevelData data, float startHealth, float startDamage)
         {

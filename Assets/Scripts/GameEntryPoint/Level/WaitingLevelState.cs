@@ -1,0 +1,58 @@
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
+using Zenject;
+
+public class WaitingLevelState : MonoBehaviour, ILevelState
+{
+    [SerializeField] private TMP_Text _timeText;
+
+    private const int WaitingTime = 3;
+    private readonly WaitForSeconds _delay = new WaitForSeconds(1);
+
+    private Coroutine _waitingCoroutine;
+
+    private ILevelSwitcher _switcher;
+
+    [Inject]
+    private void Constructor(ILevelSwitcher levelSwitcher)
+    {
+        _switcher = levelSwitcher;
+    }
+
+    public void Enter()
+    {
+        Exit();
+        EnableToggle(true);        
+        _waitingCoroutine = StartCoroutine(WaitingCoroutine());
+    }
+
+    public void Exit()
+    {
+        if (_waitingCoroutine != null)
+            StopCoroutine(_waitingCoroutine);
+
+        EnableToggle(false);
+    }
+
+    private void EnableToggle(bool isOn) => _timeText.gameObject.SetActive(isOn);
+
+    private IEnumerator WaitingCoroutine()
+    {
+        int time = WaitingTime;
+        ShowCurrentTime(time);
+
+        while (time > 0)
+        {
+            yield return _delay;
+            time--;
+            ShowCurrentTime(time);
+        }
+
+        StartSpawn();
+    }
+
+    private void StartSpawn() => _switcher.SwitchTo<UpgradeLevelState>();
+
+    private void ShowCurrentTime(int time) => _timeText.text = time.ToString();
+}

@@ -21,6 +21,7 @@
     public const float SmoothTime = 0.1f;
 
     public const float MinFPS = 20;
+    public const int MaxEnemies = 20;
 
     public const int BulletPrice = 2000;
 }

@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d621641e5c7614bae26441beb1cb52, type: 3}
-  m_Name: BlackKnightStat
+  m_Script: {fileID: 11500000, guid: ce95a7a4a05a45d4b8aad7850b827fc2, type: 3}
+  m_Name: EnemyLevel
   m_EditorClassIdentifier: 
-  Health: 100
-  Damage: 25
-  Speed: 2
-  AttackRadius: 5
-  Point: 5
-  <EnemyType>k__BackingField: 3
+  <Level>k__BackingField: 0

@@ -1,17 +1,49 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
-public class EnemySpawnerContainer : MonoBehaviour
+public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 {
     [SerializeField] private EnemySpawner[] _spawners;
 
-    private WaitForSeconds _delay;
+    private readonly WaitForSeconds _delay = new WaitForSeconds(Constants.EnemySpawnDelay);
+
+    private EnemyCounter _counter;
+    private ILevelSwitcher _switcher;
     private int _index = 0;
 
-    private void Start()
+    private Coroutine _spawnCoroutine;
+
+    private void OnEnable()
     {
-        _delay = new WaitForSeconds(Constants.EnemySpawnDelay);
-        StartCoroutine(SpawnEnemyCoroutine());
+        _counter.CapacityReached += OnFilled;
+        _counter.AllEnemiesDead += OnEnemyDied;
+    }
+
+    private void OnDisable()
+    {
+        _counter.CapacityReached -= OnFilled;
+        _counter.AllEnemiesDead -= OnEnemyDied;
+    }
+
+    [Inject]
+    private void Constructor(EnemyCounter counter, ILevelSwitcher switcher)
+    {
+        _counter = counter;
+        _switcher = switcher;
+    }
+
+    public void Enter()
+    {
+        _counter.Reset();
+        Exit();
+        _spawnCoroutine = StartCoroutine(SpawnEnemyCoroutine());
+    }
+
+    public void Exit()
+    {
+        if (_spawnCoroutine != null)
+            StopCoroutine(_spawnCoroutine);
     }
 
     private IEnumerator SpawnEnemyCoroutine()
@@ -28,7 +60,14 @@ public class EnemySpawnerContainer : MonoBehaviour
         if (_index >= _spawners.Length)
             _index = 0;
 
-        _spawners[_index].SpawnEnemy();
-        _index++;
+        if (_spawners[_index].TrySpawn())
+        {
+            _index++;
+            _counter.Add();
+        }
     }
+
+    private void OnFilled() => Exit();
+
+    private void OnEnemyDied() => _switcher.SwitchTo<WaitingLevelState>();
 }

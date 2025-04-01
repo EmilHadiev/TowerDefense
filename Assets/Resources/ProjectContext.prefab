@@ -81,3 +81,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b6ee0805f315fec469a5c21b5a87103d, type: 2}
   _playerStat: {fileID: 11400000, guid: 5c36c3f28b4406247b387b6ac5dd53a5, type: 2}
   _evnData: {fileID: 11400000, guid: 2524bf427d30e1b4ebbaeef29112468e, type: 2}
+  _enemyLevel: {fileID: 11400000, guid: 187118292e5f2e742be427daf4061128, type: 2}
