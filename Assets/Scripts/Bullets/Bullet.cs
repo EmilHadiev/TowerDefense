@@ -19,7 +19,6 @@ public class Bullet : MonoBehaviour
 
     private float _tick;
     private float _sumReflectedСoefficients;
-    private bool _isReflective;
 
     public Color Color => _data.Color;
 
@@ -35,6 +34,7 @@ public class Bullet : MonoBehaviour
             [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data, _playerStat),
             [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
+            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect()
         };
     }
 
@@ -119,6 +119,5 @@ public class Bullet : MonoBehaviour
     {
         _tick = 0;
         _sumReflectedСoefficients = 0;
-        _isReflective = false;
     }
 }

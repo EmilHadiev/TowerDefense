@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 class EnemyUpgrader
 {
-    private const int ImprovementFactor = 15;
+    private const int ImprovementFactor = 10;
 
     private readonly IEnumerable<EnemyStat> _stats;
     private readonly EnemyLevelData _levelData;
@@ -18,7 +19,7 @@ class EnemyUpgrader
         InitData();
     }
 
-    public void Upgrade()
+    public void TryUpgrade()
     {
         foreach (var stat in _stats)
         {
@@ -28,6 +29,8 @@ class EnemyUpgrader
                 stat.Damage = data.Damage;
             }
         }
+
+        Debug.Log($"Текущий уровень улучшения: {_levelData.Level}");
     }
 
     public void LevelUp() => _levelData.Level++;
@@ -41,7 +44,6 @@ class EnemyUpgrader
     private struct EnemyData
     {
         private readonly EnemyLevelData _levelData;
-        private readonly EnemyStat _stat;
 
         private readonly float _startHealth;
         private readonly float _startDamage;
@@ -52,7 +54,6 @@ class EnemyUpgrader
         public EnemyData(EnemyLevelData data, EnemyStat stat)
         {
             _levelData = data;
-            _stat = stat;
 
             _startHealth = stat.Health;
             _startDamage = stat.Damage;

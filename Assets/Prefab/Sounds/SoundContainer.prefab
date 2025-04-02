@@ -153,6 +153,8 @@ MonoBehaviour:
     <Clip>k__BackingField: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
   - <BulletType>k__BackingField: 4
     <Clip>k__BackingField: {fileID: 8300000, guid: c8e733a020541bd48b6beff16e8559bc, type: 3}
+  - <BulletType>k__BackingField: 5
+    <Clip>k__BackingField: {fileID: 8300000, guid: c8e733a020541bd48b6beff16e8559bc, type: 3}
   _gameSounds:
   - <SoundType>k__BackingField: 0
     <Clip>k__BackingField: {fileID: 8300000, guid: 20f72d2017a302643a3e25dfc7e2e8fd, type: 3}

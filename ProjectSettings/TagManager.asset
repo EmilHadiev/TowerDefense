@@ -15,9 +15,9 @@ TagManager:
   - Bullet
   - Player
   - AttackZone
+  - FlyAttackZone
   - ReflectiveObstalce
   - Obstacle
-  - 
   - 
   - 
   - 

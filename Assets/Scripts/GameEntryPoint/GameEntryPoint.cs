@@ -40,7 +40,9 @@ public class YandexGameEntryPoint : IEntryPoint
         while (YG2.isSDKEnabled == false)
             yield return _waitingFrame;
 
-        ResetProgress();
+        #if UNITY_EDITOR
+            //ResetProgress();
+        #endif
 
         HideStickyBanners();
 
@@ -67,11 +69,7 @@ public class YandexGameEntryPoint : IEntryPoint
 
     private void SwitchToStartScene() => _switcher.SwitchTo(Constants.StartScene);
 
-    private void StartGameplay()
-    {
-        _markup.Ready();
-        _markup.Start();
-    }
+    private void StartGameplay() => _markup.Ready();
 
     private void ResetProgress()
     {

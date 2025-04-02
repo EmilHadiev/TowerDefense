@@ -52,7 +52,7 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
         StartSpawn();
     }
 
-    private void StartSpawn() => _switcher.SwitchTo<UpgradeLevelState>();
+    private void StartSpawn() => _switcher.SwitchTo<EnemyUpgradeState>();
 
     private void ShowCurrentTime(int time) => _timeText.text = time.ToString();
 }

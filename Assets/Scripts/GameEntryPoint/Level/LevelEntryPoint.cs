@@ -10,6 +10,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     [SerializeField] private WaitingLevelState _waitingState;
 
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
+    private GameplayMarkup _markup;
 
     private EnemyUpgrader _upgrader;
 
@@ -19,12 +20,16 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     {
         _states.Add(typeof(EnemySpawnerContainer), _spawnerContainer);
         _states.Add(typeof(WaitingLevelState), _waitingState);
-        _states.Add(typeof(UpgradeLevelState), new UpgradeLevelState(_upgrader, this));
+        _states.Add(typeof(EnemyUpgradeState), new EnemyUpgradeState(_upgrader, this));
     }
 
     private void Start()
     {
         StopHideCanvas();
+
+        #if UNITY_WEBGL
+        StartGameplay();
+        #endif
 
         StartEnemySpawn();
     }
@@ -32,17 +37,16 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     [Inject]
     private void Constructor(EnemyUpgrader upgrader)
     {
-        _upgrader = upgrader;        
+        _upgrader = upgrader;
     }
 
-    private void StopHideCanvas()
+    #if UNITY_WEBGL
+    [Inject]
+    private void WebConstructor(GameplayMarkup markup)
     {
-        if (_uiDynamic.TryGetComponent(out Canvas canvas))
-            if (canvas.enabled == false)
-                canvas.enabled = true;
+        _markup = markup;
     }
-
-    private void StartEnemySpawn() => SwitchTo<EnemySpawnerContainer>();
+    #endif
 
     public void SwitchTo<T>() where T : ILevelState
     {
@@ -53,4 +57,15 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
         _currentState = levelState;
         _currentState.Enter();
     }
+
+    private void StopHideCanvas()
+    {
+        if (_uiDynamic.TryGetComponent(out Canvas canvas))
+            if (canvas.enabled == false)
+                canvas.enabled = true;
+    }
+
+    private void StartEnemySpawn() => SwitchTo<EnemyUpgradeState>();
+
+    private void StartGameplay() => _markup.Start();
 }

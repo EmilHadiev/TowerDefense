@@ -1,19 +1,27 @@
 using System;
 using UnityEngine;
 using YG;
+using Zenject;
 
-public class YandexAdv : IAdvertising
+public class YandexAdv : IAdvertising, IInitializable, IDisposable
 {
     private readonly ICoinStorage _coinStorage;
+    private readonly GameplayMarkup _markup;
 
-    public YandexAdv(ICoinStorage coinStorage)
+    public YandexAdv(ICoinStorage coinStorage, GameplayMarkup markup)
     {
         _coinStorage = coinStorage;
+        _markup = markup;
     }
+
+    public void Initialize() => YG2.onCloseAnyAdv += OnCloseAdv;
+
+    public void Dispose() => YG2.onCloseAnyAdv -= OnCloseAdv;
 
     public void StickyBannerToggle(bool isOn) => YG2.StickyAdActivity(isOn);
 
     public void ShowInterstitialAdv() => YG2.InterstitialAdvShow();
+
 
     public void ShowRewardAdv(AdvType advType, string rewardValue = "", Action callBack = null)
     {
@@ -42,4 +50,6 @@ public class YandexAdv : IAdvertising
 
         throw new ArgumentException(nameof(rewardValue));
     }
+
+    private void OnCloseAdv() => _markup.Stop();
 }

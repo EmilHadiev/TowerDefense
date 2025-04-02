@@ -4,5 +4,6 @@
     Fireball,
     Electric,
     Ice,
-    Pushing
+    Pushing,
+    Deadly
 }

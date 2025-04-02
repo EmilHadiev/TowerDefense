@@ -8,6 +8,7 @@ public class YandexSaver : ISavable, IDisposable
     private readonly ICoinStorage _coinStorage;
     private readonly IEnumerable<UpgradeData> _data;
     private readonly PlayerStat _playerStat;
+    private readonly EnemyLevelData _levelData;
 
     private UpgradeItemsSaver _upgradeSaver;
 
@@ -18,11 +19,12 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData)
     {
         _coinStorage = coinStorage;
         _data = data;
         _playerStat = playerStat;
+        _levelData = levelData;
     }
 
     public void Dispose() => SaveProgress();
@@ -32,6 +34,7 @@ public class YandexSaver : ISavable, IDisposable
         LoadCoins();
         LoadUpgraders();
         LoadPlayerStat();
+        LoadEnemyLevel();
 
         Debug.Log("Progress loaded...");
     }
@@ -49,6 +52,7 @@ public class YandexSaver : ISavable, IDisposable
         SaveCoins();
         SaveUpgraders();
         SavePlayerStat();
+        SaveEnemyLevel();
     }
 
     #region Coins
@@ -87,5 +91,12 @@ public class YandexSaver : ISavable, IDisposable
         YG2.saves.playerDamage = _playerStat.Damage;
         YG2.saves.playerAttackSpeed = _playerStat.AttackSpeed;
     }
+    #endregion
+
+    #region EnemyLevel
+
+    private void LoadEnemyLevel() => _levelData.Level = YG2.saves.enemyLevel;
+
+    private void SaveEnemyLevel() => YG2.saves.enemyLevel = _levelData.Level;
     #endregion
 }
