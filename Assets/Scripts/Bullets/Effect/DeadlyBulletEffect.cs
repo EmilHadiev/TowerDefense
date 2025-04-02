@@ -2,11 +2,22 @@
 
 public class DeadlyBulletEffect : IBulletEffectHandler
 {
-    private const float ChanceToKill = 30;
+    private const int ChanceToKill = 30;
 
     public void HandleEffect(Collider enemy)
     {
         if (enemy.TryGetComponent(out EnemyHealth health))
-            health.TakeDamage(health.MaxHealth);
+            if (TryToKill())
+                health.TakeDamage(health.MaxHealth);
+    }
+
+    private bool TryToKill()
+    {
+        int rand = Random.Range(0, 100);
+
+        if (rand <= ChanceToKill)
+            return true;
+
+        return false;
     }
 }

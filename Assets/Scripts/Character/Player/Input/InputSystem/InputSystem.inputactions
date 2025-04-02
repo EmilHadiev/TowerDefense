@@ -53,7 +53,43 @@
                 {
                     "name": "SwitchToBullet5",
                     "type": "Button",
-                    "id": "5becaef8-7b2e-4b5b-b553-befbc29376d8",
+                    "id": "f1270aac-5adc-4cff-8ade-560b8e198399",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchToBullet6",
+                    "type": "Button",
+                    "id": "51adbd1a-a5df-464b-88ce-29eedb159ef3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchToBullet7",
+                    "type": "Button",
+                    "id": "bbeba09c-b717-4224-a9ab-1ed7a29e41a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchToBullet8",
+                    "type": "Button",
+                    "id": "317d0d5b-68ae-4312-a87d-be7d39b03699",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchToBullet9",
+                    "type": "Button",
+                    "id": "29bad474-5982-47a6-9273-4d1e96efbe7f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -151,7 +187,7 @@
                 },
                 {
                     "name": "",
-                    "id": "eff04d14-a9f5-4ae5-a0ea-db07f5f15489",
+                    "id": "13949ad7-725e-46d7-a483-4a1be8dc232f",
                     "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
@@ -162,12 +198,100 @@
                 },
                 {
                     "name": "",
-                    "id": "4b8a4a2f-c1a3-4b6e-84cb-2c1388095ead",
+                    "id": "50b9980f-3cd8-4d84-a7c7-ef388dc06c4d",
                     "path": "<Keyboard>/numpad5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SwitchToBullet5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87e267fe-e873-4f0b-bc17-95dfd2dcd4e5",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cee8b8c-13ba-4951-90f8-30a6b1551155",
+                    "path": "<Keyboard>/numpad6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34639b79-e71d-4e8b-944f-ebda41d4cc6b",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d942006b-05ab-4a2d-9a1e-f52b614e6173",
+                    "path": "<Keyboard>/numpad7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d8d2271-6cd4-405e-9ca1-048c51971dc8",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "090b0f49-c89b-4ae1-b5fa-3fcc6cb107c8",
+                    "path": "<Keyboard>/numpad8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94b3a452-58a4-4f6a-8d0e-c20218f9e2e6",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed8a327c-5168-436f-8c08-2b3866ec8ca5",
+                    "path": "<Keyboard>/numpad9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchToBullet9",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

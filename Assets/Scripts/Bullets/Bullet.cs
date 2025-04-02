@@ -78,7 +78,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private float GetDamage() => _data.Damage + _playerStat.Damage + GetReflectedDamage();
+    private float GetDamage()
+    {
+        if (_data.Damage == 0)
+            return 0;
+
+        return _data.Damage + _playerStat.Damage + GetReflectedDamage();
+    }
 
     private void ChangeTargetParticleDamageColor(Collider collider)
     {
