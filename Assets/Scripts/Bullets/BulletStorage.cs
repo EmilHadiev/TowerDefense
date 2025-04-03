@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 
 public class BulletStorage : MonoBehaviour
-{
-    
+{    
     [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
     [SerializeField] private int _additionalPoolSize;
@@ -20,6 +19,7 @@ public class BulletStorage : MonoBehaviour
     private PlayerStat _playerStat;
 
     private int _bulletIndex;
+    private IHealth _playerHealth;
 
     private void OnEnable()
     {
@@ -37,6 +37,7 @@ public class BulletStorage : MonoBehaviour
     {
         _pool = new List<IPool<Bullet>>(10);
         _effectSetter = new BulletEffectSetter();
+        _playerHealth = GetComponent<IHealth>();
 
         InitializeTemplatesAndPools();
         InitializeEffects();
@@ -79,7 +80,7 @@ public class BulletStorage : MonoBehaviour
     private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
         Bullet bullet = Instantiate(template);
-        bullet.InitPlayerDamage(_playerStat);
+        bullet.InitPlayer(_playerStat, _playerHealth);
         bullet.gameObject.SetActive(true);
         bullet.gameObject.SetActive(false);
         pool.Add(bullet);

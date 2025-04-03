@@ -12,8 +12,10 @@ public class Bullet : MonoBehaviour, IBullet
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;
+
     private IBulletMovable _movable;
     private IBulletEffectHandler _bulletEffect;
+
     private PlayerStat _playerStat;
 
     private Dictionary<Type, IBulletEffectHandler> _bulletEffects;
@@ -24,7 +26,6 @@ public class Bullet : MonoBehaviour, IBullet
     public Color Color => _data.Color;
 
     public IBulletData BulletData => _data;
-
     public IBulletDescription BulletDescription => _data;
 
     private void Awake()
@@ -52,7 +53,7 @@ public class Bullet : MonoBehaviour, IBullet
 
     private void Update() => UpdateLifeTime();
 
-    public void InitPlayerDamage(PlayerStat playerStat)
+    public void InitPlayer(PlayerStat playerStat, IHealth playerHealth)
     {
         _playerStat = playerStat;
 
@@ -64,7 +65,8 @@ public class Bullet : MonoBehaviour, IBullet
             [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
             [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
-            [typeof(PoisonBulletEffect)] = new PoisonBulletEffect()
+            [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),
+            [typeof(VampirismEffect)] = new VampirismEffect(playerHealth, _playerStat)
         };
     }
 

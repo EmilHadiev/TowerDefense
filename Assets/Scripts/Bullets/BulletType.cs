@@ -6,5 +6,6 @@
     Ice,
     Pushing,
     Poison,
-    Deadly
+    Deadly,
+    Blood
 }

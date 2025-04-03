@@ -56,6 +56,9 @@ public class ParticleViewContainer : MonoBehaviour, IParticleColorChangable
 
     private void OnDamageApplied(float damage)
     {
+        if (damage == 0)
+            return;
+
         damage = (float)Math.Round(damage, 2);
         _damageValue.SetText(damage.ToString());
         PlayParticle(_damageValue);

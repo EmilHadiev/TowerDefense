@@ -37,7 +37,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void AddHealth(float healthPoints)
     {
-        throw new System.NotImplementedException();
+        _health += healthPoints;
+        HealthChanged?.Invoke(_health, _maxHealth);
+
+        if (_health >= _maxHealth)
+            _health = _maxHealth;
     }
 
     public void TakeDamage(float damage)
