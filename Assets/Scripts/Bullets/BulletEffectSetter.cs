@@ -34,6 +34,9 @@ public class BulletEffectSetter
             case BulletType.Deadly:
                 SetEffectHandler<DeadlyBulletEffect>();
                 break;
+            case BulletType.Poison:
+                SetEffectHandler<PoisonBulletEffect>();
+                break;
             default:
                 SetEffectHandler<EmptyBulletEffect>();
                 break;

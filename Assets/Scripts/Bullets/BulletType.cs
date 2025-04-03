@@ -5,5 +5,6 @@
     Electric,
     Ice,
     Pushing,
+    Poison,
     Deadly
 }

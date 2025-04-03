@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class FreezingEffect : INegativeEffect
 {
-    private const float PercentageSlowdown = 50;
-    private const float SlowdownDuration = 2f;
+    private const int PercentageSlowdown = 50;
+    private const int SlowdownDuration = 2;
 
     private readonly ICoroutinePefrormer _pefrormer;
     private readonly WaitForSeconds _delay;

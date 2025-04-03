@@ -11,11 +11,14 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     private Dictionary<Type, INegativeEffect> _negativeEffects;
     private ICoroutinePefrormer _pefrormer;
     private INegativeEffect _effect;
+    private PlayerStat _playerStat;
+    private IHealth _health;
 
     private void Awake()
     {
         _speed = GetComponent<IMovable>().Speed;
         _view = GetComponent<EnemyRenderViewer>();
+        _health = GetComponent<IHealth>();
     }
 
     private void Start()
@@ -23,6 +26,7 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
         _negativeEffects = new Dictionary<Type, INegativeEffect>(10)
         {
             [typeof(FreezingEffect)] = new FreezingEffect(_pefrormer, _speed, _view),
+            [typeof(PoisonEffect)] = new PoisonEffect(_pefrormer, _view, _playerStat, _health)
         };
     }
 
@@ -33,7 +37,11 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     }
 
     [Inject]
-    private void Constructor(ICoroutinePefrormer pefrormer) => _pefrormer = pefrormer;
+    private void Constructor(ICoroutinePefrormer pefrormer, PlayerStat playerStat)
+    {
+        _pefrormer = pefrormer;
+        _playerStat = playerStat;
+    }
 
     public void Activate<T>() where T : INegativeEffect
     {

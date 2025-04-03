@@ -63,7 +63,8 @@ public class Bullet : MonoBehaviour, IBullet
             [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data, _playerStat),
             [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
-            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect()
+            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
+            [typeof(PoisonBulletEffect)] = new PoisonBulletEffect()
         };
     }
 
