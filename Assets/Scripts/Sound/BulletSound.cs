@@ -1,9 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[Serializable]
 public struct BulletSound
 {
-    [field: SerializeField] public BulletType BulletType { get; private set; }
-    [field: SerializeField] public AudioClip Clip { get; private set; }
+    public readonly BulletType BulletType;
+    public readonly AudioClip Clip;
+
+    public BulletSound(BulletType bulletType, AudioClip clip)
+    {
+        BulletType = bulletType;
+        Clip = clip;
+    }
 }

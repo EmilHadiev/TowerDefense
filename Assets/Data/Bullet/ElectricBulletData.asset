@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e362bfa008880d74b9ac0ca98be88006, type: 3}
   m_Name: ElectricBulletData
   m_EditorClassIdentifier: 
-  Speed: 30
-  Damage: 5
-  LifeTime: 2
+  <Speed>k__BackingField: 25
+  <Damage>k__BackingField: 5
+  <LifeTime>k__BackingField: 2
   <Color>k__BackingField: {r: 0.44313726, g: 0.73333335, b: 0.9019608, a: 1}
+  <Clip>k__BackingField: {fileID: 8300000, guid: f68f1adcd2f671f428d3fe35bfa26809, type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: a9737fc6f25fc3748b4a0a96d2db1fee, type: 3}
   <Name>k__BackingField: "\u0418\u0441\u043A\u0440\u0430"
   <Description>k__BackingField: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 \u0443\u0440\u043E\u043D

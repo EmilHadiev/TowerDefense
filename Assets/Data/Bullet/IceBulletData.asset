@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e362bfa008880d74b9ac0ca98be88006, type: 3}
   m_Name: IceBulletData
   m_EditorClassIdentifier: 
-  Speed: 20
-  Damage: 10
-  LifeTime: 3
+  <Speed>k__BackingField: 25
+  <Damage>k__BackingField: 10
+  <LifeTime>k__BackingField: 3
   <Color>k__BackingField: {r: 0.7254902, g: 0.9098039, b: 0.91764706, a: 1}
+  <Clip>k__BackingField: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: cf81f956e7dd3ca429042d4ec8447419, type: 3}
   <Name>k__BackingField: "\u0421\u043D\u0435\u0436\u0438\u043D\u043A\u0430"
   <Description>k__BackingField: "\u0417\u0430\u043C\u0435\u0434\u043B\u044F\u0435\u0442

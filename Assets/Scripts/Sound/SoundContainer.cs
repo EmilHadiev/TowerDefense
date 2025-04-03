@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundContainer : MonoBehaviour, ISoundContainer
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private BulletSound[] _bulletSounds;
     [SerializeField] private GameSound[] _gameSounds;
+
+    private List<BulletSound> _bulletSounds;
+    private IBullet[] _bullets;
 
     private BulletType _bulletType;
     private bool _isReseted;
@@ -15,6 +19,21 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
     private void OnValidate()
     {
         _audioSource ??= GetComponent<AudioSource>();
+    }
+
+    [Inject]
+
+    private void Constructor(IBullet[] bullets)
+    {
+        _bullets = bullets;
+    }
+
+    private void Awake()
+    {
+        _bulletSounds = new List<BulletSound>(_bullets.Length);
+
+        foreach (var bullet in _bullets)
+            _bulletSounds.Add(new BulletSound(bullet.Type, bullet.BulletData.Clip));
     }
 
     public void Stop() => _audioSource.Stop();

@@ -7,7 +7,8 @@ public class BulletSwitcherContainer : MonoBehaviour
     [SerializeField] private BulletSwitcherView _bulletViewTemplate;
     [SerializeField] private Transform _container;
     [SerializeField] private BulletSwitcherDescriptionContainer _descriptionContainer;
-    [SerializeField] private BulletData[] _data;
+
+    private IBullet[] _bullets;
 
     private List<BulletSwitcherView> _switchViews;
 
@@ -15,7 +16,7 @@ public class BulletSwitcherContainer : MonoBehaviour
 
     private void Awake()
     {
-        _switchViews = new List<BulletSwitcherView>(_data.Length);
+        _switchViews = new List<BulletSwitcherView>(_bullets.Length);
         CreateTemplates();
     }
 
@@ -38,18 +39,19 @@ public class BulletSwitcherContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInputSystem input)
+    private void Constructor(IInputSystem input, IBullet[] bullets)
     {
         _input = input;
+        _bullets = bullets;
     }
 
     private void CreateTemplates()
     {
-        for (int i = 0; i < _data.Length; i++)
-            CreateTemplate(_data[i], i);
+        for (int i = 0; i < _bullets.Length; i++)
+            CreateTemplate(_bullets[i].BulletDescription, i);
     }
 
-    private void CreateTemplate(BulletData data, int index)
+    private void CreateTemplate(IBulletDescription data, int index)
     {
         BulletSwitcherView view = Instantiate(_bulletViewTemplate, _container);
         view.Initialize(data, index);

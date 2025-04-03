@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BulletMover))]
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IBullet
 {
     [SerializeField] private BulletData _data;
     [field: SerializeField] public BulletType Type { get; private set; }
@@ -22,20 +23,14 @@ public class Bullet : MonoBehaviour
 
     public Color Color => _data.Color;
 
+    public IBulletData BulletData => _data;
+
+    public IBulletDescription BulletDescription => _data;
+
     private void Awake()
     {
         _observer = GetComponent<TriggerObserver>();
         _movable = GetComponent<BulletMover>();
-
-        _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
-        {
-            [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
-            [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
-            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data, _playerStat),
-            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
-            [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
-            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect()
-        };
     }
 
     private void OnEnable()
@@ -57,7 +52,20 @@ public class Bullet : MonoBehaviour
 
     private void Update() => UpdateLifeTime();
 
-    public void InitPlayerDamage(PlayerStat playerStat) => _playerStat = playerStat;
+    public void InitPlayerDamage(PlayerStat playerStat)
+    {
+        _playerStat = playerStat;
+
+        _bulletEffects = new Dictionary<Type, IBulletEffectHandler>(10)
+        {
+            [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
+            [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_data, _playerStat),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _data, _playerStat),
+            [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
+            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect()
+        };
+    }
 
     public void SetEffect<T>() where T : IBulletEffectHandler
     {
@@ -100,7 +108,7 @@ public class Bullet : MonoBehaviour
 
     private void OnExited(Collider collider)
     {
-       
+
     }
 
     private void OnReflected() => _sumReflectedСoefficients += Constants.ReflectedCoefficient;

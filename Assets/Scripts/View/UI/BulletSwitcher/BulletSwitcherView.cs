@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class BulletSwitcherView : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _bulletIndexText;
     [SerializeField] private Image _bulletImage;
     [SerializeField] private TMP_Text _bulletNameText;
     [SerializeField] private TMP_Text _bulletDescriptionText;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
 
-    private BulletData _data;
+    private IBulletDescription _data;
 
     private int _index;
 
@@ -30,7 +31,7 @@ public class BulletSwitcherView : MonoBehaviour
         _showDescriptionButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(BulletData bulletData, int index)
+    public void Initialize(IBulletDescription bulletData, int index)
     {
         _data = bulletData;
         _index = index;
@@ -42,6 +43,7 @@ public class BulletSwitcherView : MonoBehaviour
         _bulletImage.sprite = _data.Sprite;
         _bulletDescriptionText.text = _data.Description;
         _bulletNameText.text = _data.Name;
+        _bulletIndexText.text = _index.ToString();
     }
 
     private void OnUsed() => Used?.Invoke(_index);

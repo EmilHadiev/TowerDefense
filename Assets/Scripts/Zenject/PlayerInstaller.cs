@@ -6,6 +6,7 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Player _player;
     [SerializeField] private SoundContainer _soundContainer;
     [SerializeField] private EnvironmentData _envData;
+    [SerializeField] private Bullet[] _bullets;
 
     public override void InstallBindings()
     {
@@ -14,6 +15,13 @@ public class PlayerInstaller : MonoInstaller
         BindPlayerAttacker();
         BindSoundContainer();
         BindOptimization();
+        BindBulletsData();
+    }
+
+    private void BindBulletsData()
+    {
+        Container.Bind<Bullet[]>().FromInstance(_bullets);
+        Container.Bind<IBullet[]>().FromInstance(_bullets);
     }
 
     private void BindOptimization()

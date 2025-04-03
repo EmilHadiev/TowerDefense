@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 public class BulletStorage : MonoBehaviour
 {
-    [SerializeField] private Bullet[] _bulletTemplates;
+    
     [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
     [SerializeField] private int _additionalPoolSize;
+
+    private Bullet[] _bulletTemplates;
 
     private IAttackable _attacker;
     private List<IPool<Bullet>> _pool;
@@ -57,12 +59,13 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat, IInputSystem inputSystem)
+    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat, IInputSystem inputSystem, Bullet[] bullets)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
         _input = inputSystem;
         _playerStat = playerStat;
+        _bulletTemplates = bullets;
     }
 
     private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
