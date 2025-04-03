@@ -7,5 +7,7 @@
     Pushing,
     Poison,
     Deadly,
-    Blood
+    Blood,
+    Golden,
+    Chaos
 }

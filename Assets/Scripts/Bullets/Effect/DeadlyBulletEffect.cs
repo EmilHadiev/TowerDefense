@@ -7,17 +7,14 @@ public class DeadlyBulletEffect : IBulletEffectHandler
     public void HandleEffect(Collider enemy)
     {
         if (enemy.TryGetComponent(out EnemyHealth health))
-            if (TryToKill())
-                health.TakeDamage(health.MaxHealth);
+            TryToKill(health);
     }
 
-    private bool TryToKill()
+    private void TryToKill(EnemyHealth health)
     {
         int rand = Random.Range(0, 100);
 
         if (rand <= ChanceToKill)
-            return true;
-
-        return false;
+            health.TakeDamage(health.MaxHealth);
     }
 }

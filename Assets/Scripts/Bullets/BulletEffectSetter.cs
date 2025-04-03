@@ -40,6 +40,9 @@ public class BulletEffectSetter
             case BulletType.Blood:
                 SetEffectHandler<VampirismEffect>();
                 break;
+            case BulletType.Golden:
+                SetEffectHandler<GoldenBulletEffect>();
+                break;
             default:
                 SetEffectHandler<EmptyBulletEffect>();
                 break;
