@@ -7,6 +7,7 @@ using YG;
 public class UpgradeAdvContainer : AdvertisingContainer
 {
     [SerializeField] private RewardedAdvLockTimer _lockTimer;
+    [SerializeField] private GameObject _advCooldownContainer;
 
     private const AdvType Type = AdvType.Coin;
     private ISoundContainer _soundContainer;
@@ -21,7 +22,16 @@ public class UpgradeAdvContainer : AdvertisingContainer
         _data = data;
     }
 
-    private void Start() => UpdateReward();
+    private void Start()
+    {
+        UpdateReward();
+        _lockTimer.Activated += OnTimerActivated;
+    }
+
+    private void OnDestroy()
+    {
+        _lockTimer.Activated -= OnTimerActivated;
+    }
 
     public void UpdateReward()
     {
@@ -46,7 +56,10 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     private void ShowAdv()
     {
+        
         if (_lockTimer.timerComplete)
             Advertising.ShowRewardAdv(Type, _rewardValue, PlaySpendCoin);
     }
+
+    private void OnTimerActivated(bool isOn) => _advCooldownContainer.SetActive(isOn);
 }
