@@ -9,12 +9,18 @@ public class BulletSwitcherView : MonoBehaviour
     [SerializeField] private Image _bulletImage;
     [SerializeField] private TMP_Text _bulletNameText;
     [SerializeField] private TMP_Text _bulletDescriptionText;
+    [SerializeField] private TMP_Text _useText;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
+    [SerializeField] private BuyBulletContainer _buyContainer;
 
     private IBulletDescription _data;
+    private ICoinStorage _coinStorage;
+    private ISoundContainer _soundContainer;
 
     private int _index;
+
+    private bool _isPurchased;
 
     public event Action<int> Used;
     public event Action<string> Clicked;
@@ -31,10 +37,13 @@ public class BulletSwitcherView : MonoBehaviour
         _showDescriptionButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(IBulletDescription bulletData, int index)
+    public void Initialize(IBulletDescription bulletData, int index, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
         _data = bulletData;
         _index = index;
+        _isPurchased = bulletData.IsPurchased;
+        _coinStorage = coinStorage;
+        _soundContainer = soundContainer;
         ShowData();
     }
 
@@ -44,9 +53,34 @@ public class BulletSwitcherView : MonoBehaviour
         _bulletDescriptionText.text = _data.Description;
         _bulletNameText.text = _data.Name;
         _bulletIndexText.text = _index.ToString();
+        _buyContainer.SetText(_data.Price);
+        ToggleBuyContainer();
     }
 
-    private void OnUsed() => Used?.Invoke(_index);
+    private void ToggleBuyContainer()
+    {
+        if (_isPurchased)
+        {
+            _useText.gameObject.SetActive(true);
+            _buyContainer.gameObject.SetActive(false);
+        }
+        else
+        {
+            _useText.gameObject.SetActive(false);
+            _buyContainer.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnUsed()
+    {
+        if (_coinStorage.TrySpend(_data.Price))
+        {
+            _soundContainer.Play(SoundType.SpendCoin);
+            _data.IsPurchased = true;
+        }
+
+        Used?.Invoke(_index);
+    }
 
     private void OnClicked() => Clicked?.Invoke(_data.FullDescription);
 }

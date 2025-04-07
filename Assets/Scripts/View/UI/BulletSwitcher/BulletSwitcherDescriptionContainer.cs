@@ -17,7 +17,7 @@ public class BulletSwitcherDescriptionContainer : MonoBehaviour
         _descriptionText.text = description;
     }
 
-    private void EnableToggle(bool isOn) => gameObject.SetActive(isOn);
+    public void EnableToggle(bool isOn) => gameObject.SetActive(isOn);
 
     private void OnClick() => EnableToggle(false);
 }

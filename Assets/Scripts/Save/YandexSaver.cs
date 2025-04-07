@@ -9,8 +9,10 @@ public class YandexSaver : ISavable, IDisposable
     private readonly IEnumerable<UpgradeData> _data;
     private readonly PlayerStat _playerStat;
     private readonly EnemyLevelData _levelData;
+    private readonly IBullet[] _bullets;
 
     private UpgradeItemsSaver _upgradeSaver;
+    private BulletItemSaver _itemSaves;
 
     private int Coins
     {
@@ -19,12 +21,13 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBullet[] bullets)
     {
         _coinStorage = coinStorage;
         _data = data;
         _playerStat = playerStat;
         _levelData = levelData;
+        _bullets = bullets;
     }
 
     public void Dispose() => SaveProgress();
@@ -35,6 +38,7 @@ public class YandexSaver : ISavable, IDisposable
         LoadUpgraders();
         LoadPlayerStat();
         LoadEnemyLevel();
+        InitBullets();
 
         Debug.Log("Progress loaded...");
     }
@@ -53,6 +57,7 @@ public class YandexSaver : ISavable, IDisposable
         SaveUpgraders();
         SavePlayerStat();
         SaveEnemyLevel();
+        SaveBullets();
     }
 
     #region Coins
@@ -65,14 +70,14 @@ public class YandexSaver : ISavable, IDisposable
     #endregion
 
     #region Upgraders
-    private void LoadUpgraders() => InitItems();
+    private void LoadUpgraders() => InitUpgraders();
 
-    private void InitItems() => _upgradeSaver = new UpgradeItemsSaver(YG2.saves.UpgradeItems, _data);
+    private void InitUpgraders() => _upgradeSaver = new UpgradeItemsSaver(YG2.saves.UpgradeItems, _data);
 
     private void SaveUpgraders()
     {
         Debug.Log(_upgradeSaver == null);
-        _upgradeSaver.SaveUpgraders();
+        _upgradeSaver.Save();
     }
 
     #endregion
@@ -98,5 +103,15 @@ public class YandexSaver : ISavable, IDisposable
     private void LoadEnemyLevel() => _levelData.Level = YG2.saves.enemyLevel;
 
     private void SaveEnemyLevel() => YG2.saves.enemyLevel = _levelData.Level;
+    #endregion
+
+    #region Bullets
+    private void InitBullets() => _itemSaves = new BulletItemSaver(_bullets, YG2.saves.BulletItems);
+
+    private void SaveBullets()
+    {
+        Debug.Log(_itemSaves == null);
+        _itemSaves.Save();
+    }
     #endregion
 }

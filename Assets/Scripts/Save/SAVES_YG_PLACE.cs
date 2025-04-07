@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Linq;
-using UnityEngine;
-using static YG.SavesYG;
+﻿using System;
+using System.Collections.Generic;
+
+[Serializable]
+public class UpgradeItem
+{
+    public int Cost;
+    public UpgradeType Type;
+}
+
+[Serializable]
+public class BulletItem
+{
+    public BulletType Type;
+    public bool IsPurchased;
+}
+
 namespace YG
 {
-    [Serializable]
-    public class UpgradeItem
-    {
-        public int Cost;
-        public UpgradeType Type;
-    }
-
     public partial class SavesYG
     {
         #region Coins
@@ -30,6 +35,10 @@ namespace YG
 
         #region EnemyLevelData
         public int enemyLevel = 0;
+        #endregion
+
+        #region Bullets
+        public List<BulletItem> BulletItems = new List<BulletItem>(10);
         #endregion
     }
 }

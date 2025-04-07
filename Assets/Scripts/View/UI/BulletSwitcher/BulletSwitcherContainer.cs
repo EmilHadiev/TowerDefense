@@ -5,10 +5,12 @@ using Zenject;
 public class BulletSwitcherContainer : MonoBehaviour
 {
     [SerializeField] private BulletSwitcherView _bulletViewTemplate;
-    [SerializeField] private Transform _container;
+    [SerializeField] private RectTransform _container;
     [SerializeField] private BulletSwitcherDescriptionContainer _descriptionContainer;
 
     private IBullet[] _bullets;
+    private ICoinStorage _coinStorage;
+    private ISoundContainer _soundContainer;
 
     private List<BulletSwitcherView> _switchViews;
 
@@ -27,6 +29,8 @@ public class BulletSwitcherContainer : MonoBehaviour
             _switchViews[i].Used += OnUsed;
             _switchViews[i].Clicked += OnClicked;
         }
+
+        _container.anchoredPosition = Vector2.zero;
     }
 
     private void OnDisable()
@@ -36,13 +40,17 @@ public class BulletSwitcherContainer : MonoBehaviour
             _switchViews[i].Used -= OnUsed;
             _switchViews[i].Clicked -= OnClicked;
         }
+
+        _descriptionContainer.EnableToggle(false);
     }
 
     [Inject]
-    private void Constructor(IInputSystem input, IBullet[] bullets)
+    private void Constructor(IInputSystem input, IBullet[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
         _input = input;
         _bullets = bullets;
+        _coinStorage = coinStorage;
+        _soundContainer = soundContainer;
     }
 
     private void CreateTemplates()
@@ -54,7 +62,7 @@ public class BulletSwitcherContainer : MonoBehaviour
     private void CreateTemplate(IBulletDescription data, int index)
     {
         BulletSwitcherView view = Instantiate(_bulletViewTemplate, _container);
-        view.Initialize(data, index);
+        view.Initialize(data, index, _coinStorage, _soundContainer);
         _switchViews.Add(view);
     }
 

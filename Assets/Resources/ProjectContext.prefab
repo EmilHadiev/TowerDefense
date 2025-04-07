@@ -82,3 +82,14 @@ MonoBehaviour:
   _playerStat: {fileID: 11400000, guid: 5c36c3f28b4406247b387b6ac5dd53a5, type: 2}
   _evnData: {fileID: 11400000, guid: 2524bf427d30e1b4ebbaeef29112468e, type: 2}
   _enemyLevel: {fileID: 11400000, guid: 187118292e5f2e742be427daf4061128, type: 2}
+  _bullets:
+  - {fileID: 4734834810357473392, guid: a1a8f9d1421abb140b7af105937449ac, type: 3}
+  - {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}
+  - {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
+  - {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
+  - {fileID: 5800508498983936449, guid: 5400a793350f179469317c2855c45fe1, type: 3}
+  - {fileID: 1789773434517705490, guid: 0229c757d6387fe40b50c8b1a7b8c8a1, type: 3}
+  - {fileID: 5239498764060803648, guid: 72a481a480b428749b2f7d9428a5487e, type: 3}
+  - {fileID: 5366412411476431833, guid: 7cbb7a2a9d661584bbac433f67c6b4b2, type: 3}
+  - {fileID: 2313333593945244418, guid: 9c4de4f0958498a4dbe6368aff7ae9cb, type: 3}
+  - {fileID: 1624884448297963605, guid: 0218cca2197e4b743be869740f062cac, type: 3}

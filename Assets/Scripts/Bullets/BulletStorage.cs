@@ -1,13 +1,16 @@
-﻿using UnityEngine;
-using Zenject;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Zenject;
 
 public class BulletStorage : MonoBehaviour
 {    
     [SerializeField] private PlayerViewStorage _playerViewStorage;
     [SerializeField] private int _poolSize;
     [SerializeField] private int _additionalPoolSize;
+
+    private const int AvailableIndex = 0;
 
     private Bullet[] _bulletTemplates;
 
@@ -82,7 +85,7 @@ public class BulletStorage : MonoBehaviour
     private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
         Bullet bullet = Instantiate(template);
-        bullet.InitBullet(_playerStat, _playerHealth, _coinStorage);
+        bullet.InitBullet(_playerStat, _playerHealth, _coinStorage, SetEffect);
         bullet.gameObject.SetActive(true);
         bullet.gameObject.SetActive(false);
         pool.Add(bullet);
@@ -107,13 +110,33 @@ public class BulletStorage : MonoBehaviour
 
     private void OnBulletClicked(int bulletIndex)
     {
-        if (bulletIndex < 0 || bulletIndex > _bulletTemplates.Length)
-            throw new ArgumentOutOfRangeException(nameof(bulletIndex));
+        SetIAvailableIndex(bulletIndex);
 
-        _bulletIndex = bulletIndex;
         SetEffect(_bulletIndex);
 
         _soundContainer.Play(SoundType.SwitchBullet);
+    }
+    
+    private void SetIAvailableIndex(int bulletIndex)
+    {
+        if (bulletIndex < 0 || bulletIndex >= _bulletTemplates.Length)
+            _bulletIndex = -1;
+        else
+            _bulletIndex = bulletIndex;
+
+        if (IsPurchasedBullet(_bulletIndex) == false || _bulletIndex == -1)
+            _bulletIndex = GetPurchasedIndex();
+    }
+
+    private bool IsPurchasedBullet(int bulletIndex) => _bulletTemplates[bulletIndex].BulletDescription.IsPurchased;
+
+    private int GetPurchasedIndex()
+    {
+        for (int i = 0; i < _bulletTemplates.Length; i++)
+            if (_bulletTemplates[i].BulletDescription.IsPurchased)
+                return i;
+
+        throw new ArgumentOutOfRangeException(nameof(_bulletTemplates));
     }
 
     private void SetEffect(int bulletIndex)

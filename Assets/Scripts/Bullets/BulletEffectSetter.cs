@@ -43,6 +43,9 @@ public class BulletEffectSetter
             case BulletType.Golden:
                 SetEffectHandler<GoldenBulletEffect>();
                 break;
+            case BulletType.Chaos:
+                SetEffectHandler<RandomBulletEffect>();
+                break;
             default:
                 SetEffectHandler<EmptyBulletEffect>();
                 break;

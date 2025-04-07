@@ -6,6 +6,7 @@ public class DeadlyBulletEffect : IBulletEffectHandler
 
     public void HandleEffect(Collider enemy)
     {
+        Debug.Log("Попадание!");
         if (enemy.TryGetComponent(out EnemyHealth health))
             TryToKill(health);
     }

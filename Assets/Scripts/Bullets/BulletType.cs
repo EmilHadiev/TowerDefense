@@ -1,6 +1,6 @@
 ﻿public enum BulletType
 {
-    Default,
+    Default = 0,
     Fireball,
     Electric,
     Ice,

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using YG;
 
 public class UpgradeItemsSaver
 {
@@ -16,7 +15,7 @@ public class UpgradeItemsSaver
         SetCosts();
     }
 
-    public void SaveUpgraders()
+    public void Save()
     {
         for (int i = 0; i < _items.Count; i++)
             UpdateCost(i);

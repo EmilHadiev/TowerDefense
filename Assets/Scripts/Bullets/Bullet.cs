@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour, IBullet
 
     private void Update() => UpdateLifeTime();
 
-    public void InitBullet(PlayerStat playerStat, IHealth playerHealth, ICoinStorage coinStorage)
+    public void InitBullet(PlayerStat playerStat, IHealth playerHealth, ICoinStorage coinStorage, Action<int> setEffect)
     {
         _playerStat = playerStat;
 
@@ -66,7 +66,8 @@ public class Bullet : MonoBehaviour, IBullet
             [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
             [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),
             [typeof(VampirismEffect)] = new VampirismEffect(playerHealth, _playerStat),
-            [typeof(GoldenBulletEffect)] = new GoldenBulletEffect(coinStorage)
+            [typeof(GoldenBulletEffect)] = new GoldenBulletEffect(coinStorage),
+            [typeof(RandomBulletEffect)] = new RandomBulletEffect(setEffect)
         };
     }
 

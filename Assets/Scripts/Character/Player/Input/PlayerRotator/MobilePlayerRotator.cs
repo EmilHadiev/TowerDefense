@@ -2,7 +2,7 @@
 
 public class MobilePlayerRotator : PlayerRotator
 {
-    private const int RotationSpeed = 5;
+    private const int RotationSpeed = 3;
 
     public MobilePlayerRotator(IPlayer player) : base(player)
     {
