@@ -21,7 +21,6 @@ public abstract class Enemy : MonoBehaviour
     public EnemyStat Stat { get; private set; }
 
 
-
     private void OnValidate()
     {
         _mover ??= GetComponent<EnemyMover>();

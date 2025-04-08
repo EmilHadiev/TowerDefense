@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class BulletStorage : MonoBehaviour
 {    
     [SerializeField] private PlayerViewStorage _playerViewStorage;
-    [SerializeField] private int _poolSize;
-    [SerializeField] private int _additionalPoolSize;
-
-    private const int AvailableIndex = 0;
+    [SerializeField] private ShootPosition _shootPosition;
+    [SerializeField] private int _poolSize = 30;
+    [SerializeField] private int _additionalPoolSize = 5;
 
     private Bullet[] _bulletTemplates;
 
@@ -24,6 +22,7 @@ public class BulletStorage : MonoBehaviour
 
     private int _bulletIndex;
     private IHealth _playerHealth;
+
 
     private void OnEnable()
     {
@@ -97,8 +96,8 @@ public class BulletStorage : MonoBehaviour
         if (_pool[_bulletIndex].TryGet(out Bullet bullet))
         {
             bullet.transform.parent = null;
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
+            bullet.transform.position = _shootPosition.Position;
+            bullet.transform.rotation = _shootPosition.Rotation;
             bullet.gameObject.SetActive(true);
             _soundContainer.Play(bullet.Type);
         }

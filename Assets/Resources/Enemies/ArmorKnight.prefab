@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 1880574110091297310}
   - component: {fileID: 5845010157525426473}
   - component: {fileID: 8120546233054600444}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Bishop_Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,9 +993,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &9095270850467365591
 MonoBehaviour:
   m_ObjectHideFlags: 0
