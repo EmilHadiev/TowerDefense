@@ -11,13 +11,11 @@ public class BulletSwitcherDescriptionContainer : MonoBehaviour
 
     private void OnDisable() => _buttonClose.onClick.RemoveListener(OnClick);
 
-    public void SetDescription(string description)
-    {
-        EnableToggle(transform);
+    public void SetDescription(string description) => 
         _descriptionText.text = description;
-    }
 
-    public void EnableToggle(bool isOn) => gameObject.SetActive(isOn);
+    public void EnableToggle(bool isOn) => 
+        gameObject.SetActive(isOn);
 
     private void OnClick() => EnableToggle(false);
 }

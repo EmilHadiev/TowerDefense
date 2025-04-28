@@ -8,13 +8,11 @@ public class BulletSwitcherContainer : MonoBehaviour
     [SerializeField] private RectTransform _container;
     [SerializeField] private BulletSwitcherDescriptionContainer _descriptionContainer;
 
+    private IBulletSwitcherViewFactory _viewFactory;
+    private IBulletSwitcherViewHandler _viewHandler;
+
     private IBullet[] _bullets;
-    private ICoinStorage _coinStorage;
-    private ISoundContainer _soundContainer;
-
     private List<IBulletSwitcherView> _switchViews;
-
-    private IInputSystem _input;
 
     private void Awake()
     {
@@ -37,23 +35,15 @@ public class BulletSwitcherContainer : MonoBehaviour
     [Inject]
     private void Constructor(IInputSystem input, IBullet[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
-        _input = input;
         _bullets = bullets;
-        _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
+        _viewFactory = new BulletSwitcherViewFactory(coinStorage, soundContainer, _bulletViewTemplate, _container);
+        _viewHandler = new BulletSwitcherViewHandler(input, _descriptionContainer);
     }
 
     private void CreateTemplates()
     {
         for (int i = 0; i < _bullets.Length; i++)
-            CreateTemplate(_bullets[i].BulletDescription, i);
-    }
-
-    private void CreateTemplate(IBulletDescription data, int index)
-    {
-        IBulletSwitcherView view = Instantiate(_bulletViewTemplate, _container);
-        view.Initialize(data, index, _coinStorage, _soundContainer);
-        AddTemplate(view);
+            AddTemplate(_viewFactory.CreateView(_bullets[i].BulletDescription, i));
     }
 
     private void AddTemplate(IBulletSwitcherView view) => 
@@ -63,8 +53,8 @@ public class BulletSwitcherContainer : MonoBehaviour
     {
         for (int i = 0; i < _switchViews.Count; i++)
         {
-            _switchViews[i].Used += OnUsed;
-            _switchViews[i].Clicked += OnClicked;
+            _switchViews[i].Used += _viewHandler.HandleViewUsed;
+            _switchViews[i].Clicked += _viewHandler.HandleViewClicked;
         }
     }
 
@@ -72,8 +62,8 @@ public class BulletSwitcherContainer : MonoBehaviour
     {
         for (int i = 0; i < _switchViews.Count; i++)
         {
-            _switchViews[i].Used -= OnUsed;
-            _switchViews[i].Clicked -= OnClicked;
+            _switchViews[i].Used -= _viewHandler.HandleViewUsed;
+            _switchViews[i].Clicked -= _viewHandler.HandleViewClicked;
         }
     }
 
@@ -82,8 +72,4 @@ public class BulletSwitcherContainer : MonoBehaviour
 
     private void DisableDescription() => 
         _descriptionContainer.EnableToggle(false);
-
-    private void OnUsed(int index) => _input.SwitchTo(index);
-    private void OnClicked(string fullDescription) => 
-        _descriptionContainer.SetDescription(fullDescription);
 }
