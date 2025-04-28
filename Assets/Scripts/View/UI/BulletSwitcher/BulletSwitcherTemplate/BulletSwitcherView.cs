@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletSwitcherView : MonoBehaviour
+public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
 {
     [SerializeField] private TMP_Text _bulletIndexText;
     [SerializeField] private Image _bulletImage;
@@ -19,8 +19,6 @@ public class BulletSwitcherView : MonoBehaviour
     private ISoundContainer _soundContainer;
 
     private int _index;
-
-    private bool _isPurchased;
 
     public event Action<int> Used;
     public event Action<string> Clicked;
@@ -41,7 +39,6 @@ public class BulletSwitcherView : MonoBehaviour
     {
         _data = bulletData;
         _index = index;
-        _isPurchased = bulletData.IsPurchased;
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;
         ShowData();
@@ -59,7 +56,7 @@ public class BulletSwitcherView : MonoBehaviour
 
     private void ToggleBuyContainer()
     {
-        if (_isPurchased)
+        if (_data.IsPurchased)
         {
             _useText.gameObject.SetActive(true);
             _buyContainer.gameObject.SetActive(false);
@@ -77,6 +74,7 @@ public class BulletSwitcherView : MonoBehaviour
         {
             _soundContainer.Play(SoundType.SpendCoin);
             _data.IsPurchased = true;
+            ToggleBuyContainer();
         }
 
         Used?.Invoke(_index);

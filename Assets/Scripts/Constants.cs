@@ -2,8 +2,6 @@
 {
     public const float EnemySpawnDelay = 0.5f;
 
-    public const float MaxAttackSpeed = 0.1f;
-
     public const float SpeedRotation = 15f;
     public const float SmoothTime = 0.1f;
 

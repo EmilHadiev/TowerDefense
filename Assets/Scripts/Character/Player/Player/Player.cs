@@ -8,6 +8,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerHealth _health;
+    [field: SerializeField] public PlayerType Type { get; private set; }
 
     private void OnValidate() => _health ??= GetComponent<PlayerHealth>();
 

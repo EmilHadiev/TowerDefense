@@ -12,36 +12,26 @@ public class BulletSwitcherContainer : MonoBehaviour
     private ICoinStorage _coinStorage;
     private ISoundContainer _soundContainer;
 
-    private List<BulletSwitcherView> _switchViews;
+    private List<IBulletSwitcherView> _switchViews;
 
     private IInputSystem _input;
 
     private void Awake()
     {
-        _switchViews = new List<BulletSwitcherView>(_bullets.Length);
+        _switchViews = new List<IBulletSwitcherView>(_bullets.Length);
         CreateTemplates();
     }
 
     private void OnEnable()
     {
-        for (int i = 0; i < _switchViews.Count; i++)
-        {
-            _switchViews[i].Used += OnUsed;
-            _switchViews[i].Clicked += OnClicked;
-        }
-
-        _container.anchoredPosition = Vector2.zero;
+        SubscribeToViewEvents();
+        ResetScrollPosition();
     }
 
     private void OnDisable()
     {
-        for (int i = 0; i < _switchViews.Count; i++)
-        {
-            _switchViews[i].Used -= OnUsed;
-            _switchViews[i].Clicked -= OnClicked;
-        }
-
-        _descriptionContainer.EnableToggle(false);
+        UnSubscribeFromViewEvents();
+        DisableDescription();
     }
 
     [Inject]
@@ -61,12 +51,39 @@ public class BulletSwitcherContainer : MonoBehaviour
 
     private void CreateTemplate(IBulletDescription data, int index)
     {
-        BulletSwitcherView view = Instantiate(_bulletViewTemplate, _container);
+        IBulletSwitcherView view = Instantiate(_bulletViewTemplate, _container);
         view.Initialize(data, index, _coinStorage, _soundContainer);
-        _switchViews.Add(view);
+        AddTemplate(view);
     }
 
-    private void OnUsed(int index) => _input.SwitchTo(index);
+    private void AddTemplate(IBulletSwitcherView view) => 
+        _switchViews.Add(view);
 
-    private void OnClicked(string fullDescription) => _descriptionContainer.SetDescription(fullDescription);
+    private void SubscribeToViewEvents()
+    {
+        for (int i = 0; i < _switchViews.Count; i++)
+        {
+            _switchViews[i].Used += OnUsed;
+            _switchViews[i].Clicked += OnClicked;
+        }
+    }
+
+    private void UnSubscribeFromViewEvents()
+    {
+        for (int i = 0; i < _switchViews.Count; i++)
+        {
+            _switchViews[i].Used -= OnUsed;
+            _switchViews[i].Clicked -= OnClicked;
+        }
+    }
+
+    private void ResetScrollPosition() => 
+        _container.anchoredPosition = Vector2.zero;
+
+    private void DisableDescription() => 
+        _descriptionContainer.EnableToggle(false);
+
+    private void OnUsed(int index) => _input.SwitchTo(index);
+    private void OnClicked(string fullDescription) => 
+        _descriptionContainer.SetDescription(fullDescription);
 }

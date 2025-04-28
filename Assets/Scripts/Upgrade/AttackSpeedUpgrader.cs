@@ -12,22 +12,17 @@ public class AttackSpeedUpgrader : Upgrader
 
     public override void Upgrade()
     {
-        if (Stat.AttackSpeed == Constants.MaxAttackSpeed)
-        {
-            return;
-        }
-        else if (Stat.AttackSpeed <= Constants.MaxAttackSpeed)
-        {
-            Stat.AttackSpeed = Constants.MaxAttackSpeed;
-            return;
-        }
-
         CalculateAttackSpeedValue();
 
         Data.Cost = GetRaisePrice(Data.Cost);
     }
 
-    public override string GetUpgradeDescription() => $"{Stat.AttackSpeed} > {Stat.AttackSpeed - GetTotalValue(Stat.AttackSpeed)}";
+    public override string GetUpgradeDescription()
+    {
+        float attackSpeed = (float)Math.Round(Stat.AttackSpeed, 4);
+
+        return $"{attackSpeed} > {attackSpeed - GetTotalValue(attackSpeed)}";
+    }
 
     private void CalculateAttackSpeedValue()
     {
