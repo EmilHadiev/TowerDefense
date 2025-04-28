@@ -12,11 +12,10 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
     [SerializeField] private TMP_Text _useText;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
-    [SerializeField] private BuyBulletContainer _buyContainer;
+    [SerializeField] private PurchaseBulletContainer _purchaseContainer;
 
     private IBulletDescription _data;
-    private ICoinStorage _coinStorage;
-    private ISoundContainer _soundContainer;
+    private IBulletPurchaseHandler _purchaseHandler;
 
     private int _index;
 
@@ -35,13 +34,23 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
         _showDescriptionButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(IBulletDescription bulletData, int index, ICoinStorage coinStorage, ISoundContainer soundContainer)
+    public void Initialize(IBulletDescription bulletData, int index, IBulletPurchaseHandler bulletPurchaseHander)
     {
         _data = bulletData;
         _index = index;
-        _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
+
+        if (_purchaseHandler != null)
+            _purchaseHandler.Purchased -= OnPurchased;
+
+        _purchaseHandler = bulletPurchaseHander;
+        _purchaseHandler.Purchased += OnPurchased;
+
         ShowData();
+    }
+
+    private void OnDestroy()
+    {
+        _purchaseHandler.Purchased -= OnPurchased;
     }
 
     private void ShowData()
@@ -50,35 +59,42 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
         _bulletDescriptionText.text = _data.Description;
         _bulletNameText.text = _data.Name;
         _bulletIndexText.text = _index.ToString();
-        _buyContainer.SetText(_data.Price);
-        ToggleBuyContainer();
-    }
-
-    private void ToggleBuyContainer()
-    {
-        if (_data.IsPurchased)
-        {
-            _useText.gameObject.SetActive(true);
-            _buyContainer.gameObject.SetActive(false);
-        }
-        else
-        {
-            _useText.gameObject.SetActive(false);
-            _buyContainer.gameObject.SetActive(true);
-        }
+        _purchaseContainer.SetText(_data.Price);
+        TogglePurchaseContainer(_data.IsPurchased);
     }
 
     private void OnUsed()
     {
-        if (_coinStorage.TrySpend(_data.Price))
+        if (_data.IsPurchased == false)
         {
-            _soundContainer.Play(SoundType.SpendCoin);
-            _data.IsPurchased = true;
-            ToggleBuyContainer();
+            if (_purchaseHandler.TryPurchase(_data))
+                Used?.Invoke(_index);
         }
-
-        Used?.Invoke(_index);
+        else
+        {
+            Used?.Invoke(_index);
+        }
     }
 
     private void OnClicked() => Clicked?.Invoke(_data.FullDescription);
+
+    private void OnPurchased(IBulletDescription data)
+    {
+        if (data == _data)
+            TogglePurchaseContainer(true);
+    }
+
+    private void TogglePurchaseContainer(bool isPurchased)
+    {
+        if (isPurchased)
+        {
+            _useText.gameObject.SetActive(true);
+            _purchaseContainer.gameObject.SetActive(false);
+        }
+        else
+        {
+            _useText.gameObject.SetActive(false);
+            _purchaseContainer.gameObject.SetActive(true);
+        }
+    }
 }

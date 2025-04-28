@@ -16,9 +16,3 @@ public class BulletSwitcherViewHandler : IBulletSwitcherViewHandler
         _descriptionContainer.SetDescription(fullDescription);
     }
 }
-
-public interface IBulletSwitcherViewHandler
-{
-    void HandleViewClicked(string fullDescription);
-    void HandleViewUsed(int index);
-}

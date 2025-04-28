@@ -18,12 +18,9 @@ public class BulletSwitcherViewFactory : IBulletSwitcherViewFactory
     public IBulletSwitcherView CreateView(IBulletDescription data, int index)
     {
         IBulletSwitcherView view = GameObject.Instantiate(_template, _container);
-        view.Initialize(data, index, _coinStorage, _soundContainer);
+        IBulletPurchaseHandler purchaseHander = new BulletPurchaseHandler(_coinStorage, _soundContainer);
+
+        view.Initialize(data, index, purchaseHander);
         return view;
     }
-}
-
-public interface IBulletSwitcherViewFactory
-{
-    IBulletSwitcherView CreateView(IBulletDescription data, int index);
 }
