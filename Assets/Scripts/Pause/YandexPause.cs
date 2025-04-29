@@ -7,9 +7,9 @@
         _markup = markup;
     }
 
-    public override void Start()
+    public override void Continue()
     {
-        base.Start();
+        base.Continue();
         Advertising.StickyBannerToggle(false);
         _markup.Start();
     }

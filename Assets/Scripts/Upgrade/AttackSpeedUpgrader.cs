@@ -14,7 +14,7 @@ public class AttackSpeedUpgrader : Upgrader
     {
         CalculateAttackSpeedValue();
 
-        Data.Cost = GetRaisePrice(Data.Cost);
+        _data.Cost = GetRaisePrice(_data.Cost);
     }
 
     public override string GetUpgradeDescription()
@@ -34,7 +34,7 @@ public class AttackSpeedUpgrader : Upgrader
 
     private float GetTotalValue(float value)
     {
-        float total = value / 100 * Data.Value;
+        float total = value / 100 * _data.Value;
         total = (float)Math.Round(total, 3);
         return total;
     }

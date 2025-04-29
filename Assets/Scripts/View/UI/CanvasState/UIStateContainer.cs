@@ -35,6 +35,6 @@ public class UIStateContainer : MonoBehaviour
         }
 
         if (isContains == false)
-            throw new ArgumentOutOfRangeException(nameof(uiState));
+            throw new ArgumentException(nameof(uiState));
     }
 }

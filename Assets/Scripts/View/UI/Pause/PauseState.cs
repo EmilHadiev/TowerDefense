@@ -22,21 +22,21 @@ public class PauseState : UIState
         _savable.SaveProgress();
     }
 
-    protected override void OnStart()
+    protected override void RegisterToEvents()
     {
-        base.OnStart();
+        base.RegisterToEvents();
         _restartButton.onClick.AddListener(Restart);
     }
 
-    protected override void Destroy()
+    protected override void UnRegisterFromEvents()
     {
-        base.Destroy();
+        base.UnRegisterFromEvents();
         _restartButton.onClick.RemoveListener(Restart);
     }
 
     private void Restart()
     {
         _switcher.Restart();
-        Pause.Start();
+        GameToggle.Continue();
     }
 }

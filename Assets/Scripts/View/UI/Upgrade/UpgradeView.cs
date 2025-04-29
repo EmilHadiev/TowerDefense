@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-public class UpgradeView : MonoBehaviour
+public class UpgradeView : MonoBehaviour, IUpgradeView
 {
     [SerializeField] private Image _upgradeImage;
     [SerializeField] private TMP_Text _upgradeNameText;
@@ -11,11 +10,9 @@ public class UpgradeView : MonoBehaviour
     [SerializeField] private TMP_Text _costText;
     [SerializeField] private Button _buyButton;
 
-    private ICoinStorage _coinStorage;
-    private ISoundContainer _soundContainer;
-    private Upgrader _upgrader;
-
-    private Action _updateReward;
+    private IUpgradePurchaseHandler _upgradePurchaseHandler;
+    private IRewardUpdateCommand _updateCommand;
+    private IUpgrader _upgrader;
 
     private void OnEnable()
     {
@@ -27,34 +24,41 @@ public class UpgradeView : MonoBehaviour
         _buyButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(ICoinStorage coinStorage, ISoundContainer soundContainer, Upgrader upgrader, Action updateReward)
+    public void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand, IUpgrader upgrader)
     {
-        _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
+        _upgradePurchaseHandler = purchaseHandler;
+        _updateCommand = updateCommand;
         _upgrader = upgrader;
-        _updateReward = updateReward;
-        Show(upgrader.Data);
+        Show();
     }
 
-    private void Show(UpgradeData data)
+    private void Show()
     {
-        _upgradeImage.sprite = data.Sprite;
-        _upgradeNameText.text = data.Name;
+        _upgradeImage.sprite = _upgrader.Data.Sprite;
+        _upgradeNameText.text = _upgrader.Data.Name;
         ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
-        _costText.text = data.Cost.ToString();
+        UpdatePrice();
     }
 
     private void OnClicked()
     {
-        if (_coinStorage.TrySpend(_upgrader.Data.Cost))
+        if (_upgradePurchaseHandler.TryUpgrade(_upgrader.Data))
         {
-            _upgrader.Upgrade();            
-            _costText.text = _upgrader.Data.Cost.ToString();
-            ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
-            _updateReward?.Invoke();
-            _soundContainer.Play(SoundType.SpendCoin);
+            Upgrade();
+            UpdateDescription();
         }
     }
 
+    private void UpdateDescription()
+    {
+        _updateCommand.UpdateReward();
+        UpdatePrice();
+        ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
+    }
+
+    private void Upgrade() => _upgrader.Upgrade();
+
     private void ShowUpgradeDescription(string description) => _upgradeDescriptionText.text = description;
+
+    private void UpdatePrice() => _costText.text = _upgrader.Data.Cost.ToString();
 }

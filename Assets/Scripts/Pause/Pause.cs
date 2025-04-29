@@ -13,7 +13,7 @@ public abstract class Pause
         Advertising = advertising;
     }
 
-    public virtual void Start()
+    public virtual void Continue()
     {
         Time.timeScale = 1;
         Started?.Invoke();

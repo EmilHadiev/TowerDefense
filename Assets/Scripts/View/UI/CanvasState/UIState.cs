@@ -3,56 +3,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public abstract class UIState : MonoBehaviour 
+public abstract class UIState : MonoBehaviour
 {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
-    private IInput _input;
-
-    protected Pause Pause;
+    protected IGameBlocker GameToggle;
 
     public event Action<UIState> Entered;
     public event Action Exited;
 
     private void Start()
     {
-        OnStart();
+        RegisterToEvents();
         EnableToggle(false);
     }
 
-    private void OnDestroy() => Destroy();
+    private void OnDestroy() => UnRegisterFromEvents();
 
     [Inject]
-    private void Constructor(Pause pause, IInput input)
-    {
-        Pause = pause;
-        _input = input;
+    private void Constructor(Pause pause, IInput input) 
+    {     
+        GameToggle = new GameStateBlocker(input, pause);
     }
 
     public virtual void Enter()
     {        
         Entered?.Invoke(this);
-        _input.Stop();
-        Pause.Stop();
+
+        ChangeGameToggle(true);
         EnableToggle(true);
     }
 
     public virtual void Exit()
-    {        
-        _input.Continue();
-        Pause.Start();
-        EnableToggle(false);
+    {
         Exited?.Invoke();
+
+        ChangeGameToggle(false);
+        EnableToggle(false);
     }
 
-    protected virtual void OnStart()
+    protected virtual void RegisterToEvents()
     {
         _openButton.onClick.AddListener(Enter);
         _closeButton.onClick.AddListener(Exit);
     }
 
-    protected virtual void Destroy()
+    protected virtual void UnRegisterFromEvents()
     {
         _openButton.onClick.RemoveListener(Enter);
         _closeButton.onClick.RemoveListener(Exit);
@@ -61,5 +58,13 @@ public abstract class UIState : MonoBehaviour
     private void EnableToggle(bool isOn)
     {
         gameObject.SetActive(isOn);
+    }
+
+    private void ChangeGameToggle(bool isStateEnter)
+    {
+        if (isStateEnter)
+            GameToggle.Stop();
+        else
+            GameToggle.Continue();
     }
 }

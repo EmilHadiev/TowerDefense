@@ -9,15 +9,15 @@ public class DamageUpgrader : Upgrader
         UpgradeType = UpgradeType.Damage;
     }
 
-    public override string GetUpgradeDescription() => $"{Stat.Damage} > {Stat.Damage + Data.Value}";
+    public override string GetUpgradeDescription() => $"{Stat.Damage} > {Stat.Damage + _data.Value}";
 
     public override void Upgrade()
     {
         GetUpgradeDescription();
 
-        Stat.DamageProperty.Value += Data.Value;
-        Stat.Damage += Data.Value;
+        Stat.DamageProperty.Value += _data.Value;
+        Stat.Damage += _data.Value;
 
-        Data.Cost = GetRaisePrice(Data.Cost);
+        _data.Cost = GetRaisePrice(_data.Cost);
     }
 }

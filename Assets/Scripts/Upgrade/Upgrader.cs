@@ -1,19 +1,21 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Upgrader
+public abstract class Upgrader : IUpgrader
 {
     protected readonly PlayerStat Stat;
+    protected readonly UpgradeData _data;
+
     private int _countOfUpgraders = 0;
 
     protected abstract UpgradeType UpgradeType { get; }
 
-    public readonly UpgradeData Data;
+    public UpgradeData Data => _data;
 
     public Upgrader(PlayerStat stat, UpgradeData data)
     {
         Stat = stat;
-        Data = data;
+        _data = data;
     }
 
     public abstract void Upgrade();

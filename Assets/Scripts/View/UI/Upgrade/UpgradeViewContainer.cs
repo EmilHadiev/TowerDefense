@@ -9,16 +9,15 @@ public class UpgradeViewContainer : MonoBehaviour
     [SerializeField] private UpgradeView _template;
     [SerializeField] private Transform _container;
 
-    private List<UpgradeView> _views;
+    private List<IUpgradeView> _views;
     private UpgraderContainer _upgraderContainer;
     private PlayerStat _stat;
-    private ICoinStorage _coinStorage;
-    private ISoundContainer _soundContainer;
     private IEnumerable<UpgradeData> _data;
+    private IUpgradePurchaseHandler _purchaseHandler;
 
     private void Awake()
     {
-        _views = new List<UpgradeView>(_data.Count());
+        _views = new List<IUpgradeView>(_data.Count());
         _upgraderContainer = new UpgraderContainer(_stat, _data);
         CreateTemplates(_template);
     }
@@ -27,18 +26,22 @@ public class UpgradeViewContainer : MonoBehaviour
     private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, ISoundContainer soundContainer, IEnumerable<UpgradeData> data)
     {
         _stat = playerStat;
-        _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
         _data = data;
+
+        _purchaseHandler = new UpgradePurchaseHandler(coinStorage, soundContainer);
     }
 
     private void CreateTemplates(UpgradeView template)
     {
         foreach (var upgrade in _upgraderContainer.Upgraders)
         {
-            UpgradeView upgradeView = Instantiate(template, _container);
-            upgradeView.Initialize(_coinStorage, _soundContainer, upgrade.Value, _upgradeAdvContainer.UpdateReward);
-            _views.Add(upgradeView);
+            IUpgradeView upgradeView = Instantiate(template, _container);
+            
+            upgradeView.Initialize(_purchaseHandler, _upgradeAdvContainer, upgrade.Value);
+            AddTemplate(upgradeView);
         }
     }
+
+    private void AddTemplate(IUpgradeView upgradeView) => 
+        _views.Add(upgradeView);
 }

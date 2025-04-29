@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using Zenject;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using YG;
+using Zenject;
 
-public class UpgradeAdvContainer : AdvertisingContainer
+public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
 {
     [SerializeField] private RewardedAdvLockTimer _lockTimer;
     [SerializeField] private GameObject _advCooldownContainer;
 
     private const AdvType Type = AdvType.Coin;
     private ISoundContainer _soundContainer;
-    private IEnumerable<UpgradeData> _data;
-
-    private string _rewardValue;
+    private IUpgradePriceCalculator _priceCalculator;
 
     [Inject]
     private void Constructor(ISoundContainer soundContainer, IEnumerable<UpgradeData> data)
     {
         _soundContainer = soundContainer;
-        _data = data;
+        _priceCalculator = new UpgradePriceCalculator(data);
     }
 
     private void Start()
@@ -35,31 +32,20 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     public void UpdateReward()
     {
-        CalculatePrice();
-        SetText(_rewardValue);
+        SetRewardValueText(GetPrice());
     }
 
     protected override void OnClick() => ShowAdv();
 
+    private void ShowAdv()
+    {        
+        if (_lockTimer.timerComplete)
+            Advertising.ShowRewardAdv(Type, GetPrice(), PlaySpendCoin);
+    }
+
     private void PlaySpendCoin() => _soundContainer.Play(SoundType.SpendCoin);
 
-    private void CalculatePrice()
-    {
-        float totalPrice = 0;
-
-        foreach (var data in _data)
-            totalPrice += data.Cost;
-
-        totalPrice = totalPrice * Constants.AdvUpgradeCoefficient + Constants.UpgradeStartPrice;
-        _rewardValue = Convert.ToInt32(totalPrice).ToString();
-    }
-
-    private void ShowAdv()
-    {
-        
-        if (_lockTimer.timerComplete)
-            Advertising.ShowRewardAdv(Type, _rewardValue, PlaySpendCoin);
-    }
-
     private void OnTimerActivated(bool isOn) => _advCooldownContainer.SetActive(isOn);
+
+    private string GetPrice() => _priceCalculator.CalculatePrice().ToString();
 }

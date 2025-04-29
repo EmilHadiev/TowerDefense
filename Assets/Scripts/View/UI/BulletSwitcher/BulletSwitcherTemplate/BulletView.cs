@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
+public class BulletView : MonoBehaviour, IBulletView
 {
     [SerializeField] private TMP_Text _bulletIndexText;
     [SerializeField] private Image _bulletImage;
@@ -16,6 +16,7 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
 
     private IBulletDescription _data;
     private IBulletPurchaseHandler _purchaseHandler;
+    private IBulletSwitcherRender _render;
 
     private int _index;
 
@@ -39,26 +40,15 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
         _data = bulletData;
         _index = index;
 
-        if (_purchaseHandler != null)
-            _purchaseHandler.Purchased -= OnPurchased;
-
         _purchaseHandler = bulletPurchaseHander;
-        _purchaseHandler.Purchased += OnPurchased;
+        _render = new BulletSwitcherRender(_bulletIndexText, _bulletNameText, _bulletDescriptionText, _bulletImage);
 
         ShowData();
     }
 
-    private void OnDestroy()
-    {
-        _purchaseHandler.Purchased -= OnPurchased;
-    }
-
     private void ShowData()
     {
-        _bulletImage.sprite = _data.Sprite;
-        _bulletDescriptionText.text = _data.Description;
-        _bulletNameText.text = _data.Name;
-        _bulletIndexText.text = _index.ToString();
+        _render.Render(_data, _index);
         _purchaseContainer.SetText(_data.Price);
         TogglePurchaseContainer(_data.IsPurchased);
     }
@@ -68,7 +58,10 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
         if (_data.IsPurchased == false)
         {
             if (_purchaseHandler.TryPurchase(_data))
+            {
+                TogglePurchaseContainer(true);
                 Used?.Invoke(_index);
+            }
         }
         else
         {
@@ -77,12 +70,6 @@ public class BulletSwitcherView : MonoBehaviour, IBulletSwitcherView
     }
 
     private void OnClicked() => Clicked?.Invoke(_data.FullDescription);
-
-    private void OnPurchased(IBulletDescription data)
-    {
-        if (data == _data)
-            TogglePurchaseContainer(true);
-    }
 
     private void TogglePurchaseContainer(bool isPurchased)
     {

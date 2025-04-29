@@ -11,11 +11,11 @@ public class HealthUpgrader : Upgrader
 
     public override void Upgrade()
     {
-        Stat.HealthProperty.Value += Data.Value;
-        Stat.MaxHealth += Data.Value;
+        Stat.HealthProperty.Value += _data.Value;
+        Stat.MaxHealth += _data.Value;
 
-        Data.Cost = GetRaisePrice(Data.Cost);
+        _data.Cost = GetRaisePrice(_data.Cost);
     }
 
-    public override string GetUpgradeDescription() => $"{Stat.MaxHealth} > {Stat.MaxHealth + Data.Value}";
+    public override string GetUpgradeDescription() => $"{Stat.MaxHealth} > {Stat.MaxHealth + _data.Value}";
 }
