@@ -3,14 +3,14 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class BulletSwitcherContainer : MonoBehaviour
+public class BulletViewContainer : MonoBehaviour
 {
     [SerializeField] private BulletView _bulletViewTemplate;
     [SerializeField] private RectTransform _container;
-    [SerializeField] private BulletSwitcherDescriptionContainer _descriptionContainer;
+    [SerializeField] private BulletDescriptionContainer _descriptionContainer;
 
-    private IBulletSwitcherViewCreator _viewCreator;
-    private IBulletSwitcherViewHandler _viewHandler;
+    private IBulletViewCreator _viewCreator;
+    private IBulletViewHandler _viewHandler;
 
     private IBullet[] _bullets;
     private List<IBulletView> _switchViews;
@@ -37,8 +37,8 @@ public class BulletSwitcherContainer : MonoBehaviour
     private void Constructor(IInputSystem input, IBullet[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
         _bullets = bullets;
-        _viewCreator = new BulletSwitcherViewCreator(coinStorage, soundContainer, _bulletViewTemplate, _container);
-        _viewHandler = new BulletSwitcherViewHandler(input, _descriptionContainer);
+        _viewCreator = new BulletViewCreator(coinStorage, soundContainer, _bulletViewTemplate, _container);
+        _viewHandler = new BulletViewHandler(input, _descriptionContainer);
     }
 
     private void CreateTemplates()

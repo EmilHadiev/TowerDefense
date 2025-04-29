@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSwitcherViewCreator : IBulletSwitcherViewCreator
+public class BulletViewCreator : IBulletViewCreator
 {
     private readonly ICoinStorage _coinStorage;
     private readonly ISoundContainer _soundContainer;
     private readonly BulletView _template;
     private readonly Transform _container;
 
-    public BulletSwitcherViewCreator(ICoinStorage coinStorage, ISoundContainer soundContainer, BulletView template, Transform container)
+    public BulletViewCreator(ICoinStorage coinStorage, ISoundContainer soundContainer, BulletView template, Transform container)
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;

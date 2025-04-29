@@ -1,27 +1,27 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(BulletViewRender))]
 public class BulletView : MonoBehaviour, IBulletView
 {
-    [SerializeField] private TMP_Text _bulletIndexText;
-    [SerializeField] private Image _bulletImage;
-    [SerializeField] private TMP_Text _bulletNameText;
-    [SerializeField] private TMP_Text _bulletDescriptionText;
-    [SerializeField] private TMP_Text _useText;
+    [SerializeField] private BulletViewRender _render;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
     [SerializeField] private PurchaseBulletContainer _purchaseContainer;
 
     private IBulletDescription _data;
     private IBulletPurchaseHandler _purchaseHandler;
-    private IBulletSwitcherRender _render;
 
     private int _index;
 
     public event Action<int> Used;
     public event Action<string> Clicked;
+
+    private void OnValidate()
+    {
+        _render ??= GetComponent<BulletViewRender>();
+    }
 
     private void OnEnable()
     {
@@ -41,7 +41,6 @@ public class BulletView : MonoBehaviour, IBulletView
         _index = index;
 
         _purchaseHandler = bulletPurchaseHander;
-        _render = new BulletSwitcherRender(_bulletIndexText, _bulletNameText, _bulletDescriptionText, _bulletImage);
 
         ShowData();
     }
@@ -75,12 +74,12 @@ public class BulletView : MonoBehaviour, IBulletView
     {
         if (isPurchased)
         {
-            _useText.gameObject.SetActive(true);
+            _render.UseTextEnableToggle(true);
             _purchaseContainer.gameObject.SetActive(false);
         }
         else
         {
-            _useText.gameObject.SetActive(false);
+            _render.UseTextEnableToggle(false);
             _purchaseContainer.gameObject.SetActive(true);
         }
     }

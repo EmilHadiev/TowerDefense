@@ -1,27 +1,29 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UpgradeViewRender))]
 public class UpgradeView : MonoBehaviour, IUpgradeView
 {
-    [SerializeField] private Image _upgradeImage;
-    [SerializeField] private TMP_Text _upgradeNameText;
-    [SerializeField] private TMP_Text _upgradeDescriptionText;
-    [SerializeField] private TMP_Text _costText;
+    [SerializeField] private UpgradeViewRender _render;
     [SerializeField] private Button _buyButton;
 
     private IUpgradePurchaseHandler _upgradePurchaseHandler;
     private IRewardUpdateCommand _updateCommand;
     private IUpgrader _upgrader;
 
+    private void OnValidate()
+    {
+        _render ??= GetComponent<UpgradeViewRender>();
+    }
+
     private void OnEnable()
     {
-        _buyButton.onClick.AddListener(OnClicked);
+        _buyButton.onClick.AddListener(OnTryBuyUpgrade);
     }
 
     private void OnDisable()
     {
-        _buyButton.onClick.RemoveListener(OnClicked);
+        _buyButton.onClick.RemoveListener(OnTryBuyUpgrade);
     }
 
     public void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand, IUpgrader upgrader)
@@ -29,18 +31,19 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
         _upgradePurchaseHandler = purchaseHandler;
         _updateCommand = updateCommand;
         _upgrader = upgrader;
+
+        _render.Initialize(_upgrader);
         Show();
     }
 
     private void Show()
     {
-        _upgradeImage.sprite = _upgrader.Data.Sprite;
-        _upgradeNameText.text = _upgrader.Data.Name;
-        ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
+        _render.Show();
+        ShowUpgradeDescription();
         UpdatePrice();
     }
 
-    private void OnClicked()
+    private void OnTryBuyUpgrade()
     {
         if (_upgradePurchaseHandler.TryUpgrade(_upgrader.Data))
         {
@@ -53,12 +56,12 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
     {
         _updateCommand.UpdateReward();
         UpdatePrice();
-        ShowUpgradeDescription(_upgrader.GetUpgradeDescription());
+        ShowUpgradeDescription();
     }
 
     private void Upgrade() => _upgrader.Upgrade();
 
-    private void ShowUpgradeDescription(string description) => _upgradeDescriptionText.text = description;
+    private void ShowUpgradeDescription() => _render.UpdateDescription();
 
-    private void UpdatePrice() => _costText.text = _upgrader.Data.Cost.ToString();
+    private void UpdatePrice() => _render.UpdatePrice();
 }
