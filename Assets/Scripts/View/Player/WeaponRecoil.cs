@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
 
-public class PlayerAnimationsView
+public class WeaponRecoil : IWeaponRecoil
 {
     private const float RecoilDistance = 0.1f;
     private const int Accelerator = 2;
@@ -8,13 +8,13 @@ public class PlayerAnimationsView
     private readonly ShakingPart _shakingPart;
     private readonly PlayerStat _stat;
 
-    public PlayerAnimationsView(ShakingPart shakingPart, PlayerStat stat)
+    public WeaponRecoil(ShakingPart shakingPart, PlayerStat stat)
     {
         _shakingPart = shakingPart;
         _stat = stat;
     }
 
-    public void PlayAttack()
+    public void PlayRecoil()
     {
         _shakingPart.transform.DOLocalMoveZ(GetEndValue(), GetDuration())
             .SetLoops(2, LoopType.Yoyo);

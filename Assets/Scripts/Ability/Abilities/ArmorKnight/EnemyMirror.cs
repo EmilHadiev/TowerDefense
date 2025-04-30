@@ -13,11 +13,6 @@ public class EnemyMirror : IAbility
 
     private Vector3 GetMirrorScale(Transform transform) => new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-    public void Deactivate()
-    {
-        
-    }
-
     private void RandomActivate()
     {
         int randomValue = Random.Range(0, 2);

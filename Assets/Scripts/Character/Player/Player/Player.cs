@@ -4,10 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(PlayerViewStorage))]
+[RequireComponent(typeof(PlayerCombatView))]
 public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerHealth _health;
+
     [field: SerializeField] public PlayerType Type { get; private set; }
 
     private void OnValidate() => _health ??= GetComponent<PlayerHealth>();

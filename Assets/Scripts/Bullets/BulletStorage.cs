@@ -5,7 +5,7 @@ using Zenject;
 
 public class BulletStorage : MonoBehaviour
 {    
-    [SerializeField] private PlayerViewStorage _playerViewStorage;
+    [SerializeField] private PlayerCombatView _combatView;
     [SerializeField] private ShootPosition _shootPosition;
     [SerializeField] private int _poolSize = 30;
     [SerializeField] private int _additionalPoolSize = 5;
@@ -23,6 +23,11 @@ public class BulletStorage : MonoBehaviour
     private int _bulletIndex;
     private IHealth _playerHealth;
 
+    private void OnValidate()
+    {
+        _combatView ??= GetComponent<PlayerCombatView>();
+        _shootPosition ??= GetComponentInChildren<ShootPosition>();
+    }
 
     private void OnEnable()
     {
@@ -73,7 +78,7 @@ public class BulletStorage : MonoBehaviour
         _coinStorage = coinStorage;
     }
 
-    private void SetParticleColor(Color color) => _playerViewStorage.SetParticleViewColor(color);
+    private void SetParticleColor(Color color) => _combatView.SetParticleColor(color);
 
     private void CreateBullets(int poolSize, int index)
     {

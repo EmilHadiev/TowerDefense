@@ -9,7 +9,7 @@ using Zenject;
 [RequireComponent(typeof(EnemyAttacker))]
 [RequireComponent(typeof(EnemyDieChecker))]
 [RequireComponent(typeof(EnemyRenderViewer))]
-[RequireComponent(typeof(ParticleViewContainer))]
+[RequireComponent(typeof(DamageParticleFX))]
 [RequireComponent(typeof(NegativeEffectContainer))]
 public abstract class Enemy : MonoBehaviour
 {

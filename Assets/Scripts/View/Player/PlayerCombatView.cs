@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class PlayerViewStorage : MonoBehaviour
+public class PlayerCombatView : MonoBehaviour
 {    
-    [SerializeField] private ParticleView _attackParticle;
+    [SerializeField] private PlayerAttackParticle _attackParticle;
     [SerializeField] private ShakingPart _shakingPart;    
 
     private IAttackable _attackable;
-    private PlayerStat _stat;
-    private PlayerAnimationsView _animationView;
+    private IWeaponRecoil _recoil;
 
     private Color _currentColor;
 
-    private void OnValidate() => _shakingPart ??= GetComponentInChildren<ShakingPart>();
+    private void OnValidate()
+    {
+        _shakingPart ??= GetComponentInChildren<ShakingPart>();
+        _attackParticle ??= GetComponentInChildren<PlayerAttackParticle>();
+    }
 
     private void OnEnable() => _attackable.Attacked += OnAttacked;
 
@@ -20,18 +23,17 @@ public class PlayerViewStorage : MonoBehaviour
 
     private void Start()
     {
-        _attackParticle.Stop();
-        _animationView = new PlayerAnimationsView(_shakingPart, _stat);
+        _attackParticle.Stop();        
     }
 
     [Inject]
     private void Constructor(IAttackable attackable, PlayerStat stat)
     {
         _attackable = attackable;
-        _stat = stat;
+        _recoil = new WeaponRecoil(_shakingPart, stat);
     }
 
-    public void SetParticleViewColor(Color color)
+    public void SetParticleColor(Color color)
     {
         if (_currentColor == color)
             return;
@@ -40,14 +42,11 @@ public class PlayerViewStorage : MonoBehaviour
         _attackParticle.SetColor(_currentColor);
     }
 
-    private void OnAttacked()
-    {
-        PlayParticle();
-        _animationView.PlayAttack();
-    }
+    private void OnAttacked() => PlayView();
 
-    private void PlayParticle()
+    private void PlayView()
     {
         _attackParticle.Play();
-    }    
+        _recoil.PlayRecoil();
+    }
 }

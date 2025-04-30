@@ -11,6 +11,10 @@ public class ParticleView : MonoBehaviour
             throw new ArgumentNullException(nameof(_particles));
     }
 
+    /// <summary>
+    /// first the Stop method will be called, 
+    /// then the animation will play
+    /// </summary>
     public void Play()
     {
         Stop();

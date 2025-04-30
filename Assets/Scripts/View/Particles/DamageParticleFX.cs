@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ParticleViewContainer : MonoBehaviour, IParticleColorChangable
+public class DamageParticleFX : MonoBehaviour, IParticleColorChangable
 {
     [SerializeField] private ParticleView _damageImpact;
     [SerializeField] private ParticleViewText _damageValue;
@@ -24,9 +24,7 @@ public class ParticleViewContainer : MonoBehaviour, IParticleColorChangable
     {
         _health.HealthChanged += OnHealthChanged;
         _health.DamageApplied += OnDamageApplied;
-
-        _damageValue.Stop();
-        _damageImpact.Stop();
+        StopParticles();
     }
 
     private void OnDisable()
@@ -52,21 +50,26 @@ public class ParticleViewContainer : MonoBehaviour, IParticleColorChangable
         _damageValue.SetColor(color);
     }
 
-    private void OnHealthChanged(float currentHealth, float maxHealth) => PlayParticle(_damageImpact);
+    private void OnHealthChanged(float currentHealth, float maxHealth) => _damageImpact.Play();
 
     private void OnDamageApplied(float damage)
     {
         if (damage == 0)
             return;
 
-        damage = (float)Math.Round(damage, 2);
-        _damageValue.SetText(damage.ToString());
-        PlayParticle(_damageValue);
+        PlayTextToParticle(_damageValue, damage);       
     }
 
-    private void PlayParticle(ParticleView particle)
+    private void PlayTextToParticle(ParticleViewText particle, float damage)
     {
-        particle.Stop();
+        damage = (float)Math.Round(damage, 2);
+        particle.SetText(damage.ToString());
         particle.Play();
+    }
+
+    private void StopParticles()
+    {
+        _damageValue.Stop();
+        _damageImpact.Stop();
     }
 }

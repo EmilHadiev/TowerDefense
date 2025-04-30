@@ -34,8 +34,6 @@ public class EnemyExplosion : IAbility
         PhysicsDebug.DrawDebug(_enemy.position, ExplosionRadius, 1);
     }
 
-    public void Deactivate() { }
-
     private void AttackTargets(int countEnemies)
     {
         for (int i = 0; i < countEnemies; i++)
