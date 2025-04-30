@@ -9,7 +9,7 @@ public class YandexSaver : ISavable, IDisposable
     private readonly IEnumerable<UpgradeData> _data;
     private readonly PlayerStat _playerStat;
     private readonly EnemyLevelData _levelData;
-    private readonly IBullet[] _bullets;
+    private readonly IBulletDefinition[] _bullets;
 
     private UpgradeItemsSaver _upgradeSaver;
     private BulletItemSaver _itemSaves;
@@ -21,7 +21,7 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBullet[] bullets)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets)
     {
         _coinStorage = coinStorage;
         _data = data;

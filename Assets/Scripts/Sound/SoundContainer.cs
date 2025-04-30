@@ -11,7 +11,7 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
     [SerializeField] private GameSound[] _gameSounds;
 
     private List<BulletSound> _bulletSounds;
-    private IBullet[] _bullets;
+    private IBulletDefinition[] _bullets;
 
     private BulletType _bulletType;
     private bool _isReseted;
@@ -23,7 +23,7 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
 
     [Inject]
 
-    private void Constructor(IBullet[] bullets)
+    private void Constructor(IBulletDefinition[] bullets)
     {
         _bullets = bullets;
     }

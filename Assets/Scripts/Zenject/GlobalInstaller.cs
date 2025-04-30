@@ -107,6 +107,6 @@ public class GlobalInstaller : MonoInstaller
     private void BindBullets()
     {
         Container.Bind<Bullet[]>().FromInstance(_bullets);
-        Container.Bind<IBullet[]>().FromInstance(_bullets);
+        Container.Bind<IBulletDefinition[]>().FromInstance(_bullets);
     }
 }

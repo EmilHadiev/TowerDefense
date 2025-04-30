@@ -3,10 +3,10 @@ using System.Linq;
 
 class BulletItemSaver
 {
-    private readonly IBullet[] _bullets;
+    private readonly IBulletDefinition[] _bullets;
     private readonly List<BulletItem> _items;
 
-    public BulletItemSaver(IBullet[] bullets, List<BulletItem> items)
+    public BulletItemSaver(IBulletDefinition[] bullets, List<BulletItem> items)
     {
         _bullets = bullets;
         _items = items;
@@ -47,5 +47,5 @@ class BulletItemSaver
         }
     }
 
-    private void UpdateAvailable(BulletItem item, IBullet bullet) => item.IsPurchased = bullet.BulletDescription.IsPurchased;
+    private void UpdateAvailable(BulletItem item, IBulletDefinition bullet) => item.IsPurchased = bullet.BulletDescription.IsPurchased;
 }

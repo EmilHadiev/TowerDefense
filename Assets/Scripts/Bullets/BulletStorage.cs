@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -19,9 +20,9 @@ public class BulletStorage : MonoBehaviour
     private BulletEffectSetter _effectSetter;
     private PlayerStat _playerStat;
     private ICoinStorage _coinStorage;
+    private IHealth _playerHealth;
 
     private int _bulletIndex;
-    private IHealth _playerHealth;
 
     private void OnValidate()
     {
@@ -89,7 +90,7 @@ public class BulletStorage : MonoBehaviour
     private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
         Bullet bullet = Instantiate(template);
-        bullet.InitBullet(_playerStat, _playerHealth, _coinStorage, SetEffect);
+        bullet.InitBullet(_playerStat, GetBulletsEffect(bullet.Data));
         bullet.gameObject.SetActive(true);
         bullet.gameObject.SetActive(false);
         pool.Add(bullet);
@@ -147,5 +148,22 @@ public class BulletStorage : MonoBehaviour
     {
         _effectSetter.SetBulletEffect(_bulletTemplates[bulletIndex].Type); 
         SetParticleColor(_bulletTemplates[bulletIndex].Color);
+    }
+
+    private IReadOnlyDictionary<Type, IBulletEffectHandler> GetBulletsEffect(BulletData data)
+    {
+        return new Dictionary<Type, IBulletEffectHandler>(10)
+        {
+            [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
+            [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(data, _playerStat),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, data, _playerStat),
+            [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
+            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
+            [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),
+            [typeof(VampirismEffect)] = new VampirismEffect(_playerHealth, _playerStat),
+            [typeof(GoldenBulletEffect)] = new GoldenBulletEffect(_coinStorage),
+            [typeof(RandomBulletEffect)] = new RandomBulletEffect(SetEffect)
+        };
     }
 }

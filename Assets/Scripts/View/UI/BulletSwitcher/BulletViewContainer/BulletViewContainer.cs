@@ -12,7 +12,7 @@ public class BulletViewContainer : MonoBehaviour
     private IBulletViewCreator _viewCreator;
     private IBulletViewHandler _viewHandler;
 
-    private IBullet[] _bullets;
+    private IBulletDefinition[] _bullets;
     private List<IBulletView> _switchViews;
 
     private void Awake()
@@ -34,7 +34,7 @@ public class BulletViewContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInputSystem input, IBullet[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
+    private void Constructor(IInputSystem input, IBulletDefinition[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
         _bullets = bullets;
         _viewCreator = new BulletViewCreator(coinStorage, soundContainer, _bulletViewTemplate, _container);

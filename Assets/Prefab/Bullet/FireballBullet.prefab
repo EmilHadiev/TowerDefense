@@ -5013,7 +5013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51e06037543c5947aaad4b44741d8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: fd0dc92f4ae7d0c4ebce8ecfda68a6c8, type: 2}
+  <Data>k__BackingField: {fileID: 11400000, guid: fd0dc92f4ae7d0c4ebce8ecfda68a6c8, type: 2}
   <Type>k__BackingField: 1
 --- !u!54 &4520321247019126630
 Rigidbody:
