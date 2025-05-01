@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -18,9 +17,7 @@ public class BulletStorage : MonoBehaviour
     private ISoundContainer _soundContainer;
     private IInputSystem _input;
     private BulletEffectSetter _effectSetter;
-    private PlayerStat _playerStat;
-    private ICoinStorage _coinStorage;
-    private IHealth _playerHealth;
+    private IInstantiator _instantiator;
 
     private int _bulletIndex;
 
@@ -46,7 +43,6 @@ public class BulletStorage : MonoBehaviour
     {
         _pool = new List<IPool<Bullet>>(10);
         _effectSetter = new BulletEffectSetter();
-        _playerHealth = GetComponent<IHealth>();
 
         InitializeTemplatesAndPools();
         InitializeEffects();
@@ -69,14 +65,13 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, ISoundContainer soundContainer, PlayerStat playerStat, IInputSystem inputSystem, Bullet[] bullets, ICoinStorage coinStorage)
+    private void Constructor(IAttackable attacker, IInstantiator instantiator, ISoundContainer soundContainer, IInputSystem inputSystem, Bullet[] bullets)
     {
         _attacker = attacker;
         _soundContainer = soundContainer;
         _input = inputSystem;
-        _playerStat = playerStat;
         _bulletTemplates = bullets;
-        _coinStorage = coinStorage;
+        _instantiator = instantiator;
     }
 
     private void SetParticleColor(Color color) => _combatView.SetParticleColor(color);
@@ -89,8 +84,8 @@ public class BulletStorage : MonoBehaviour
 
     private void CreateTemplate(Bullet template, IPool<Bullet> pool)
     {
-        Bullet bullet = Instantiate(template);
-        bullet.InitBullet(_playerStat, GetBulletsEffect(bullet.Data));
+        Bullet bullet = _instantiator.InstantiatePrefab(template).GetComponent<Bullet>();
+        bullet.InitEffects(SetEffect);
         bullet.gameObject.SetActive(true);
         bullet.gameObject.SetActive(false);
         pool.Add(bullet);
@@ -121,7 +116,7 @@ public class BulletStorage : MonoBehaviour
 
         _soundContainer.Play(SoundType.SwitchBullet);
     }
-    
+
     private void SetIAvailableIndex(int bulletIndex)
     {
         if (bulletIndex < 0 || bulletIndex >= _bulletTemplates.Length)
@@ -146,24 +141,7 @@ public class BulletStorage : MonoBehaviour
 
     private void SetEffect(int bulletIndex)
     {
-        _effectSetter.SetBulletEffect(_bulletTemplates[bulletIndex].Type); 
+        _effectSetter.SetBulletEffect(_bulletTemplates[bulletIndex].Type);
         SetParticleColor(_bulletTemplates[bulletIndex].Color);
-    }
-
-    private IReadOnlyDictionary<Type, IBulletEffectHandler> GetBulletsEffect(BulletData data)
-    {
-        return new Dictionary<Type, IBulletEffectHandler>(10)
-        {
-            [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
-            [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
-            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(data, _playerStat),
-            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, data, _playerStat),
-            [typeof(PushingBulletEffect)] = new PushingBulletEffect(),
-            [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
-            [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),
-            [typeof(VampirismEffect)] = new VampirismEffect(_playerHealth, _playerStat),
-            [typeof(GoldenBulletEffect)] = new GoldenBulletEffect(_coinStorage),
-            [typeof(RandomBulletEffect)] = new RandomBulletEffect(SetEffect)
-        };
     }
 }

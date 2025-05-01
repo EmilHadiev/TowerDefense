@@ -3,10 +3,10 @@
 public class ExtraDamageBulletEffect : IBulletEffectHandler
 {
     private const float AdditionalPercentageDamage = 50;
-    private readonly BulletData _data;
+    private readonly IBulletData _data;
     private readonly PlayerStat _playerStat;
 
-    public ExtraDamageBulletEffect(BulletData data, PlayerStat playerStat)
+    public ExtraDamageBulletEffect(IBulletData data, PlayerStat playerStat)
     {
         _data = data;
         _playerStat = playerStat;

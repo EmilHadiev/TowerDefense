@@ -10,10 +10,10 @@ public class SplashBulletEffect : IBulletEffectHandler
     private readonly LayerMask _enemyMask;
     private readonly Collider[] _hits;
     private readonly Transform _bullet;
-    private readonly BulletData _data;
+    private readonly IBulletData _data;
     private readonly PlayerStat _playerStat;
 
-    public SplashBulletEffect(Transform bullet, BulletData data, PlayerStat playerStat)
+    public SplashBulletEffect(Transform bullet, IBulletData data, PlayerStat playerStat)
     {
         _bullet = bullet;
         _data = data;
