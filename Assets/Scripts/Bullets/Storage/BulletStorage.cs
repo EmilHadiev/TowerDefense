@@ -14,7 +14,6 @@ public class BulletStorage : MonoBehaviour
 
     private IAttackable _attacker;
     private List<IPool<Bullet>> _pool;
-    private ISoundContainer _soundContainer;
     private IInputSystem _input;
     private BulletEffectSetter _effectSetter;
     private IInstantiator _instantiator;
@@ -52,7 +51,6 @@ public class BulletStorage : MonoBehaviour
     {
         SetEffect(_bulletIndex);
         _input.SwitchTo(0);
-        _soundContainer.Stop();
     }
 
     private void InitializeTemplatesAndPools()
@@ -65,10 +63,9 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, IInstantiator instantiator, ISoundContainer soundContainer, IInputSystem inputSystem, Bullet[] bullets)
+    private void Constructor(IAttackable attacker, IInstantiator instantiator, IInputSystem inputSystem, Bullet[] bullets)
     {
         _attacker = attacker;
-        _soundContainer = soundContainer;
         _input = inputSystem;
         _bulletTemplates = bullets;
         _instantiator = instantiator;
@@ -100,7 +97,6 @@ public class BulletStorage : MonoBehaviour
             bullet.transform.position = _shootPosition.Position;
             bullet.transform.rotation = _shootPosition.Rotation;
             bullet.gameObject.SetActive(true);
-            _soundContainer.Play(bullet.Type);
         }
         else
         {
@@ -111,10 +107,7 @@ public class BulletStorage : MonoBehaviour
     private void OnBulletClicked(int bulletIndex)
     {
         SetIAvailableIndex(bulletIndex);
-
         SetEffect(_bulletIndex);
-
-        _soundContainer.Play(SoundType.SwitchBullet);
     }
 
     private void SetIAvailableIndex(int bulletIndex)

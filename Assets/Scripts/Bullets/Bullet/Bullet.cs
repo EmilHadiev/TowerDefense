@@ -8,17 +8,19 @@ using Zenject;
 [RequireComponent(typeof(BulletMover))]
 [RequireComponent(typeof(LifetimeTimer))]
 [RequireComponent(typeof(BulletEffectHandlerContainer))]
+[RequireComponent(typeof(BulletEffectView))]
 public class Bullet : MonoBehaviour, IBulletDefinition
 {
     [SerializeField] private LifetimeTimer _timer;
     [SerializeField] private BulletEffectHandlerContainer _effectsContainer;
+    [SerializeField] private BulletEffectView _effectsView;
 
     [field: SerializeField] public BulletData Data { get; private set; }
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;
     private readonly ReflectDamageCalculator _reflectCalculator = new ReflectDamageCalculator();
-    private BulletEffectView _effects;
+    
 
     private IBulletMovable _movable;
     private IBulletEffectHandler _currentEffect;
@@ -36,6 +38,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     {
         _timer ??= GetComponent<LifetimeTimer>();
         _effectsContainer ??= GetComponent<BulletEffectHandlerContainer>();
+        _effectsView ??= GetComponent<BulletEffectView>();
     }
 
     private void Awake()
@@ -50,7 +53,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         _movable.Reflected += OnReflected;
 
         _timer.StartTimer(Data.LifeTime);
-        //_effects.PlaySound(Type);
     }
 
     private void OnDisable()
@@ -60,17 +62,16 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         ResetValues();
     }
 
+    [Inject]
+    private void Constructor(PlayerStat stat)
+    {
+        _playerStat = stat;
+    }
+
     public void InitEffects(Action<int> setEffect)
     {
         _effectsContainer.SetEffects(setEffect);
         _bulletEffects = _effectsContainer.Effects;
-    }
-
-    [Inject]
-    private void Constructor(PlayerStat stat, ISoundContainer soundContainer)
-    {
-        _playerStat = stat;
-        _effects = new BulletEffectView(soundContainer);
     }
 
     public void SetEffect<T>() where T : IBulletEffectHandler
@@ -93,7 +94,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private void HandleCollision(Collider collider)
     {
-        _effects.ChangeTargetParticleColor(collider, Color);
+        _effectsView.ChangeTargetParticleColor(collider, Color);
         _currentEffect.HandleEffect(collider);
     }
 
