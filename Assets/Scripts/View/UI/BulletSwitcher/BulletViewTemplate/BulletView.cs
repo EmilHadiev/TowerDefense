@@ -12,6 +12,7 @@ public class BulletView : MonoBehaviour, IBulletView
 
     private IBulletDescription _data;
     private IBulletPurchaseHandler _purchaseHandler;
+    private ISoundContainer _soundContainer;
 
     private int _index;
 
@@ -35,10 +36,11 @@ public class BulletView : MonoBehaviour, IBulletView
         _showDescriptionButton.onClick.RemoveListener(OnClicked);
     }
 
-    public void Initialize(IBulletDescription bulletData, int index, IBulletPurchaseHandler bulletPurchaseHander)
+    public void Initialize(IBulletDescription bulletData, int index, IBulletPurchaseHandler bulletPurchaseHander, ISoundContainer soundContainer)
     {
         _data = bulletData;
         _index = index;
+        _soundContainer = soundContainer;
 
         _purchaseHandler = bulletPurchaseHander;
 
@@ -65,6 +67,7 @@ public class BulletView : MonoBehaviour, IBulletView
         else
         {
             Used?.Invoke(_index);
+            _soundContainer.Play(SoundType.SwitchBullet);
         }
     }
 

@@ -26,7 +26,7 @@ public class BulletViewCreator : IBulletViewCreator
             IBulletView template = GameObject.Instantiate(_template, _container);
             IBulletPurchaseHandler purchaseHander = new BulletPurchaseHandler(_coinStorage, _soundContainer);
 
-            template.Initialize(description, index, purchaseHander);
+            template.Initialize(description, index, purchaseHander, _soundContainer);
             index++;
             views.Add(template);
         }

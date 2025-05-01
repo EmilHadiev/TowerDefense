@@ -2,7 +2,7 @@
 
 public class BulletPool : IPool<Bullet>
 {
-    private const int StartSize = 15;
+    private const int StartSize = 300;
 
     private readonly List<Bullet> _bullets = new List<Bullet>(StartSize);
 
