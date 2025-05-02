@@ -7,6 +7,7 @@ public class DamageParticleFX : MonoBehaviour, IParticleColorChangable
     [SerializeField] private ParticleViewText _damageValue;
 
     private IHealth _health;
+    private IDamagable _damagable;
     private Color _currentColor;
 
     private void OnValidate()
@@ -18,19 +19,23 @@ public class DamageParticleFX : MonoBehaviour, IParticleColorChangable
             throw new ArgumentNullException(nameof(_damageValue));
     }
 
-    private void Awake() => _health = GetComponent<IHealth>();
+    private void Awake()
+    {
+        _health = GetComponent<IHealth>();
+        _damagable = GetComponent<IDamagable>();
+    }
 
     private void OnEnable()
     {
         _health.HealthChanged += OnHealthChanged;
-        _health.DamageApplied += OnDamageApplied;
+        _damagable.DamageApplied += OnDamageApplied;
         StopParticles();
     }
 
     private void OnDisable()
     {
         _health.HealthChanged -= OnHealthChanged;
-        _health.DamageApplied -= OnDamageApplied;
+        _damagable.DamageApplied -= OnDamageApplied;
     }
 
     private void Start() => SetDamageParticleColor(Color.yellow);

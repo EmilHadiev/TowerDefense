@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
-public class EnemyHealth : MonoBehaviour, IHealth
+public class EnemyHealth : MonoBehaviour, IHealth, IDamagable
 {
     private float _health;
     private EnemyStat _stat;

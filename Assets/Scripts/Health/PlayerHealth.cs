@@ -13,7 +13,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public event Action<float, float> HealthChanged;
     public event Action Died;
-    public event Action<float> DamageApplied;
 
     private void Awake()
     {
@@ -49,7 +48,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         _health -= damage;
 
         HealthChanged?.Invoke(_health, _maxHealth);
-        DamageApplied?.Invoke(damage);
 
         if (_health <= 0)
             Die();

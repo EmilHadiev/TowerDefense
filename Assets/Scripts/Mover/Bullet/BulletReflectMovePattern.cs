@@ -2,15 +2,15 @@
 
 public class BulletReflectMovePattern : IBulletMover
 {
-    private readonly BulletData _data;
+    private readonly IBulletData _data;
     private readonly Transform _bullet;
-    private readonly BulletMover _mover;
+    private readonly IBulletMovable _mover;
 
     private bool _isWork;
 
     private ReflectiveObstacle _previousObstacle = null;
 
-    public BulletReflectMovePattern(BulletData data, Transform bullet, BulletMover bulletMover)
+    public BulletReflectMovePattern(IBulletData data, Transform bullet, IBulletMovable bulletMover)
     {
         _data = data;
         _bullet = bullet;

@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;
-    private readonly ReflectDamageCalculator _reflectCalculator = new ReflectDamageCalculator();
+    private readonly ReflectDamageCoefficientCalculator _reflectCalculator = new ReflectDamageCoefficientCalculator();
     
 
     private IBulletMovable _movable;
@@ -112,13 +112,13 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         gameObject.SetActive(false);
     }
 
-    private void OnReflected() => _reflectCalculator.UpDamage();
+    private void OnReflected() => _reflectCalculator.UpCoefficient();
 
-    private float GetReflectedDamage() => (Data.Damage + _playerStat.Damage) * _reflectCalculator.Damage;
+    private float GetReflectedDamage() => (Data.Damage + _playerStat.Damage) * _reflectCalculator.Coefficient;
 
     private void ResetValues()
     {
         _timer.ResetTimer();
-        _reflectCalculator.ResetDamage();
+        _reflectCalculator.ResetCoefficient();
     }
 }

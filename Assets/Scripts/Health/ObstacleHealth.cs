@@ -13,7 +13,7 @@ public class ObstacleHealth : MonoBehaviour, IHealth
 
     public void AddHealth(float healthPoints)
     {
-        throw new NotImplementedException();
+
     }
 
     public void TakeDamage(float damage)
