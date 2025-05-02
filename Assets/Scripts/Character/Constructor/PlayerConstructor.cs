@@ -13,27 +13,30 @@ public class PlayerConstructor : MonoBehaviour
 
     private void Awake()
     {
+        DestroySelf();
+    }
+
+    /// <summary>
+    /// destroys the component when the application starts
+    /// </summary>
+    public void DestroySelf()
+    {
         Destroy(this);
     }
 
     [ContextMenu(nameof(ConfigureComponents))]
     private void ConfigureComponents()
-    {
-        ConfigureRigidbody();
-        ConfigureCollider();
+    {       
+        foreach (var config in GetConfigurators())
+            config.Configurate();
     }
 
-    private void ConfigureRigidbody()
+    private IComponentConfigurator[] GetConfigurators()
     {
-        _rigidBody.isKinematic = true;
-    }
-
-    private void ConfigureCollider()
-    {
-        float yPos = 0.5f;
-        int defaultRadius = 1;
-
-        _collider.center = new Vector3(0, yPos, 0);
-        _collider.radius = defaultRadius;
+        return new IComponentConfigurator[]
+        {
+            new RigidBodyConfigurator(_rigidBody),
+            new SphereColliderConfigurator(_collider)
+        };
     }
 }
