@@ -6,29 +6,17 @@ class MobileInput : IInput, ITickable
 {
     private const int FirstTouch = 0;
 
-    private readonly PlayerRotator _rotator;
+    private readonly IPlayerRotator _rotator;
     private readonly Joystick _joystick;
 
     private bool _isWork = true;
     
     public event Action Attacked;
 
-    public MobileInput(IPlayer player, IInstantiator instantitator)
+    public MobileInput(IJoystickFactory joystickFactory, IPlayerRotator rotator)
     {
-        _joystick = InstantiateJoystick(instantitator);
-        _rotator = new MobilePlayerRotator(player);
-    }
-
-    public Joystick InstantiateJoystick(IInstantiator instantitator)
-    {
-        PlayerUI playerUI = GameObject.FindAnyObjectByType<PlayerUI>();
-
-        if (playerUI.TryGetComponent(out RectTransform parent) == false)
-            throw new ArgumentNullException(nameof(parent));
-
-        Joystick joystick = instantitator.InstantiatePrefabResourceForComponent<Joystick>(AssetPath.MobileInputPath, parent);
-
-        return joystick;
+        _joystick = joystickFactory.CreateJoystick();
+        _rotator = rotator;
     }
 
     public void Tick()

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface IInputSystem
+public interface IInputHandler
 {
     event Action<int> SwitchBulletButtonClicked;
 

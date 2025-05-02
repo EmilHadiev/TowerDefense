@@ -6,15 +6,15 @@ public class DesktopInput : IInput, ITickable
 {
     private const int AttackButton = 0;
 
-    private readonly PlayerRotator _rotator;
+    private readonly IPlayerRotator _rotator;
 
     private bool _isWork = true;
 
     public event Action Attacked;
 
-    public DesktopInput(IPlayer player)
+    public DesktopInput(IPlayerRotator rotator)
     {
-        _rotator = new DesktopPlayerRotator(player);        
+        _rotator = rotator;       
     }
 
     public void Tick()

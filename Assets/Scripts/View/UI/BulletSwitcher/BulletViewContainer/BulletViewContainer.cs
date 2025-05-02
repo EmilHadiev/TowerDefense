@@ -34,7 +34,7 @@ public class BulletViewContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInputSystem input, IBulletDefinition[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
+    private void Constructor(IInputHandler input, IBulletDefinition[] bullets, ICoinStorage coinStorage, ISoundContainer soundContainer)
     {
         _bullets = bullets;
         _viewCreator = new BulletViewCreator(coinStorage, soundContainer, _bulletViewTemplate, _container);
