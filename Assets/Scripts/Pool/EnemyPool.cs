@@ -3,19 +3,19 @@
 public class EnemyPool : IPool<Enemy>
 {
     private readonly List<Enemy> _enemies;
-    private readonly Optimizator _counter;
+    private readonly IFPSLimiter _fpsLimiter;
 
-    public EnemyPool(Optimizator counter, int size = 15)
+    public EnemyPool(IFPSLimiter fpsLimiter, int size = 15)
     {
         _enemies = new List<Enemy>(size);
-        _counter = counter;
+        _fpsLimiter = fpsLimiter;
     }
 
     public void Add(Enemy item) => _enemies.Add(item);
 
     public bool TryGet(out Enemy enemy)
     {
-        if (_counter.IsEnoughFPS == false)
+        if (_fpsLimiter.IsEnoughFPS == false)
         {
             enemy = null;
             return false;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class Optimizator : ITickable, IDisposable, IInitializable
+public class Optimizator : ITickable, IDisposable, IInitializable, IFPSLimiter
 {
     private int _frameCount;
     private float _prevTime;

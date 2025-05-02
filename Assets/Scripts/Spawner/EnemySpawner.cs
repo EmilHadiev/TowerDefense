@@ -7,21 +7,21 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyType _enemyType;
 
     private IInstantiator _instantiator;
-    private Optimizator _fpsCounter;
+    private IFPSLimiter _fpsLimiter;
     private IEnemyFactory _factory;
     private IPool<Enemy> _pool;
 
     [Inject]
-    private void Constructor(IInstantiator instantiator, Optimizator fPSCounter)
+    private void Constructor(IInstantiator instantiator, IFPSLimiter fpsLimiter)
     {
         _instantiator = instantiator;
-        _fpsCounter = fPSCounter;
+        _fpsLimiter = fpsLimiter;
     }
 
     private void Start()
     {
         _factory = new EnemyFactory(_instantiator);
-        _pool = new EnemyPool(_fpsCounter);
+        _pool = new EnemyPool(_fpsLimiter);
 
         CreateEnemies();
     }
