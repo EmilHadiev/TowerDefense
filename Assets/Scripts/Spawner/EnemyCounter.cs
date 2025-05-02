@@ -1,6 +1,6 @@
 ﻿using System;
 
-class EnemyCounter
+public class EnemyCounter
 {
     private int _currentAlive;
     private int _totalSpawned;

@@ -10,6 +10,12 @@ public class EnemyInstaller : MonoInstaller
     {
         BindEnemyStats();
         BindEnemyUpgrader();
+        BindRewardSystems();
+    }
+
+    private void BindRewardSystems()
+    {
+        Container.Bind<RewardSystem>().AsSingle();
     }
 
     private void BindEnemyStats()

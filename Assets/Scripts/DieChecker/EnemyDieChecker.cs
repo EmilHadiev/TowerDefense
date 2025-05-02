@@ -6,8 +6,8 @@ public class EnemyDieChecker : MonoBehaviour
     [SerializeField] private EnemyHealth _health;
     [SerializeField] private Enemy _enemy;
 
-    private ICoinStorage _coinStorage;
-    private EnemyCounter _counter;
+    private RewardSystem _rewardSystem;
+
     private bool _isDead;
 
     private void OnValidate()
@@ -19,35 +19,39 @@ public class EnemyDieChecker : MonoBehaviour
     private void OnEnable()
     {
         _health.Died += OnDied;
-        Spawned();
+        Respawn();
     }
 
     private void OnDisable() => _health.Died -= OnDied;
 
     [Inject]
-    private void Constructor(ICoinStorage coinStorage, EnemyCounter counter)
+    private void Constructor(RewardSystem rewardSystem)
     {
-        _coinStorage = coinStorage;
-        _counter = counter;
+        _rewardSystem = rewardSystem;
     }
 
     private void OnDied()
     {
-        _coinStorage.Add(_enemy.Stat.Point);
-        _counter.Remove();
-        _health.AddHealth(_health.MaxHealth);
-        _enemy.StateMachine.SwitchTo<EmptyState>();
+        _rewardSystem.HandleEnemyDeath(_enemy.Stat.Point);
+        RestoreHealth();
+        SwitchToEmptyState();
         _isDead = true;
 
         gameObject.SetActive(false);
     }
 
-    private void Spawned()
+    private void SwitchToEmptyState() => _enemy.StateMachine.SwitchTo<EmptyState>();
+
+    private void RestoreHealth() => _health.AddHealth(_health.MaxHealth);
+
+    private void Respawn()
     {
         if (_isDead)
         {
-            _enemy.StateMachine.SwitchTo<EnemyMoveState>();
+            SwitchToMoveState();
             _isDead = false;
         }
     }
+
+    private void SwitchToMoveState() => _enemy.StateMachine.SwitchTo<EnemyMoveState>();
 }
