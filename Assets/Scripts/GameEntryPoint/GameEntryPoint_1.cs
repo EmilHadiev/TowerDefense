@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class GameEntryPointContainer : MonoBehaviour
+public class GameEntryPoint : MonoBehaviour
 {
     private IEntryPoint _currentPoint;
 

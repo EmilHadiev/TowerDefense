@@ -59,6 +59,11 @@ public class YandexGameEntryPoint : IEntryPoint
             _envData.IsDesktop = true;
         else
             _envData.IsDesktop = false;
+
+        if (YG2.envir.language == "ru")
+            _envData.Language = LanguageType.ru;
+        else
+            _envData.Language = LanguageType.en;
     }
 
     private void HideStickyBanners() => YG2.StickyAdActivity(false);

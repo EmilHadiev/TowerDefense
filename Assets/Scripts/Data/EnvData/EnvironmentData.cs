@@ -4,4 +4,5 @@ using UnityEngine;
 public class EnvironmentData : ScriptableObject
 {
     [field: SerializeField] public bool IsDesktop { get; set; }
+    [field: SerializeField] public LanguageType Language { get; set; }
 }
