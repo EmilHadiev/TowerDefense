@@ -38,7 +38,6 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
 
     private void Show()
     {
-        _render.Show();
         ShowUpgradeDescription();
         UpdatePrice();
     }

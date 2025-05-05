@@ -8,13 +8,16 @@ public class BulletViewRender : MonoBehaviour
     [SerializeField] private TMP_Text _bulletNameText;
     [SerializeField] private TMP_Text _bulletDescriptionText;
     [SerializeField] private TMP_Text _useText;
+    [SerializeField] private TMP_Text _translatedDescription;
     [SerializeField] private Image _bulletImage;
+
+    public string TranslatedDescription => _translatedDescription.text;
+
+    private void Start() => HideTranslatedText();
 
     public void Render(IBulletDescription data, int index)
     {
-        _bulletImage.sprite = data.Sprite;
-        _bulletDescriptionText.text = data.Description;
-        _bulletNameText.text = data.Name;
+        ShowData(data);
         _bulletIndexText.text = index.ToString();
     }
 
@@ -22,4 +25,15 @@ public class BulletViewRender : MonoBehaviour
     {
         _useText.gameObject.SetActive(isOn);
     }
+
+    private void ShowData(IBulletDescription data)
+    {
+        _bulletImage.sprite = data.Sprite;
+        _bulletDescriptionText.text = data.Description;
+        _translatedDescription.text = data.FullDescription;
+        _bulletNameText.text = data.Name;
+    }
+
+    private void HideTranslatedText() => 
+        _translatedDescription.gameObject.SetActive(false);
 }

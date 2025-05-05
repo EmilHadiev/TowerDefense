@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using YG.LanguageLegacy;
 
 [RequireComponent(typeof(BulletViewRender))]
 public class BulletView : MonoBehaviour, IBulletView
 {
+    [SerializeField] private LanguageYG[] _translators;
     [SerializeField] private BulletViewRender _render;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
@@ -45,6 +47,7 @@ public class BulletView : MonoBehaviour, IBulletView
         _purchaseHandler = bulletPurchaseHander;
 
         ShowData();
+        Translate();
     }
 
     private void ShowData()
@@ -52,6 +55,12 @@ public class BulletView : MonoBehaviour, IBulletView
         _render.Render(_data, _index);
         _purchaseContainer.SetText(_data.Price);
         TogglePurchaseContainer(_data.IsPurchased);
+    }
+
+    private void Translate()
+    {
+        for (int i = 0; i < _translators.Length; i++)
+            _translators[i].Translate(19);
     }
 
     private void OnUsed()
@@ -71,7 +80,11 @@ public class BulletView : MonoBehaviour, IBulletView
         }
     }
 
-    private void OnClicked() => Clicked?.Invoke(_data.FullDescription);
+    private void OnClicked()
+    {
+        Clicked?.Invoke(_render.TranslatedDescription);
+        Debug.Log("При нажатии: " + _render.TranslatedDescription);
+    }
 
     private void TogglePurchaseContainer(bool isPurchased)
     {
