@@ -1,4 +1,4 @@
 ﻿public interface IJoystickFactory
 {
-    Joystick CreateJoystick();
+    Joystick CreateJoystick(string path);
 }

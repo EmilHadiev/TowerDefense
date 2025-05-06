@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine.InputSystem;
 using Zenject;
 
-class PlayerInputHandler : IInputHandler, IInitializable, IDisposable
+public class BulletSwitchHandler : IBulletSwitchHandler, IInitializable, IDisposable
 {
     private readonly InputSystem _inputSystem;
 
@@ -12,17 +11,15 @@ class PlayerInputHandler : IInputHandler, IInitializable, IDisposable
 
     public event Action<int> SwitchBulletButtonClicked;
 
-    public PlayerInputHandler()
+    public BulletSwitchHandler(IPlayerInputSystem playerInputSystem)
     {
-        _inputSystem = new InputSystem();
-        _bulletSwitchActions = new BulletSwitcherHandler(_inputSystem).Actions.ToArray();
+        _inputSystem = playerInputSystem.InputSystem;
+        _bulletSwitchActions = GetInputActions(_inputSystem);
         _bulletsCallback = new Action<InputAction.CallbackContext>[_bulletSwitchActions.Length];
     }
 
     public void Initialize()
     {
-        _inputSystem.Enable();
-
         for (int i = 0; i < _bulletSwitchActions.Length; i++)
         {
             int tmpIndex = i;
@@ -35,11 +32,26 @@ class PlayerInputHandler : IInputHandler, IInitializable, IDisposable
     {
         for (int i = 0; i < _bulletSwitchActions.Length; i++)
             _bulletSwitchActions[i].performed -= _bulletsCallback[i];
-
-        _inputSystem.Disable();
     }
 
     private void SwitchBulletTo(int index) => SwitchBulletButtonClicked?.Invoke(index);
 
     public void SwitchTo(int bulletIndex) => SwitchBulletTo(bulletIndex);
+
+    private InputAction[] GetInputActions(InputSystem inputSystem)
+    {
+        return new InputAction[]
+        {
+            inputSystem.Player.SwitchToBullet0,
+            inputSystem.Player.SwitchToBullet1,
+            inputSystem.Player.SwitchToBullet2,
+            inputSystem.Player.SwitchToBullet3,
+            inputSystem.Player.SwitchToBullet4,
+            inputSystem.Player.SwitchToBullet5,
+            inputSystem.Player.SwitchToBullet6,
+            inputSystem.Player.SwitchToBullet7,
+            inputSystem.Player.SwitchToBullet8,
+            inputSystem.Player.SwitchToBullet9,
+        };
+    }
 }

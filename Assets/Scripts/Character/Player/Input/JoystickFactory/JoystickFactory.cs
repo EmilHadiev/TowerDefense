@@ -11,14 +11,14 @@ public class JoystickFactory : IJoystickFactory
         _instantiator = instantiator;
     }
 
-    public Joystick CreateJoystick()
+    public Joystick CreateJoystick(string path)
     {
         PlayerUI playerUI = GameObject.FindAnyObjectByType<PlayerUI>();
 
         if (playerUI.TryGetComponent(out RectTransform parent) == false)
             throw new ArgumentNullException(nameof(parent));
 
-        Joystick joystick = _instantiator.InstantiatePrefabResourceForComponent<Joystick>(AssetPath.MobileInputPath, parent);
+        Joystick joystick = _instantiator.InstantiatePrefabResourceForComponent<Joystick>(path, parent);
 
         return joystick;
     }

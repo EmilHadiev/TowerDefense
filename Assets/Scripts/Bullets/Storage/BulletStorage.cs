@@ -42,7 +42,7 @@ public class BulletStorage : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IAttackable attacker, IInstantiator instantiator, IInputHandler inputSystem, Bullet[] bullets)
+    private void Constructor(IAttackable attacker, IInstantiator instantiator, IBulletSwitchHandler inputSystem, Bullet[] bullets)
     {
         _attacker = attacker;
         _effectSetter = new BulletEffectSetter();

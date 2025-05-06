@@ -2,12 +2,12 @@
 
 public class BulletsSelector : IDisposable, IBulletsSelector
 {
-    private readonly IInputHandler _input;
+    private readonly IBulletSwitchHandler _input;
     private readonly Bullet[] _bullets;
 
     public event Action<int> BulletSwitched;
 
-    public BulletsSelector(IInputHandler input, Bullet[] bulletTemplates)
+    public BulletsSelector(IBulletSwitchHandler input, Bullet[] bulletTemplates)
     {
         _input = input;
         _bullets = bulletTemplates;

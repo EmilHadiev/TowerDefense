@@ -1,9 +1,9 @@
 public class BulletViewHandler : IBulletViewHandler
 {
-    private readonly IInputHandler _input;
+    private readonly IBulletSwitchHandler _input;
     private readonly BulletDescriptionContainer _descriptionContainer;
 
-    public BulletViewHandler(IInputHandler input, BulletDescriptionContainer descriptionContainer)
+    public BulletViewHandler(IBulletSwitchHandler input, BulletDescriptionContainer descriptionContainer)
     {
         _input = input;
         _descriptionContainer = descriptionContainer;

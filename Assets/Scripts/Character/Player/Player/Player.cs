@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BulletStorage))]
 [RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerCombatView))]

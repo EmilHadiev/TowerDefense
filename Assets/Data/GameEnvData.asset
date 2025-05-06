@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f18e135a30b964283d73afe0b36768, type: 3}
   m_Name: GameEnvData
   m_EditorClassIdentifier: 
-  <IsDesktop>k__BackingField: 0
+  <IsDesktop>k__BackingField: 1
+  <Language>k__BackingField: 0

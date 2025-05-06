@@ -2,21 +2,23 @@
 using UnityEngine;
 using Zenject;
 
-class MobileInput : IInput, ITickable
+class MobileInput : IInput, ITickable, IMoveHandler
 {
     private const int FirstTouch = 0;
-
+    private const int NeededTouchCount = 0;
     private readonly IPlayerRotator _rotator;
-    private readonly Joystick _joystick;
+    private readonly Joystick _rotateJoystick;
+    private readonly Joystick _moveJoystick;
 
     private bool _isWork = true;
+    private Vector3 _rotateDirection;
     
     public event Action Attacked;
-    public event Action<Vector3> Moving;
 
     public MobileInput(IJoystickFactory joystickFactory, IPlayerRotator rotator)
     {
-        _joystick = joystickFactory.CreateJoystick();
+        _rotateJoystick = CreateJoystick(joystickFactory, AssetPath.MobileInputRotatorPath);
+        _moveJoystick = CreateJoystick(joystickFactory, AssetPath.MobileInputMoverPath);
         _rotator = rotator;
     }
 
@@ -26,23 +28,6 @@ class MobileInput : IInput, ITickable
             return;
 
         HandleTouch();
-    }
-
-    private void HandleTouch()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(FirstTouch);
-
-            switch (touch.phase)
-            {
-                case TouchPhase.Stationary:
-                case TouchPhase.Moved:
-                    _rotator.Rotate(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical));
-                    StartAttack();
-                    break;
-            }
-        }
     }
 
     public void Continue()
@@ -57,18 +42,52 @@ class MobileInput : IInput, ITickable
         JoystickEnableToggle(_isWork);
     }
 
-    private void JoystickEnableToggle(bool isOn) => _joystick.gameObject.SetActive(isOn);
-
-    private void StartAttack()
+    public Vector3 GetMoveDirection()
     {
-        if (_isWork == false)
+        Vector3 direction = new Vector3(_moveJoystick.Horizontal, 0, _moveJoystick.Vertical);
+        return direction;
+    }
+
+    private void HandleTouch()
+    {
+        if (Input.touchCount > NeededTouchCount)
+        {
+            Touch touch = Input.GetTouch(FirstTouch);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Stationary:
+                case TouchPhase.Moved:
+                    Rotate();
+                    InvokeAttack();
+                    break;
+            }
+        }
+    }
+
+    private void Rotate()
+    {
+        Vector3 direction = new Vector3(_rotateJoystick.Horizontal, 0, _rotateJoystick.Vertical);
+        _rotateDirection = direction;
+        _rotator.Rotate(direction);
+    }
+
+    private void JoystickEnableToggle(bool isOn)
+    {
+        _rotateJoystick.gameObject.SetActive(isOn);
+        _moveJoystick.gameObject.SetActive(isOn);
+    }
+
+    private void InvokeAttack()
+    {
+        if (_isWork == false || IsCanAttack())
             return;
 
         Attacked?.Invoke();
-    } 
-
-    private void Move()
-    {
-
     }
+
+    private bool IsCanAttack() => _rotateDirection == Vector3.zero;
+
+    private Joystick CreateJoystick(IJoystickFactory factory, string path) => 
+        factory.CreateJoystick(path);
 }
