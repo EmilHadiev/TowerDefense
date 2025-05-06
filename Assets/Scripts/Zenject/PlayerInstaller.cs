@@ -11,7 +11,6 @@ public class PlayerInstaller : MonoInstaller
     {
         BindPlayer();
         BindInput();
-        BindRotator();
         BindPlayerAttacker();
         BindSoundContainer();
         BindOptimization();
@@ -43,20 +42,15 @@ public class PlayerInstaller : MonoInstaller
 
         if (_envData.IsDesktop)
         {
+            Container.BindInterfacesTo<DesktopPlayerRotator>().AsSingle();
+            Container.BindInterfacesTo<DesktopMoveHandler>().AsSingle();
             Container.BindInterfacesTo<DesktopInput>().AsSingle();
         }
         else
         {
+            Container.BindInterfacesTo<MobilePlayerRotator>().AsSingle();
             Container.BindInterfacesTo<JoystickFactory>().AsSingle();
             Container.BindInterfacesTo<MobileInput>().AsSingle();
         }
-    }
-
-    private void BindRotator()
-    {
-        if (_envData.IsDesktop)
-            Container.BindInterfacesTo<DesktopPlayerRotator>().AsSingle();
-        else
-            Container.BindInterfacesTo<MobilePlayerRotator>().AsSingle();
     }
 }

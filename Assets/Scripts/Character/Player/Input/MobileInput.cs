@@ -12,6 +12,7 @@ class MobileInput : IInput, ITickable
     private bool _isWork = true;
     
     public event Action Attacked;
+    public event Action<Vector3> Moving;
 
     public MobileInput(IJoystickFactory joystickFactory, IPlayerRotator rotator)
     {
@@ -24,6 +25,11 @@ class MobileInput : IInput, ITickable
         if (_isWork == false)
             return;
 
+        HandleTouch();
+    }
+
+    private void HandleTouch()
+    {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(FirstTouch);
@@ -60,4 +66,9 @@ class MobileInput : IInput, ITickable
 
         Attacked?.Invoke();
     } 
+
+    private void Move()
+    {
+
+    }
 }
