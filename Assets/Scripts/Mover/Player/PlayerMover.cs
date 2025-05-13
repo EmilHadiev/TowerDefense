@@ -9,8 +9,9 @@ public class PlayerMover : MonoBehaviour
     private void Constructor(IMoveHandler moveHandler, PlayerStat playerStat, IPlayer player)
     {
         _mover = new DefaultPlayerMover(playerStat, player, moveHandler);
-        _mover.StartMove();
     }
+
+    private void Start() => _mover.StartMove();
 
     private void Update() => _mover.Update();
 }

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, IPlayer
 
     [field: SerializeField] public PlayerType Type { get; private set; }
 
-    private void OnValidate() => _health ??= GetComponent<PlayerHealth>();
+    protected virtual void OnValidate() => _health ??= GetComponent<PlayerHealth>();
 
     public Transform Transform => transform;
 

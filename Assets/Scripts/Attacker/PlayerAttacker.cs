@@ -12,6 +12,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     private bool _isAttacking;
 
     public event Action Attacked;
+    public bool IsAttacking { get; private set; }
 
     public PlayerAttacker(IInput input, PlayerStat playerStat)
     {
@@ -36,8 +37,13 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         if (_isAttacking)
         {
             Attacked?.Invoke();
+            IsAttacking = true;
             ResetTimer();
             StopAttack();
+        }
+        else
+        {
+            IsAttacking = false;
         }
     }
 

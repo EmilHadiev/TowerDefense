@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: EnemyLevel
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 0
+  <MaxLevel>k__BackingField: 100
