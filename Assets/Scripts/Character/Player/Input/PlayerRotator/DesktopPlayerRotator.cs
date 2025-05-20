@@ -16,6 +16,9 @@ class DesktopPlayerRotator : IPlayerRotator
 
     public void Rotate(Vector3 lookAtPosition)
     {
+        if (IsValidPosition(lookAtPosition) == false || IsCameraEnable() == false)
+            return;
+
         Ray ray = _camera.ScreenPointToRay(lookAtPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -41,5 +44,29 @@ class DesktopPlayerRotator : IPlayerRotator
         Vector3 targetPosition = hit.point;
         targetPosition.y = _player.Transform.position.y;
         return targetPosition;
+    }
+
+    private bool IsValidPosition(Vector3 lookAtPosition)
+    {
+        // Проверка на некорректные значения
+        if (float.IsInfinity(lookAtPosition.x) || float.IsInfinity(lookAtPosition.y) || float.IsInfinity(lookAtPosition.z) ||
+            float.IsNaN(lookAtPosition.x) || float.IsNaN(lookAtPosition.y) || float.IsNaN(lookAtPosition.z))
+        {
+            Debug.Log("Invalid lookAtPosition: " + lookAtPosition);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsCameraEnable()
+    {
+        if (_camera == null || !_camera.gameObject.activeInHierarchy)
+        {
+            Debug.LogError("Camera is not assigned or inactive!");
+            return false;
+        }
+
+        return true;
     }
 }
