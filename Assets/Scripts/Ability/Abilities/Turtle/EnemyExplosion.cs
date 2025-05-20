@@ -14,8 +14,6 @@ public class EnemyExplosion : IAbility
 
     private Collider[] _hits = new Collider[10];
 
-    public event Action<int> Exploded;
-
     public EnemyExplosion(Transform enemy, EnemyStat stat, ParticleViewText text)
     {
         _enemy = enemy;

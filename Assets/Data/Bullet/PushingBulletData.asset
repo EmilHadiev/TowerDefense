@@ -27,3 +27,22 @@ MonoBehaviour:
     0.25 \u0441\u0435\u043A\u0443\u043D\u0434"
   <Price>k__BackingField: 1000
   <IsPurchased>k__BackingField: 1
+  _localizedTexts:
+  - <Language>k__BackingField: 0
+    <Name>k__BackingField: "\u0422\u0435\u043C\u043D\u0430\u044F \u043C\u0430\u0442\u0435\u0440\u0438\u044F"
+    <ShortDescription>k__BackingField: "\u041E\u0442\u0442\u0430\u043B\u043A\u0438\u0432\u0430\u0435\u0442
+      \u0432\u0440\u0430\u0433\u0430"
+    <FullDescription>k__BackingField: "\u041F\u0440\u0438 \u043F\u043E\u043F\u0430\u0434\u0430\u043D\u0438\u0438
+      \u043E\u0442\u0442\u0430\u043B\u043A\u0438\u0432\u0430\u0435\u0442 \u0432\u0440\u0430\u0433\u0430
+      \u043D\u0430 5 \u043C\u0435\u0442\u0440\u043E\u0432, \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0438
+      0.25 \u0441\u0435\u043A\u0443\u043D\u0434"
+  - <Language>k__BackingField: 1
+    <Name>k__BackingField: Dark matter
+    <ShortDescription>k__BackingField: Pushes away the enemy
+    <FullDescription>k__BackingField: On hit, pushes the enemy back 5 meters for
+      0.25 seconds
+  - <Language>k__BackingField: 2
+    <Name>k__BackingField: "Karanl\u0131k madde"
+    <ShortDescription>k__BackingField: "D\xFC\u015Fman\u0131 uzakla\u015Ft\u0131r\u0131r"
+    <FullDescription>k__BackingField: "Vuruldu\u011Funda d\xFC\u015Fman\u0131 0,25
+      saniye boyunca 5 metre geriye iter"

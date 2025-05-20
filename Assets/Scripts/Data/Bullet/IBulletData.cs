@@ -6,5 +6,5 @@ public interface IBulletData
     AudioClip Clip { get; }
     float Damage { get; }
     int LifeTime { get; }
-    float Speed { get; }    
+    float Speed { get; }
 }

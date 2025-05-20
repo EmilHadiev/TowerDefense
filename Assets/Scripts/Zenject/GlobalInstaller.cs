@@ -85,7 +85,7 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindSceneSwitcher()
     {
-        Container.Bind<SceneSwitcher>().AsSingle();
+        Container.BindInterfacesTo<SceneLoader>().AsSingle();
     }
 
     private void BindCoroutinePerformer()

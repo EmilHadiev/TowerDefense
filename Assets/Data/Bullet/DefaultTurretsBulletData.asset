@@ -28,3 +28,23 @@ MonoBehaviour:
     \u043D\u0430\u0434\u0435\u0436\u043D\u044B\u0439 \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u044B\u0439"
   <Price>k__BackingField: 1000
   <IsPurchased>k__BackingField: 1
+  _localizedTexts:
+  - <Language>k__BackingField: 0
+    <Name>k__BackingField: "\u0421\u0442\u0430\u043D\u0434\u0430\u0440\u0442"
+    <ShortDescription>k__BackingField: "\u041D\u0430\u0434\u0435\u0436\u043D\u044B\u0439
+      \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441"
+    <FullDescription>k__BackingField: "\u0414\u0430\u043D\u043D\u044B\u0439 \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441
+      \u043D\u0435 \u043E\u0431\u043B\u0430\u0434\u0430\u0435\u0442 \u043E\u0441\u043E\u0431\u044B\u043C\u0438
+      \u044D\u0444\u0444\u0435\u043A\u0442\u0430\u043C\u0438, \u043D\u043E \u0442\u0435\u043C
+      \u043D\u0435 \u043C\u0435\u043D\u0435\u0435, \u043E\u043D \u043A\u0440\u0430\u0439\u043D\u0435
+      \u043D\u0430\u0434\u0435\u0436\u043D\u044B\u0439 \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u044B\u0439"
+  - <Language>k__BackingField: 1
+    <Name>k__BackingField: Standard
+    <ShortDescription>k__BackingField: Reliable ammunition
+    <FullDescription>k__BackingField: This ammunition does not have any special effects,
+      but nevertheless, it is extremely reliable and effective.
+  - <Language>k__BackingField: 2
+    <Name>k__BackingField: Standart
+    <ShortDescription>k__BackingField: "G\xFCvenilir m\xFChimmat"
+    <FullDescription>k__BackingField: "Bu m\xFChimmat\u0131n hi\xE7bir \xF6zel etkisi
+      yoktur, ancak yine de son derece g\xFCvenilir ve etkilidir."

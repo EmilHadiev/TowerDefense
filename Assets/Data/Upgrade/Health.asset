@@ -17,3 +17,16 @@ MonoBehaviour:
   <Cost>k__BackingField: 10
   <Name>k__BackingField: "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
   <UpgradeType>k__BackingField: 0
+  _localizedTexts:
+  - <Language>k__BackingField: 0
+    <Name>k__BackingField: "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 1
+    <Name>k__BackingField: Health
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 2
+    <Name>k__BackingField: "Sa\u011Fl\u0131k"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 

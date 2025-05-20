@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class GameStateBlocker : MonoBehaviour, IGameBlocker
+public class GameStateBlocker : IGameBlocker
 {
     private readonly IInput _input;
     private readonly Pause _pause;

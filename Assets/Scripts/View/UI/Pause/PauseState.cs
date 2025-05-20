@@ -7,13 +7,13 @@ public class PauseState : UIState
     [SerializeField] private Button _restartButton;
 
     private ISavable _savable;
-    private SceneSwitcher _switcher;
+    private ISceneLoader _sceneLoader;
 
     [Inject]
-    private void Constructor(ISavable savable, SceneSwitcher sceneSwitcher)
+    private void Constructor(ISavable savable, ISceneLoader sceneSwitcher)
     {
         _savable = savable;
-        _switcher = sceneSwitcher;
+        _sceneLoader = sceneSwitcher;
     }
 
     public override void Enter()
@@ -36,7 +36,7 @@ public class PauseState : UIState
 
     private void Restart()
     {
-        _switcher.Restart();
+        _sceneLoader.Restart();
         GameToggle.Continue();
     }
 }

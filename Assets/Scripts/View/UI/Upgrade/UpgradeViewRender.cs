@@ -1,12 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 using YG.LanguageLegacy;
 
 [RequireComponent(typeof(LanguageYG))]
 public class UpgradeViewRender : MonoBehaviour
 {
-    [SerializeField] private LanguageYG _translator;
     [SerializeField] private Image _upgradeImage;
     [SerializeField] private TMP_Text _upgradeNameText;
     [SerializeField] private TMP_Text _upgradeDescriptionText;
@@ -17,6 +17,7 @@ public class UpgradeViewRender : MonoBehaviour
     public void Initialize(IUpgrader data)
     {
         _upgrader = data;
+
         ShowData(_upgrader.Data);
         Translate();
     }
@@ -35,7 +36,7 @@ public class UpgradeViewRender : MonoBehaviour
 
     private void Translate()
     {
-        _translator.text = _upgradeNameText.text;
-        _translator.Translate(19);
+        LocalizedText localizedText = _upgrader.Data.GetLocalizedText(YG2.lang);
+        _upgradeNameText.text = localizedText.Name;
     }
 }

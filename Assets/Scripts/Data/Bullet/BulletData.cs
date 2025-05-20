@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "BulletData", menuName = "Bullet")]
 public class BulletData : ScriptableObject, IBulletData, IBulletDescription
@@ -15,4 +16,18 @@ public class BulletData : ScriptableObject, IBulletData, IBulletDescription
     [field: SerializeField, TextArea(1, 3)] public string FullDescription { get; private set; }
     [field: SerializeField] public int Price { get; private set; }
     [field: SerializeField] public bool IsPurchased { get; set; }
+
+    [SerializeField] private LocalizedText[] _localizedTexts;
+
+    public LocalizedText GetLocalizedText(LanguageType languageType, string language)
+    {
+        foreach (var localize in _localizedTexts)
+            if (localize.Language == languageType || CompareByName(language, localize))
+                return localize;
+
+        throw new ArgumentException(nameof(languageType));
+    }
+
+    private bool CompareByName(string language, LocalizedText localized) =>
+        localized.Language.ToString().ToLower() == language.ToString().ToLower();
 }

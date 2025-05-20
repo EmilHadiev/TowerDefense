@@ -8,4 +8,5 @@ public interface IBulletDescription
     Sprite Sprite { get; }
     int Price { get; }
     bool IsPurchased { get; set; }
+    LocalizedText GetLocalizedText(LanguageType languageType = LanguageType.en, string language = "en");
 }

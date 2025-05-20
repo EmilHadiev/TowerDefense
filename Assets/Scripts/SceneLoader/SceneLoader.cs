@@ -2,14 +2,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitcher
+public class SceneLoader : ISceneLoader
 {
     private readonly ICoroutinePefrormer _coroutinePerformer;
     private readonly ISavable _savable;
 
     private Coroutine _sceneLoader;
 
-    public SceneSwitcher(ICoroutinePefrormer coroutinePerformer, ISavable savable)
+    public SceneLoader(ICoroutinePefrormer coroutinePerformer, ISavable savable)
     {
         _coroutinePerformer = coroutinePerformer;
         _savable = savable;
@@ -19,7 +19,7 @@ public class SceneSwitcher
     {
         StopLoadScene();
 
-        _sceneLoader = _coroutinePerformer.StartPerform(SceneLoader(index));
+        _sceneLoader = _coroutinePerformer.StartPerform(LoadScene(index));
     }
 
     public void Restart() => SwitchTo(SceneManager.GetActiveScene().buildIndex);
@@ -30,7 +30,7 @@ public class SceneSwitcher
             _coroutinePerformer.StopPerform(_sceneLoader);
     }
 
-    private IEnumerator SceneLoader(int id)
+    private IEnumerator LoadScene(int id)
     {
         AsyncOperation async = async = SceneManager.LoadSceneAsync(id);
 

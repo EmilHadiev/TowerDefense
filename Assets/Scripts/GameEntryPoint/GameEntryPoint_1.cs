@@ -5,7 +5,7 @@ public class GameEntryPoint : MonoBehaviour
 {
     private IEntryPoint _currentPoint;
 
-    private SceneSwitcher _switcher;
+    private ISceneLoader _sceneLoader;
     private ISavable _savable;
     private ICoroutinePefrormer _performer;
     private GameplayMarkup _markup;
@@ -15,9 +15,9 @@ public class GameEntryPoint : MonoBehaviour
 
     #if UNITY_WEBGL
     [Inject]
-    public void Constructor(SceneSwitcher sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
+    public void Constructor(ISceneLoader sceneLoader, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
     {
-        _switcher = sceneSwitcher;
+        _sceneLoader = sceneLoader;
         _savable = savable;
         _performer = performer;
         _markup = markup;
@@ -28,7 +28,7 @@ public class GameEntryPoint : MonoBehaviour
     private void StartEntryPoint()
     {
         #if UNITY_WEBGL
-            _currentPoint = new YandexGameEntryPoint(_switcher, _savable, _markup, _envData, _performer);
+            _currentPoint = new YandexGameEntryPoint(_sceneLoader, _savable, _markup, _envData, _performer);
             _currentPoint.Start();
         #endif
     }
