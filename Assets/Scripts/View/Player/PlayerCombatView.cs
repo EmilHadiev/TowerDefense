@@ -6,7 +6,7 @@ public class PlayerCombatView : MonoBehaviour
     [SerializeField] private PlayerAttackParticle _attackParticle;
     [SerializeField] private ShakingPart _shakingPart;    
 
-    private IAttackable _attackable;
+    private LazyInject<IAttackable> _attackable;
     private IWeaponRecoil _recoil;
 
     private Color _currentColor;
@@ -17,17 +17,16 @@ public class PlayerCombatView : MonoBehaviour
         _attackParticle ??= GetComponentInChildren<PlayerAttackParticle>();
     }
 
-    private void OnEnable() => _attackable.Attacked += OnAttacked;
-
-    private void OnDisable() => _attackable.Attacked -= OnAttacked;
-
     private void Start()
     {
-        _attackParticle.Stop();        
+        _attackParticle.Stop();
+        _attackable.Value.Attacked += OnAttacked;
     }
 
+    private void OnDestroy() => _attackable.Value.Attacked -= OnAttacked;
+
     [Inject]
-    private void Constructor(IAttackable attackable, PlayerStat stat)
+    private void Constructor(LazyInject<IAttackable> attackable, PlayerStat stat)
     {
         _attackable = attackable;
         _recoil = new WeaponRecoil(_shakingPart, stat);

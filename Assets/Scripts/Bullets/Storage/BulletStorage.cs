@@ -8,7 +8,7 @@ public class BulletStorage : MonoBehaviour
     [SerializeField] private int _poolSize = 30;
     [SerializeField] private int _additionalPoolSize = 5;
 
-    private IAttackable _attacker;
+    private LazyInject<IAttackable> _attacker;
     private BulletEffectSetter _effectSetter;
     private BulletCreator _bulletsCreator;
     private IBulletsSelector _indexator;
@@ -22,15 +22,12 @@ public class BulletStorage : MonoBehaviour
     }
 
     private void OnEnable()
-    {
-        _attacker.Attacked += OnAttacked;
+    {        
         _indexator.BulletSwitched += OnBulletSwitched;
     }
 
     private void OnDisable()
     {
-        _attacker.Attacked -= OnAttacked;
-
         _indexator.BulletSwitched -= OnBulletSwitched;
         _indexator.Dispose();
     }
@@ -39,10 +36,13 @@ public class BulletStorage : MonoBehaviour
     {
         _bulletsCreator.FirstInit(_poolSize);
         InitializeEffects();
+        _attacker.Value.Attacked += OnAttacked;
     }
 
+    private void OnDestroy() => _attacker.Value.Attacked -= OnAttacked;
+
     [Inject]
-    private void Constructor(IAttackable attacker, IInstantiator instantiator, IBulletSwitchHandler inputSystem, Bullet[] bullets)
+    private void Constructor(LazyInject<IAttackable> attacker, IInstantiator instantiator, IBulletSwitchHandler inputSystem, Bullet[] bullets)
     {
         _attacker = attacker;
         _effectSetter = new BulletEffectSetter();

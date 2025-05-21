@@ -8,13 +8,13 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private EnvironmentData _envData;
 
     public override void InstallBindings()
-    {
-        BindPlayer();
-        BindInput();
-        BindPlayerAttacker();
+    {        
+        //BindInput();
+        //BindPlayerAttacker();
         BindSoundContainer();
         BindOptimization();
         BindPlayerProvider();
+        BindPlayer();
     }
 
     private void BindPlayerProvider()
@@ -39,7 +39,9 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        Container.BindInterfacesTo<Player>().FromInstance(_player).AsSingle();
+        Container.BindInterfacesTo<Player>().FromComponentInNewPrefab(_player).AsSingle();
+        BindPlayerAttacker();
+        BindInput();
     }
 
     private void BindInput()
