@@ -8,6 +8,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     [SerializeField] private PlayerUIDynamic _uiDynamic;
     [SerializeField] private EnemySpawnerContainer _spawnerContainer;
     [SerializeField] private WaitingLevelState _waitingState;
+    [SerializeField] private PlayerSpawnPosition _spawnPosition;
 
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
 

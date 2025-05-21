@@ -10,6 +10,8 @@
     public const string SlimePath = "Enemies/Slime";
     public const string MagePath = "Enemies/Mage";
 
+    public const string StickmanGhost = "Players/Ghost";
+
     public const string ParticleExplosionPath = "Particles/Explosion";
     public const string ParticleExplosionCountPath = "Particles/ExplosionCount";
     public const string ParticleSpawnRunePath = "Particles/SpawnRune";

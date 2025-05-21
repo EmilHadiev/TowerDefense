@@ -14,6 +14,12 @@ public class PlayerInstaller : MonoInstaller
         BindPlayerAttacker();
         BindSoundContainer();
         BindOptimization();
+        BindPlayerProvider();
+    }
+
+    private void BindPlayerProvider()
+    {
+        Container.BindInterfacesTo<PlayerProvider>().AsSingle();
     }
 
     private void BindOptimization()
@@ -28,7 +34,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayerAttacker()
     {
-        Container.BindInterfacesTo<PlayerAttacker>().AsSingle().NonLazy();
+        Container.BindInterfacesTo<PlayerAttacker>().AsSingle();
     }
 
     private void BindPlayer()
