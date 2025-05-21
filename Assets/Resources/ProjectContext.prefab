@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _performer: {fileID: 2097464550127242616, guid: f528980225d2f15499cbe71aea5a3fe1, type: 3}
+  _loadingScreen: {fileID: 385612833250185692, guid: 1ad780dd9a69a2a46b9b07f9e5957252, type: 3}
   _data:
   - {fileID: 11400000, guid: fb0d39b80738e6545a3df4fd829022a6, type: 2}
   - {fileID: 11400000, guid: 2441d64f1d187b049a3bb3d0b4a83b2b, type: 2}

@@ -12,6 +12,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
 
     private EnemyUpgrader _upgrader;
+    private LoadingScreen _loadingScreen;
 
     private ILevelState _currentState;
 
@@ -24,6 +25,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
 
     private void Start()
     {
+        _loadingScreen.Show();
         StopHideCanvas();
 
         #if UNITY_WEBGL
@@ -34,9 +36,10 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     }
 
     [Inject]
-    private void Constructor(EnemyUpgrader upgrader)
+    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen)
     {
         _upgrader = upgrader;
+        _loadingScreen = loadingScreen;
     }
 
     #if UNITY_WEBGL

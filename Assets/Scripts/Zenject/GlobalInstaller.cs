@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -5,6 +6,7 @@ using Zenject;
 public class GlobalInstaller : MonoInstaller
 {
     [SerializeField] private CoroutinePerformer _performer;
+    [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private UpgradeData[] _data;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
@@ -21,6 +23,7 @@ public class GlobalInstaller : MonoInstaller
         BindEnvironmentData();
         BindEnemyData();
         BindBullets();
+        BindLoadingScreen();
 
         #region DefferentPlatforms
         BindAdvertising();
@@ -59,6 +62,11 @@ public class GlobalInstaller : MonoInstaller
         #endif
     }
     #endregion
+
+    private void BindLoadingScreen()
+    {
+        Container.Bind<LoadingScreen>().FromComponentsInNewPrefab(_loadingScreen).AsSingle();
+    }
 
     private void BindEnvironmentData()
     {

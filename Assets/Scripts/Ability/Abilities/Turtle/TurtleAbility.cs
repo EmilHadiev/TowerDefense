@@ -7,6 +7,7 @@ public class TurtleAbility : MonoBehaviour
     private IHealth _health;
     private EnemyExplosion _ability;
     private IInstantiator _instantiator;
+    private ICameraProvider _cameraProvider;
 
     private ParticleView _explosionPrefab;
     private ParticleViewText _explosionCountPrefab;
@@ -22,7 +23,7 @@ public class TurtleAbility : MonoBehaviour
 
         CreateExplosionParticle();
         CreateExplosionCountParticle();
-        _ability = new EnemyExplosion(transform, _stat, _explosionCountPrefab);
+        _ability = new EnemyExplosion(transform, _stat, _explosionCountPrefab, _cameraProvider);
     }
 
     private void OnEnable() => _health.Died += OnDied;
@@ -30,7 +31,11 @@ public class TurtleAbility : MonoBehaviour
     private void OnDisable() => _health.Died -= OnDied;
 
     [Inject]
-    private void Constructor(IInstantiator instantiator) => _instantiator = instantiator;
+    private void Constructor(IInstantiator instantiator, ICameraProvider cameraProvider)
+    {
+        _instantiator = instantiator;
+        _cameraProvider = cameraProvider;
+    }
 
     private void CreateExplosionParticle()
     {
@@ -53,13 +58,15 @@ public class TurtleAbility : MonoBehaviour
 
     private void ExplodeView()
     {
-        _explosionCountPrefab.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        _explosionPrefab.transform.position = transform.position;
+        _explosionPrefab.transform.rotation = transform.rotation;
         _explosionPrefab.Play();
     }
 
     private void ExplodeCountView()
     {
-        _explosionCountPrefab.transform.SetPositionAndRotation(GetExplosionCountPosition(), transform.rotation);
+        _explosionCountPrefab.transform.position = GetExplosionCountPosition();
+        _explosionCountPrefab.transform.rotation = transform.rotation;
         _explosionCountPrefab.Play();
     }
 

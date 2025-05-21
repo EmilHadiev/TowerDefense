@@ -18,12 +18,6 @@ public class LevelInstaller : MonoInstaller
     {
         BindLevelEntryPoint();
         BindEnemyCounter();
-        BindCameraProvider();
-    }
-
-    private void BindCameraProvider()
-    {
-        Container.BindInterfacesTo<CameraProvider>().AsSingle();
     }
 
     private void BindEnemyCounter()

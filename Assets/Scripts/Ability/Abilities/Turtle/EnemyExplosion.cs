@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyExplosion : IAbility
 {
@@ -11,14 +10,17 @@ public class EnemyExplosion : IAbility
     private readonly Transform _enemy;
     private readonly EnemyStat _stat;
     private readonly ParticleViewText _text;
+    private readonly ICameraProvider _cameraProvider;
 
     private Collider[] _hits = new Collider[10];
 
-    public EnemyExplosion(Transform enemy, EnemyStat stat, ParticleViewText text)
+    public EnemyExplosion(Transform enemy, EnemyStat stat, ParticleViewText text, ICameraProvider cameraProvider)
     {
         _enemy = enemy;
         _stat = stat;
         _text = text;
+        _cameraProvider = cameraProvider;
+        _cameraProvider.SetCamera(Camera.main);
     }
 
     public void Activate()
@@ -29,6 +31,7 @@ public class EnemyExplosion : IAbility
             AttackTargets(countEnemies);
 
         _text.SetText(countEnemies.ToString());
+        _cameraProvider.Punch();
         PhysicsDebug.DrawDebug(_enemy.position, ExplosionRadius, 1);
     }
 

@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 530028312}
   - component: {fileID: 530028313}
   m_Layer: 0
-  m_Name: Initializer
+  m_Name: BOOT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

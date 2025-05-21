@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,12 @@ public class EnemyInstaller : MonoInstaller
         BindEnemyStats();
         BindEnemyUpgrader();
         BindRewardSystems();
+        BindCameraProvider();
+    }
+
+    private void BindCameraProvider()
+    {
+        Container.BindInterfacesTo<CameraProvider>().AsSingle();
     }
 
     private void BindRewardSystems()
