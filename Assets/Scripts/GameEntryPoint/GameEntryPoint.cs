@@ -41,7 +41,7 @@ public class YandexGameEntryPoint : IEntryPoint
             yield return _waitingFrame;
 
         #if UNITY_EDITOR
-            //ResetProgress();
+            ResetProgress();
         #endif
 
         HideStickyBanners();
@@ -62,6 +62,8 @@ public class YandexGameEntryPoint : IEntryPoint
 
         if (YG2.envir.language == "ru")
             _envData.Language = LanguageType.ru;
+        else if (YG2.envir.language == "tr")
+            _envData.Language = LanguageType.tr;
         else
             _envData.Language = LanguageType.en;
     }
