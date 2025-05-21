@@ -29,5 +29,5 @@ public class BulletData : ScriptableObject, IBulletData, IBulletDescription
     }
 
     private bool CompareByName(string language, LocalizedText localized) =>
-        localized.Language.ToString().ToLower() == language.ToString().ToLower();
+        localized.Language.ToString().ToLower() == language.ToLower();
 }

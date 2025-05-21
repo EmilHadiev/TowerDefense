@@ -34,13 +34,13 @@ public class TurtleAbility : MonoBehaviour
 
     private void CreateExplosionParticle()
     {
-        _explosionPrefab = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetPath.ParticleExplosionPath);
+        _explosionPrefab = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetProvider.ParticleExplosionPath);
         _explosionPrefab.Stop();
     }
 
     private void CreateExplosionCountParticle()
     {
-        _explosionCountPrefab = _instantiator.InstantiatePrefabResourceForComponent<ParticleViewText>(AssetPath.ParticleExplosionCountPath);
+        _explosionCountPrefab = _instantiator.InstantiatePrefabResourceForComponent<ParticleViewText>(AssetProvider.ParticleExplosionCountPath);
         _explosionCountPrefab.Stop();
     }
 
@@ -53,15 +53,13 @@ public class TurtleAbility : MonoBehaviour
 
     private void ExplodeView()
     {
-        _explosionPrefab.transform.position = transform.position;
-        _explosionPrefab.transform.rotation = transform.rotation;
+        _explosionCountPrefab.transform.SetPositionAndRotation(transform.position, transform.rotation);
         _explosionPrefab.Play();
     }
 
     private void ExplodeCountView()
     {
-        _explosionCountPrefab.transform.position = GetExplosionCountPosition();
-        _explosionCountPrefab.transform.rotation = transform.rotation;
+        _explosionCountPrefab.transform.SetPositionAndRotation(GetExplosionCountPosition(), transform.rotation);
         _explosionCountPrefab.Play();
     }
 

@@ -16,7 +16,7 @@ public class EnemySpawnerAbilityView
 
     private ParticleView CreateParticle()
     {
-        ParticleView view = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetPath.ParticleSpawnRunePath);
+        ParticleView view = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetProvider.ParticleSpawnRunePath);
         view.transform.parent = _spawner.transform;
         view.Stop();
         return view;

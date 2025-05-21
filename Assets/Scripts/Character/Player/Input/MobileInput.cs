@@ -17,8 +17,8 @@ class MobileInput : IInput, ITickable, IMoveHandler
 
     public MobileInput(IJoystickFactory joystickFactory, IPlayerRotator rotator)
     {
-        _rotateJoystick = CreateJoystick(joystickFactory, AssetPath.MobileInputRotatorPath);
-        _moveJoystick = CreateJoystick(joystickFactory, AssetPath.MobileInputMoverPath);
+        _rotateJoystick = CreateJoystick(joystickFactory, AssetProvider.MobileInputRotatorPath);
+        _moveJoystick = CreateJoystick(joystickFactory, AssetProvider.MobileInputMoverPath);
         _rotator = rotator;
     }
 

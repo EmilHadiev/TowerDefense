@@ -1,4 +1,4 @@
-﻿public static class AssetPath
+﻿public static class AssetProvider
 {
     public const string SkeletonPath = "Enemies/Skeleton";
     public const string DemonKnightPath = "Enemies/DemonKnight";
@@ -16,4 +16,6 @@
 
     public const string MobileInputRotatorPath = "Input/Rotate Joystick";
     public const string MobileInputMoverPath = "Input/Move Joystick";
+
+    public const string SceneDefaultArena = "DefaultArena";
 }

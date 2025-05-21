@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class BulletViewRender : MonoBehaviour
 {
@@ -17,21 +18,26 @@ public class BulletViewRender : MonoBehaviour
 
     public void Render(IBulletDescription data, int index)
     {
-        ShowData(data);
+        ViewShow(data, index);
+        Translate(data);
+    }
+
+    public void UseTextEnableToggle(bool isOn) =>
+        _useText.gameObject.SetActive(isOn);
+
+    private void ViewShow(IBulletDescription data, int index)
+    {
+        _bulletImage.sprite = data.Sprite;
         _bulletIndexText.text = index.ToString();
     }
 
-    public void UseTextEnableToggle(bool isOn)
+    private void Translate(IBulletDescription data)
     {
-        _useText.gameObject.SetActive(isOn);
-    }
+        LocalizedText localizedText = data.GetLocalizedText(language: YG2.lang);
 
-    private void ShowData(IBulletDescription data)
-    {
-        _bulletImage.sprite = data.Sprite;
-        _bulletDescriptionText.text = data.Description;
-        _translatedDescription.text = data.FullDescription;
-        _bulletNameText.text = data.Name;
+        _bulletDescriptionText.text = localizedText.ShortDescription;
+        _translatedDescription.text = localizedText.FullDescription;
+        _bulletNameText.text = localizedText.Name;
     }
 
     private void HideTranslatedText() => 

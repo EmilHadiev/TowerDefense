@@ -31,6 +31,9 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     {
         _counter = counter;
         _switcher = switcher;
+
+        if (switcher == null)
+            Debug.LogError("IS NULL!");
     }
 
     public void Enter()

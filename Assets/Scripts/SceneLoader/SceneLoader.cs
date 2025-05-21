@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SceneLoader : ISceneLoader
 {
     private readonly ICoroutinePefrormer _coroutinePerformer;
     private readonly ISavable _savable;
 
-    private Coroutine _sceneLoader;
+    private Coroutine _activeLoadCoroutine;
 
     public SceneLoader(ICoroutinePefrormer coroutinePerformer, ISavable savable)
     {
@@ -15,29 +16,60 @@ public class SceneLoader : ISceneLoader
         _savable = savable;
     }
 
-    public void SwitchTo(int index)
+    public void SwitchTo(int buildIndex)
     {
-        StopLoadScene();
+        StopActiveLoad();
+        _activeLoadCoroutine = _coroutinePerformer.StartPerform(LoadSceneByIndex(buildIndex));
+    }
 
-        _sceneLoader = _coroutinePerformer.StartPerform(LoadScene(index));
+    public void SwitchTo(string sceneName)
+    {
+        StopActiveLoad();
+        _activeLoadCoroutine = _coroutinePerformer.StartPerform(LoadSceneByName(sceneName));
     }
 
     public void Restart() => SwitchTo(SceneManager.GetActiveScene().buildIndex);
 
-    private void StopLoadScene()
+    private void StopActiveLoad()
     {
-        if (_sceneLoader != null)
-            _coroutinePerformer.StopPerform(_sceneLoader);
+        if (_activeLoadCoroutine != null)
+        {
+            _coroutinePerformer.StopPerform(_activeLoadCoroutine);
+            _activeLoadCoroutine = null;
+        }
     }
 
-    private IEnumerator LoadScene(int id)
+    private IEnumerator LoadSceneByIndex(int buildIndex)
     {
-        AsyncOperation async = async = SceneManager.LoadSceneAsync(id);
+        if (!ISceneIndexValid(buildIndex))
+            throw new ArgumentException(nameof(buildIndex));
 
-        while (async.isDone == false)
-            yield return null;
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync(buildIndex);
+        asyncOp.allowSceneActivation = true;
 
-        _savable.SaveProgress();
-        Debug.Log("СЦЕНА ЗАГРУЗИЛАСЬ!");
+        yield return asyncOp;
+
+        if (asyncOp.isDone)
+        {
+            _savable?.SaveProgress();
+            Debug.Log($"Scene {buildIndex} (index) loaded successfully!");
+        }
     }
+
+    private IEnumerator LoadSceneByName(string sceneName)
+    {
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync(sceneName);
+        asyncOp.allowSceneActivation = true;
+
+        yield return asyncOp;
+
+        if (asyncOp.isDone)
+        {
+            _savable?.SaveProgress();
+            Debug.Log($"Scene {sceneName} (name) loaded successfully!");
+        }
+    }
+
+    private bool ISceneIndexValid(int buildIndex) =>
+        buildIndex >= 0 && buildIndex<SceneManager.sceneCountInBuildSettings;
 }

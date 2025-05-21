@@ -10,7 +10,6 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     [SerializeField] private WaitingLevelState _waitingState;
 
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
-    private GameplayMarkup _markup;
 
     private EnemyUpgrader _upgrader;
 
@@ -41,11 +40,15 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     }
 
     #if UNITY_WEBGL
+
+    private GameplayMarkup _markup;
     [Inject]
     private void WebConstructor(GameplayMarkup markup)
     {
         _markup = markup;
     }
+
+    private void StartGameplay() => _markup.Start();
     #endif
 
     public void SwitchTo<T>() where T : ILevelState
@@ -66,6 +69,4 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     }
 
     private void StartEnemySpawn() => SwitchTo<EnemyUpgradeState>();
-
-    private void StartGameplay() => _markup.Start();
 }

@@ -48,13 +48,9 @@ class DesktopPlayerRotator : IPlayerRotator
 
     private bool IsValidPosition(Vector3 lookAtPosition)
     {
-        // Проверка на некорректные значения
         if (float.IsInfinity(lookAtPosition.x) || float.IsInfinity(lookAtPosition.y) || float.IsInfinity(lookAtPosition.z) ||
             float.IsNaN(lookAtPosition.x) || float.IsNaN(lookAtPosition.y) || float.IsNaN(lookAtPosition.z))
-        {
-            Debug.Log("Invalid lookAtPosition: " + lookAtPosition);
             return false;
-        }
 
         return true;
     }
@@ -62,10 +58,7 @@ class DesktopPlayerRotator : IPlayerRotator
     private bool IsCameraEnable()
     {
         if (_camera == null || !_camera.gameObject.activeInHierarchy)
-        {
-            Debug.LogError("Camera is not assigned or inactive!");
             return false;
-        }
 
         return true;
     }

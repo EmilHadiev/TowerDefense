@@ -13,15 +13,15 @@ public class EnemyFactory : IEnemyFactory
 
         _enemyPaths = new Dictionary<EnemyType, string>(10)
         {
-            {EnemyType.Skeleton,    AssetPath.SkeletonPath},
-            {EnemyType.DemonKnight, AssetPath.DemonKnightPath},
-            {EnemyType.Golem,       AssetPath.GolemPath},
-            {EnemyType.BlackKnight, AssetPath.BlackKnightPath},
-            {EnemyType.ArmorKnight, AssetPath.ArmorKnightPath},
-            {EnemyType.Turtle,      AssetPath.TurtlePath },
-            {EnemyType.Dragon,      AssetPath.DragonPath},
-            {EnemyType.Slime,       AssetPath.SlimePath},
-            {EnemyType.Mage,        AssetPath.MagePath},
+            {EnemyType.Skeleton,    AssetProvider.SkeletonPath},
+            {EnemyType.DemonKnight, AssetProvider.DemonKnightPath},
+            {EnemyType.Golem,       AssetProvider.GolemPath},
+            {EnemyType.BlackKnight, AssetProvider.BlackKnightPath},
+            {EnemyType.ArmorKnight, AssetProvider.ArmorKnightPath},
+            {EnemyType.Turtle,      AssetProvider.TurtlePath },
+            {EnemyType.Dragon,      AssetProvider.DragonPath},
+            {EnemyType.Slime,       AssetProvider.SlimePath},
+            {EnemyType.Mage,        AssetProvider.MagePath},
         };
 
         if (_enemyPaths.Count != Enum.GetValues(typeof(EnemyType)).Length)
