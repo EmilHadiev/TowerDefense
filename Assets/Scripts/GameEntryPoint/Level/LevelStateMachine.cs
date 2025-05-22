@@ -5,6 +5,7 @@ using Zenject;
 
 public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 {
+    [SerializeField] private PlayerUIDynamic _uiDynamic;
     [SerializeField] private EnemySpawnerContainer _spawnerContainer;
     [SerializeField] private WaitingLevelState _waitingState;
     [SerializeField] private PlayerSpawnPosition _spawnPosition;
@@ -24,9 +25,19 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         _states.Add(typeof(EnemyUpgradeState), new EnemyUpgradeState(_upgrader, this));
     }
 
+    private void OnEnable()
+    {
+        _loadingScreen.Loaded += OnLoaded;
+    }
+
+    private void OnDisable()
+    {
+        _loadingScreen.Loaded -= OnLoaded;
+    }
+
     private void Start()
     {
-        ActivatePlatformOptions();
+        StopHideCanvas();        
         StartEnemySpawn();
         SetPlayerPosition();
         _loadingScreen.Show();
@@ -70,7 +81,19 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         _currentState.Enter();
     }
 
+    private void StopHideCanvas()
+    {
+        if (_uiDynamic.TryGetComponent(out Canvas canvas))
+            if (canvas.enabled == false)
+                canvas.enabled = true;
+    }
+
     private void StartEnemySpawn() => SwitchState<EnemyUpgradeState>();
 
     private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
+
+    private void OnLoaded()
+    {
+        ActivatePlatformOptions();
+    }
 }

@@ -1,10 +1,15 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private Slider _slider;
     [SerializeField] private float _hideDelay = 2;
+
+    public event Action Loaded;
 
     private void Awake()
     {
@@ -13,14 +18,26 @@ public class LoadingScreen : MonoBehaviour
 
     public void Hide()
     {
+        EnableToggle(true);
         _canvasGroup.alpha = 1;
+        _slider.value = 0;
     }
 
     public void Show()
     {
-        if (_canvasGroup.alpha == 0)
-            return;
+        _slider.DOValue(1, _hideDelay / 2).OnComplete(Disable);
+    }
 
-        _canvasGroup.DOFade(0, _hideDelay);
+    private void Disable()
+    {
+        _canvasGroup.DOFade(0, _hideDelay / 2).OnComplete(OnCompleted);
+    }
+
+    private void EnableToggle(bool isOn) => gameObject.SetActive(isOn);
+
+    private void OnCompleted()
+    {
+        EnableToggle(false);
+        Loaded?.Invoke();
     }
 }
