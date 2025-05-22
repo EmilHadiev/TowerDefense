@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
+public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 {
-    [SerializeField] private PlayerUIDynamic _uiDynamic;
     [SerializeField] private EnemySpawnerContainer _spawnerContainer;
     [SerializeField] private WaitingLevelState _waitingState;
     [SerializeField] private PlayerSpawnPosition _spawnPosition;
@@ -14,6 +13,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
 
     private EnemyUpgrader _upgrader;
     private LoadingScreen _loadingScreen;
+    private IPlayer _player;
 
     private ILevelState _currentState;
 
@@ -26,26 +26,24 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
 
     private void Start()
     {
-        _loadingScreen.Show();
-        StopHideCanvas();
-
-        #if UNITY_WEBGL
-        StartGameplay();
-        #endif
-
+        ActivatePlatformOptions();
         StartEnemySpawn();
+        SetPlayerPosition();
+        _loadingScreen.Show();
     }
 
     [Inject]
-    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen)
+    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen, IPlayer player)
     {
         _upgrader = upgrader;
         _loadingScreen = loadingScreen;
+        _player = player;
     }
 
     #if UNITY_WEBGL
 
     private GameplayMarkup _markup;
+
     [Inject]
     private void WebConstructor(GameplayMarkup markup)
     {
@@ -55,7 +53,14 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
     private void StartGameplay() => _markup.Start();
     #endif
 
-    public void SwitchTo<T>() where T : ILevelState
+    private void ActivatePlatformOptions()
+    {
+        #if UNITY_WEBGL
+            StartGameplay();
+        #endif
+    }
+
+    public void SwitchState<T>() where T : ILevelState
     {
         if (_states.TryGetValue(typeof(T), out ILevelState levelState) == false)
             new ArgumentOutOfRangeException(typeof(T).ToString());
@@ -65,12 +70,7 @@ public class LevelEntryPoint : MonoBehaviour, ILevelSwitcher
         _currentState.Enter();
     }
 
-    private void StopHideCanvas()
-    {
-        if (_uiDynamic.TryGetComponent(out Canvas canvas))
-            if (canvas.enabled == false)
-                canvas.enabled = true;
-    }
+    private void StartEnemySpawn() => SwitchState<EnemyUpgradeState>();
 
-    private void StartEnemySpawn() => SwitchTo<EnemyUpgradeState>();
+    private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
 }

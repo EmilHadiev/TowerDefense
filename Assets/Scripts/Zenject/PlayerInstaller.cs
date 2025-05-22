@@ -9,17 +9,11 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {        
-        //BindInput();
-        //BindPlayerAttacker();
+        BindInput();
+        BindPlayerAttacker();
         BindSoundContainer();
         BindOptimization();
-        BindPlayerProvider();
         BindPlayer();
-    }
-
-    private void BindPlayerProvider()
-    {
-        Container.BindInterfacesTo<PlayerProvider>().AsSingle();
     }
 
     private void BindOptimization()
@@ -40,8 +34,6 @@ public class PlayerInstaller : MonoInstaller
     private void BindPlayer()
     {
         Container.BindInterfacesTo<Player>().FromComponentInNewPrefab(_player).AsSingle();
-        BindPlayerAttacker();
-        BindInput();
     }
 
     private void BindInput()

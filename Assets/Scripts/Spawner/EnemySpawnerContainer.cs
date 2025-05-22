@@ -9,7 +9,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     private readonly WaitForSeconds _delay = new WaitForSeconds(Constants.EnemySpawnDelay);
 
     private EnemyCounter _counter;
-    private ILevelSwitcher _switcher;
+    private ILevelStateSwitcher _switcher;
     private int _index = 0;
 
     private Coroutine _spawnCoroutine;
@@ -27,7 +27,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     }
 
     [Inject]
-    private void Constructor(EnemyCounter counter, ILevelSwitcher switcher)
+    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher)
     {
         _counter = counter;
         _switcher = switcher;
@@ -72,5 +72,5 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private void OnFilled() => Exit();
 
-    private void OnEnemyDied() => _switcher.SwitchTo<WaitingLevelState>();
+    private void OnEnemyDied() => _switcher.SwitchState<WaitingLevelState>();
 }

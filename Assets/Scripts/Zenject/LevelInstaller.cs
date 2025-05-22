@@ -4,11 +4,11 @@ using Zenject;
 
 public class LevelInstaller : MonoInstaller
 {
-    [SerializeField] private LevelEntryPoint _entryPoint;
+    [SerializeField] private LevelStateMachine _entryPoint;
 
     private void OnValidate()
     {
-        _entryPoint ??= FindObjectOfType<LevelEntryPoint>();
+        _entryPoint ??= FindObjectOfType<LevelStateMachine>();
 
         if (_entryPoint == null)
             Debug.LogError($"ERROR {nameof(_entryPoint)} is null!");
@@ -27,6 +27,6 @@ public class LevelInstaller : MonoInstaller
 
     private void BindLevelEntryPoint()
     {
-        Container.BindInterfacesTo<LevelEntryPoint>().FromInstance(_entryPoint).AsSingle();
+        Container.BindInterfacesTo<LevelStateMachine>().FromInstance(_entryPoint).AsSingle();
     }
 }
