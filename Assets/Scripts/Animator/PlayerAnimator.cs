@@ -3,10 +3,10 @@ using Zenject;
 
 public class PlayerAnimator : CharacterAnimator
 {
-    private IMoveHandler _moveHandler;
+    private LazyInject<IMoveHandler> _moveHandler;
 
     [Inject]
-    private void Constructor(IMoveHandler moveHandler)
+    private void Constructor(LazyInject<IMoveHandler> moveHandler)
     {
         _moveHandler = moveHandler;
     }
@@ -18,7 +18,7 @@ public class PlayerAnimator : CharacterAnimator
 
     private void Running()
     {
-        if (_moveHandler.GetMoveDirection() != Vector3.zero)
+        if (_moveHandler.Value.GetMoveDirection() != Vector3.zero)
             StartRunning();
         else
             StopRunning();
