@@ -40,9 +40,8 @@ public class YandexGameEntryPoint : IEntryPoint
         while (YG2.isSDKEnabled == false)
             yield return _waitingFrame;
 
-        #if UNITY_EDITOR
-            ResetProgress();
-        #endif
+        ResetProgress();
+        Debug.Log("бпелеммн яаюпяшбюел опнцпеяя!");
 
         HideStickyBanners();
 

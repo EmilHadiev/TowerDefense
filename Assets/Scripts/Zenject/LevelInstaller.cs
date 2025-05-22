@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +17,12 @@ public class LevelInstaller : MonoInstaller
     {
         BindLevelEntryPoint();
         BindEnemyCounter();
+        BindGameOverService();
+    }
+
+    private void BindGameOverService()
+    {
+        Container.BindInterfacesTo<GameOverService>().AsSingle();
     }
 
     private void BindEnemyCounter()

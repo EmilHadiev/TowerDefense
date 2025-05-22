@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using YG;
 using Zenject;
 
@@ -33,7 +32,7 @@ public class YandexAdv : IAdvertising, IInitializable, IDisposable
                     _coinStorage.Add(TryConvertToInt(rewardValue));
                     break;
                 case AdvType.Resurrect:
-                    Debug.Log("Доделать восркшение!");
+                    callBack?.Invoke();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(advType));
