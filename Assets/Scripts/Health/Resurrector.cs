@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 using Zenject;
 
 public class Resurrector : MonoBehaviour, IResurrectable
@@ -13,25 +14,24 @@ public class Resurrector : MonoBehaviour, IResurrectable
 
     private IPlayer _player;
     private PlayerStat _stat;
-    private IInstantiator _instantiator;
+    private IFactoryParticle _factoryParticle;
     private ParticleView _view;
 
     public event Action Resurrected;
 
     private void Awake()
     {
-        _view = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetProvider.ParticleMagicShieldPath);
+        _view = _factoryParticle.Create(AssetProvider.ParticleMagicShieldPath, transform);
         _view.Stop();
-        _view.transform.parent = transform;
         _view.transform.position = transform.position;
     }
 
     [Inject]
-    private void Constructor(IPlayer player, PlayerStat stat, IInstantiator instantiator)
+    private void Constructor(IPlayer player, PlayerStat stat, IFactoryParticle instantiator)
     {
         _player = player;
         _stat = stat;
-        _instantiator = instantiator;
+        _factoryParticle = instantiator;
     }
 
     public void Resurrect()

@@ -13,11 +13,11 @@ public class EnemySpawnerAbility
 
     private int _previousSpawnPositionIndex = -1;
 
-    public EnemySpawnerAbility(EnemySpawnPosition[] spawnPositions, IInstantiator instantiator, int maxEnemies, Optimizator fPSCounter)
+    public EnemySpawnerAbility(EnemySpawnPosition[] spawnPositions, IEnemyFactory factory, int maxEnemies, Optimizator fPSCounter)
     {
-        _factory = new EnemyFactory(instantiator);
         _spanwer = spawnPositions;
         _maxEnemies = maxEnemies;
+        _factory = factory;
         _pool = new EnemyPool(fPSCounter,_maxEnemies);
     }
 

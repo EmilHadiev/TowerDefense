@@ -15,7 +15,8 @@ public class MageAbility : MonoBehaviour
     private WaitForSeconds _delay;
     private Optimizator _fpsCounter;
     private EnemyCounter _enemyCounter;
-    private IInstantiator _instantiator;
+    private IFactoryParticle _factoryParticle;
+    private IEnemyFactory _enemyFactory;
 
     private void Awake()
     {
@@ -37,7 +38,7 @@ public class MageAbility : MonoBehaviour
 
     private void InitSpawner()
     {
-        _spawners = new EnemySpawnerAbility(_spawnPositions, _instantiator, MaxEnemies, _fpsCounter);
+        _spawners = new EnemySpawnerAbility(_spawnPositions, _enemyFactory, MaxEnemies, _fpsCounter);
         _spawners.CreateEnemies();
     }
 
@@ -46,7 +47,7 @@ public class MageAbility : MonoBehaviour
         _views = new EnemySpawnerAbilityView[MaxEnemies];
 
         for (int i = 0; i < MaxEnemies; i++)
-            _views[i] = new EnemySpawnerAbilityView(_spawnPositions[i], _instantiator);
+            _views[i] = new EnemySpawnerAbilityView(_spawnPositions[i], _factoryParticle);
     }
 
     private void StopSpawn()
@@ -58,11 +59,12 @@ public class MageAbility : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IInstantiator instantiator, Optimizator fPSCounter, EnemyCounter counter)
+    private void Constructor(IFactoryParticle factoryParticle, Optimizator fPSCounter, EnemyCounter counter, IEnemyFactory enemyFactory)
     {
         _fpsCounter = fPSCounter;
-        _instantiator = instantiator;
+        _factoryParticle = factoryParticle;
         _enemyCounter = counter;
+        _enemyFactory = enemyFactory;
     }
 
     private IEnumerator SpawnCoroutine()

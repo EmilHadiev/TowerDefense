@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
-using Zenject;
 
 public class EnemySpawnerAbilityView
 {
-    private readonly IInstantiator _instantiator;
+    private readonly IFactoryParticle _factoryParticle;
     private readonly Transform _spawner;
     private readonly ParticleView _particleView;
 
-    public EnemySpawnerAbilityView(EnemySpawnPosition spawner, IInstantiator instantiator)
+    public EnemySpawnerAbilityView(EnemySpawnPosition spawner, IFactoryParticle factoryParticle)
     {
         _spawner = spawner.transform;
-        _instantiator = instantiator;
+        _factoryParticle = factoryParticle;
         _particleView = CreateParticle();
     }
 
     private ParticleView CreateParticle()
     {
-        ParticleView view = _instantiator.InstantiatePrefabResourceForComponent<ParticleView>(AssetProvider.ParticleSpawnRunePath);
-        view.transform.parent = _spawner.transform;
+        ParticleView view = _factoryParticle.Create(AssetProvider.ParticleSpawnRunePath, _spawner);
         view.Stop();
         return view;
     }
