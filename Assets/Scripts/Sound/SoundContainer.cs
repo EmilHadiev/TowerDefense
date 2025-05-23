@@ -68,13 +68,13 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
 
         _audioSource.clip = clip;
     }
-
-    private void SetClip(string soundType)
+  
+    private void SetClip(string soundName)
     {
-        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.Name == soundType).Clip;
+        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.Name == soundName).Clip;
 
         if (clip == null)
-            throw new ArgumentNullException(nameof(soundType));
+            throw new ArgumentNullException(nameof(soundName));
 
         _audioSource.clip = clip;
     }

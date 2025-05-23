@@ -143,9 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 2783800062045417324}
   _gameSounds:
-  - <SoundType>k__BackingField: 0
-    <Name>k__BackingField: SwitchBullet
+  - <Name>k__BackingField: SwitchBullet
     <Clip>k__BackingField: {fileID: 8300000, guid: 20f72d2017a302643a3e25dfc7e2e8fd, type: 3}
-  - <SoundType>k__BackingField: 1
-    <Name>k__BackingField: SpendCoin
+  - <Name>k__BackingField: SpendCoin
     <Clip>k__BackingField: {fileID: 8300000, guid: 1ad5b2f96d41bd44aaa2253f99a62dc4, type: 3}
+  - <Name>k__BackingField: Resurrect
+    <Clip>k__BackingField: {fileID: 8300000, guid: c98d0ba47181b564d8b19d2ba31249f2, type: 3}

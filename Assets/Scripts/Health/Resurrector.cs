@@ -16,6 +16,7 @@ public class Resurrector : MonoBehaviour, IResurrectable
     private PlayerStat _stat;
     private IFactoryParticle _factoryParticle;
     private ParticleView _view;
+    private ISoundContainer _soundContainer;
 
     public event Action Resurrected;
 
@@ -27,11 +28,12 @@ public class Resurrector : MonoBehaviour, IResurrectable
     }
 
     [Inject]
-    private void Constructor(IPlayer player, PlayerStat stat, IFactoryParticle instantiator)
+    private void Constructor(IPlayer player, PlayerStat stat, IFactoryParticle instantiator, ISoundContainer soundContainer)
     {
         _player = player;
         _stat = stat;
         _factoryParticle = instantiator;
+        _soundContainer = soundContainer;
     }
 
     public void Resurrect()
@@ -45,6 +47,7 @@ public class Resurrector : MonoBehaviour, IResurrectable
 
     private IEnumerator Resurrecting()
     {
+        _soundContainer.Play(SoundName.Resurrect);
         _view.Play();
         yield return _delay;
         Resurrected?.Invoke();
