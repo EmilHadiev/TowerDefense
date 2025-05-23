@@ -13,7 +13,7 @@ public class UpgradePurchaseHandler : IUpgradePurchaseHandler
     {
         if (_coinStorage.TrySpend(data.Cost))
         {
-            _soundContainer.Play(SoundType.SpendCoin);
+            _soundContainer.Play(SoundName.SpendCoin);
             return true;
         }
 

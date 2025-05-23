@@ -43,7 +43,7 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
             Advertising.ShowRewardAdv(Type, GetPrice(), PlaySpendCoin);
     }
 
-    private void PlaySpendCoin() => _soundContainer.Play(SoundType.SpendCoin);
+    private void PlaySpendCoin() => _soundContainer.Play(SoundName.SpendCoin);
 
     private void OnTimerActivated(bool isOn) => _advCooldownContainer.SetActive(isOn);
 

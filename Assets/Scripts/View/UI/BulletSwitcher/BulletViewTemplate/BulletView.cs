@@ -67,7 +67,7 @@ public class BulletView : MonoBehaviour, IBulletView
         else
         {
             Used?.Invoke(_index);
-            _soundContainer.Play(SoundType.SwitchBullet);
+            _soundContainer.Play(SoundName.SwitchBullet);
         }
     }
 

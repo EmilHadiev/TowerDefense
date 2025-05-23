@@ -52,7 +52,7 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
         Play();
     }
 
-    public void Play(SoundType soundType)
+    public void Play(string soundType)
     {
         _isReseted = true;
         SetClip(soundType);
@@ -69,9 +69,9 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
         _audioSource.clip = clip;
     }
 
-    private void SetClip(SoundType soundType)
+    private void SetClip(string soundType)
     {
-        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.SoundType == soundType).Clip;
+        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.Name == soundType).Clip;
 
         if (clip == null)
             throw new ArgumentNullException(nameof(soundType));

@@ -20,7 +20,7 @@ public class BulletPurchaseHandler : IBulletPurchaseHandler
 
         if (_coinStorage.TrySpend(data.Price))
         {
-            _soundContainer.Play(SoundType.SpendCoin);
+            _soundContainer.Play(SoundName.SpendCoin);
             data.IsPurchased = true;
 
             Purchased?.Invoke(data);

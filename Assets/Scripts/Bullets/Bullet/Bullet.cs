@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
 
@@ -19,8 +20,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     [field: SerializeField] public BulletType Type { get; private set; }
 
     private TriggerObserver _observer;
-    private readonly ReflectDamageCoefficientCalculator _reflectCalculator = new ReflectDamageCoefficientCalculator();
-    
+    private readonly ReflectDamageCoefficientCalculator _reflectCalculator = new ReflectDamageCoefficientCalculator();    
 
     private IBulletMovable _movable;
     private IBulletEffectHandler _currentEffect;
