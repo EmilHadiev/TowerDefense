@@ -4,11 +4,11 @@ using UnityEngine;
 public class BulletViewCreator : IBulletViewCreator
 {
     private readonly ICoinStorage _coinStorage;
-    private readonly ISoundContainer _soundContainer;
+    private readonly IPlayerSoundContainer _soundContainer;
     private readonly BulletView _template;
     private readonly Transform _container;
 
-    public BulletViewCreator(ICoinStorage coinStorage, ISoundContainer soundContainer, BulletView template, Transform container)
+    public BulletViewCreator(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, BulletView template, Transform container)
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;

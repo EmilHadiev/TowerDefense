@@ -17,7 +17,7 @@ public class UpgradeViewContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, ISoundContainer soundContainer, IEnumerable<UpgradeData> data)
+    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data)
     {
         UpgraderContainer upgraderContainer = new UpgraderContainer(playerStat, data);
         IUpgradePurchaseHandler purchaseHandler = new UpgradePurchaseHandler(coinStorage, soundContainer);

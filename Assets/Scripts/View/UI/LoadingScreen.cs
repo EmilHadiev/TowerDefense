@@ -11,29 +11,24 @@ public class LoadingScreen : MonoBehaviour
 
     public event Action Loaded;
 
-    private void Awake()
-    {
+    private void Awake() => 
         DontDestroyOnLoad(gameObject);
-    }
 
-    public void Hide()
+    public void Show()
     {
         EnableToggle(true);
         _canvasGroup.alpha = 1;
         _slider.value = 0;
     }
 
-    public void Show()
-    {
+    public void Hide() => 
         _slider.DOValue(1, _hideDelay / 2).OnComplete(Disable);
-    }
 
-    private void Disable()
-    {
+    private void Disable() => 
         _canvasGroup.DOFade(0, _hideDelay / 2).OnComplete(OnCompleted);
-    }
 
-    private void EnableToggle(bool isOn) => gameObject.SetActive(isOn);
+    private void EnableToggle(bool isOn) => 
+        gameObject.SetActive(isOn);
 
     private void OnCompleted()
     {

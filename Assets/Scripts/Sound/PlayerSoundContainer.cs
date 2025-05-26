@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(AudioSource))]
-public class SoundContainer : MonoBehaviour, ISoundContainer
+public class PlayerSoundContainer : MonoBehaviour, IPlayerSoundContainer
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameSound[] _gameSounds;
@@ -22,7 +22,6 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
     }
 
     [Inject]
-
     private void Constructor(IBulletDefinition[] bullets)
     {
         _bullets = bullets;
@@ -74,7 +73,7 @@ public class SoundContainer : MonoBehaviour, ISoundContainer
         AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.Name == soundName).Clip;
 
         if (clip == null)
-            throw new ArgumentNullException(nameof(soundName));
+            throw new ArgumentNullException(soundName);
 
         _audioSource.clip = clip;
     }

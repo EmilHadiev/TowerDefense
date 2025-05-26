@@ -3,11 +3,11 @@ using System;
 public class BulletPurchaseHandler : IBulletPurchaseHandler
 {
     private readonly ICoinStorage _coinStorage;
-    private readonly ISoundContainer _soundContainer;
+    private readonly IPlayerSoundContainer _soundContainer;
 
     public event Action<IBulletDescription> Purchased;
 
-    public BulletPurchaseHandler(ICoinStorage coinStorage, ISoundContainer soundContainer)
+    public BulletPurchaseHandler(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer)
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;

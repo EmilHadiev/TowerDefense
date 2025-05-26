@@ -5,7 +5,7 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Player _player;
-    [SerializeField] private SoundContainer _soundContainer;
+    [SerializeField] private PlayerSoundContainer _soundContainer;
     [SerializeField] private EnvironmentData _envData;
 
     public override void InstallBindings()
@@ -24,7 +24,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindSoundContainer()
     {
-        Container.BindInterfacesTo<SoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
+        Container.BindInterfacesTo<PlayerSoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
     }
 
     private void BindPlayerAttacker()

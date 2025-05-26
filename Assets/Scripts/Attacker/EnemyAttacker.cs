@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class EnemyAttacker : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class EnemyAttacker : MonoBehaviour
     private const int MaxTargets = 2;
 
     private LayerMask _layers;
+    private IEnemySoundContainer _soundContainer;
 
     private readonly Collider[] _hits = new Collider[MaxTargets];
 
@@ -23,6 +25,12 @@ public class EnemyAttacker : MonoBehaviour
         _stat = GetComponent<Enemy>().Stat;
 
         _layers = LayerMask.GetMask(Constants.PlayerMask, Constants.ObstacleMask);
+    }
+
+    [Inject]
+    private void Constructor(IEnemySoundContainer enemySoundContainer)
+    {
+        _soundContainer = enemySoundContainer;
     }
 
     private void Hit()
@@ -45,9 +53,11 @@ public class EnemyAttacker : MonoBehaviour
             {
                 FaceToTarget(_hits[i].transform.position);
                 health.TakeDamage(_stat.Damage);
+                PlaySound();
             }
         }
     }
+
 
     private void FaceToTarget(Vector3 position) => transform.LookAt(position);
 
@@ -56,6 +66,8 @@ public class EnemyAttacker : MonoBehaviour
         PhysicsDebug.DrawDebug(GetStartPoint(), _stat.AttackRadius);
         return Physics.OverlapSphereNonAlloc(GetStartPoint(), _stat.AttackRadius, _hits, _layers);
     }
+
+    private void PlaySound() => _soundContainer.Play(_stat);
 
     private void ResetTarget()
     {

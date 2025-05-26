@@ -9,11 +9,11 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
     [SerializeField] private GameObject _advCooldownContainer;
 
     private const AdvType Type = AdvType.Coin;
-    private ISoundContainer _soundContainer;
+    private IPlayerSoundContainer _soundContainer;
     private IUpgradePriceCalculator _priceCalculator;
 
     [Inject]
-    private void Constructor(ISoundContainer soundContainer, IEnumerable<UpgradeData> data)
+    private void Constructor(IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data)
     {
         _soundContainer = soundContainer;
         _priceCalculator = new UpgradePriceCalculator(data);

@@ -8,7 +8,7 @@ public class TurtleAbility : MonoBehaviour
     private EnemyExplosion _ability;
     private IInstantiator _instantiator;
     private ICameraProvider _cameraProvider;
-
+    private IEnemySoundContainer _soundContainer;
     private ParticleView _explosionPrefab;
     private ParticleViewText _explosionCountPrefab;
     private EnemyStat _stat;
@@ -31,10 +31,11 @@ public class TurtleAbility : MonoBehaviour
     private void OnDisable() => _health.Died -= OnDied;
 
     [Inject]
-    private void Constructor(IInstantiator instantiator, ICameraProvider cameraProvider)
+    private void Constructor(IInstantiator instantiator, ICameraProvider cameraProvider, IEnemySoundContainer enemySoundContainer)
     {
         _instantiator = instantiator;
         _cameraProvider = cameraProvider;
+        _soundContainer = enemySoundContainer;
     }
 
     private void CreateExplosionParticle()
@@ -52,6 +53,7 @@ public class TurtleAbility : MonoBehaviour
     private void OnDied()
     {        
         ExplodeView();
+        PlaySound();
         _ability.Activate();
         ExplodeCountView();
     }
@@ -74,5 +76,11 @@ public class TurtleAbility : MonoBehaviour
     {
         Vector3 additionalPosition = transform.up * 2;
         return transform.position + additionalPosition;
+    }
+
+    private void PlaySound()
+    {
+        _soundContainer.Stop();
+        _soundContainer.Play(SoundName.FireExplosion);
     }
 }

@@ -19,6 +19,7 @@ public class EnemyExplosion : IAbility
         _enemy = enemy;
         _stat = stat;
         _text = text;
+
         _cameraProvider = cameraProvider;
         _cameraProvider.SetCamera(Camera.main);
     }
@@ -32,6 +33,7 @@ public class EnemyExplosion : IAbility
 
         _text.SetText(countEnemies.ToString());
         _cameraProvider.Punch();
+        
         PhysicsDebug.DrawDebug(_enemy.position, ExplosionRadius, 1);
     }
 

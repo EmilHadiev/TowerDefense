@@ -37,10 +37,11 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 
     private void Start()
     {
+        _loadingScreen.Show();
         StopHideCanvas();        
         StartEnemySpawn();
         SetPlayerPosition();
-        _loadingScreen.Show();
+        _loadingScreen.Hide();
     }
 
     [Inject]

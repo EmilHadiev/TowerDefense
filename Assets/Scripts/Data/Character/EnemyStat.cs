@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyStat", menuName = "Character/Stat/EnemyStats/Enemy")]
-public class EnemyStat : ScriptableObject
+public class EnemyStat : ScriptableObject, IEnemySound
 {
     [SerializeField, Range(1f, 1000f)] public float Health = 30;
     [SerializeField, Range(1f, 100f)] public float Damage = 10;
@@ -10,4 +10,5 @@ public class EnemyStat : ScriptableObject
     [SerializeField, Range(1, 10f)] public int Point = 1;
 
     [field: SerializeField] public EnemyType EnemyType { get; protected set; }
+    [field: SerializeField] public AudioClip SoundAttack { get; private set; }
 }

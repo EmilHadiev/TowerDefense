@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -6,6 +5,7 @@ using Zenject;
 public class EnemyInstaller : MonoInstaller
 {
     [SerializeField] private EnemyStat[] _stats;
+    [SerializeField] private EnemySoundContainer _soundContainer;
 
     public override void InstallBindings()
     {
@@ -13,6 +13,12 @@ public class EnemyInstaller : MonoInstaller
         BindEnemyUpgrader();
         BindRewardSystems();
         BindCameraProvider();
+        BindEnemySoundContainer();
+    }
+
+    private void BindEnemySoundContainer()
+    {
+        Container.BindInterfacesTo<EnemySoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
     }
 
     private void BindCameraProvider()
@@ -36,6 +42,7 @@ public class EnemyInstaller : MonoInstaller
         }
 
         Container.Bind<IEnumerable<EnemyStat>>().FromInstance(stats).AsSingle();
+        Container.Bind<IEnumerable<IEnemySound>>().FromInstance(stats).AsSingle();
     }
 
     private void BindEnemyUpgrader()

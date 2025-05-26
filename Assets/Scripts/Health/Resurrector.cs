@@ -16,7 +16,7 @@ public class Resurrector : MonoBehaviour, IResurrectable
     private PlayerStat _stat;
     private IFactoryParticle _factoryParticle;
     private ParticleView _view;
-    private ISoundContainer _soundContainer;
+    private IPlayerSoundContainer _soundContainer;
 
     public event Action Resurrected;
 
@@ -28,7 +28,7 @@ public class Resurrector : MonoBehaviour, IResurrectable
     }
 
     [Inject]
-    private void Constructor(IPlayer player, PlayerStat stat, IFactoryParticle instantiator, ISoundContainer soundContainer)
+    private void Constructor(IPlayer player, PlayerStat stat, IFactoryParticle instantiator, IPlayerSoundContainer soundContainer)
     {
         _player = player;
         _stat = stat;

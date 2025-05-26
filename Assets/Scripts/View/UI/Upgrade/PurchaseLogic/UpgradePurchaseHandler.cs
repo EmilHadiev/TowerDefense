@@ -1,9 +1,9 @@
 public class UpgradePurchaseHandler : IUpgradePurchaseHandler
 {
     private readonly ICoinStorage _coinStorage;
-    private readonly ISoundContainer _soundContainer;
+    private readonly IPlayerSoundContainer _soundContainer;
 
-    public UpgradePurchaseHandler(ICoinStorage coinStorage, ISoundContainer soundContainer)
+    public UpgradePurchaseHandler(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer)
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;

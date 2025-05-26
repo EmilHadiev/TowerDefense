@@ -18,3 +18,4 @@ MonoBehaviour:
   AttackRadius: 5
   Point: 5
   <EnemyType>k__BackingField: 3
+  <SoundAttack>k__BackingField: {fileID: 8300000, guid: b97909cc05dccfc498d076e1bd2efe90, type: 3}

@@ -29,7 +29,7 @@ public class GameEntryPoint : MonoBehaviour
 
     private void StartEntryPoint()
     {
-        _loadingScreen.Hide();
+        _loadingScreen.Show();
 
         #if UNITY_WEBGL
             _currentPoint = new YandexGameEntryPoint(_sceneLoader, _savable, _markup, _envData, _performer);

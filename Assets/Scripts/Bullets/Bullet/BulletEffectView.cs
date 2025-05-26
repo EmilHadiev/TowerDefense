@@ -5,7 +5,7 @@ public class BulletEffectView : MonoBehaviour
 {
     [SerializeField] private Bullet _bullet;
 
-    private ISoundContainer _soundContainer;
+    private IPlayerSoundContainer _soundContainer;
 
     private void OnValidate()
     {
@@ -15,7 +15,7 @@ public class BulletEffectView : MonoBehaviour
     private void OnEnable() => PlaySoundEffect();
 
     [Inject]
-    private void Constructor(ISoundContainer soundContainer)
+    private void Constructor(IPlayerSoundContainer soundContainer)
     {
         _soundContainer = soundContainer;
     }
