@@ -1,9 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class ObstacleHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float _health = 100;
+    private PlayerStat _playerStat;
+
+    private float _health;
+
+    public float MaxHealth { get; private set; }
 
     public bool IsAlive => _health > 0;
 
@@ -11,9 +16,26 @@ public class ObstacleHealth : MonoBehaviour, IHealth
     public event Action Died;
     public event Action<float> DamageApplied;
 
+    [Inject]
+    private void Constructor(PlayerStat playerStat)
+    {
+        _playerStat = playerStat;
+    }
+
+    private void OnEnable()
+    {
+        MaxHealth = _playerStat.MaxHealth;
+        _health = MaxHealth;
+    }
+
     public void AddHealth(float healthPoints)
     {
+        _health += healthPoints;
 
+        if (_health > MaxHealth)
+            _health = MaxHealth;
+
+        
     }
 
     public void TakeDamage(float damage)
@@ -22,6 +44,8 @@ public class ObstacleHealth : MonoBehaviour, IHealth
 
         if (_health <= 0)
             Die();
+
+        DamageApplied?.Invoke(damage);
     }
 
     private void Die()

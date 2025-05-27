@@ -45,13 +45,14 @@ public class ExplosionBarrel : InteractiveObstacle
     {
         _cameraProvider.Punch();
         _view.Stop();
+        _view.transform.position = transform.position;
         _view.Play();
         _soundContainer.Play(SoundName.FireExplosion);
     }
 
     private void CreateExplosionParticle()
     {
-        _view = _factoryParticle.Create(AssetProvider.ParticleExplosionPath, transform);
+        _view = _factoryParticle.Create(AssetProvider.ParticleExplosionPath);
         _view.Stop();
     }
 

@@ -6,14 +6,18 @@ public class Map : MonoBehaviour
 
     private void OnValidate()
     {
-        SetPosition();
+        BakePosition();
+    }
+
+    [ContextMenu(nameof(SetPosition))]
+    private void SetPosition()
+    {
+        transform.position = Position;
     }
 
     [ContextMenu(nameof(BakePosition))]
     private void BakePosition()
     {
-        SetPosition();
+        Position = transform.position;
     }
-
-    private void SetPosition() => Position = transform.position;
 }
