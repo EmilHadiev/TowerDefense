@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using Zenject;
 
 public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 {
+    [Header("Level state")]
     [SerializeField] private PlayerUIDynamic _uiDynamic;
     [SerializeField] private EnemySpawnerContainer _spawnerContainer;
     [SerializeField] private WaitingLevelState _waitingState;
+    [Header("Player")]
     [SerializeField] private PlayerSpawnPosition _spawnPosition;
+    [Header("Map")]
+    [SerializeField] private NavMeshSurface _navMeshSurface;
+    [SerializeField] private Map _map;
 
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
 
@@ -38,9 +44,12 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void Start()
     {
         _loadingScreen.Show();
-        StopHideCanvas();        
+        StopHideCanvas();
         StartEnemySpawn();
         SetPlayerPosition();
+
+        CreateMap();
+        BuildNavMesh();
         _loadingScreen.Hide();
     }
 
@@ -92,6 +101,13 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void StartEnemySpawn() => SwitchState<EnemyUpgradeState>();
 
     private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
+
+    private void CreateMap()
+    {
+        Map map = Instantiate(_map);
+    }
+
+    private void BuildNavMesh() => _navMeshSurface.BuildNavMesh();
 
     private void OnLoaded()
     {

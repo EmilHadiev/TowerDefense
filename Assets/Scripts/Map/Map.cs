@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [field: SerializeField] public Vector3 Position { get; private set; }
+
+    private void OnValidate()
     {
-        
+        SetPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu(nameof(BakePosition))]
+    private void BakePosition()
     {
-        
+        SetPosition();
     }
+
+    private void SetPosition() => Position = transform.position;
 }
