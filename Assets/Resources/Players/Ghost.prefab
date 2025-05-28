@@ -1031,6 +1031,7 @@ GameObject:
   - component: {fileID: 6494459654767042401}
   - component: {fileID: 1968544527444592899}
   - component: {fileID: 4577799215340509543}
+  - component: {fileID: 4506570636302567165}
   m_Layer: 8
   m_Name: Ghost
   m_TagString: Untagged
@@ -1207,6 +1208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 5991142045842110094}
+  _resurrector: {fileID: 4506570636302567165}
   <Type>k__BackingField: 0
 --- !u!114 &4577799215340509543
 MonoBehaviour:
@@ -1222,6 +1224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 6853289722278234553}
   _collider: {fileID: 4636094266482581166}
+--- !u!114 &4506570636302567165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7259172423999636083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17b34e2610ad4d42a6c559d0457c621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7389559152714789932
 GameObject:
   m_ObjectHideFlags: 0

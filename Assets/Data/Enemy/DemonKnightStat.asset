@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 60
   Damage: 16
-  Speed: 6
+  Speed: 6.5
   AttackRadius: 5
   Point: 3
   <EnemyType>k__BackingField: 1
