@@ -6,6 +6,7 @@ class MobileInput : IInput, ITickable, IMoveHandler
 {
     private const int FirstTouch = 0;
     private const int NeededTouchCount = 0;
+
     private readonly IPlayerRotator _rotator;
     private readonly Joystick _rotateJoystick;
     private readonly Joystick _moveJoystick;

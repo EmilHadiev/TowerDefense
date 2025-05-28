@@ -8,15 +8,16 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
     [SerializeField] private RewardedAdvLockTimer _lockTimer;
     [SerializeField] private GameObject _advCooldownContainer;
 
-    private const AdvType Type = AdvType.Coin;
     private IPlayerSoundContainer _soundContainer;
     private IUpgradePriceCalculator _priceCalculator;
+    private ICoinStorage _coinStorage;
 
     [Inject]
-    private void Constructor(IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data)
+    private void Constructor(IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data, ICoinStorage coinStorage)
     {
         _soundContainer = soundContainer;
         _priceCalculator = new UpgradePriceCalculator(data);
+        _coinStorage = coinStorage;
     }
 
     private void Start()
@@ -32,7 +33,7 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
 
     public void UpdateReward()
     {
-        SetRewardValueText(GetPrice());
+        SetRewardValueText(GetPrice().ToString());
     }
 
     protected override void OnClick() => ShowAdv();
@@ -40,12 +41,18 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
     private void ShowAdv()
     {        
         if (_lockTimer.timerComplete)
-            Advertising.ShowRewardAdv(Type, GetPrice(), PlaySpendCoin);
+            Advertising.ShowRewardAdv(GiveCoinsToPlayer);
     }
 
     private void PlaySpendCoin() => _soundContainer.Play(SoundName.SpendCoin);
 
     private void OnTimerActivated(bool isOn) => _advCooldownContainer.SetActive(isOn);
 
-    private string GetPrice() => _priceCalculator.CalculatePrice().ToString();
+    private int GetPrice() => _priceCalculator.CalculatePrice();
+
+    private void GiveCoinsToPlayer()
+    {
+        _coinStorage.Add(GetPrice());
+        PlaySpendCoin();
+    }
 }

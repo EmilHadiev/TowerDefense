@@ -4,12 +4,10 @@ using Zenject;
 
 public class YandexAdv : IAdvertising, IInitializable, IDisposable
 {
-    private readonly ICoinStorage _coinStorage;
     private readonly GameplayMarkup _markup;
 
-    public YandexAdv(ICoinStorage coinStorage, GameplayMarkup markup)
+    public YandexAdv(GameplayMarkup markup)
     {
-        _coinStorage = coinStorage;
         _markup = markup;
     }
 
@@ -22,22 +20,10 @@ public class YandexAdv : IAdvertising, IInitializable, IDisposable
     public void ShowInterstitialAdv() => YG2.InterstitialAdvShow();
 
 
-    public void ShowRewardAdv(AdvType advType, string rewardValue = "", Action callBack = null)
+    public void ShowRewardAdv(Action callBack)
     {
         YG2.RewardedAdvShow(Constants.RewardID, () =>
         {
-            switch (advType)
-            {
-                case AdvType.Coin:
-                    _coinStorage.Add(TryConvertToInt(rewardValue));
-                    break;
-                case AdvType.Resurrect:
-                    callBack?.Invoke();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(advType));
-            }
-
             callBack?.Invoke();
         });
     }

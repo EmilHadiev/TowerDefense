@@ -61,7 +61,7 @@ public class PauseState : UIState
 
     private void ResurrectPlayer()
     {
-        _advertising.ShowRewardAdv(AdvType.Resurrect, callBack: _player.Resurrectable.Resurrect);
+        _advertising.ShowRewardAdv(_player.Resurrectable.Resurrect);
         _rewardContinueButton.gameObject.SetActive(false);
         _rewardContainer.gameObject.SetActive(false);
         Exit();
