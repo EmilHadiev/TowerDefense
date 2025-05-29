@@ -6,6 +6,7 @@ public class FactoryInstaller : MonoInstaller
     {
         BindParticleFactory();
         BindEnemyFactory();
+        BindInteractiveElementFactory()
     }
 
     private void BindEnemyFactory()
@@ -16,5 +17,10 @@ public class FactoryInstaller : MonoInstaller
     private void BindParticleFactory()
     {
         Container.BindInterfacesTo<FactoryParticle>().AsSingle();
+    }
+
+    private void BindInteractiveElementFactory()
+    {
+        Container.BindInterfacesTo<InteractiveElementFactory>().AsSingle();
     }
 }
