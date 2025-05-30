@@ -1,17 +1,17 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 public class InteractiveElementFactory : IInteractiveElementFactory
 {
     private readonly IInstantiator _instantiator;
-    private readonly IPlayer _player;
 
-    public InteractiveElementFactory(IInstantiator instantiator, IPlayer player)
+    public InteractiveElementFactory(IInstantiator instantiator)
     {
         _instantiator = instantiator;
-        _player = player;
     }
 
-    public GameObject Create(InteractiveElement interactiveElement) =>
-        _instantiator.InstantiatePrefab(interactiveElement, _player.Transform.position, _player.Transform.rotation, null);
+    public InteractiveElement Create(InteractiveElement interactiveElement)
+    {        
+        return _instantiator.InstantiatePrefab(interactiveElement).GetComponent<InteractiveElement>();
+    }
+        
 }

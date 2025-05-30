@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IInteractiveElementFactory
+﻿public interface IInteractiveElementFactory
 {
-    GameObject Create(InteractiveElement interactiveElement);
+    InteractiveElement Create(InteractiveElement prefab);
 }

@@ -30,7 +30,6 @@ public class DefenseBarricade : Barricade
         {
             yield return _delay;
             _health.AddHealth(GetHealthPoints());
-            Debug.Log("»сцул€ю на " + GetHealthPoints());
         }
     }
 
