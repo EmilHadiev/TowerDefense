@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class InteractiveElementFactory
+public class InteractiveElementFactory : IInteractiveElementFactory
 {
     private readonly IInstantiator _instantiator;
     private readonly IPlayer _player;

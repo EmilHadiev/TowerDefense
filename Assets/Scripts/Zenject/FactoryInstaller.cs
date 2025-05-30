@@ -6,7 +6,7 @@ public class FactoryInstaller : MonoInstaller
     {
         BindParticleFactory();
         BindEnemyFactory();
-        BindInteractiveElementFactory()
+        BindInteractiveElementFactory();
     }
 
     private void BindEnemyFactory()
