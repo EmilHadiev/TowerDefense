@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
 public class InteractiveElementPool
 {
-    private const int Size = 5;
+    private const int Size = 3;
 
     private readonly IInteractiveElementFactory _factory;
     private readonly Dictionary<InteractiveElement, List<InteractiveElement>> _elements 
@@ -18,16 +17,15 @@ public class InteractiveElementPool
             _elements.Add(item.Prefab, new List<InteractiveElement>(startSize));
     }
 
-    public InteractiveElement TryGet(InteractiveElement key)
+    public InteractiveElement Get(InteractiveElement key)
     {
-        var prefab = _elements[key].FirstOrDefault(element => element.gameObject.activeInHierarchy == false);
+        InteractiveElement prefab = GetInactiveElement(_elements[key]);
 
         if (prefab == null)
         {
             Create(key);
-            prefab = _elements[key].FirstOrDefault(element => element.gameObject.activeInHierarchy == false);
+            prefab = GetInactiveElement(_elements[key]);
         }
-
         return prefab;
     }
 
@@ -39,5 +37,23 @@ public class InteractiveElementPool
             prefab.gameObject.SetActive(false);
             _elements[key].Add(prefab);
         }
+    }
+
+    private InteractiveElement GetInactiveElement(List<InteractiveElement> elements)
+    {
+        InteractiveElement element = null;
+
+        for (int i = 0; i < elements.Count; i++)
+        {
+            if (elements[i].gameObject.activeInHierarchy == false && elements[i].IsPurchased == false)
+                return elements[i];
+
+            element = elements[i];
+        }
+
+        if (element)
+            element.IsPurchased = true;
+        
+        return null;
     }
 }

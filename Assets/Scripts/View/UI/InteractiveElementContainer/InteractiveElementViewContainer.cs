@@ -85,8 +85,10 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
         if (_coinStorage.TrySpend(_currentData.Price))
         {
-            InteractiveElement element = _pools.TryGet(_currentData.Prefab);
+            InteractiveElement element = _pools.Get(_currentData.Prefab);
+            element.IsPurchased = true;
             _elements.Enqueue(element);
+
             _soundContainer.Play(SoundName.SpendCoin);
         }  
     }
@@ -110,9 +112,11 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private void CreateInteractiveElement()
     {
-        var prefab = _elements.Dequeue();
+        var prefab = _elements.Dequeue();         
         prefab.transform.position = _player.Transform.position;
         prefab.transform.rotation = _player.Transform.rotation;
+
+        prefab.IsPurchased = false;
         prefab.gameObject.SetActive(true);
         _soundContainer.Play(SoundName.Building);
     }

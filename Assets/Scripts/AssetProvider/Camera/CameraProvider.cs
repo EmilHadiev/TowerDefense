@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class CameraProvider : ICameraProvider
 {
-    private Camera _camera;
+    private readonly Camera _camera;
 
-    public void SetCamera(Camera camera)
+    public CameraProvider()
     {
-        _camera = camera;
+        _camera = Camera.main;
     }
 
     public void Punch()

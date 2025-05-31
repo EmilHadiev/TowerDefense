@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefenseBarricadeData
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 21300000, guid: 6add455990a8bb740ac4157eb5f11321, type: 3}
-  <Price>k__BackingField: 25
+  <Price>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 6115518914502060692, guid: 47c7e21c8663a9b488ec06a97556727d, type: 3}
   _localizeTexts:
   - <Language>k__BackingField: 0

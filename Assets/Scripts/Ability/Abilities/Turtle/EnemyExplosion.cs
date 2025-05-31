@@ -21,7 +21,6 @@ public class EnemyExplosion : IAbility
         _text = text;
 
         _cameraProvider = cameraProvider;
-        _cameraProvider.SetCamera(Camera.main);
     }
 
     public void Activate()
