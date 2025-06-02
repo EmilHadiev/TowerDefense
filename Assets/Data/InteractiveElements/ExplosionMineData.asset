@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32d8b7de783acbe43b1e27a642dc5b73, type: 3}
-  m_Name: DefenseBarricadeData
+  m_Name: ExplosionMineData
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6add455990a8bb740ac4157eb5f11321, type: 3}
-  <Price>k__BackingField: 25
-  <Prefab>k__BackingField: {fileID: 6115518914502060692, guid: 47c7e21c8663a9b488ec06a97556727d, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e389ed0bd4ba89d439206c21ba58e96d, type: 3}
+  <Price>k__BackingField: 20
+  <Prefab>k__BackingField: {fileID: 1547917703792842808, guid: d3fec051ba4417b46aa2a4f0482ed0e4, type: 3}
   _localizeTexts:
   - <Language>k__BackingField: 0
-    <Name>k__BackingField: "\u0417\u0430\u0449\u0438\u0442\u043D\u0430\u044F \u0431\u0430\u0440\u0440\u0438\u043A\u0430\u0434\u0430"
+    <Name>k__BackingField: "\u0412\u0437\u0440\u044B\u0432\u043D\u0430\u044F \u043C\u0438\u043D\u0430"
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 1
-    <Name>k__BackingField: Protective barricade
+    <Name>k__BackingField: Explosive mine
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 2
-    <Name>k__BackingField: Koruyucu barikat
+    <Name>k__BackingField: "Patlay\u0131c\u0131 may\u0131n"
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 

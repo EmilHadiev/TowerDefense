@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32d8b7de783acbe43b1e27a642dc5b73, type: 3}
-  m_Name: DefenseBarricadeData
+  m_Name: FlamethrowerData
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6add455990a8bb740ac4157eb5f11321, type: 3}
-  <Price>k__BackingField: 25
-  <Prefab>k__BackingField: {fileID: 6115518914502060692, guid: 47c7e21c8663a9b488ec06a97556727d, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 786abe0490a09d247bd883567db55a53, type: 3}
+  <Price>k__BackingField: 150
+  <Prefab>k__BackingField: {fileID: 6224447971518501370, guid: 0f3559b56538a13488ca1bf7194d1405, type: 3}
   _localizeTexts:
   - <Language>k__BackingField: 0
-    <Name>k__BackingField: "\u0417\u0430\u0449\u0438\u0442\u043D\u0430\u044F \u0431\u0430\u0440\u0440\u0438\u043A\u0430\u0434\u0430"
+    <Name>k__BackingField: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439
+      \u043E\u0433\u043D\u0435\u043C\u0435\u0442"
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 1
-    <Name>k__BackingField: Protective barricade
+    <Name>k__BackingField: Automatic flamethrower
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 2
-    <Name>k__BackingField: Koruyucu barikat
+    <Name>k__BackingField: Otomatik alev makinesi
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 

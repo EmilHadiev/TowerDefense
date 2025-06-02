@@ -16,6 +16,7 @@
     public const string RewardID = "lockTimer";
     public const string PlayerUIName = "PlayerUI";
     public const string PlayerMask = "Player";
+    public const string EnemyMask = "Enemy";
     public const string ObstacleMask = "Obstacle";
 
     public const int UpgradeStartPrice = 10;

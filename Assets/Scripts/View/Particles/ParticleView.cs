@@ -13,7 +13,7 @@ public class ParticleView : MonoBehaviour
 
     /// <summary>
     /// first the Stop method will be called, 
-    /// then the animation will play
+    /// then the particle will play
     /// </summary>
     public void Play()
     {
