@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseAttackSpeed>k__BackingField: 0.8
   <DamagePercent>k__BackingField: 50
-  <Gun>k__BackingField: {fileID: 8602585338378738246, guid: 1fa9417927fc95345b2df2a4fe68b35b, type: 3}
+  <Prefab>k__BackingField: {fileID: 8602585338378738246, guid: 1fa9417927fc95345b2df2a4fe68b35b, type: 3}
+  <Cost>k__BackingField: 0
+  IsPurchased: 0
