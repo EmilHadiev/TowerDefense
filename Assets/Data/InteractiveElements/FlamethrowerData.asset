@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FlamethrowerData
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 21300000, guid: 786abe0490a09d247bd883567db55a53, type: 3}
-  <Price>k__BackingField: 150
-  <Prefab>k__BackingField: {fileID: 6224447971518501370, guid: 0f3559b56538a13488ca1bf7194d1405, type: 3}
+  <Price>k__BackingField: 200
+  <Prefab>k__BackingField: {fileID: 895523369019553850, guid: 63a000e26862417468c1066066ddcfbb, type: 3}
   _localizeTexts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439

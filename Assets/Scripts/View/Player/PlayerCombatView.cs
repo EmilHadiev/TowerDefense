@@ -12,8 +12,7 @@ public class PlayerCombatView : MonoBehaviour
     private Color _currentColor;
 
     private void OnValidate()
-    {
-        _shakingPart ??= GetComponentInChildren<ShakingPart>();
+    {        
         _attackParticle ??= GetComponentInChildren<PlayerAttackParticle>();
     }
 
@@ -21,6 +20,7 @@ public class PlayerCombatView : MonoBehaviour
     {
         _attackParticle.Stop();
         _attackable.Value.Attacked += OnAttacked;
+        _shakingPart ??= GetComponentInChildren<ShakingPart>();
     }
 
     private void OnDestroy() => _attackable.Value.Attacked -= OnAttacked;

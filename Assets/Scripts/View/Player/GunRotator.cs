@@ -49,7 +49,7 @@ public class GunRotator : MonoBehaviour
             _isAttacking = false;
     }
 
-    private float GetSpeed() => _playerStat.AttackSpeed * SpeedBooster;
+    private float GetSpeed() => _playerStat.BonusAttackSpeed * SpeedBooster;
 
     private void OnAttacked()
     {

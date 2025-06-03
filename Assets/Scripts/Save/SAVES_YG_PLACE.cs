@@ -29,7 +29,7 @@ namespace YG
 
         #region PlayerData
         public float playerHealth = 100;
-        public float playerAttackSpeed = 0.25f;
+        public float playerBonusAttackSpeed = 0.25f;
         public float playerDamage = 0;
         #endregion
 

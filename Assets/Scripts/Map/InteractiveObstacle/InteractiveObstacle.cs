@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class InteractiveObstacle : InteractiveElement
 {
     [SerializeField] private TriggerObserver _observer;

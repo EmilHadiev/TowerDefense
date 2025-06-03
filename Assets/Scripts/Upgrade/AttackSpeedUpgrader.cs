@@ -19,7 +19,7 @@ public class AttackSpeedUpgrader : Upgrader
 
     public override string GetUpgradeDescription()
     {
-        float attackSpeed = (float)Math.Round(Stat.AttackSpeed, 4);
+        float attackSpeed = (float)Math.Round(Stat.BonusAttackSpeed, 4);
 
         return $"{attackSpeed} > {attackSpeed - GetTotalValue(attackSpeed)}";
     }
@@ -28,8 +28,8 @@ public class AttackSpeedUpgrader : Upgrader
     {
         GetUpgradeDescription();
 
-        Stat.AttackSpeed -= GetTotalValue(Stat.AttackSpeed);
-        Debug.Log(Stat.AttackSpeed);
+        Stat.BonusAttackSpeed -= GetTotalValue(Stat.BonusAttackSpeed);
+        Debug.Log(Stat.BonusAttackSpeed);
     }
 
     private float GetTotalValue(float value)

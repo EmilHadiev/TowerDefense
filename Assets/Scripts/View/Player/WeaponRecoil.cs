@@ -20,7 +20,7 @@ public class WeaponRecoil : IWeaponRecoil
             .SetLoops(2, LoopType.Yoyo);
     }
 
-    private float GetDuration() => _stat.AttackSpeed / Accelerator;
+    private float GetDuration() => _stat.BonusAttackSpeed / Accelerator;
 
     private float GetEndValue()
     {

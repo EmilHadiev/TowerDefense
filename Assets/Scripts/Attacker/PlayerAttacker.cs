@@ -28,7 +28,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     public void Tick()
     {
         _timeAfterAttack += Time.deltaTime;
-        if (_timeAfterAttack >= _playerStat.AttackSpeed)
+        if (_timeAfterAttack >= _playerStat.BonusAttackSpeed)
             StartAttack();
     }
 

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e54ba55535a6e3479e1522e073f8789, type: 3}
-  m_Name: PlayerStat
+  m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
+  m_Name: Assult_M4_8
   m_EditorClassIdentifier: 
-  Health: 100
-  MaxHealth: 100
-  BonusAttackSpeed: 0.3
-  Damage: 10
-  Speed: 5
+  <BaseAttackSpeed>k__BackingField: 0.24
+  <DamagePercent>k__BackingField: 12
+  <Gun>k__BackingField: {fileID: 3521448879843695763, guid: 6be4273c52347c344b976ca42e40a500, type: 3}

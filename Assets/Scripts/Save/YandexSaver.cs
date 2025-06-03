@@ -87,14 +87,14 @@ public class YandexSaver : ISavable, IDisposable
     {
         _playerStat.MaxHealth = YG2.saves.playerHealth;
         _playerStat.Damage = YG2.saves.playerDamage;
-        _playerStat.AttackSpeed = YG2.saves.playerAttackSpeed;
+        _playerStat.BonusAttackSpeed = YG2.saves.playerBonusAttackSpeed;
     }
 
     private void SavePlayerStat()
     {
         YG2.saves.playerHealth = _playerStat.MaxHealth;
         YG2.saves.playerDamage = _playerStat.Damage;
-        YG2.saves.playerAttackSpeed = _playerStat.AttackSpeed;
+        YG2.saves.playerBonusAttackSpeed = _playerStat.BonusAttackSpeed;
     }
     #endregion
 
