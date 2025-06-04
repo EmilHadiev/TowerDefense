@@ -12,6 +12,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     [SerializeField] private WaitingLevelState _waitingState;
     [Header("Player")]
     [SerializeField] private PlayerSpawnPosition _spawnPosition;
+    [SerializeField] private GunViewContainer _gunContainer;
     [Header("Map")]
     [SerializeField] private NavMeshSurface _navMeshSurface;
     [SerializeField] private Map _map;
@@ -47,6 +48,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         StopHideCanvas();
         StartEnemySpawn();
         SetPlayerPosition();
+        SetGunToPlayer();
 
         CreateMap();
         BuildNavMesh();
@@ -101,6 +103,8 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void StartEnemySpawn() => SwitchState<EnemyUpgradeState>();
 
     private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
+
+    private void SetGunToPlayer() => _player.GunPlace.SetGun(_gunContainer.CreateAndSetAvailableGun());
 
     private void CreateMap()
     {

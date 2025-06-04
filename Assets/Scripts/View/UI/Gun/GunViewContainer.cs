@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -56,17 +56,39 @@ public class GunViewContainer : MonoBehaviour
 
     private void GunSelected(Gun gun)
     {
+        Gun tmpGun = null;
+
         if (_guns.TryGetValue(gun, out Gun prefab))
         {
             _gunPlace.SetGun(prefab);
+            tmpGun = prefab;
         }
         else
         {
-            var obj = CreateGun(gun);
-            _guns.Add(gun, obj);
-            _gunPlace.SetGun(obj);
+            Gun newGun = CreateGun(gun);
+            _guns.Add(gun, newGun);
+            _gunPlace.SetGun(newGun);
+            tmpGun = newGun;
         }
+
+        SetGunData(gun, tmpGun);
+    }
+
+    private void SetGunData(Gun gun, Gun tmpGun)
+    {
+        tmpGun.SetData(_data.FirstOrDefault(data => data.Prefab == gun));
     }
 
     private Gun CreateGun(Gun prefab) => _gunFactory.Create(prefab);
+
+    public Gun CreateAndSetAvailableGun()
+    {
+        GunData data = _data.FirstOrDefault(data => data.IsPurchased);
+        _guns.Add(data.Prefab, CreateGun(data.Prefab));
+
+        var gun = _guns[data.Prefab];
+
+        gun.SetData(data);
+        return gun;
+    }
 }
