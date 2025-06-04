@@ -12,8 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
   m_Name: Sniper_SVD
   m_EditorClassIdentifier: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e0628802d1c8dc8429c6174e65d13373, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.8
   <DamagePercent>k__BackingField: 50
-  <Prefab>k__BackingField: {fileID: 8602585338378738246, guid: 1fa9417927fc95345b2df2a4fe68b35b, type: 3}
-  <Cost>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: -1070504417259154230, guid: 1fa9417927fc95345b2df2a4fe68b35b, type: 3}
+  <Cost>k__BackingField: 1350
+  _texts:
+  - <Language>k__BackingField: 0
+    <Name>k__BackingField: "\u0421\u0412\u0414"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 1
+    <Name>k__BackingField: SVD
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 2
+    <Name>k__BackingField: SVD (Dragunov)
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
   IsPurchased: 0

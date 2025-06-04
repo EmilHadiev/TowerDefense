@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerHealth _health;
     [SerializeField] private Resurrector _resurrector;
+    [SerializeField] private GunPlace _gunPlace;
 
     [field: SerializeField] public PlayerType Type { get; private set; }
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour, IPlayer
     {
         _health ??= GetComponent<PlayerHealth>();
         _resurrector ??= GetComponent<Resurrector>();
+        _gunPlace ??= GetComponentInChildren<GunPlace>();
     }
 
     public Transform Transform => transform;
@@ -25,4 +27,6 @@ public class Player : MonoBehaviour, IPlayer
     public IHealth Health => _health;
 
     public IResurrectable Resurrectable => _resurrector;
+
+    public IGunPlace GunPlace => _gunPlace;
 }

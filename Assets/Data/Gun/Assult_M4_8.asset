@@ -12,8 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
   m_Name: Assult_M4_8
   m_EditorClassIdentifier: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 54bab0fd44ab6b94e9a2885cfc0346d0, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.24
   <DamagePercent>k__BackingField: 12
-  <Prefab>k__BackingField: {fileID: 3521448879843695763, guid: 6be4273c52347c344b976ca42e40a500, type: 3}
-  <Cost>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 7938466019392146760, guid: 6be4273c52347c344b976ca42e40a500, type: 3}
+  <Cost>k__BackingField: 650
+  _texts:
+  - <Language>k__BackingField: 0
+    <Name>k__BackingField: "\u041C4"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 1
+    <Name>k__BackingField: "\u041C4"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
+  - <Language>k__BackingField: 2
+    <Name>k__BackingField: "\u041C4"
+    <ShortDescription>k__BackingField: 
+    <FullDescription>k__BackingField: 
   IsPurchased: 0

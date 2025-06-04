@@ -980,7 +980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &223375724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 397717458}
   - component: {fileID: 397717454}
   m_Layer: 5
-  m_Name: BulletSwitcher
+  m_Name: WeaponSwitcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3019,7 +3019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2540357}
+  m_AnchoredPosition: {x: 0, y: 4226.885}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &649304518
@@ -5453,7 +5453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -120.880394}
+  m_AnchoredPosition: {x: 0, y: -0.00025002155}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065
@@ -5751,8 +5751,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1170508388}
   - component: {fileID: 1170508389}
+  - component: {fileID: 1170508390}
   m_Layer: 5
-  m_Name: BulletShopContainer
+  m_Name: WeaponShopContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5793,6 +5794,20 @@ MonoBehaviour:
   _bulletViewTemplate: {fileID: 7454715286551777744, guid: 4e9925c142de3ae4d8e5539c507e639b, type: 3}
   _container: {fileID: 649304517}
   _descriptionContainer: {fileID: 223375725}
+--- !u!114 &1170508390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170508387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851f5cddab4e14f4bbb76283b846261c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunView: {fileID: 2075588750159310491, guid: 1cfca402596d43c479805fef0575ca92, type: 3}
+  _container: {fileID: 649304517}
 --- !u!1 &1183329957
 GameObject:
   m_ObjectHideFlags: 0
@@ -6796,7 +6811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308499693}
   m_Layer: 5
-  m_Name: BulletSwitcher_____________________
+  m_Name: WeaponSwitcher_____________________
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7432,7 +7447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1478465881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10233,7 +10248,7 @@ GameObject:
   - component: {fileID: 2130921128}
   - component: {fileID: 2130921130}
   m_Layer: 5
-  m_Name: BulletShopNameText
+  m_Name: WeaponShopNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

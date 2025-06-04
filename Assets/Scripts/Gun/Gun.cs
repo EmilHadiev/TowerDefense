@@ -1,6 +1,14 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour, IGun
 {
+    public float DamagePercent { get; private set; }
 
+    public float BaseAttackSpeed { get; private set; }
+
+    public void SetData(GunData gunData)
+    {
+        DamagePercent = gunData.DamagePercent;
+        BaseAttackSpeed = gunData.BaseAttackSpeed;
+    }
 }

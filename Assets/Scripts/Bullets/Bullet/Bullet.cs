@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     private IBulletEffectHandler _currentEffect;
 
     private PlayerStat _playerStat;
+    private IGun _currentGun;
 
     private IReadOnlyDictionary<Type, IBulletEffectHandler> _bulletEffects;
 
@@ -63,9 +64,10 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     }
 
     [Inject]
-    private void Constructor(PlayerStat stat)
+    private void Constructor(PlayerStat stat, IPlayer player)
     {
         _playerStat = stat;
+        _currentGun = player.GunPlace.CurrentGun;
     }
 
     public void InitEffects(Action<int> setEffect)
@@ -86,7 +88,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     {
         if (collider.TryGetComponent(out IHealth health))
         {
-            health.TakeDamage(GetDamage());
+            health.TakeDamage(GetDamage());            
             HandleCollision(collider);
             HideAfterCollided();
         }
@@ -103,7 +105,9 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         if (Data.Damage == 0)
             return 0;
 
-        return Data.Damage + _playerStat.Damage + GetReflectedDamage();
+        float totalDamage = Data.Damage + _playerStat.Damage + GetReflectedDamage();
+        Debug.Log($"Было: {totalDamage} стало: {totalDamage + totalDamage * (_currentGun.DamagePercent / 10)}" );
+        return totalDamage + totalDamage * (_currentGun.DamagePercent / 10);
     }
 
     private void HideAfterCollided()

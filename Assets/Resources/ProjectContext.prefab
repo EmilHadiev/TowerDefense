@@ -94,3 +94,14 @@ MonoBehaviour:
   - {fileID: 5366412411476431833, guid: 7cbb7a2a9d661584bbac433f67c6b4b2, type: 3}
   - {fileID: 2313333593945244418, guid: 9c4de4f0958498a4dbe6368aff7ae9cb, type: 3}
   - {fileID: 1624884448297963605, guid: 0218cca2197e4b743be869740f062cac, type: 3}
+  _gunData:
+  - {fileID: 11400000, guid: 63324fd48542df846a0624b93b7277d1, type: 2}
+  - {fileID: 11400000, guid: e72128d2352f24e4aa59f49d93afb8d3, type: 2}
+  - {fileID: 11400000, guid: 233ee853b2532bd4f9c922d693803100, type: 2}
+  - {fileID: 11400000, guid: bbc873999c3a33e418526b5ff1768068, type: 2}
+  - {fileID: 11400000, guid: 30579ea483932ed49adfb9772c490efb, type: 2}
+  - {fileID: 11400000, guid: 151d59ed751eeef4b80ac798a2551dcf, type: 2}
+  - {fileID: 11400000, guid: e50d05975dee34f46811599f63669611, type: 2}
+  - {fileID: 11400000, guid: 807e6523baa56cc47a1b02b70f25ebaa, type: 2}
+  - {fileID: 11400000, guid: b5315cb99acff654ab863e0f18149586, type: 2}
+  - {fileID: 11400000, guid: 81435ea42f544c847938fb0e7a1ed5c8, type: 2}
