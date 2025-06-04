@@ -10,15 +10,17 @@ public class GunViewContainer : MonoBehaviour
 
     private GunData[] _data;
     private IGunPlace _gunPlace;
+    private IGunFactory _gunFactory;
 
     private readonly Dictionary<Gun, Gun> _guns = new Dictionary<Gun, Gun>(10);
     private readonly List<GunView> _views = new List<GunView>(10);
 
     [Inject]
-    private void Constructor(GunData[] gunData, IPlayer player)
+    private void Constructor(GunData[] gunData, IPlayer player, IGunFactory gunFactory)
     {
         _data = gunData;
         _gunPlace = player.GunPlace;
+        _gunFactory = gunFactory;
     }
 
     private void Awake()
@@ -54,11 +56,17 @@ public class GunViewContainer : MonoBehaviour
 
     private void GunSelected(Gun gun)
     {
-        if (_guns.TryGetValue(gun, out Gun prefab) == false)
+        if (_guns.TryGetValue(gun, out Gun prefab))
         {
-
+            _gunPlace.SetGun(prefab);
         }
-
-        _gunPlace.SetGun(gun);
+        else
+        {
+            var obj = CreateGun(gun);
+            _guns.Add(gun, obj);
+            _gunPlace.SetGun(obj);
+        }
     }
+
+    private Gun CreateGun(Gun prefab) => _gunFactory.Create(prefab);
 }
