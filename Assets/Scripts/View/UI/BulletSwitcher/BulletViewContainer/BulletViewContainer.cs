@@ -7,7 +7,7 @@ public class BulletViewContainer : MonoBehaviour
 {
     [SerializeField] private BulletView _bulletViewTemplate;
     [SerializeField] private RectTransform _container;
-    [SerializeField] private BulletDescriptionContainer _descriptionContainer;
+    [SerializeField] private ShopItemDescriptionContainer _descriptionContainer;
 
     private IBulletViewCreator _viewCreator;
     private IBulletViewHandler _viewHandler;

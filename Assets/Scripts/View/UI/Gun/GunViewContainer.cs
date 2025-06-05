@@ -7,20 +7,25 @@ public class GunViewContainer : MonoBehaviour
 {
     [SerializeField] private GunView _gunView;
     [SerializeField] private Transform _container;
+    [SerializeField] private ShopItemDescriptionContainer _shopItemDescriptionContainer;
 
     private GunData[] _data;
     private IGunPlace _gunPlace;
     private IGunFactory _gunFactory;
+    private IPurchaser _purchaser;
+    private IPlayerSoundContainer _soundContainer;
 
     private readonly Dictionary<Gun, Gun> _guns = new Dictionary<Gun, Gun>(10);
     private readonly List<GunView> _views = new List<GunView>(10);
 
     [Inject]
-    private void Constructor(GunData[] gunData, IPlayer player, IGunFactory gunFactory)
+    private void Constructor(GunData[] gunData, IPlayer player, IGunFactory gunFactory, IPurchaser purchaser, IPlayerSoundContainer playerSoundContainer)
     {
         _data = gunData;
         _gunPlace = player.GunPlace;
         _gunFactory = gunFactory;
+        _purchaser = purchaser;
+        _soundContainer = playerSoundContainer;
     }
 
     private void Awake()
@@ -31,17 +36,13 @@ public class GunViewContainer : MonoBehaviour
     private void OnEnable()
     {
         foreach (var view in _views)
-        {
             view.Selected += GunSelected;
-        }
     }
 
     private void OnDisable()
     {
         foreach (var view in _views)
-        {
             view.Selected -= GunSelected;
-        }
     }
 
     private void CreateTemplates()
@@ -49,7 +50,7 @@ public class GunViewContainer : MonoBehaviour
         for (int i = 0; i < _data.Length; i++)
         {
             GunView view = Instantiate(_gunView, _container);
-            view.Initialize(_data[i]);
+            view.Initialize(_data[i], _purchaser, _soundContainer, _shopItemDescriptionContainer);
             _views.Add(view);
         }
     }
@@ -72,6 +73,7 @@ public class GunViewContainer : MonoBehaviour
         }
 
         SetGunData(gun, tmpGun);
+        HideViewBackground();
     }
 
     private void SetGunData(Gun gun, Gun tmpGun)
@@ -90,5 +92,11 @@ public class GunViewContainer : MonoBehaviour
 
         gun.SetData(data);
         return gun;
+    }
+
+    private void HideViewBackground()
+    {
+        foreach (var view in _views)
+            view.BackgroundToggle(false);
     }
 }

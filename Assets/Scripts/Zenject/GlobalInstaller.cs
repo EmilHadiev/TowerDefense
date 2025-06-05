@@ -26,6 +26,7 @@ public class GlobalInstaller : MonoInstaller
         BindBullets();
         BindGuns();
         BindLoadingScreen();
+        BindPurchaser();
 
         #region DefferentPlatforms
         BindAdvertising();
@@ -115,12 +116,17 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindBullets()
     {
-        Container.Bind<Bullet[]>().FromInstance(_bullets);
-        Container.Bind<IBulletDefinition[]>().FromInstance(_bullets);
+        Container.Bind<Bullet[]>().FromInstance(_bullets).AsSingle();
+        Container.Bind<IBulletDefinition[]>().FromInstance(_bullets).AsSingle();
     }
 
     private void BindGuns()
     {
-        Container.Bind<GunData[]>().FromInstance(_gunData);
+        Container.Bind<GunData[]>().FromInstance(_gunData).AsSingle();
+    }
+
+    private void BindPurchaser()
+    {
+        Container.BindInterfacesTo<Purchaser>().AsSingle();
     }
 }

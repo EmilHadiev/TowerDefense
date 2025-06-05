@@ -106,8 +106,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
             return 0;
 
         float totalDamage = Data.Damage + _playerStat.Damage + GetReflectedDamage();
-        Debug.Log(_gunPlace == null);
-        Debug.Log($"Было: {totalDamage} стало: {totalDamage + totalDamage * (_gunPlace.CurrentGun.DamagePercent / 100)}" );
         return totalDamage + totalDamage * (_gunPlace.CurrentGun.DamagePercent / 100);
     }
 

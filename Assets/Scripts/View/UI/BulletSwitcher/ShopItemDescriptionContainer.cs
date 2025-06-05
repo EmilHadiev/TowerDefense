@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletDescriptionContainer : MonoBehaviour
+public class ShopItemDescriptionContainer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private Button _buttonClose;
