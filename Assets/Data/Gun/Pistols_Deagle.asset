@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
   m_Name: Pistols_Deagle
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 0
   <Sprite>k__BackingField: {fileID: 21300000, guid: 0e921d84fa09d3d43a15dc728fc9e719, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.4
   <DamagePercent>k__BackingField: 0

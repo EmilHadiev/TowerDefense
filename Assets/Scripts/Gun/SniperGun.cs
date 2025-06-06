@@ -3,7 +3,7 @@ using Zenject;
 
 public class SniperGun : Gun
 {
-    private const int CriticalChance = 20;
+    private const int CriticalChance = 100;
     private PlayerStat _stat;
 
     [Inject]
@@ -21,6 +21,6 @@ public class SniperGun : Gun
     private float GetCriticalStrike()
     {
         int randomValue = Random.Range(0, 100);
-        return CriticalChance >= randomValue ? _stat.Damage : 0;
+        return CriticalChance >= randomValue ? _stat.Damage * CriticalChance + CriticalChance : 0;
     }
 }
