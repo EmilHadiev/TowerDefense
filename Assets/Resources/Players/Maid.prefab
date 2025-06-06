@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 9103783631593780500}
   - component: {fileID: 7741543948403912486}
   m_Layer: 8
-  m_Name: Sticman_Maid
+  m_Name: Maid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

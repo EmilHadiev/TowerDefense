@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 8640219433077884397}
   - component: {fileID: 8505825216746633380}
   m_Layer: 8
-  m_Name: Stickman_Queen
+  m_Name: Queen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
