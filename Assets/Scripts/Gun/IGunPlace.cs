@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IGunPlace
+﻿public interface IGunPlace
 {
     IGun CurrentGun { get; }
 

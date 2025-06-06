@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
   m_Name: Assault_AK74
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 54bab0fd44ab6b94e9a2885cfc0346d0, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.3
   <DamagePercent>k__BackingField: 15
   <Prefab>k__BackingField: {fileID: -5971381423991182823, guid: 6f9e1b08305855c4795ad4f03a133804, type: 3}
   <Price>k__BackingField: 1
-  <IsPurchased>k__BackingField: 0
+  <IsPurchased>k__BackingField: 1
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: AK74

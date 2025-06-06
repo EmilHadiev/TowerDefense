@@ -11,4 +11,9 @@ public abstract class Gun : MonoBehaviour, IGun
         DamagePercent = gunData.DamagePercent;
         BaseAttackSpeed = gunData.BaseAttackSpeed;
     }
+
+    public virtual void HandleAttack(Collider collider)
+    {
+        
+    }
 }

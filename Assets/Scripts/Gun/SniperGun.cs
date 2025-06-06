@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class SniperGun : Gun, IGunAbility
+public class SniperGun : Gun
 {
     private const int CriticalChance = 20;
     private PlayerStat _stat;
@@ -12,9 +12,9 @@ public class SniperGun : Gun, IGunAbility
         _stat = stat;
     }
 
-    public void Activate(Collider target)
+    public override void HandleAttack(Collider collider)
     {
-        if (target.TryGetComponent(out IHealth health))
+        if (collider.TryGetComponent(out IHealth health))
             health.TakeDamage(GetCriticalStrike());
     }
 

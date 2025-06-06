@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8adfc81083b92b4ba9342e687aa51b7, type: 3}
   m_Name: Shotgun_Bennelli_M4
   m_EditorClassIdentifier: 
+  <ID>k__BackingField: 4
   <Sprite>k__BackingField: {fileID: 21300000, guid: 813c47bc5fb05f24e8a5754c74fc5630, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.52
   <DamagePercent>k__BackingField: 25

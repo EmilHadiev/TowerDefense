@@ -15,6 +15,13 @@ public class BulletItem
     public bool IsPurchased;
 }
 
+[Serializable]
+public class GunItem
+{
+    public int Id;
+    public bool IsPurchased;
+}
+
 namespace YG
 {
     public partial class SavesYG
@@ -39,6 +46,10 @@ namespace YG
 
         #region Bullets
         public List<BulletItem> BulletItems = new List<BulletItem>(10);
+        #endregion
+
+        #region Gundata
+        public List<GunItem> GunItems = new List<GunItem>(10);
         #endregion
     }
 }

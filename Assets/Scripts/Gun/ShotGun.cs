@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ShotGun : Gun, IGunAbility
+public class ShotGun : Gun
 {
     private const int AttackRadius = 3;
     private readonly Collider[] _targets = new Collider[Constants.MaxEnemies];
@@ -14,14 +14,14 @@ public class ShotGun : Gun, IGunAbility
         _stat = stat;
     }
 
-    public void Activate(Collider target)
+    public override void HandleAttack(Collider collider)
     {
-        int count = Physics.OverlapSphereNonAlloc(target.transform.position, AttackRadius, _targets, LayerMask.GetMask(Constants.EnemyMask));
+        int count = Physics.OverlapSphereNonAlloc(collider.transform.position, AttackRadius, _targets, LayerMask.GetMask(Constants.EnemyMask));
 
         for (int i = 0; i < count; i++)
             if (_targets[i].TryGetComponent(out IHealth health))
                 health.TakeDamage(_stat.Damage / count);
 
-        PhysicsDebug.DrawDebug(target.transform.position, AttackRadius);
+        PhysicsDebug.DrawDebug(collider.transform.position, AttackRadius);
     }
 }

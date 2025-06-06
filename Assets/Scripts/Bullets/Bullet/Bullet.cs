@@ -88,7 +88,8 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     {
         if (collider.TryGetComponent(out IHealth health))
         {
-            health.TakeDamage(GetDamage());            
+            health.TakeDamage(GetDamage());
+            _gunPlace.CurrentGun.HandleAttack(collider);
             HandleCollision(collider);
             HideAfterCollided();
         }
