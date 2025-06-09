@@ -13,6 +13,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private EnemyLevelData _enemyLevel;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private GunData[] _gunData;
+    [SerializeField] private PlayerData[] _playerData;
 
     public override void InstallBindings()
     {
@@ -27,6 +28,7 @@ public class GlobalInstaller : MonoInstaller
         BindGuns();
         BindLoadingScreen();
         BindPurchaser();
+        BindPlayers();
 
         #region DefferentPlatforms
         BindAdvertising();
@@ -123,6 +125,11 @@ public class GlobalInstaller : MonoInstaller
     private void BindGuns()
     {
         Container.Bind<GunData[]>().FromInstance(_gunData).AsSingle();
+    }
+
+    private void BindPlayers()
+    {
+        Container.Bind<PlayerData[]>().FromInstance(_playerData).AsSingle();
     }
 
     private void BindPurchaser()

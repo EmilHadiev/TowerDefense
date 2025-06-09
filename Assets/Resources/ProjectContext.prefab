@@ -105,3 +105,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 807e6523baa56cc47a1b02b70f25ebaa, type: 2}
   - {fileID: 11400000, guid: b5315cb99acff654ab863e0f18149586, type: 2}
   - {fileID: 11400000, guid: 81435ea42f544c847938fb0e7a1ed5c8, type: 2}
+  _playerData:
+  - {fileID: 11400000, guid: 308bf87a361c2b3418890a127dba56f5, type: 2}
+  - {fileID: 11400000, guid: c670afae2a624d74397393432a702692, type: 2}
+  - {fileID: 11400000, guid: 26252082607eac34d953c374f969efd4, type: 2}
+  - {fileID: 11400000, guid: cd81e58f493403f4298c1be97d80edb1, type: 2}
+  - {fileID: 11400000, guid: d930ada3399ca5d4c88ccda6b33593fb, type: 2}
+  - {fileID: 11400000, guid: e3095b07cf2e0ad4c80f3b9e45ee69fa, type: 2}
+  - {fileID: 11400000, guid: cb16fd22620887f4e999e619c5ca53f5, type: 2}
+  - {fileID: 11400000, guid: c7ab1ba974147b54f984595996a46164, type: 2}
+  - {fileID: 11400000, guid: 18ccae0c943a9c64f815af523b1c0bc1, type: 2}

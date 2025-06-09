@@ -34,25 +34,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        Debug.Log("œŒ ¿ ◊“Œ —À”◊¿…Õ€… »√–Œ !");
-        //Container.BindInterfacesTo<Player>().FromComponentInNewPrefab(_player).AsSingle();
-
-        string[] players =
-        {
-            "Players/CrazyDoctor",
-            "Players/Ghost",
-            "Players/King",
-            "Players/Knight",
-            "Players/Mummy",
-            "Players/Pirate",
-            "Players/Queen",
-            "Players/Maid",
-            "Players/Witch",
-        };
-
-        int randomIndex = UnityEngine.Random.Range(0, players.Length);
-
-        Container.BindInterfacesTo<Player>().FromComponentInNewPrefabResource(players[randomIndex]).AsSingle();
+        Container.BindInterfacesTo<Player>().FromComponentInNewPrefab(_envData.PlayerData.Prefab).AsSingle();
     }
 
     private void BindInput()

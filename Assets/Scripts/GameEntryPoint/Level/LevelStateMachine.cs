@@ -44,6 +44,11 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 
     private void Start()
     {
+        StartLevel();
+    }
+
+    private void StartLevel()
+    {
         _loadingScreen.Show();
         StopHideCanvas();
         StartEnemySpawn();

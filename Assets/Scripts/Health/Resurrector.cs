@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 using Zenject;
 
 public class Resurrector : MonoBehaviour, IResurrectable

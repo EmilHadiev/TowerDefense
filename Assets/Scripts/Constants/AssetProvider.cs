@@ -22,4 +22,5 @@
     public const string MobileInputMoverPath = "Input/Move Joystick";
 
     public const string SceneDefaultArena = "DefaultArena";
+    public const string SceneSkinSelector = "SkinSelector";
 }
