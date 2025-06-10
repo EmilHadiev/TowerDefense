@@ -22,6 +22,13 @@ public class GunItem
     public bool IsPurchased;
 }
 
+[Serializable]
+public class PlayerDataItem
+{
+    public int Id;
+    public bool IsPurchased;
+}
+
 namespace YG
 {
     public partial class SavesYG
@@ -34,7 +41,7 @@ namespace YG
         public List<UpgradeItem> UpgradeItems = new List<UpgradeItem>(3);
         #endregion
 
-        #region PlayerData
+        #region PlayerStat
         public float playerHealth = 100;
         public float playerBonusAttackSpeed = 0.3f;
         public float playerDamage = 10;
@@ -50,6 +57,10 @@ namespace YG
 
         #region Gundata
         public List<GunItem> GunItems = new List<GunItem>(10);
+        #endregion
+
+        #region PlayerData
+        public List<PlayerDataItem> PlayerDataItems = new List<PlayerDataItem>(9);
         #endregion
     }
 }

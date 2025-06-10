@@ -73,7 +73,7 @@ public class YandexGameEntryPoint : IEntryPoint
 
     private void OpenAuthDialog() => YG2.OpenAuthDialog();
 
-    private void SwitchToStartScene() => _sceneLoader.SwitchTo(Constants.StartScene);
+    private void SwitchToStartScene() => _sceneLoader.SwitchTo(AssetProvider.SceneSkinSelector);
 
     private void StartGameplay() => _markup.Ready();
 

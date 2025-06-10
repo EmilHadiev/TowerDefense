@@ -11,10 +11,13 @@ public class YandexSaver : ISavable, IDisposable
     private readonly EnemyLevelData _levelData;
     private readonly IBulletDefinition[] _bullets;
     private readonly GunData[] _guns;
+    private readonly PlayerData[] _playerData;
 
     private UpgradeItemsSaver _upgradeSaver;
     private BulletItemSaver _bulletSaver;
     private GunItemSaver _gunSaver;
+    private PlayerDataSaver _playerDataSaver;
+    
 
     private int Coins
     {
@@ -23,7 +26,7 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData)
     {
         _coinStorage = coinStorage;
         _data = data;
@@ -31,6 +34,7 @@ public class YandexSaver : ISavable, IDisposable
         _levelData = levelData;
         _bullets = bullets;
         _guns = guns;
+        _playerData = playerData;
     }
 
     public void Dispose() => SaveProgress();
@@ -43,6 +47,8 @@ public class YandexSaver : ISavable, IDisposable
         LoadEnemyLevel();
         InitBullets();
         InitGuns();
+        InitPlayerData();
+        SavePlayerData();
 
         Debug.Log("Progress loaded...");
     }
@@ -63,6 +69,7 @@ public class YandexSaver : ISavable, IDisposable
         SaveEnemyLevel();
         SaveBullets();
         SaveGuns();
+        SavePlayerData();
     }
 
     #region Coins
@@ -111,26 +118,21 @@ public class YandexSaver : ISavable, IDisposable
     #endregion
 
     #region Bullets
-    private void InitBullets()
-    {
-        _bulletSaver = new BulletItemSaver(_bullets, YG2.saves.BulletItems);
-    }
+    private void InitBullets() => _bulletSaver = new BulletItemSaver(_bullets, YG2.saves.BulletItems);
 
-    private void SaveBullets()
-    {
-        Debug.Log(_bulletSaver == null);
-        _bulletSaver.Save();
-    }
+    private void SaveBullets() => _bulletSaver.Save();
     #endregion
 
     #region Guns
-    private void InitGuns()
-    {
-        Debug.Log(YG2.saves.GunItems.Count);
-        _gunSaver = new GunItemSaver(_guns, YG2.saves.GunItems);
-    }
+    private void InitGuns() => _gunSaver = new GunItemSaver(_guns, YG2.saves.GunItems);
 
     private void SaveGuns() => _gunSaver.Save();
 
+    #endregion
+
+    #region PlayerData
+    private void InitPlayerData() => _playerDataSaver = new PlayerDataSaver(_playerData, YG2.saves.PlayerDataItems);
+
+    private void SavePlayerData() => _playerDataSaver.Save();
     #endregion
 }

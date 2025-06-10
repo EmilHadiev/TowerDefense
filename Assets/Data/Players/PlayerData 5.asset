@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348505eb31d63c44b86960558793ef4c, type: 3}
   m_Name: PlayerData 5
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 0
-  <Price>k__BackingField: 0
+  <Id>k__BackingField: 5
+  <Price>k__BackingField: 200
   <Prefab>k__BackingField: {fileID: 261377806618845350, guid: 1c5cd5ce46cd8dd48bc9b7fcb435c9d9, type: 3}
   <StickmanView>k__BackingField: {fileID: 3278486651066811192, guid: d4cf5c049802eb84f938766d225fd248, type: 3}
   <IsPurchased>k__BackingField: 1

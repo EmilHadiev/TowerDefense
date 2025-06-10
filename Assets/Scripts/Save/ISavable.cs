@@ -4,6 +4,8 @@
 
     void SaveProgress();
 
-    //carefully resets all saves without the ability to restore
+    /// <summary>
+    /// carefully resets all saves without the ability to restore
+    /// </summary>
     void ResetAllSavesAndProgress();
 }
