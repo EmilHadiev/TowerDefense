@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsDesktop>k__BackingField: 0
   <Language>k__BackingField: 0
+  <PlayerData>k__BackingField: {fileID: 11400000, guid: 308bf87a361c2b3418890a127dba56f5, type: 2}

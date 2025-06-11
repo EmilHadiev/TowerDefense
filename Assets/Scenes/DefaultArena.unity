@@ -2619,10 +2619,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1166747424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.147, y: 0.91919506}
-  m_AnchorMax: {x: 0.185, y: 0.98876256}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.008854167, y: 0.6182963}
+  m_AnchorMax: {x: 0.062472064, y: 0.7118149}
+  m_AnchoredPosition: {x: 0.5, y: -0.6199951}
+  m_SizeDelta: {x: -3, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &531245720
 MonoBehaviour:
@@ -3019,7 +3019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 616244.1}
+  m_AnchoredPosition: {x: 0, y: 789693.6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &649304518
@@ -3206,10 +3206,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1166747424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.062472064, y: 0.91919506}
-  m_AnchorMax: {x: 0.1, y: 0.98876256}
-  m_AnchoredPosition: {x: -1.5, y: -1.840332}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.9352235, y: 0.7275556}
+  m_AnchorMax: {x: 0.9885625, y: 0.81929636}
+  m_AnchoredPosition: {x: -0.5, y: -1}
+  m_SizeDelta: {x: -1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694051100
 MonoBehaviour:
@@ -3268,14 +3268,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5254902, g: 0.4784314, b: 0.6745098, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b76efc948a5218043aeefea908d3543c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: edb7d63696460c0439a050505f9ec1e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3346,6 +3346,7 @@ MonoBehaviour:
   _container: {fileID: 1117965064}
   _buttonPurchase: {fileID: 1245264284}
   _setElementButton: {fileID: 2081578467}
+  _elementSetter: {fileID: 2081578470}
   _data:
   - {fileID: 11400000, guid: 8293f5237d0838e4095ad82d0bfc5fe5, type: 2}
   - {fileID: 11400000, guid: 4ba454836f728a94ca1c97febc9d2ec1, type: 2}
@@ -5286,7 +5287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -41.05493}
+  m_AnchoredPosition: {x: 0, y: -52.533035}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065
@@ -8219,10 +8220,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1166747424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1046875, y: 0.91919506}
-  m_AnchorMax: {x: 0.14447917, y: 0.98876256}
-  m_AnchoredPosition: {x: 0.5, y: -0.5}
-  m_SizeDelta: {x: -2, y: 0}
+  m_AnchorMin: {x: 0.008854167, y: 0.7275556}
+  m_AnchorMax: {x: 0.062472064, y: 0.81929636}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800832608
 MonoBehaviour:
@@ -9684,7 +9685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2076519482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9743,6 +9744,7 @@ GameObject:
   - component: {fileID: 2081578469}
   - component: {fileID: 2081578468}
   - component: {fileID: 2081578467}
+  - component: {fileID: 2081578470}
   m_Layer: 5
   m_Name: SetBarricadesButton
   m_TagString: Untagged
@@ -9851,6 +9853,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081578465}
   m_CullTransparentMesh: 1
+--- !u!114 &2081578470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081578465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530536cddff34ab4b91ede57e0dbce8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 2081578468}
 --- !u!1 &2089939867
 GameObject:
   m_ObjectHideFlags: 0

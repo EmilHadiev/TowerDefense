@@ -9,6 +9,7 @@ public class InteractiveElementViewContainer : MonoBehaviour
     [SerializeField] private Transform _container;
     [SerializeField] private Button _buttonPurchase;
     [SerializeField] private Button _setElementButton;
+    [SerializeField] private InteractiveElementSetterView _elementSetter;
     [SerializeField] private InteractiveElementData[] _data;
 
     private readonly List<InteractiveElementView> _views = new List<InteractiveElementView>();
@@ -22,6 +23,11 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private InteractiveElementData _currentData;
     private ParticleView _particleView;
+
+    private void OnValidate()
+    {
+        _elementSetter ??= FindObjectOfType<InteractiveElementSetterView>();
+    }
 
     private void Awake()
     {
@@ -88,6 +94,7 @@ public class InteractiveElementViewContainer : MonoBehaviour
             InteractiveElement element = _pools.Get(_currentData.Prefab);
             element.IsPurchased = true;
             _elements.Enqueue(element);
+            _elementSetter.AddSprite(_currentData.Sprite);
 
             _soundContainer.Play(SoundName.SpendCoin);
         }  
@@ -112,12 +119,14 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private void CreateInteractiveElement()
     {
-        var prefab = _elements.Dequeue();         
+        var prefab = _elements.Dequeue();
         prefab.transform.position = _player.Transform.position;
         prefab.transform.rotation = _player.Transform.rotation;
 
         prefab.IsPurchased = false;
         prefab.gameObject.SetActive(true);
         _soundContainer.Play(SoundName.Building);
+
+        _elementSetter.ShowNextSprite();
     }
 }
