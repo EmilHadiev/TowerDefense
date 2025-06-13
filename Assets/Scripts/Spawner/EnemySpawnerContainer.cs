@@ -10,6 +10,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private EnemyCounter _counter;
     private ILevelStateSwitcher _switcher;
+    private ITrainingMode _trainingMode;
     private int _index = 0;
 
     private Coroutine _spawnCoroutine;
@@ -27,10 +28,11 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     }
 
     [Inject]
-    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher)
+    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode)
     {
         _counter = counter;
         _switcher = switcher;
+        _trainingMode = trainingMode;
 
         if (switcher == null)
             Debug.LogError("IS NULL!");
@@ -72,5 +74,15 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private void OnFilled() => Exit();
 
-    private void OnEnemyDied() => _switcher.SwitchState<WaitingLevelState>();
+    private void OnEnemyDied()
+    {
+        if (_trainingMode.IsStartProcess())
+        {
+            _trainingMode.ShowNextTraining();
+            Debug.Log("ѕќка что тренировочный процесс");
+            return;
+        }
+        else
+            _switcher.SwitchState<WaitingLevelState>();
+    }
 }

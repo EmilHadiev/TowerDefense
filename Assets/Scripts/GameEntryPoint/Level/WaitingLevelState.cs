@@ -7,7 +7,7 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
 {
     [SerializeField] private TMP_Text _timeText;
 
-    private const int WaitingTime = 10;
+    private const int WaitingTime = 1;
     private readonly WaitForSeconds _delay = new WaitForSeconds(1);
 
     private Coroutine _waitingCoroutine;

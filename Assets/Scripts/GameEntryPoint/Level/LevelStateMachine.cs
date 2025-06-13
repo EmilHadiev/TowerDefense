@@ -16,6 +16,9 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     [Header("Map")]
     [SerializeField] private NavMeshSurface _navMeshSurface;
     [SerializeField] private Map _map;
+    
+
+    private ITrainingMode _trainingMode;
 
     private readonly Dictionary<Type, ILevelState> _states = new Dictionary<Type, ILevelState>(10);
 
@@ -45,13 +48,18 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void Start()
     {
         StartLevel();
+
+        if (_trainingMode.IsStartProcess() == false)
+        {
+            _trainingMode.TrainingOver();
+            StartEnemySpawn();
+        }
     }
 
     private void StartLevel()
     {
         _loadingScreen.Show();
         StopHideCanvas();
-        StartEnemySpawn();
         SetPlayerPosition();
         SetGunToPlayer();
 
@@ -60,12 +68,19 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         _loadingScreen.Hide();
     }
 
+    private void StartTraining()
+    {
+        _trainingMode.InitTraining(this);
+        _trainingMode.ShowNextTraining();
+    }
+
     [Inject]
-    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen, IPlayer player)
+    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen, IPlayer player, ITrainingMode trainingMode)
     {
         _upgrader = upgrader;
         _loadingScreen = loadingScreen;
         _player = player;
+        _trainingMode = trainingMode;
     }
 
     #if UNITY_WEBGL
@@ -121,5 +136,8 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void OnLoaded()
     {
         ActivatePlatformOptions();
+
+        if (_trainingMode.IsStartProcess())
+            StartTraining();
     }
 }

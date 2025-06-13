@@ -11,6 +11,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
     [SerializeField] private EnemyLevelData _enemyLevel;
+    [SerializeField] private TrainingData _trainingData;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private GunData[] _gunData;
     [SerializeField] private PlayerData[] _playerData;
@@ -24,6 +25,7 @@ public class GlobalInstaller : MonoInstaller
         BindPlayerData();
         BindEnvironmentData();
         BindEnemyData();
+        BindTrainingData();
         BindBullets();
         BindGuns();
         BindLoadingScreen();
@@ -104,6 +106,11 @@ public class GlobalInstaller : MonoInstaller
     private void BindCoroutinePerformer()
     {
         Container.BindInterfacesTo<CoroutinePerformer>().FromComponentInNewPrefab(_performer).AsSingle();
+    }
+
+    private void BindTrainingData()
+    {
+        Container.Bind<TrainingData>().FromNewScriptableObject(_trainingData).AsSingle();
     }
 
     private void BindPlayerData()

@@ -83,6 +83,7 @@ MonoBehaviour:
   _playerStat: {fileID: 11400000, guid: 5c36c3f28b4406247b387b6ac5dd53a5, type: 2}
   _evnData: {fileID: 11400000, guid: 2524bf427d30e1b4ebbaeef29112468e, type: 2}
   _enemyLevel: {fileID: 11400000, guid: 187118292e5f2e742be427daf4061128, type: 2}
+  _trainingData: {fileID: 11400000, guid: 5a252f78ebc6de1498d1a3d4d888fb11, type: 2}
   _bullets:
   - {fileID: 4734834810357473392, guid: a1a8f9d1421abb140b7af105937449ac, type: 3}
   - {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}

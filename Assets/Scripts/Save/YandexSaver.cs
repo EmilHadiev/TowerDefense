@@ -12,6 +12,7 @@ public class YandexSaver : ISavable, IDisposable
     private readonly IBulletDefinition[] _bullets;
     private readonly GunData[] _guns;
     private readonly PlayerData[] _playerData;
+    private readonly TrainingData _trainingData;
 
     private UpgradeItemsSaver _upgradeSaver;
     private BulletItemSaver _bulletSaver;
@@ -26,7 +27,7 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData)
+    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData, TrainingData trainingData)
     {
         _coinStorage = coinStorage;
         _data = data;
@@ -35,6 +36,7 @@ public class YandexSaver : ISavable, IDisposable
         _bullets = bullets;
         _guns = guns;
         _playerData = playerData;
+        _trainingData = trainingData;
     }
 
     public void Dispose() => SaveProgress();
@@ -44,11 +46,12 @@ public class YandexSaver : ISavable, IDisposable
         LoadCoins();
         LoadUpgraders();
         LoadPlayerStat();
-        LoadEnemyLevel();
+        LoadEnemyLevel();        
         InitBullets();
         InitGuns();
         InitPlayerData();
         SavePlayerData();
+        LoadTraining();
 
         Debug.Log("Progress loaded...");
     }
@@ -70,6 +73,7 @@ public class YandexSaver : ISavable, IDisposable
         SaveBullets();
         SaveGuns();
         SavePlayerData();
+        SaveTraining();
     }
 
     #region Coins
@@ -134,5 +138,11 @@ public class YandexSaver : ISavable, IDisposable
     private void InitPlayerData() => _playerDataSaver = new PlayerDataSaver(_playerData, YG2.saves.PlayerDataItems);
 
     private void SavePlayerData() => _playerDataSaver.Save();
+    #endregion
+
+    #region Training
+    private void LoadTraining() => _trainingData.IsTrainingCompleted = YG2.saves.IsTrainingCompleted;
+
+    private void SaveTraining() => YG2.saves.IsTrainingCompleted = _trainingData.IsTrainingCompleted;
     #endregion
 }

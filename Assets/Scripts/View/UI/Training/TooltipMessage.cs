@@ -28,7 +28,6 @@ public class TooltipMessage : MonoBehaviour
         _arrow = arrow;
 
         UpdatePosition();
-        EnableToggle(true);
     }
 
     private void Update()

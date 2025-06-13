@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Pause
 {
     public event Action Started;
-    public event Action Exited;
+    public event Action Stoped;
 
     protected readonly IAdvertising Advertising;
 
@@ -23,6 +23,6 @@ public abstract class Pause
     {
         Time.timeScale = 0;
         Advertising.ShowInterstitialAdv();
-        Exited?.Invoke();
+        Stoped?.Invoke();
     }
 }

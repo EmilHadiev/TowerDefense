@@ -62,6 +62,10 @@ namespace YG
         #region PlayerData
         public List<PlayerDataItem> PlayerDataItems = new List<PlayerDataItem>(9);
         #endregion
+
+        #region Training
+        public bool IsTrainingCompleted;
+        #region
     }
 }
 
