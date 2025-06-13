@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ElectricBulletData
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 25
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 10
   <LifeTime>k__BackingField: 2
   <Color>k__BackingField: {r: 0.44313726, g: 0.73333335, b: 0.9019608, a: 1}
   <Clip>k__BackingField: {fileID: 8300000, guid: f68f1adcd2f671f428d3fe35bfa26809, type: 3}

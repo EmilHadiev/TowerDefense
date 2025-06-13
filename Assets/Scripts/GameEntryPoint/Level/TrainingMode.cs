@@ -50,14 +50,14 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
         _playerTraining.Completed -= OnTrainingCompleted;
     }
 
-    public bool IsStartProcess() => _trainingData.IsTrainingCompleted == false;
+    public bool IsTrainingProcess() => _trainingData.IsTrainingCompleted == false;
 
     public void InitTraining(ILevelStateSwitcher levelStateSwitcher)
     {
         _levelSwitcher = levelStateSwitcher;
 
-        var template = Instantiate(_playerTraining);
-        _playerTraining = template;
+        _playerTraining = Instantiate(_trainingData.ViewPrefab);
+        _playerTraining.gameObject.SetActive(true);
         _playerTraining.SetPause(_pause);
         _playerTraining.Completed += OnTrainingCompleted;
     }
@@ -66,9 +66,10 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     {
         _targetIndex++;
 
-        if (_targetIndex + 1 >= _targets.Count)
+        if (_targetIndex >= _targets.Count)
         {
             TrainingOver();
+            OnTrainingCompleted();
             return;
         }
 
@@ -78,7 +79,8 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     public void TrainingOver()
     {
         _trainingData.IsTrainingCompleted = true;
-        Destroy(_playerTraining.gameObject);
+        _playerTraining.gameObject.SetActive(false);
+        
         Destroy(this);
     }
 

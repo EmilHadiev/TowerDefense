@@ -49,7 +49,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     {
         StartLevel();
 
-        if (_trainingMode.IsStartProcess() == false)
+        if (_trainingMode.IsTrainingProcess() == false)
         {
             _trainingMode.TrainingOver();
             StartEnemySpawn();
@@ -120,7 +120,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
                 canvas.enabled = true;
     }
 
-    private void StartEnemySpawn() => SwitchState<EnemyUpgradeState>();
+    private void StartEnemySpawn() => SwitchState<EnemySpawnerContainer>();
 
     private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
 
@@ -137,7 +137,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     {
         ActivatePlatformOptions();
 
-        if (_trainingMode.IsStartProcess())
+        if (_trainingMode.IsTrainingProcess())
             StartTraining();
     }
 }

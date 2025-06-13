@@ -13,11 +13,13 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
     private Coroutine _waitingCoroutine;
 
     private ILevelStateSwitcher _switcher;
+    private ITrainingMode _trainingMode;
 
     [Inject]
-    private void Constructor(ILevelStateSwitcher levelSwitcher)
+    private void Constructor(ILevelStateSwitcher levelSwitcher, ITrainingMode trainingMode)
     {
         _switcher = levelSwitcher;
+        _trainingMode = trainingMode;
     }
 
     public void Enter()
@@ -52,7 +54,13 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
         StartSpawn();
     }
 
-    private void StartSpawn() => _switcher.SwitchState<EnemyUpgradeState>();
+    private void StartSpawn()
+    {
+        if (_trainingMode.IsTrainingProcess())
+            _switcher.SwitchState<EnemySpawnerContainer>();        
+        else
+            _switcher.SwitchState<EnemyUpgradeState>();
+    }
 
     private void ShowCurrentTime(int time) => _timeText.text = time.ToString();
 }

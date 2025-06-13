@@ -64,8 +64,8 @@ namespace YG
         #endregion
 
         #region Training
-        public bool IsTrainingCompleted;
-        #region
+        public bool IsTrainingCompleted = false;
+        #endregion
     }
 }
 

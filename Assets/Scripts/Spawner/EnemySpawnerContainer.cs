@@ -76,7 +76,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private void OnEnemyDied()
     {
-        if (_trainingMode.IsStartProcess())
+        if (_trainingMode.IsTrainingProcess())
         {
             _trainingMode.ShowNextTraining();
             Debug.Log("ѕќка что тренировочный процесс");

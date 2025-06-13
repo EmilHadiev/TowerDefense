@@ -4,7 +4,6 @@ public class SplashBulletEffect : IBulletEffectHandler
 {
     private const int Radius = 5;
     private const int MaxEnemies = 5;
-    private const float DamagePercentage = 50;
     private const string EnemyMask = "Enemy";
 
     private readonly LayerMask _enemyMask;
@@ -41,10 +40,8 @@ public class SplashBulletEffect : IBulletEffectHandler
     {
         for (int i = 0; i < enemiesCount; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(GetRadiusDamage());
+                health.TakeDamage(GetDamage() / enemiesCount);
     }
-
-    private float GetRadiusDamage() => GetDamage() / 100 * DamagePercentage;
 
     private float GetDamage()
     {

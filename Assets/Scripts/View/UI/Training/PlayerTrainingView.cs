@@ -29,18 +29,15 @@ public class PlayerTrainingView : MonoBehaviour
     private void OnDisable()
     {
         _tooltip.Closed -= ShowNextTraining;
+
+        _pause.Started -= OnGameStarted;
+        _pause.Stoped -= OnGamePaused;
     }
 
     public void SetPause(Pause pause)
     {
         _pause = pause;
 
-        _pause.Started += OnGameStarted;
-        _pause.Stoped += OnGamePaused;
-    }
-
-    private void OnDestroy()
-    {
         _pause.Started += OnGameStarted;
         _pause.Stoped += OnGamePaused;
     }
@@ -72,7 +69,6 @@ public class PlayerTrainingView : MonoBehaviour
         {
             _arrow.EnableToggle(false);
             _tooltip.EnableToggle(false);
-            Debug.Log("Все обучения пройдены! " + nameof(PlayerTrainingView));
             Completed?.Invoke();
             return;
         }

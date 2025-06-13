@@ -1,6 +1,6 @@
 ﻿public interface ITrainingMode
 {
-    bool IsStartProcess();
+    bool IsTrainingProcess();
     void ShowNextTraining();
     void InitTraining(ILevelStateSwitcher levelStateSwitcher);
 

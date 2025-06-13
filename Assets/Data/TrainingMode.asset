@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb427ace708218a40b5810b73954d95f, type: 3}
   m_Name: TrainingMode
   m_EditorClassIdentifier: 
-  <ViewPrefab>k__BackingField: {fileID: 0}
+  <ViewPrefab>k__BackingField: {fileID: 7766025819553835249, guid: 80ce878a81a74a243b00facd2e1fe5c4, type: 3}
   <IsTrainingCompleted>k__BackingField: 0

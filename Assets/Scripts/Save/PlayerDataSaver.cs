@@ -40,8 +40,6 @@ public class PlayerDataSaver
                 throw new System.NullReferenceException($"GunItem with ID {_playerData[i].Id} not found in _items");
             }
 
-            Debug.Log($"{item.Id} ~ {item.IsPurchased}");
-
             _playerData[i].IsPurchased = item.IsPurchased;
         }
     }

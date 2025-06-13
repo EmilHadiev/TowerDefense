@@ -10,7 +10,7 @@
     }
 
     public void Enter()
-    {        
+    {
         _upgrader.TryUpgrade();
         _switcher.SwitchState<EnemySpawnerContainer>();
     }
