@@ -658,7 +658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135499336}
   m_Layer: 5
-  m_Name: RotateTrainingPlace
+  m_Name: AttackTrainingPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3054,7 +3054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1403983.8}
+  m_AnchoredPosition: {x: 0, y: 1449784.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &649304518
@@ -3906,18 +3906,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isOn: 0
   _playerTraining: {fileID: 7766025819553835249, guid: 80ce878a81a74a243b00facd2e1fe5c4, type: 3}
-  _inputsText: []
+  _inputsText:
+  - _ru: "\u0414\u0432\u0438\u0433\u0430\u0442\u044C\u0441\u044F"
+    _en: Move
+    _tr: "Ta\u015F\u0131nmak"
+  - _ru: "\u0410\u0442\u0430\u043A\u043E\u0432\u0430\u0442\u044C"
+    _en: Attack
+    _tr: "Sald\u0131r\u0131"
   _inputs:
   - {fileID: 719146170}
   - {fileID: 135499336}
-  _upgradersText: []
+  _upgradersText:
+  - _ru: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0445\u0430\u0440\u0430\u043A\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043A"
+    _en: Improving characteristics
+    _tr: "\xD6zelliklerin iyile\u015Ftirilmesi"
   _upgraders:
   - {fileID: 694051099}
-  _elementsText: []
+  _elementsText:
+  - _ru: "\u0412\u043E\u0435\u043D\u043D\u044B\u0439 \u0441\u043A\u043B\u0430\u0434"
+    _en: Military warehouse
+    _tr: Askeri depo
+  - _ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C"
+    _en: Deploy
+    _tr: "\"Konu\u015Fland\u0131r\""
   _elementsShops:
   - {fileID: 531245719}
   - {fileID: 2081578466}
-  _weaponText: []
+  _weaponText:
+  - _ru: "\u041E\u0440\u0443\u0436\u0435\u0439\u043D\u044B\u0439 \u043C\u0430\u0433\u0430\u0437\u0438\u043D"
+    _en: Gun shop
+    _tr: "Silah d\xFCkkan\u0131"
   _weaponShops:
   - {fileID: 1800832607}
 --- !u!1 &843818692
@@ -4985,7 +5003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u043E\u0435\u043D\u043D\u0430\u044F \u043F\u043E\u043C\u043E\u0449\u044C"
+  m_text: "\u0412\u043E\u0435\u043D\u043D\u044B\u0439 \u0421\u043A\u043B\u0430\u0434"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a0b232bd30ae8b4599525cdb0fbe10f, type: 2}
   m_sharedMaterial: {fileID: -8031130005468352054, guid: 4a0b232bd30ae8b4599525cdb0fbe10f, type: 2}
@@ -5194,9 +5212,9 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "\u0412\u043E\u0435\u043D\u043D\u0430\u044F \u043F\u043E\u043C\u043E\u0449\u044C"
-  en: Military assistance
-  tr: "Askeri yard\u0131m"
+  ru: "\u0412\u043E\u0435\u043D\u043D\u044B\u0439 \u0421\u043A\u043B\u0430\u0434"
+  en: Military warehouse
+  tr: Askeri depo
   az: 
   be: 
   he: 
@@ -5226,9 +5244,9 @@ MonoBehaviour:
   uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
-  processTranslateLabel: 0/3 completed
+  processTranslateLabel: 3/3 completed
   componentTextField: 1
-  countLang: 0
+  countLang: 3
 --- !u!1 &1013488853
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,7 +5404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -97.450005}
+  m_AnchoredPosition: {x: 0, y: -100.895}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065
@@ -10244,7 +10262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441"
+  m_text: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0440\u0443\u0436\u0438\u0435"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a0b232bd30ae8b4599525cdb0fbe10f, type: 2}
   m_sharedMaterial: {fileID: -8031130005468352054, guid: 4a0b232bd30ae8b4599525cdb0fbe10f, type: 2}
@@ -10453,9 +10471,9 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441"
-  en: Switch the ammunition
-  tr: "M\xFChimmat\u0131 de\u011Fi\u015Ftir"
+  ru: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0440\u0443\u0436\u0438\u0435"
+  en: Switch the weapon
+  tr: "Silah\u0131 de\u011Fi\u015Ftir"
   az: 
   be: 
   he: 
@@ -10485,9 +10503,9 @@ MonoBehaviour:
   uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
-  processTranslateLabel: 3/3 completed
+  processTranslateLabel: 0/3 completed
   componentTextField: 1
-  countLang: 3
+  countLang: 0
 --- !u!1 &2142743710
 GameObject:
   m_ObjectHideFlags: 0

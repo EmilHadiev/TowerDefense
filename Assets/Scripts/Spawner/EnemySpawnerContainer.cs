@@ -33,9 +33,6 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         _counter = counter;
         _switcher = switcher;
         _trainingMode = trainingMode;
-
-        if (switcher == null)
-            Debug.LogError("IS NULL!");
     }
 
     public void Enter()
@@ -77,11 +74,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     private void OnEnemyDied()
     {
         if (_trainingMode.IsTrainingProcess())
-        {
             _trainingMode.ShowNextTraining();
-            Debug.Log("ѕќка что тренировочный процесс");
-            return;
-        }
         else
             _switcher.SwitchState<WaitingLevelState>();
     }

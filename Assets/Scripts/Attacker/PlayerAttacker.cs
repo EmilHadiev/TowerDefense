@@ -6,6 +6,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 {
     private readonly IInput _input;
     private readonly PlayerStat _playerStat;
+    private readonly IGunPlace _gunPlace;
 
     private float _timeAfterAttack;
 
@@ -14,11 +15,12 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     public event Action Attacked;
     public bool IsAttacking { get; private set; }
 
-    public PlayerAttacker(IInput input, PlayerStat playerStat)
+    public PlayerAttacker(IInput input, PlayerStat playerStat, IPlayer player)
     {
         _input = input;
         _isAttacking = true;
         _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
     }
 
     public void Initialize() => _input.Attacked += OnAttacked;
@@ -28,8 +30,14 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
     public void Tick()
     {
         _timeAfterAttack += Time.deltaTime;
-        if (_timeAfterAttack >= _playerStat.BonusAttackSpeed)
+        if (_timeAfterAttack >= GetAttackSpeed())
             StartAttack();
+    }
+
+    private float GetAttackSpeed()
+    {
+        //return _playerStat.BonusAttackSpeed;
+        return _gunPlace.CurrentGun.BaseAttackSpeed;
     }
 
     private void OnAttacked()
@@ -38,6 +46,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
         {
             Attacked?.Invoke();
             IsAttacking = true;
+            Debug.Log(_gunPlace.CurrentGun.BaseAttackSpeed);
             ResetTimer();
             StopAttack();
         }

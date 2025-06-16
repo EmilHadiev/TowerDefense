@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PlayerTrainingView : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerTrainingView : MonoBehaviour
     [SerializeField] private HintArrow _arrow;
     [SerializeField] private TooltipMessage _tooltip;
     [SerializeField] private List<RectTransform> _targets;
-
+    [SerializeField] private List<TrainingTranslate> _translates;
     private int _index = -1;
     private Pause _pause;
 
@@ -42,15 +43,18 @@ public class PlayerTrainingView : MonoBehaviour
         _pause.Stoped += OnGamePaused;
     }
 
-    public void SetTargets(IEnumerable<RectTransform> targets)
+    public void SetTargets(IEnumerable<RectTransform> targets, IEnumerable<TrainingTranslate> trainingTranslates)
     {
-        UpdateTargets(targets);
+        UpdateTargets(targets, trainingTranslates);
+
         ShowNextTraining();
     }
 
-    private void UpdateTargets(IEnumerable<RectTransform> targets)
+    private void UpdateTargets(IEnumerable<RectTransform> targets, IEnumerable<TrainingTranslate> trainingTranslates)
     {
         _targets = new List<RectTransform>(targets);
+        _translates = new List<TrainingTranslate>(trainingTranslates);
+
         _index = -1;
     }
 
@@ -60,7 +64,7 @@ public class PlayerTrainingView : MonoBehaviour
         _tooltip.EnableToggle(true);
 
         _arrow.SetTarget(_targets[_index]);
-        _tooltip.ShowMessage(_index.ToString(), _arrow);
+        _tooltip.ShowMessage(_translates[_index].GetTranslate(YG2.lang), _arrow);
     }
 
     private void ShowNextTraining()

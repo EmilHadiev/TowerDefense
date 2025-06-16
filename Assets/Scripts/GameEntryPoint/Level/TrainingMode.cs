@@ -9,16 +9,16 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     [Header("UI")]
     [SerializeField] private PlayerTrainingView _playerTraining;
     [Header("Inputs")]
-    [SerializeField] private LocalizedText[] _inputsText;
+    [SerializeField] private TrainingTranslate[] _inputsText;
     [SerializeField] private RectTransform[] _inputs;
     [Header("Upgraders")]
-    [SerializeField] private LocalizedText[] _upgradersText;
+    [SerializeField] private TrainingTranslate[] _upgradersText;
     [SerializeField] private RectTransform[] _upgraders;
     [Header("Elements shop")]
-    [SerializeField] private LocalizedText[] _elementsText;
+    [SerializeField] private TrainingTranslate[] _elementsText;
     [SerializeField] private RectTransform[] _elementsShops;
     [Header("Weapon show")]
-    [SerializeField] private LocalizedText[] _weaponText;
+    [SerializeField] private  TrainingTranslate[] _weaponText;
     [SerializeField] private RectTransform[] _weaponShops;
 
 
@@ -27,6 +27,7 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     private ILevelStateSwitcher _levelSwitcher;
 
     private readonly List<RectTransform[]> _targets = new List<RectTransform[]>(3);
+    private readonly List<TrainingTranslate[]> _translates = new List<TrainingTranslate[]>(3);
 
     private int _targetIndex = -1;
 
@@ -43,6 +44,11 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
         _targets.Add(_upgraders);
         _targets.Add(_elementsShops);
         _targets.Add(_weaponShops);
+
+        _translates.Add(_inputsText);
+        _translates.Add(_upgradersText);
+        _translates.Add(_elementsText);
+        _translates.Add(_weaponText);
     }
 
     private void OnDestroy()
@@ -73,7 +79,7 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
             return;
         }
 
-        _playerTraining.SetTargets(_targets[_targetIndex]);
+        _playerTraining.SetTargets(_targets[_targetIndex], _translates[_targetIndex]);
     }
 
     public void TrainingOver()
