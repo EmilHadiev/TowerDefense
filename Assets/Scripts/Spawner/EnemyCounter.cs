@@ -2,15 +2,18 @@
 
 public class EnemyCounter
 {
+    private readonly WaveData _waveData;
+
     private int _currentAlive;
     private int _totalSpawned;
 
     public event Action CapacityReached;
     public event Action AllEnemiesDead;
 
-    public EnemyCounter()
+    public EnemyCounter(WaveData waveData)
     {
         Reset();
+        _waveData = waveData;
     }
 
     public void Add()
@@ -18,7 +21,7 @@ public class EnemyCounter
         _currentAlive++;
         _totalSpawned++;
 
-        if (_totalSpawned >= Constants.MaxEnemies)
+        if (_totalSpawned >= _waveData.MaxEnemies)
             CapacityReached?.Invoke();
     }
 
@@ -26,7 +29,7 @@ public class EnemyCounter
     {
         _currentAlive--;
 
-        if (_currentAlive <= 0 && _totalSpawned >= Constants.MaxEnemies)
+        if (_currentAlive <= 0 && _totalSpawned >= _waveData.MaxEnemies)
             AllEnemiesDead?.Invoke();
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -5,6 +6,8 @@ public class GunPlace : MonoBehaviour, IGunPlace
 {
     private Gun _currentGun;
     private IPlayerSoundContainer _sound;
+
+    public event Action<IGun> GunSwitched;
 
     public IGun CurrentGun => _currentGun;
 
@@ -18,9 +21,11 @@ public class GunPlace : MonoBehaviour, IGunPlace
     {
         _currentGun?.gameObject.SetActive(false);
         _currentGun = gun;
-        SetPosition(_currentGun);
+        SetPosition(_currentGun);        
         _currentGun.gameObject.SetActive(true);
         _sound.Play(SoundName.SwitchBullet);
+
+        GunSwitched?.Invoke(CurrentGun);
     }
 
     private void SetPosition(Gun gun)

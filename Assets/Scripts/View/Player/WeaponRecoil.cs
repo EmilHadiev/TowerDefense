@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Zenject;
 
 public class WeaponRecoil : IWeaponRecoil
 {
@@ -6,12 +7,12 @@ public class WeaponRecoil : IWeaponRecoil
     private const int Accelerator = 2;
 
     private readonly ShakingPart _shakingPart;
-    private readonly PlayerStat _stat;
+    private readonly LazyInject<IAttackable> _attackable;
 
-    public WeaponRecoil(ShakingPart shakingPart, PlayerStat stat)
+    public WeaponRecoil(ShakingPart shakingPart, LazyInject<IAttackable> attackable)
     {
         _shakingPart = shakingPart;
-        _stat = stat;
+        _attackable = attackable;
     }
 
     public void PlayRecoil()
@@ -20,7 +21,7 @@ public class WeaponRecoil : IWeaponRecoil
             .SetLoops(2, LoopType.Yoyo);
     }
 
-    private float GetDuration() => _stat.BonusAttackSpeed / Accelerator;
+    private float GetDuration() => _attackable.Value.AttackSpeed / Accelerator;
 
     private float GetEndValue()
     {

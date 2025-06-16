@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -35,7 +36,8 @@ public class PauseState : UIState
         base.RegisterToEvents();
         _restartButton.onClick.AddListener(Restart);
         _rewardContinueButton.onClick.AddListener(ResurrectPlayer);
-        _gameOver.GameOvered += OnPlayerDied;
+        _gameOver.PlayerLost += OnPlayerDied;
+        _gameOver.PlayerWon += OnPlayerWon;
     }
 
     protected override void UnRegisterFromEvents()
@@ -43,7 +45,8 @@ public class PauseState : UIState
         base.UnRegisterFromEvents();
         _restartButton.onClick.RemoveListener(Restart);
         _rewardContinueButton.onClick.AddListener(ResurrectPlayer);
-        _gameOver.GameOvered -= OnPlayerDied;
+        _gameOver.PlayerLost -= OnPlayerDied;
+        _gameOver.PlayerWon += OnPlayerWon;
     }
 
     private void Restart()
@@ -56,6 +59,13 @@ public class PauseState : UIState
     {        
         _rewardContinueButton.gameObject.SetActive(true);
         _rewardContainer.gameObject.SetActive(true);
+        Enter();
+    }
+
+    private void OnPlayerWon()
+    {
+        _rewardContinueButton.gameObject.SetActive(false);
+        _rewardContainer.gameObject.SetActive(false);
         Enter();
     }
 

@@ -29,7 +29,7 @@ public class PlayerCombatView : MonoBehaviour
     private void Constructor(LazyInject<IAttackable> attackable, PlayerStat stat)
     {
         _attackable = attackable;
-        _recoil = new WeaponRecoil(_shakingPart, stat);
+        _recoil = new WeaponRecoil(_shakingPart, attackable);
     }
 
     public void SetParticleColor(Color color)

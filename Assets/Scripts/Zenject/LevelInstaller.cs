@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -5,6 +6,7 @@ public class LevelInstaller : MonoInstaller
 {
     [SerializeField] private LevelStateMachine _entryPoint;
     [SerializeField] private TrainingMode _trainingMode;
+    [SerializeField] private WaveData _waveData;
 
     private void OnValidate()
     {
@@ -21,6 +23,13 @@ public class LevelInstaller : MonoInstaller
         BindEnemyCounter();
         BindGameOverService();
         BindTrainingMode();
+        BindWaveData();
+        BindWaveCounter();
+    }
+
+    private void BindWaveCounter()
+    {
+        Container.BindInterfacesAndSelfTo<WaveCounter>().AsSingle();
     }
 
     private void BindGameOverService()
@@ -41,5 +50,10 @@ public class LevelInstaller : MonoInstaller
     private void BindTrainingMode()
     {
         Container.BindInterfacesTo<TrainingMode>().FromInstance(_trainingMode).AsSingle();
+    }
+
+    private void BindWaveData()
+    {
+        Container.Bind<WaveData>().FromNewScriptableObject(_waveData).AsSingle();
     }
 }

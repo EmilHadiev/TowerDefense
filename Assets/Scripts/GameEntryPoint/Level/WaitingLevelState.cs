@@ -7,19 +7,20 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
 {
     [SerializeField] private TMP_Text _timeText;
 
-    private const int WaitingTime = 1;
     private readonly WaitForSeconds _delay = new WaitForSeconds(1);
 
     private Coroutine _waitingCoroutine;
 
     private ILevelStateSwitcher _switcher;
     private ITrainingMode _trainingMode;
+    private WaveData _waveData;
 
     [Inject]
-    private void Constructor(ILevelStateSwitcher levelSwitcher, ITrainingMode trainingMode)
+    private void Constructor(ILevelStateSwitcher levelSwitcher, ITrainingMode trainingMode, WaveData waveData)
     {
         _switcher = levelSwitcher;
         _trainingMode = trainingMode;
+        _waveData = waveData;
     }
 
     public void Enter()
@@ -41,7 +42,7 @@ public class WaitingLevelState : MonoBehaviour, ILevelState
 
     private IEnumerator WaitingCoroutine()
     {
-        int time = WaitingTime;
+        int time = _waveData.WaitingTime;
         ShowCurrentTime(time);
 
         while (time > 0)

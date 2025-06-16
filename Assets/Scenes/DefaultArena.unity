@@ -3054,7 +3054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1449784.4}
+  m_AnchoredPosition: {x: 0, y: 1564772.9}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &649304518
@@ -5404,7 +5404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100.895}
+  m_AnchoredPosition: {x: 0, y: -109.495804}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065
@@ -6957,6 +6957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entryPoint: {fileID: 826629057}
   _trainingMode: {fileID: 826629058}
+  _waveData: {fileID: 11400000, guid: c7c361b0718953848bec68be4b1b89be, type: 2}
 --- !u!1 &1386531130
 GameObject:
   m_ObjectHideFlags: 0

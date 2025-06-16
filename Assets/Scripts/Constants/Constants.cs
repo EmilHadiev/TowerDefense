@@ -24,7 +24,8 @@
 
     public const int StartScene = 1;
 
-    public const int MaxEnemies = 1;
+    public const int MaxEnemies = 20;
+    public const int MaxWaves = 4;
 
     public const int BulletPrice = 2000; 
 }

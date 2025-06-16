@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameEnvData", fileName = "GameEnvData")]
+[CreateAssetMenu(menuName = "GameEnvData/Game", fileName = "GameEnvData")]
 public class EnvironmentData : ScriptableObject
 {
     [field: SerializeField] public bool IsDesktop { get; set; }

@@ -5,7 +5,8 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
 {
     private readonly IHealth _playerHealth;
 
-    public event Action GameOvered;
+    public event Action PlayerLost;
+    public event Action PlayerWon;
 
     public GameOverService(IPlayer player)
     {
@@ -13,11 +14,8 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
     }
 
     public void Initialize() => _playerHealth.Died += GameOver;
-
     public void Dispose() => _playerHealth.Died -= GameOver;
 
-    public void GameOver()
-    {
-        GameOvered?.Invoke();
-    }
+    public void GameOver() => PlayerLost?.Invoke();
+    public void GameCompleted() => PlayerWon?.Invoke();
 }
