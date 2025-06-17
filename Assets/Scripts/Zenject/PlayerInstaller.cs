@@ -15,6 +15,12 @@ public class PlayerInstaller : MonoInstaller
         BindSoundContainer();
         BindOptimization();
         BindPlayer();
+        BindProfits();
+    }
+
+    private void BindProfits()
+    {
+        Container.BindInterfacesAndSelfTo<ProfitContainer>().AsSingle();
     }
 
     private void BindOptimization()

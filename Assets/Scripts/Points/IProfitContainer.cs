@@ -1,7 +1,7 @@
 public interface IProfitContainer
 {
-    public int Profit { get; }
+    public int Profits { get; }
 
-    public void IncreaseProfits(int profit);
-    public void GetBoostProfits(int multiplier);
+    public void IncreaseProfits(int profits);
+    public int GetBoostProfits(int multiplier = 2);
 }

@@ -1,16 +1,15 @@
-public class ProfitContainer : IProfitContainer
+using Zenject;
+
+public class ProfitContainer : IProfitContainer, IInitializable
 {
-    private int _currentProfit;
+    public int Profits { get; private set; }
 
-    public int Profit => _currentProfit;
+    public int GetBoostProfits(int multiplier = 2) => Profits * multiplier;
 
-    public void GetBoostProfits(int multiplier)
+    public void IncreaseProfits(int profits) => Profits += profits;
+
+    public void Initialize()
     {
-        _currentProfit *= multiplier;
-    }
-
-    public void IncreaseProfits(int profit)
-    {
-        _currentProfit += profit;
+        Profits = 0;
     }
 }
