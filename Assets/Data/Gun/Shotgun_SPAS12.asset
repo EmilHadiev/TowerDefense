@@ -17,7 +17,7 @@ MonoBehaviour:
   <BaseAttackSpeed>k__BackingField: 0.5
   <DamagePercent>k__BackingField: 22
   <Prefab>k__BackingField: {fileID: 3416578373548854326, guid: 9f133a4e28aea334e8ad6beb4c4dabf8, type: 3}
-  <Price>k__BackingField: 750
+  <Price>k__BackingField: 1500
   <IsPurchased>k__BackingField: 1
   _texts:
   - <Language>k__BackingField: 0

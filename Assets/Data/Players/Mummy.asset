@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 348505eb31d63c44b86960558793ef4c, type: 3}
-  m_Name: PlayerData 1
+  m_Name: Mummy
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 1
-  <Price>k__BackingField: 200
-  <Prefab>k__BackingField: {fileID: 1968544527444592899, guid: 921d5949ca56eea44b36d3c4fc53f514, type: 3}
-  <StickmanView>k__BackingField: {fileID: 3188627310260580418, guid: 3a2c031da22f21b4cb9bd08cf8303994, type: 3}
+  <Id>k__BackingField: 5
+  <Price>k__BackingField: 500
+  <Prefab>k__BackingField: {fileID: 261377806618845350, guid: 1c5cd5ce46cd8dd48bc9b7fcb435c9d9, type: 3}
+  <StickmanView>k__BackingField: {fileID: 3278486651066811192, guid: d4cf5c049802eb84f938766d225fd248, type: 3}
   <IsPurchased>k__BackingField: 1

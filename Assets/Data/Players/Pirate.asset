@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 348505eb31d63c44b86960558793ef4c, type: 3}
-  m_Name: PlayerData 2
+  m_Name: Pirate
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 2
-  <Price>k__BackingField: 300
-  <Prefab>k__BackingField: {fileID: 4866786798344882585, guid: 94372c100034ce141af23bda937c5ba8, type: 3}
-  <StickmanView>k__BackingField: {fileID: 1423870281352973540, guid: 74da3885e02b6114abdb2af68dae53aa, type: 3}
+  <Id>k__BackingField: 6
+  <Price>k__BackingField: 500
+  <Prefab>k__BackingField: {fileID: 6784586607510583380, guid: 8ee686e4a3db290499a2070a11460427, type: 3}
+  <StickmanView>k__BackingField: {fileID: 7655195891517578651, guid: b876db4535803a94e85409913561ade1, type: 3}
   <IsPurchased>k__BackingField: 1
