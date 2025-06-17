@@ -1,4 +1,4 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -6,23 +6,38 @@ using Zenject;
 public class PauseState : UIState
 {
     [SerializeField] private Button _restartButton;
+
+    [Header("Pause")]
+    [SerializeField] private TMP_Text _pauseText;
+    [SerializeField] private GameObject _continueButton;
+
+    [Header("RewardContinue")]
+    [SerializeField] private TMP_Text _defeatText;
     [SerializeField] private Button _rewardContinueButton;
-    [SerializeField] private GameObject _rewardContainer;
+    [SerializeField] private GameObject _rewardContinueContainer;
+
+    [Header("Victory")]
+    [SerializeField] private TMP_Text _victoryText;
+    [SerializeField] private Button _rewardProfitButton;
+    [SerializeField] private GameObject _rewardProfitContainer;
+    [SerializeField] private ProfitsView _profitsView;
 
     private ISavable _savable;
     private ISceneLoader _sceneLoader;
     private IGameOver _gameOver;
     private IAdvertising _advertising;
     private IPlayer _player;
+    private IProfitContainer _profit;
 
     [Inject]
-    private void Constructor(ISavable savable, ISceneLoader sceneSwitcher, IGameOver gameOver, IAdvertising advertising, IPlayer player)
+    private void Constructor(ISavable savable, ISceneLoader sceneSwitcher, IGameOver gameOver, IAdvertising advertising, IPlayer player, IProfitContainer profit)
     {
         _savable = savable;
         _sceneLoader = sceneSwitcher;
         _advertising = advertising;
         _gameOver = gameOver;
         _player = player;
+        _profit = profit;
     }
 
     public override void Enter()
@@ -36,6 +51,8 @@ public class PauseState : UIState
         base.RegisterToEvents();
         _restartButton.onClick.AddListener(Restart);
         _rewardContinueButton.onClick.AddListener(ResurrectPlayer);
+        _rewardProfitButton.onClick.AddListener(AddProfit);
+
         _gameOver.PlayerLost += OnPlayerDied;
         _gameOver.PlayerWon += OnPlayerWon;
     }
@@ -44,9 +61,11 @@ public class PauseState : UIState
     {
         base.UnRegisterFromEvents();
         _restartButton.onClick.RemoveListener(Restart);
-        _rewardContinueButton.onClick.AddListener(ResurrectPlayer);
+        _rewardContinueButton.onClick.RemoveListener(ResurrectPlayer);
+        _rewardProfitButton.onClick.RemoveListener(AddProfit);
+
         _gameOver.PlayerLost -= OnPlayerDied;
-        _gameOver.PlayerWon += OnPlayerWon;
+        _gameOver.PlayerWon -= OnPlayerWon;
     }
 
     private void Restart()
@@ -56,24 +75,64 @@ public class PauseState : UIState
     }
 
     private void OnPlayerDied()
-    {        
-        _rewardContinueButton.gameObject.SetActive(true);
-        _rewardContainer.gameObject.SetActive(true);
+    {
+        ProfitsToggle(false);
+        RewardContinueToggle(true);
         Enter();
     }
 
     private void OnPlayerWon()
     {
-        _rewardContinueButton.gameObject.SetActive(false);
-        _rewardContainer.gameObject.SetActive(false);
+        RewardContinueToggle(false);
+        ProfitsToggle(true);
         Enter();
     }
 
-    private void ResurrectPlayer()
+    private void RewardContinueToggle(bool isOn)
     {
-        _advertising.ShowRewardAdv(_player.Resurrectable.Resurrect);
-        _rewardContinueButton.gameObject.SetActive(false);
-        _rewardContainer.gameObject.SetActive(false);
+        TextEnableToggle(false, true, false);
+
+        _rewardContinueButton.gameObject.SetActive(isOn);
+        _rewardContinueContainer.gameObject.SetActive(isOn);
+    }
+
+    private void ProfitsToggle(bool isOn)
+    {
+        TextEnableToggle(false, false, true);
+
+        _rewardProfitButton.gameObject.SetActive(isOn);
+        _profitsView.gameObject.SetActive(isOn);
+        _rewardProfitContainer.gameObject.SetActive(isOn);
+    }
+
+    private void TextEnableToggle(bool isPause, bool isDefeat, bool isVictory)
+    {
+        _pauseText.gameObject.SetActive(isPause);
+        _defeatText.gameObject.SetActive(isDefeat);
+        _victoryText.gameObject.SetActive(isVictory);
+    }
+
+    private void AddProfit()
+    {
+        _advertising.ShowRewardAdv(
+            () => 
+            { 
+                _profit.AddProfitsToPlayer();
+                ProfitsToggle(false);
+                _continueButton.gameObject.SetActive(false);
+            });
+    }
+
+    private void ResurrectPlayer()
+    {        
+        _advertising.ShowRewardAdv(
+            () =>
+            {
+                _player.Resurrectable.Resurrect();            
+                RewardContinueToggle(false);
+                TextEnableToggle(true, false, false);
+            });
+        
         Exit();
     }
 }
