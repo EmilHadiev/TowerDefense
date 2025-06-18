@@ -124,15 +124,14 @@ public class PauseState : UIState
     }
 
     private void ResurrectPlayer()
-    {        
+    {
         _advertising.ShowRewardAdv(
             () =>
             {
                 _player.Resurrectable.Resurrect();            
                 RewardContinueToggle(false);
                 TextEnableToggle(true, false, false);
+                Exit();
             });
-        
-        Exit();
     }
 }

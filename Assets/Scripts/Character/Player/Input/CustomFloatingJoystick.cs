@@ -2,6 +2,8 @@
 
 public class CustomFloatingJoystick : Joystick
 {
+    private void OnDisable() => StopCalculate();
+
     public override void OnPointerDown(PointerEventData eventData)
     {
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
@@ -13,5 +15,11 @@ public class CustomFloatingJoystick : Joystick
     {
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
+    }
+
+    private void StopCalculate()
+    {
+        background.gameObject.SetActive(false);
+        base.OnPointerUp(null);
     }
 }
