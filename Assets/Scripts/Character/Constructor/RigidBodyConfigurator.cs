@@ -11,6 +11,10 @@ public class RigidBodyConfigurator : IComponentConfigurator
 
     public void Configurate()
     {
-        _rigidBody.isKinematic = true;
+        _rigidBody.isKinematic = false;
+        _rigidBody.constraints = GetConstraints();
     }
+
+    private RigidbodyConstraints GetConstraints() =>
+        RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 }

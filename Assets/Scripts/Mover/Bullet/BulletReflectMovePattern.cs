@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BulletReflectMovePattern : IBulletMover
 {
@@ -35,8 +36,16 @@ public class BulletReflectMovePattern : IBulletMover
     {
         if (_isWork == false)
             return;
+        
+        UpdateBulletPosition();
+    }
 
-        _bullet.Translate(Direction * _data.Speed * Time.deltaTime, Space.World);
+    private void UpdateBulletPosition()
+    {
+        Vector3 moveDirection = GetDirection();
+
+        _bullet.Translate(moveDirection, Space.World);
+        _bullet.forward = moveDirection;
     }
 
     private void OnCollided(Vector3 direction, ReflectiveObstacle obstacle)
@@ -47,4 +56,6 @@ public class BulletReflectMovePattern : IBulletMover
             _previousObstacle = obstacle;
         }
     }
+
+    private Vector3 GetDirection() => Direction * _data.Speed * Time.deltaTime;
 }
