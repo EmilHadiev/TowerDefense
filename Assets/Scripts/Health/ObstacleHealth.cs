@@ -4,6 +4,9 @@ using Zenject;
 
 public class ObstacleHealth : MonoBehaviour, IHealth
 {
+    [SerializeField] private ParticleView _damageParticle;
+
+    private ParticleView _damageImpact;
     private PlayerStat _playerStat;
 
     private float _health;
@@ -26,6 +29,7 @@ public class ObstacleHealth : MonoBehaviour, IHealth
     {
         MaxHealth = _playerStat.MaxHealth;
         _health = MaxHealth;
+        _damageImpact.Stop();
     }
 
     public void AddHealth(float healthPoints)
@@ -34,8 +38,6 @@ public class ObstacleHealth : MonoBehaviour, IHealth
 
         if (_health > MaxHealth)
             _health = MaxHealth;
-
-        
     }
 
     public void TakeDamage(float damage)
@@ -45,8 +47,11 @@ public class ObstacleHealth : MonoBehaviour, IHealth
         if (_health <= 0)
             Die();
 
+        PlayParticle();
         DamageApplied?.Invoke(damage);
     }
+
+    private void PlayParticle() => _damageParticle.Play();
 
     private void Die()
     {

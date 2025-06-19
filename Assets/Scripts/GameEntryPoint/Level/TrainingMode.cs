@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class TrainingMode : MonoBehaviour, ITrainingMode
@@ -11,6 +12,7 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     [Header("Inputs")]
     [SerializeField] private TrainingTranslate[] _inputsText;
     [SerializeField] private RectTransform[] _inputs;
+    [SerializeField] private Image[] _inputsImage;
     [Header("Upgraders")]
     [SerializeField] private TrainingTranslate[] _upgradersText;
     [SerializeField] private RectTransform[] _upgraders;
@@ -24,6 +26,7 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
 
     private TrainingData _trainingData;
     private Pause _pause;
+    private EnvironmentData _envData;
     private ILevelStateSwitcher _levelSwitcher;
 
     private readonly List<RectTransform[]> _targets = new List<RectTransform[]>(3);
@@ -32,10 +35,11 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
     private int _targetIndex = -1;
 
     [Inject]
-    private void Constructor(TrainingData data, Pause pause)
+    private void Constructor(TrainingData data, Pause pause, EnvironmentData envData)
     {
         _trainingData = data;
         _pause = pause;
+        _envData = envData;
     }
 
     private void Awake()
@@ -66,12 +70,14 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
         _playerTraining.gameObject.SetActive(true);
         _playerTraining.SetPause(_pause);
         _playerTraining.Completed += OnTrainingCompleted;
+
+        TryToggleDesktopInput(true);
     }
 
     public void ShowNextTraining()
     {
         _targetIndex++;
-
+        
         if (_targetIndex >= _targets.Count)
         {
             TrainingOver();
@@ -92,6 +98,20 @@ public class TrainingMode : MonoBehaviour, ITrainingMode
 
     private void OnTrainingCompleted()
     {
+        TryToggleDesktopInput(false);
         _levelSwitcher.SwitchState<WaitingLevelState>();
     }
+
+    #region Desktop
+
+    private void TryToggleDesktopInput(bool isOn)
+    {
+        if (IsDesktop())
+            for (int i = 0; i < _inputs.Length; i++)
+                _inputs[i].gameObject.SetActive(isOn);
+    }
+
+    private bool IsDesktop() => _envData.IsDesktop;
+
+    #endregion
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 public class DesktopInput : IInput, ITickable
@@ -35,7 +36,7 @@ public class DesktopInput : IInput, ITickable
         if (_isWork == false)
             return;
 
-        if (Input.GetMouseButton(AttackButton))
+        if (Input.GetMouseButton(AttackButton) && EventSystem.current.IsPointerOverGameObject() == false)
             Attacked?.Invoke();
     }
 

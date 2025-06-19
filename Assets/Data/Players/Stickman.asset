@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 348505eb31d63c44b86960558793ef4c, type: 3}
-  m_Name: Witch
+  m_Name: Stickman
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 9
-  <Price>k__BackingField: 500
-  <Prefab>k__BackingField: {fileID: 1892971135449419586, guid: c6d9664a3994c864a92ccbce6f6c01f4, type: 3}
-  <StickmanView>k__BackingField: {fileID: 7674938189233158962, guid: d6f8ecb122242c64ca541f6f227e3190, type: 3}
+  <Id>k__BackingField: 8
+  <Price>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 5219102535121839568, guid: db2d4217c43d4e54193f3aea87ec45df, type: 3}
+  <StickmanView>k__BackingField: {fileID: 855297536759639016, guid: b5bc4008a4b8a5b4d8fd5af0b946d1ab, type: 3}
   <IsPurchased>k__BackingField: 1
