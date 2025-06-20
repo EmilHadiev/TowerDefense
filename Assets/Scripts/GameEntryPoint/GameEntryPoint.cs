@@ -1,55 +1,61 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using UnityEngine;
 using YG;
 
 public class YandexGameEntryPoint : IEntryPoint
 {
-    private Coroutine _waitingCoroutine;
-    private readonly ICoroutinePefrormer _performer;
-    private readonly WaitForEndOfFrame _waitingFrame;
+    private CancellationTokenSource _cts;
 
     private readonly EnvironmentData _envData;
     private readonly ISceneLoader _sceneLoader;
     private readonly ISavable _savable;
     private readonly GameplayMarkup _markup;
 
-    public YandexGameEntryPoint(ISceneLoader sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, ICoroutinePefrormer performer)
+    public YandexGameEntryPoint(ISceneLoader sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData)
     {
-        _waitingFrame = new WaitForEndOfFrame();
         _sceneLoader = sceneSwitcher;
         _envData = envData;
         _savable = savable;
-        _performer = performer;
         _markup = markup;
     }
 
     public void Start()
     {
         StopPerform();
-        _waitingCoroutine = _performer.StartPerform(AuthenticationCoroutine());
+        _cts = new CancellationTokenSource();
+        AuthenticationProcess(_cts.Token).Forget(); // Çàïóñê áåç îæèäàíèÿ
     }
 
     private void StopPerform()
     {
-        if (_waitingCoroutine != null)
-            _performer.StopPerform(_waitingCoroutine);
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
     }
 
-    private IEnumerator AuthenticationCoroutine()
+    private async UniTaskVoid AuthenticationProcess(CancellationToken ct)
     {
-        while (YG2.isSDKEnabled == false)
-            yield return _waitingFrame;
+        try
+        {
+            while (YG2.isSDKEnabled == false)
+                await UniTask.Yield(_cts.Token);
 
-        ResetProgress();
-        Debug.Log("ÂĞÅÌÅÍÍÎ ÑÁÀĞÑÛÂÀÅÌ ÏĞÎÃĞÅÑÑ!");
+            ResetProgress();
+            Debug.Log("ÂĞÅÌÅÍÍÎ ÑÁÀĞÑÛÂÀÅÌ ÏĞÎÃĞÅÑÑ!");
 
-        HideStickyBanners();
-
-        OpenAuthDialog();
-        LoadProgress();
-        SetEnvData();
-        SwitchToStartScene();
-        StartGameplay();
+            HideStickyBanners();
+            OpenAuthDialog();
+            LoadProgress();
+            SetEnvData();
+            SwitchToStartScene();
+            StartGameplay();
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("Àóòåíòèôèêàöèÿ îòìåíåíà");
+        }
     }
 
     private void SetEnvData()

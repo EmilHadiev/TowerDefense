@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
@@ -7,14 +9,13 @@ public class EnemyAttackZone : MonoBehaviour
     [SerializeField] private TriggerObserver _observer;
     [SerializeField] private Enemy _enemy;
 
-    private const int WaitingTime = 1;
+    private const int WaitingTimeMs = 1000;
 
     private IHealth _health;
     private IHealth _targetHealth;
     private IStateSwitcher _stateSwitcher;
 
-    private Coroutine _targetCheckCoroutine;
-    private readonly WaitForSeconds _delay = new WaitForSeconds(WaitingTime);
+    private CancellationTokenSource _targetCheckCts;
 
     private void OnValidate()
     {
@@ -30,7 +31,6 @@ public class EnemyAttackZone : MonoBehaviour
     {
         _observer.Entered += OnEntered;
         _observer.Exited += OnExited;
-
         _health.Died += OnDied;
     }
 
@@ -38,8 +38,9 @@ public class EnemyAttackZone : MonoBehaviour
     {
         _observer.Entered -= OnEntered;
         _observer.Exited -= OnExited;
-
         _health.Died -= OnDied;
+
+        StopTargetCheck();
     }
 
     public void Attack()
@@ -47,13 +48,15 @@ public class EnemyAttackZone : MonoBehaviour
         _stateSwitcher.SwitchTo<EnemyAttackState>();
         StopTargetCheck();
 
-        _targetCheckCoroutine = StartCoroutine(CheckTargetAlive());
+        _targetCheckCts = new CancellationTokenSource();
+        CheckTargetAliveAsync(_targetCheckCts.Token).Forget();
     }
 
     private void StopTargetCheck()
     {
-        if (_targetCheckCoroutine != null)
-            StopCoroutine(_targetCheckCoroutine);
+        _targetCheckCts?.Cancel();
+        _targetCheckCts?.Dispose();
+        _targetCheckCts = null;
     }
 
     public void Move()
@@ -63,12 +66,24 @@ public class EnemyAttackZone : MonoBehaviour
         _observer.UnLock();
     }
 
-    private IEnumerator CheckTargetAlive()
+    private async UniTaskVoid CheckTargetAliveAsync(CancellationToken ct)
     {
-        while (_targetHealth.IsAlive)
-            yield return _delay;
+        try
+        {
+            while (_targetHealth.IsAlive && ct.IsCancellationRequested == false)
+            {
+                await UniTask.Delay(WaitingTimeMs, cancellationToken: ct);
+            }
 
-        Move();
+            if (ct.IsCancellationRequested == false)
+            {
+                Move();
+            }
+        }
+        catch (Exception)
+        {
+            
+        }
     }
 
     private void OnEntered(Collider collider)
@@ -76,6 +91,7 @@ public class EnemyAttackZone : MonoBehaviour
         _targetHealth = collider.GetComponent<IHealth>();
         Attack();
     }
+
     private void OnExited(Collider collider) => Move();
 
     private void OnDied()

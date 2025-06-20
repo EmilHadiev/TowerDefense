@@ -1,28 +1,23 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using UnityEngine;
 
 public class FreezingEffect : INegativeEffect
 {
     private const int PercentageSlowdown = 50;
-    private const int SlowdownDuration = 2;
+    private const int SlowdownDuration = 2000; // 2 секунды в миллисекундах
 
-    private readonly ICoroutinePefrormer _pefrormer;
-    private readonly WaitForSeconds _delay;
     private readonly Property _speed;
     private readonly EnemyRenderViewer _view;
-
     private readonly Color _freezeColor = Color.blue;
 
     private Color _startColor;
-
-    private Coroutine _slowdownCoroutine;
-
     private float _defaultSpeed;
+    private CancellationTokenSource _effectCts;
 
-    public FreezingEffect(ICoroutinePefrormer pefrormer, Property speed, EnemyRenderViewer view)
+    public FreezingEffect(Property speed, EnemyRenderViewer view)
     {
-        _delay = new WaitForSeconds(SlowdownDuration);
-        _pefrormer = pefrormer;
         _speed = speed;
         _defaultSpeed = _speed.Value;
         _view = view;
@@ -32,22 +27,31 @@ public class FreezingEffect : INegativeEffect
     {
         StopEffect();
 
-        _slowdownCoroutine = _pefrormer.StartPerform(SlowdownCoroutine());
+        _effectCts = new CancellationTokenSource();
+        SlowdownEffectAsync(_effectCts.Token).Forget();
     }
 
     public void StopEffect()
     {
-        if (_slowdownCoroutine != null && _pefrormer != null)
-            _pefrormer.StopPerform(_slowdownCoroutine);
+        _effectCts?.Cancel();
+        _effectCts?.Dispose();
+        _effectCts = null;
 
         StopFreeze();
     }
 
-    private IEnumerator SlowdownCoroutine()
+    private async UniTaskVoid SlowdownEffectAsync(CancellationToken ct)
     {
-        StartFreeze();
-        yield return _delay;
-        StopFreeze();
+        try
+        {
+            StartFreeze();
+            await UniTask.Delay(SlowdownDuration, cancellationToken: ct);
+            StopFreeze();
+        }
+        catch (OperationCanceledException)
+        {
+            
+        }
     }
 
     private void StartFreeze()

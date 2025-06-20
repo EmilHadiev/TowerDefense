@@ -9,7 +9,6 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     private EnemyRenderViewer _view;
 
     private Dictionary<Type, INegativeEffect> _negativeEffects;
-    private ICoroutinePefrormer _pefrormer;
     private INegativeEffect _effect;
     private PlayerStat _playerStat;
 
@@ -26,8 +25,8 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     {
         _negativeEffects = new Dictionary<Type, INegativeEffect>(10)
         {
-            [typeof(FreezingEffect)] = new FreezingEffect(_pefrormer, _speed, _view),
-            [typeof(PoisonEffect)] = new PoisonEffect(_pefrormer, _view, _playerStat, _enemyHealth),
+            [typeof(FreezingEffect)] = new FreezingEffect(_speed, _view),
+            [typeof(PoisonEffect)] = new PoisonEffect(_view, _playerStat, _enemyHealth),
         };
     }
 
@@ -38,9 +37,8 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     }
 
     [Inject]
-    private void Constructor(ICoroutinePefrormer pefrormer, PlayerStat playerStat)
+    private void Constructor(PlayerStat playerStat)
     {
-        _pefrormer = pefrormer;
         _playerStat = playerStat;
     }
 

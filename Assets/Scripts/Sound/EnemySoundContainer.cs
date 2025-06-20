@@ -25,10 +25,12 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
 
     public void Play(IEnemySound sound)
     {
-        if (_currentSound == sound.SoundAttack)
-            return;
+        if (_currentSound != sound.SoundAttack)
+        {
+            _currentSound = _sounds.FirstOrDefault(s => s.SoundAttack == sound.SoundAttack).SoundAttack;
+            Debug.Log("Устанавливаю звук");
+        }
 
-        _currentSound = _sounds.FirstOrDefault(s => s.SoundAttack == sound.SoundAttack).SoundAttack;
         Play();
     }
 

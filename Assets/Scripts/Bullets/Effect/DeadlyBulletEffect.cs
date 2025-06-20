@@ -2,11 +2,10 @@
 
 public class DeadlyBulletEffect : IBulletEffectHandler
 {
-    private const int ChanceToKill = 30;
+    private const int ChanceToKill = 35;
 
     public void HandleEffect(Collider enemy)
     {
-        Debug.Log("Попадание!");
         if (enemy.TryGetComponent(out EnemyHealth health))
             TryToKill(health);
     }
