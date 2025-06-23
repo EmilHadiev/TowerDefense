@@ -211,6 +211,8 @@ MonoBehaviour:
   _timer: {fileID: 796508449610100473}
   _effectsContainer: {fileID: 4743502870498146519}
   _effectsView: {fileID: 7515785216524836737}
+  _rb: {fileID: 8076380622677811354}
+  _collider: {fileID: 1158035625097052394}
   <Data>k__BackingField: {fileID: 11400000, guid: af4933cd9f0a5064cab8c7345fb88c88, type: 2}
   <Type>k__BackingField: 0
 --- !u!114 &796508449610100473

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +14,9 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     [SerializeField] private LifetimeTimer _timer;
     [SerializeField] private BulletEffectHandlerContainer _effectsContainer;
     [SerializeField] private BulletEffectView _effectsView;
+
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private Collider _collider;
 
     [field: SerializeField] public BulletData Data { get; private set; }
     [field: SerializeField] public BulletType Type { get; private set; }
@@ -37,6 +39,8 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private void OnValidate()
     {
+        _rb ??= GetComponent<Rigidbody>();
+        _collider ??= GetComponent<Collider>();
         _timer ??= GetComponent<LifetimeTimer>();
         _effectsContainer ??= GetComponent<BulletEffectHandlerContainer>();
         _effectsView ??= GetComponent<BulletEffectView>();
@@ -50,6 +54,8 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private void OnEnable()
     {
+        PhysicsToggle(true);
+
         _observer.Entered += OnTargetHit;
         _movable.Reflected += OnReflected;
 
@@ -58,6 +64,8 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private void OnDisable()
     {
+        PhysicsToggle(false);
+
         _observer.Entered -= OnTargetHit;
         _movable.Reflected -= OnReflected;
         ResetValues();
@@ -124,5 +132,20 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     {
         _timer.ResetTimer();
         _reflectCalculator.ResetCoefficient();
+    }
+
+    private void PhysicsToggle(bool isOn)
+    {
+        if (isOn)
+        {
+            _rb.isKinematic = false;
+            _collider.enabled = true;
+        }
+        else
+        {
+            _rb.isKinematic = true;
+            _rb.velocity = Vector3.zero;
+            _collider.enabled = false;
+        }
     }
 }

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 600623877287638346}
   - component: {fileID: 4840594365086158226}
   - component: {fileID: 1622790923035417216}
+  - component: {fileID: 503399243558327692}
+  - component: {fileID: 348112116528101896}
+  - component: {fileID: 8129835025122158645}
   m_Layer: 7
   m_Name: ElectricBullet
   m_TagString: Untagged
@@ -122,8 +125,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51e06037543c5947aaad4b44741d8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timer: {fileID: 503399243558327692}
+  _effectsContainer: {fileID: 348112116528101896}
+  _effectsView: {fileID: 8129835025122158645}
+  _rb: {fileID: 600623877287638346}
+  _collider: {fileID: 6203836822337994915}
   <Data>k__BackingField: {fileID: 11400000, guid: 77de8d60fd24abf4b82b6e39479c3a37, type: 2}
   <Type>k__BackingField: 2
+--- !u!114 &503399243558327692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779341445967451710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5dec4af0ac45f4f9647d83bdc98ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &348112116528101896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779341445967451710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea599b995298e3449f81ea9202fd2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 1622790923035417216}
+--- !u!114 &8129835025122158645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779341445967451710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85244d9f009095a499964876f1ecb218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 1622790923035417216}
 --- !u!1001 &723311918961279560
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 8805677647056119547}
   - component: {fileID: 5043886182841252158}
   - component: {fileID: 7184111560625082921}
+  - component: {fileID: 4902348994779833837}
+  - component: {fileID: 4132345740040910546}
+  - component: {fileID: 5481931058616892992}
   m_Layer: 7
   m_Name: IceBullet
   m_TagString: Untagged
@@ -122,8 +125,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51e06037543c5947aaad4b44741d8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timer: {fileID: 4902348994779833837}
+  _effectsContainer: {fileID: 4132345740040910546}
+  _effectsView: {fileID: 5481931058616892992}
+  _rb: {fileID: 8805677647056119547}
+  _collider: {fileID: 3663931001389700562}
   <Data>k__BackingField: {fileID: 11400000, guid: aca5ffbd34729b443a12298635f7f7f3, type: 2}
   <Type>k__BackingField: 3
+--- !u!114 &4902348994779833837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350813342097143940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5dec4af0ac45f4f9647d83bdc98ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4132345740040910546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350813342097143940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea599b995298e3449f81ea9202fd2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 7184111560625082921}
+--- !u!114 &5481931058616892992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350813342097143940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85244d9f009095a499964876f1ecb218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 7184111560625082921}
 --- !u!1 &5320334303017342673
 GameObject:
   m_ObjectHideFlags: 0
