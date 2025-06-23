@@ -9,6 +9,7 @@ public class EnemyAttacker : MonoBehaviour
     private const int MaxTargets = 2;
 
     private LayerMask _layers;
+    private IPlayer _player;
     private IEnemySoundContainer _soundContainer;
 
     private readonly Collider[] _hits = new Collider[MaxTargets];
@@ -28,9 +29,10 @@ public class EnemyAttacker : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IEnemySoundContainer enemySoundContainer)
+    private void Constructor(IEnemySoundContainer enemySoundContainer, IPlayer player)
     {
         _soundContainer = enemySoundContainer;
+        _player = player;
     }
 
     private void Hit()
@@ -45,21 +47,28 @@ public class EnemyAttacker : MonoBehaviour
         ResetTarget();
     }
 
+    private void Update()
+    {
+        if (Time.frameCount % 60 == 0)
+            LookToTarget(); ;
+    }
+
     private void AttackTargets(int hitCount)
     {
         for (int i = 0; i < hitCount; i++)
         {
             if (_hits[i].TryGetComponent(out IHealth health))
             {
-                FaceToTarget(_hits[i].transform.position);
                 health.TakeDamage(_stat.Damage);
                 PlaySound();
             }
         }
     }
 
-
-    private void FaceToTarget(Vector3 position) => transform.LookAt(position);
+    private void LookToTarget()
+    {
+        transform.LookAt(_player.Transform.position);
+    }
 
     private int DetectTargets()
     {
