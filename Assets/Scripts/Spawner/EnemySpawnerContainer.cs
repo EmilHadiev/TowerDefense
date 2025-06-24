@@ -10,11 +10,10 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private const int SpawnDelay = (int)(Constants.EnemySpawnDelay * 1000);
 
-    private SpawnLogic _spawnLogic;
+    private ISpawnLogic _spawnLogic;
     private EnemyCounter _counter;
     private ILevelStateSwitcher _switcher;
     private ITrainingMode _trainingMode;
-    private int _index = 0;
 
     private CancellationTokenSource _spawnCts;
 
@@ -39,11 +38,13 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         _counter = counter;
         _switcher = switcher;
         _trainingMode = trainingMode;
+
         _spawnLogic = new SpawnLogic(waveData, _spawners);
     }
 
     public void Enter()
     {
+        _spawnLogic.CalculateNextWave();
         _counter.Reset();
         Exit();
 
@@ -65,7 +66,15 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             while (ct.IsCancellationRequested == false)
             {
                 await UniTask.Delay(SpawnDelay, cancellationToken: ct);
-                SpawnEnemy();
+
+                if (ct.IsCancellationRequested) 
+                    break;
+
+                if (_spawnLogic.TrySpawn())
+                {
+                    _counter.Add();
+                    await UniTask.Yield();
+                }
             }
         }
         catch (Exception)
@@ -74,22 +83,12 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         }
     }
 
-    private void SpawnEnemy()
-    {
-        if (_index >= _spawners.Length)
-            _index = 0;
-
-        if (_spawners[_index].TrySpawn())
-        {
-            _index++;
-            _counter.Add();
-        }
-    }
 
     private void OnFilled() => Exit();
 
     private void OnEnemyDied()
     {
+        Debug.Log("all enemy died");
         if (_trainingMode.IsTrainingProcess())
             _trainingMode.ShowNextTraining();
         else

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class BulletReflectMovePattern : IBulletMover
 {
@@ -43,6 +42,9 @@ public class BulletReflectMovePattern : IBulletMover
     private void UpdateBulletPosition()
     {
         Vector3 moveDirection = GetDirection();
+
+        if (moveDirection == Vector3.zero)
+            return;
 
         _bullet.Translate(moveDirection, Space.World);
         _bullet.forward = moveDirection;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class EnemySpawner : MonoBehaviour
@@ -38,12 +39,17 @@ public class EnemySpawner : MonoBehaviour
         SetPosition(enemy);
     }
 
-    public bool TrySpawn()
+    public bool TrySpawn(Vector3 position = default, Quaternion rotation = default)
     {
         if (_pool.TryGet(out Enemy enemy))
         {
             enemy.gameObject.SetActive(true);
-            SetPosition(enemy);
+
+            if (position == default && rotation == default)
+                SetPosition(enemy);
+            else
+                SetPosition(enemy, position, rotation);
+            
             return true;
         }
 
@@ -54,5 +60,11 @@ public class EnemySpawner : MonoBehaviour
     {
         enemy.transform.position = transform.position;
         enemy.transform.rotation = transform.rotation;
+    }
+
+    private void SetPosition(Enemy enemy, Vector3 position, Quaternion rotation)
+    {
+        enemy.transform.position = position;
+        enemy.transform.rotation = rotation;
     }
 }

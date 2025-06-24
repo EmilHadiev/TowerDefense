@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
 public class WaveCounter : IInitializable, IDisposable
@@ -30,9 +29,6 @@ public class WaveCounter : IInitializable, IDisposable
         _waveData.PrepareNextWave();
 
         if (_waveData.IsWaveEnded)
-        {
-            Debug.Log("ИГРА ДОЛЖНА БЫТЬ ОКОНЧЕНА!");
             _gameOver.GameCompleted();
-        }
     }
 }

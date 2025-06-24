@@ -1,18 +1,97 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class SpawnLogic
+public class SpawnLogic : ISpawnLogic
 {
     private readonly WaveData _waveData;
-    private readonly IEnumerable<EnemySpawner> _spawners;
+    private readonly Dictionary<EnemyType, EnemySpawner> _spawners = new Dictionary<EnemyType, EnemySpawner>();
+    private readonly List<Transform> _positions = new List<Transform>(6);
+
+    EnemyType[] _otherEnemies = { EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage };
+
+    private int _skeletons;
+    private int _mageAndKnightAndDragon;
+    private int _elite;
 
     public SpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners)
     {
         _waveData = waveData;
-        _spawners = spawners;
+
+        foreach (var spawn in spawners)
+        {
+            _spawners.Add(spawn.EnemyType, spawn);
+            _positions.Add(spawn.transform);
+        }
     }
 
-    public void SpawnEnemy()
+    public void CalculateNextWave()
     {
+        int maxEnemies = _waveData.MaxEnemies;
+        int total = maxEnemies;
 
+        _skeletons = Convert.ToInt32(maxEnemies * 0.5f);
+
+        int others = maxEnemies - _skeletons;
+
+        _mageAndKnightAndDragon = Convert.ToInt32(others * 0.3f);
+        _elite = others - (_mageAndKnightAndDragon * 3);
+        
+        total -= (_skeletons + _mageAndKnightAndDragon + _elite);
+        _mageAndKnightAndDragon += total;
+    }
+
+    public bool TrySpawn()
+    { 
+        return TrySpawnSkeleton() || TrySpawnRandomOther() || TrySpawnElite();
+    }
+
+    private bool TrySpawnSkeleton()
+    {
+        if (_skeletons <= 0)
+            return false;
+
+        Vector3 position = GetRandomSpawnPosition();
+        if (_spawners[EnemyType.Skeleton].TrySpawn(position))
+        {
+            _skeletons--;
+            return true;
+        }
+        return false;
+    }
+
+    private bool TrySpawnRandomOther()
+    {
+        if (_mageAndKnightAndDragon <= 0)
+            return false;
+
+        EnemyType type = _otherEnemies[UnityEngine.Random.Range(0, _otherEnemies.Length)];
+        Vector3 position = GetRandomSpawnPosition();
+        if (_spawners.TryGetValue(type, out var spawner) && spawner.TrySpawn(position))
+        {
+            _mageAndKnightAndDragon--;
+            return true;
+        }
+        return false;
+    }
+
+    private bool TrySpawnElite()
+    {
+        if (_elite <= 0)
+            return false;
+
+        Vector3 position = GetRandomSpawnPosition();
+        if (_spawners[EnemyType.DemonKnight].TrySpawn(position))
+        {
+            _elite--;
+            return true;
+        }
+        return false;
+    }
+
+    private Vector3 GetRandomSpawnPosition()
+    {
+        int rand = UnityEngine.Random.Range(0, _positions.Count);
+        return _positions[rand].position;
     }
 }
