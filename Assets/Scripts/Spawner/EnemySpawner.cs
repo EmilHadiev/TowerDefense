@@ -4,7 +4,7 @@ using Zenject;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private int _size;
-    [SerializeField] private EnemyType _enemyType;
+    [field: SerializeField] public EnemyType EnemyType { get; private set; }
 
     private IEnemyFactory _factory;
     private IFPSLimiter _fpsLimiter;
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateEnemy()
     {
-        Enemy enemy = _factory.Get(_enemyType);
+        Enemy enemy = _factory.Get(EnemyType);
         _pool.Add(enemy);
         enemy.gameObject.SetActive(false);
         SetPosition(enemy);

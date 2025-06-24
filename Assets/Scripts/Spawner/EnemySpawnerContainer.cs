@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using System.Threading;
 using UnityEngine;
 using Zenject;
@@ -11,6 +10,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private const int SpawnDelay = (int)(Constants.EnemySpawnDelay * 1000);
 
+    private SpawnLogic _spawnLogic;
     private EnemyCounter _counter;
     private ILevelStateSwitcher _switcher;
     private ITrainingMode _trainingMode;
@@ -34,11 +34,12 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     }
 
     [Inject]
-    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode)
+    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode, WaveData waveData)
     {
         _counter = counter;
         _switcher = switcher;
         _trainingMode = trainingMode;
+        _spawnLogic = new SpawnLogic(waveData, _spawners);
     }
 
     public void Enter()
