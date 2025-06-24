@@ -416,12 +416,10 @@ GameObject:
   - component: {fileID: 4203799262211317340}
   - component: {fileID: 5411643780255580994}
   - component: {fileID: 1793782221267428179}
-  - component: {fileID: 4370059746570181354}
   - component: {fileID: 2814069263685217884}
   - component: {fileID: 7199477827799823277}
   - component: {fileID: 6134386807460463418}
   - component: {fileID: 7149088736318537668}
-  - component: {fileID: 6681095341319275438}
   - component: {fileID: 8640219433077884397}
   - component: {fileID: 8505825216746633380}
   m_Layer: 8
@@ -503,18 +501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29cf4f6e4ce2f04f8fb012ecce5bda1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4370059746570181354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126500972554380298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f8c13c56e6c9e449f6efa5d5e36e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &2814069263685217884
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -589,19 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17b34e2610ad4d42a6c559d0457c621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6681095341319275438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126500972554380298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bdb312825f8eb24ca857eb2ff76c31e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 4203799262211317340}
 --- !u!114 &8640219433077884397
 MonoBehaviour:
   m_ObjectHideFlags: 0

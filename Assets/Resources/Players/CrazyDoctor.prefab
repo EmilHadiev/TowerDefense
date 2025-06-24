@@ -869,13 +869,11 @@ GameObject:
   - component: {fileID: 1161475491533654135}
   - component: {fileID: 9175389488704048428}
   - component: {fileID: 1003690498201067210}
-  - component: {fileID: 7670216567800320667}
   - component: {fileID: 1268603019273725070}
   - component: {fileID: 9146276439239919034}
   - component: {fileID: 2624188449487652202}
   - component: {fileID: 5569428102761848607}
   - component: {fileID: 8222638740933254501}
-  - component: {fileID: 8278191658292456786}
   - component: {fileID: 4178615384973032288}
   m_Layer: 8
   m_Name: CrazyDoctor
@@ -954,18 +952,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a29cf4f6e4ce2f04f8fb012ecce5bda1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7670216567800320667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757305158472847418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f8c13c56e6c9e449f6efa5d5e36e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &1268603019273725070
@@ -1056,19 +1042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 9146276439239919034}
   _collider: {fileID: 1268603019273725070}
---- !u!114 &8278191658292456786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757305158472847418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bdb312825f8eb24ca857eb2ff76c31e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1161475491533654135}
 --- !u!114 &4178615384973032288
 MonoBehaviour:
   m_ObjectHideFlags: 0

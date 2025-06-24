@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// if you also need to use map movement
+/// if you also need to use map movement. 
+/// The player must also have the PlayerMover and PlayerAnimator components
 /// </summary>
 class FullMobileInput : BaseMobileInput, IMoveHandler
 {
