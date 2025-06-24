@@ -3,13 +3,8 @@ using Zenject;
 
 public class PlayerAnimator : CharacterAnimator
 {
-    private LazyInject<IMoveHandler> _moveHandler;
-
     [Inject]
-    private void Constructor(LazyInject<IMoveHandler> moveHandler)
-    {
-        _moveHandler = moveHandler;
-    }
+    private LazyInject<IMoveHandler> _moveHandler;
 
     private void Update()
     {

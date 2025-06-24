@@ -18,7 +18,7 @@
     public const string ParticleMagicShieldPath = "Particles/MagicShield";
     public const string ParticleBuildPath = "Particles/BuildParticle";
 
-    public const string MobileInputRotatorPath = "Input/Rotate Joystick";
+    public const string MobileInputAttackPath = "Input/Rotate Joystick";
     public const string MobileInputMoverPath = "Input/Move Joystick";
 
     public const string SceneDefaultArena = "DefaultArena";

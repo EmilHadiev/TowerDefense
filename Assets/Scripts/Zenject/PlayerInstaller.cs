@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -58,7 +57,11 @@ public class PlayerInstaller : MonoInstaller
         {
             Container.BindInterfacesTo<MobilePlayerRotator>().AsSingle();
             Container.BindInterfacesTo<JoystickFactory>().AsSingle();
-            Container.BindInterfacesTo<MobileInput>().AsSingle();
+            BindOnlyAttack();
         }
     }
+
+    private void BindOnlyAttack() => Container.BindInterfacesTo<SimpleMobileInput>().AsSingle();
+
+    private void BindAttackAndMove() => Container.BindInterfacesAndSelfTo<FullMobileInput>().AsSingle();
 }
