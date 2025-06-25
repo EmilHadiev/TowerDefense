@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +8,11 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameSound[] _gameSounds;
 
-    private List<IEnemySound> _sounds;
+    private Dictionary<AudioClip, AudioClip> _enemySoundsMap;
+    private Dictionary<string, AudioClip> _abilitySoundsMap;
     private AudioClip _currentSound;
 
-    private void OnValidate()
+    private void Awake()
     {
         _audioSource ??= GetComponent<AudioSource>();
     }
@@ -20,41 +20,53 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
     [Inject]
     private void Constructor(IEnumerable<IEnemySound> sounds)
     {
-        _sounds = new List<IEnemySound>(sounds);
+        _enemySoundsMap = new Dictionary<AudioClip, AudioClip>();
+        foreach (var sound in sounds)
+        {
+            _enemySoundsMap[sound.SoundAttack] = sound.SoundAttack;
+        }
+
+        _abilitySoundsMap = new Dictionary<string, AudioClip>(_gameSounds.Length);
+        foreach (var sound in _gameSounds)
+        {
+            _abilitySoundsMap[sound.Name] = sound.Clip;
+        }
     }
 
     public void Play(IEnemySound sound)
     {
+        // ќптимизаци€ 3: ”брана лишн€€ проверка и поиск
         if (_currentSound != sound.SoundAttack)
         {
-            _currentSound = _sounds.FirstOrDefault(s => s.SoundAttack == sound.SoundAttack).SoundAttack;
-            Debug.Log("”станавливаю звук");
+            _currentSound = sound.SoundAttack;
+            Debug.Log("”станавливаю звук атаки");
         }
-
-        Play();
+        PlayInternal();
     }
 
     public void Play(string abilityName)
     {
-        foreach (var clip in _gameSounds)
-            if (clip.Name == abilityName)
-                _currentSound = clip.Clip;
-        Play();
-    }
-
-    public void Stop() => 
-        _audioSource.Stop();
-
-    private void Play()
-    {
-        if (_currentSound != null)
+        if (_abilitySoundsMap.TryGetValue(abilityName, out var clip))
         {
-            _audioSource.clip = _currentSound;
-            _audioSource.Play();
+            _currentSound = clip;
+            PlayInternal();
         }
         else
         {
-            Debug.LogError(_currentSound.name + " is null");
-        }        
+            Debug.LogError($"Sound for ability {abilityName} not found");
+        }
+    }
+
+    public void Stop() => _audioSource.Stop();
+
+    private void PlayInternal()
+    {
+        if (_currentSound == null)
+        {
+            Debug.LogError("Current sound is null");
+            return;
+        }
+
+        _audioSource.PlayOneShot(_currentSound);
     }
 }

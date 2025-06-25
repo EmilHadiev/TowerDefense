@@ -10,10 +10,9 @@ public class PlayerSoundContainer : MonoBehaviour, IPlayerSoundContainer
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameSound[] _gameSounds;
 
-    private List<BulletSound> _bulletSounds;
-    private IBulletDefinition[] _bullets;
-
-    private BulletType _bulletType;
+    private Dictionary<BulletType, AudioClip> _bulletSoundMap;
+    private Dictionary<string, AudioClip> _gameSoundMap;
+    private BulletType _currentBulletType;
     private bool _isReseted;
 
     private void OnValidate()
@@ -24,59 +23,66 @@ public class PlayerSoundContainer : MonoBehaviour, IPlayerSoundContainer
     [Inject]
     private void Constructor(IBulletDefinition[] bullets)
     {
-        _bullets = bullets;
-    }
+        _bulletSoundMap = new Dictionary<BulletType, AudioClip>(bullets.Length);
+        _gameSoundMap = new Dictionary<string, AudioClip>(_gameSounds.Length);
 
-    private void Awake()
-    {
-        _bulletSounds = new List<BulletSound>(_bullets.Length);
+        foreach (var bullet in bullets)
+        {
+            _bulletSoundMap[bullet.Type] = bullet.BulletData.Clip;
+        }
 
-        foreach (var bullet in _bullets)
-            _bulletSounds.Add(new BulletSound(bullet.Type, bullet.BulletData.Clip));
+        foreach (var sound in _gameSounds)
+        {
+            _gameSoundMap[sound.Name] = sound.Clip;
+        }
     }
 
     public void Stop() => _audioSource.Stop();
 
     public void Play(BulletType bulletType)
     {
-        if (_bulletType == bulletType && _isReseted == false)
+        if (_currentBulletType == bulletType && _isReseted == false)
         {
-            Play();
+            PlayCurrent();
             return;
         }
 
-        _bulletType = bulletType;
+        _currentBulletType = bulletType;
         _isReseted = false;
-        SetClip(_bulletType);
-        Play();
+        SetBulletClip(bulletType);
+        PlayCurrent();
     }
 
     public void Play(string soundType)
     {
         _isReseted = true;
-        SetClip(soundType);
-        Play();
+        SetGameClip(soundType);
+        PlayCurrent();
     }
 
-    private void SetClip(BulletType bulletType)
+    private void SetBulletClip(BulletType bulletType)
     {
-        AudioClip clip = _bulletSounds.FirstOrDefault(sound => sound.BulletType == bulletType).Clip;
-
-        if (clip == null)
-            throw new ArgumentNullException(nameof(bulletType));
-
-        _audioSource.clip = clip;
-    }
-  
-    private void SetClip(string soundName)
-    {
-        AudioClip clip = _gameSounds.FirstOrDefault(sound => sound.Name == soundName).Clip;
-
-        if (clip == null)
-            throw new ArgumentNullException(soundName);
-
+        if (_bulletSoundMap.TryGetValue(bulletType, out var clip) == false)
+        {
+            Debug.LogError($"Bullet sound not found for type: {bulletType}");
+            return;
+        }
         _audioSource.clip = clip;
     }
 
-    private void Play() => _audioSource.Play();
+    private void SetGameClip(string soundName)
+    {
+        if (_gameSoundMap.TryGetValue(soundName, out var clip) == false)
+        {
+            Debug.LogError($"Game sound not found: {soundName}");
+            return;
+        }
+        _audioSource.clip = clip;
+    }
+
+    private void PlayCurrent()
+    {
+        if (_audioSource.clip != null)
+            _audioSource.PlayOneShot(_audioSource.clip);
+    }
 }
