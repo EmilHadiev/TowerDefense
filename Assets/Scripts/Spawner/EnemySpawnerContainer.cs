@@ -83,12 +83,10 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         }
     }
 
-
     private void OnFilled() => Exit();
 
     private void OnEnemyDied()
     {
-        Debug.Log("all enemy died");
         if (_trainingMode.IsTrainingProcess())
             _trainingMode.ShowNextTraining();
         else
