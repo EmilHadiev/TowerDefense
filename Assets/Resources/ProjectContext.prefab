@@ -86,7 +86,7 @@ MonoBehaviour:
   _trainingData: {fileID: 11400000, guid: 5a252f78ebc6de1498d1a3d4d888fb11, type: 2}
   _bullets:
   - {fileID: 4734834810357473392, guid: a1a8f9d1421abb140b7af105937449ac, type: 3}
-  - {fileID: 8275298916539564963, guid: 965ec854c38d89c458daa8c2514ba8a3, type: 3}
+  - {fileID: 678141454919090991, guid: 75a92030a687dd846b458be41bb679dd, type: 3}
   - {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
   - {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
   - {fileID: 5800508498983936449, guid: 5400a793350f179469317c2855c45fe1, type: 3}
