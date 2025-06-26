@@ -14,6 +14,7 @@ public class ExplosionMine : InteractiveElement
     private IPlayerSoundContainer _soundContainer;
     private IFactoryParticle _factoryParticle;
     private ParticleView _particle;
+    private ICameraProvider _cameraProvider;
 
     private void OnValidate()
     {
@@ -38,11 +39,12 @@ public class ExplosionMine : InteractiveElement
     }
 
     [Inject]
-    private void Constructor(IPlayerSoundContainer playerSoundContainer, IFactoryParticle factoryParticle, PlayerStat playerStat)
+    private void Constructor(IPlayerSoundContainer playerSoundContainer, IFactoryParticle factoryParticle, PlayerStat playerStat, ICameraProvider cameraProvider)
     {
         _playerStat = playerStat;
         _factoryParticle = factoryParticle;
         _soundContainer = playerSoundContainer;
+        _cameraProvider = cameraProvider;
     }
 
     private void OnHealthEntered(Collider collider)
@@ -57,6 +59,7 @@ public class ExplosionMine : InteractiveElement
         if (count == 0)
             return;
 
+        _cameraProvider.Punch();
         PlayView();
 
         for (int i = 0; i < count; i++)

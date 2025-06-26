@@ -4,6 +4,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyDamageImpactSound))]
 [RequireComponent(typeof(EnemyMover))]
 [RequireComponent(typeof(CharacterAnimator))]
 [RequireComponent(typeof(EnemyAttacker))]

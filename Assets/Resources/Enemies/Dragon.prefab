@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 6640996256975540896}
   - component: {fileID: 6376185244759717575}
   - component: {fileID: 526720219906867825}
+  - component: {fileID: 2897318270152680638}
   m_Layer: 6
   m_Name: Dragon
   m_TagString: Untagged
@@ -552,8 +553,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9040026314521492679}
   - {fileID: 3018632860299683490}
@@ -781,6 +782,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3215c9b3acde148af9a2b502ea7ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2897318270152680638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896052126169470068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566af9e9c155c964d96cc7ea7df909c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageImpactSound: FlashDamageImpact
 --- !u!1 &2963337150587967062
 GameObject:
   m_ObjectHideFlags: 0

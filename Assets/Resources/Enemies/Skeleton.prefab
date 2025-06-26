@@ -1578,6 +1578,7 @@ GameObject:
   - component: {fileID: 3229499873186649922}
   - component: {fileID: 3913318411462037616}
   - component: {fileID: 6944903453497364839}
+  - component: {fileID: 870200403269847108}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
@@ -1595,8 +1596,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9999581, z: -0, w: -0.009154134}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1528660789286666715}
   - {fileID: 5300813340771011801}
@@ -1824,6 +1825,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3215c9b3acde148af9a2b502ea7ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &870200403269847108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728009267254461936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566af9e9c155c964d96cc7ea7df909c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageImpactSound: BoneDamageImpact
 --- !u!1 &6733065686197009453
 GameObject:
   m_ObjectHideFlags: 0
