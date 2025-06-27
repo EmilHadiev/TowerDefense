@@ -12,18 +12,12 @@ public class EnemyInstaller : MonoInstaller
         BindEnemyStats();
         BindEnemyUpgrader();
         BindRewardSystems();
-        BindCameraProvider();
         BindEnemySoundContainer();
     }
 
     private void BindEnemySoundContainer()
     {
         Container.BindInterfacesTo<EnemySoundContainer>().FromComponentInNewPrefab(_soundContainer).AsSingle();
-    }
-
-    private void BindCameraProvider()
-    {
-        Container.BindInterfacesTo<CameraProvider>().AsSingle();
     }
 
     private void BindRewardSystems()

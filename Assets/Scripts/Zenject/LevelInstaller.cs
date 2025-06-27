@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +6,7 @@ public class LevelInstaller : MonoInstaller
     [SerializeField] private LevelStateMachine _entryPoint;
     [SerializeField] private TrainingMode _trainingMode;
     [SerializeField] private WaveData _waveData;
+    [SerializeField] private CameraProvider _camera;
 
     private void OnValidate()
     {
@@ -25,6 +25,12 @@ public class LevelInstaller : MonoInstaller
         BindTrainingMode();
         BindWaveData();
         BindWaveCounter();
+        BindCameraProvider();
+    }
+
+    private void BindCameraProvider()
+    {
+        Container.BindInterfacesTo<CameraProvider>().FromInstance(_camera).AsSingle();
     }
 
     private void BindWaveCounter()

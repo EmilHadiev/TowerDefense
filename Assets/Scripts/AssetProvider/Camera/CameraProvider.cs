@@ -1,11 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class CameraProvider : ICameraProvider
+public class CameraProvider : MonoBehaviour, ICameraProvider
 {
-    private readonly Camera _camera;
+    private Camera _camera;
+    private readonly Vector3 PunchVector = new Vector3(0.1f, 0.1f, 0);
+    private readonly Vector3 ShakeVector = new Vector3(0.1f, 0.1f, 0);
 
-    public CameraProvider()
+    private void Awake()
     {
         _camera = Camera.main;
     }
@@ -16,10 +18,11 @@ public class CameraProvider : ICameraProvider
             return;
 
         _camera.transform.DOPunchPosition(
-          punch: new Vector3(0.1f, 0.1f, 0),
-          duration: 0.5f,
-          vibrato: 10,
-          elasticity: 0.25f);
+            punch: PunchVector,
+            duration: 0.5f,
+            vibrato: 10,
+            elasticity: 0.25f)
+            .SetUpdate(UpdateType.Normal, true);
     }
 
     public void Vibrate()
@@ -29,10 +32,17 @@ public class CameraProvider : ICameraProvider
 
         _camera.transform.DOShakePosition(
             duration: 1f,
-            strength: new Vector3(0.1f, 0.1f, 0),
+            strength: ShakeVector,
             vibrato: 50,
             randomness: 90,
             snapping: false,
-            fadeOut: false);
+            fadeOut: false)
+            .SetUpdate(UpdateType.Normal, true);
+    }
+
+    public void SetPosition(Vector3 position, Quaternion quaternion)
+    {
+        _camera.transform.position = position;
+        _camera.transform.rotation = quaternion;
     }
 }

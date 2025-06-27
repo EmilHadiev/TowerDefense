@@ -9,7 +9,7 @@ public class ShotGun : Gun
     private PlayerStat _stat;
 
     [Inject]
-    private void Constructor( PlayerStat stat)
+    private void Constructor(PlayerStat stat)
     {
         _stat = stat;
     }
@@ -17,6 +17,9 @@ public class ShotGun : Gun
     public override void HandleAttack(Collider collider)
     {
         int count = Physics.OverlapSphereNonAlloc(collider.transform.position, AttackRadius, _targets, LayerMask.GetMask(Constants.EnemyMask));
+
+        if (count == 0)
+            return;
 
         for (int i = 0; i < count; i++)
             if (_targets[i].TryGetComponent(out IHealth health))

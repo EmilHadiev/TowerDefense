@@ -3,19 +3,27 @@ using Zenject;
 
 public class SniperGun : Gun
 {
-    private const int CriticalChance = 100;
+    private const int CriticalChance = 25;
     private PlayerStat _stat;
+    private ICameraProvider _camera;
 
     [Inject]
-    private void Constructor(PlayerStat stat)
+    private void Constructor(PlayerStat stat, ICameraProvider cameraProvider)
     {
         _stat = stat;
+        _camera = cameraProvider;
     }
 
     public override void HandleAttack(Collider collider)
     {
         if (collider.TryGetComponent(out IHealth health))
-            health.TakeDamage(GetCriticalStrike());
+        {
+            float criticalDamage = GetCriticalStrike();
+            health.TakeDamage(criticalDamage);
+
+            if (criticalDamage > 0)
+                _camera.Punch();
+        }
     }
 
     private float GetCriticalStrike()
