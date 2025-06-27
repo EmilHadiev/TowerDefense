@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
@@ -8,17 +10,48 @@ public class EnemyDetector : MonoBehaviour
     [SerializeField] private Color _lineColor = Color.green; // Цвет линий к врагам
 
     private Collider[] _hits = new Collider[Constants.MaxEnemies];
+    private CancellationTokenSource _cts;
+
     public int Count { get; private set; }
 
-    private void Update()
+    private void OnEnable()
     {
-        // Обнаруживаем врагов с помощью Physics.OverlapBoxNonAlloc
+        _cts = new CancellationTokenSource();
+        DetectionLoop(_cts.Token).Forget();
+    }
+
+    private void OnDisable()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+    }
+
+    private async UniTaskVoid DetectionLoop(CancellationToken ct)
+    {
+        while (ct.IsCancellationRequested == false)
+        {
+            PerformDetection();
+            await UniTask.Delay(100, cancellationToken: ct);
+        }
+    }
+
+    private void PerformDetection()
+    {
         Count = Physics.OverlapBoxNonAlloc(
             transform.position,
             _boxSize / 2,
             _hits,
             transform.rotation,
             LayerMask.GetMask(Constants.EnemyMask));
+
+        if (Count == 0)
+            Clear();
+    }
+
+    private void Clear()
+    {
+        for (int i = 0; i < _hits.Length; i++)
+            _hits[i] = null;
     }
 
     public IEnumerable<Collider> GetHits()
@@ -28,12 +61,10 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Рисуем сам бокс
         Gizmos.color = _gizmoColor;
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, _boxSize);
 
-        // Рисуем линии к обнаруженным врагам
         if (_hits != null)
         {
             Gizmos.color = _lineColor;
@@ -49,7 +80,6 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnRenderObject()
     {
-        // Рисуем линии к врагам в игровом окне
         if (_hits != null)
         {
             GL.PushMatrix();

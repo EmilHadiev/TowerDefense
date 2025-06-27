@@ -8,6 +8,8 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameSound[] _gameSounds;
 
+    private const float VolumeScale = 0.5f;
+
     private Dictionary<AudioClip, AudioClip> _enemySoundsMap;
     private Dictionary<string, AudioClip> _abilitySoundsMap;
     private AudioClip _currentSound;
@@ -67,6 +69,6 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
             return;
         }
 
-        _audioSource.PlayOneShot(_currentSound);
+        _audioSource.PlayOneShot(_currentSound, VolumeScale);
     }
 }

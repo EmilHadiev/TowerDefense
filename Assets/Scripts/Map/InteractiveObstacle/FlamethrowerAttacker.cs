@@ -1,4 +1,6 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using UnityEngine;
 using Zenject;
 
@@ -8,11 +10,8 @@ public class FlamethrowerAttacker : MonoBehaviour
     [SerializeField] private EnemyDetector _detector;
     [SerializeField] private ParticleView _particleView;
 
-    private const float DamagePerTime = 0.25f;
-
-    private readonly WaitForSeconds _delay = new WaitForSeconds(DamagePerTime);
-
-    private Coroutine _attackCoroutine;
+    private const int DamageInterval = 300;
+    private CancellationTokenSource _attackCts;
     private PlayerStat _playerStat;
 
     private void OnValidate()
@@ -23,14 +22,12 @@ public class FlamethrowerAttacker : MonoBehaviour
     private void OnEnable()
     {
         _particleView.Stop();
+        Activate();
     }
 
     private void OnDisable()
     {
-        if (_attackCoroutine != null)
-            StopCoroutine(_attackCoroutine);
-
-        _particleView.Stop();
+        StopAttack();
     }
 
     [Inject]
@@ -39,25 +36,50 @@ public class FlamethrowerAttacker : MonoBehaviour
         _playerStat = playerStat;
     }
 
-    private IEnumerator Attack()
+    private async UniTaskVoid AttackLoop(CancellationToken ct)
     {
-        while (true)
+        try
         {
-            yield return _delay;
-            foreach (var item in _detector.GetHits())
+            while (ct.IsCancellationRequested == false)
             {
-                if (item == null)
-                    break;
+                await UniTask.Delay(DamageInterval, cancellationToken: ct);
+                foreach (var enemy in _detector.GetHits())
+                {
+                    if (enemy == null) 
+                        break;
 
-                if (item.TryGetComponent(out IHealth health))
-                    health.TakeDamage(_playerStat.Damage * DamagePerTime);
+                    if (enemy.TryGetComponent(out IHealth health))
+                    {
+                        health.TakeDamage(_playerStat.Damage);
+                    }
+                }
+
+                
             }
+        }
+        catch (OperationCanceledException)
+        {
+
         }
     }
 
-    public void Activate()
+    private void Activate()
     {
-        _attackCoroutine = StartCoroutine(Attack());
+        StopAttack();
+        Debug.Log("Активирую!");
+
+        _attackCts = new CancellationTokenSource();
+        AttackLoop(_attackCts.Token).Forget();
+
         _particleView.Play();
+    }
+
+    private void StopAttack()
+    {
+        _attackCts?.Cancel();
+        _attackCts?.Dispose();
+        _attackCts = null;
+
+        _particleView.Stop();
     }
 }

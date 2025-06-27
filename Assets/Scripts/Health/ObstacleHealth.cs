@@ -6,7 +6,6 @@ public class ObstacleHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private ParticleView _damageParticle;
 
-    private ParticleView _damageImpact;
     private PlayerStat _playerStat;
 
     private float _health;
@@ -29,7 +28,7 @@ public class ObstacleHealth : MonoBehaviour, IHealth
     {
         MaxHealth = _playerStat.MaxHealth;
         _health = MaxHealth;
-        _damageImpact.Stop();
+        _damageParticle.Stop();
     }
 
     public void AddHealth(float healthPoints)
