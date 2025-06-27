@@ -3,15 +3,20 @@ using Zenject;
 
 public class SniperGun : Gun
 {
-    private const int CriticalChance = 25;
+    [SerializeField] private ParticleView _criticalStrikeView;
+
+    private const int CriticalChance = 20;
     private PlayerStat _stat;
-    private ICameraProvider _camera;
+
+    private void OnEnable()
+    {
+        _criticalStrikeView.Stop();
+    }
 
     [Inject]
-    private void Constructor(PlayerStat stat, ICameraProvider cameraProvider)
+    private void Constructor(PlayerStat stat)
     {
         _stat = stat;
-        _camera = cameraProvider;
     }
 
     public override void HandleAttack(Collider collider)
@@ -22,7 +27,11 @@ public class SniperGun : Gun
             health.TakeDamage(criticalDamage);
 
             if (criticalDamage > 0)
-                _camera.Punch();
+            {
+                Transform enemy = collider.transform;
+                _criticalStrikeView.transform.position = enemy.transform.position + enemy.transform.up;
+                _criticalStrikeView.Play();
+            }
         }
     }
 
