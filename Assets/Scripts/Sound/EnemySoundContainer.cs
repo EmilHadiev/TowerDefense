@@ -37,12 +37,9 @@ public class EnemySoundContainer : MonoBehaviour, IEnemySoundContainer
 
     public void Play(IEnemySound sound)
     {
-        // ќптимизаци€ 3: ”брана лишн€€ проверка и поиск
         if (_currentSound != sound.SoundAttack)
-        {
             _currentSound = sound.SoundAttack;
-            Debug.Log("”станавливаю звук атаки");
-        }
+
         PlayInternal();
     }
 

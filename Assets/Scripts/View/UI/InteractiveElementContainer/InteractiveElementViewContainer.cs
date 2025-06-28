@@ -14,15 +14,10 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private readonly List<InteractiveElementView> _views = new List<InteractiveElementView>();
     private InteractiveElementPool _pools;
-    private readonly Queue<InteractiveElement> _elements = new Queue<InteractiveElement>(15);
 
-    private ICoinStorage _coinStorage;
-    private IPlayerSoundContainer _soundContainer;
-    private IPlayer _player;
-    private IFactoryParticle _factoryParticle;
+    private InteractiveElementCreator _creator;
 
     private InteractiveElementData _currentData;
-    private ParticleView _particleView;
 
     private void OnValidate()
     {
@@ -33,8 +28,6 @@ public class InteractiveElementViewContainer : MonoBehaviour
     {
         CreateTemplates(_template, _data);
         _setElementButton.onClick.AddListener(SetElement);
-        _particleView = _factoryParticle.Create(AssetProvider.ParticleBuildPath);
-        _particleView.Stop();
     }
 
     private void OnEnable()
@@ -57,21 +50,11 @@ public class InteractiveElementViewContainer : MonoBehaviour
         _setElementButton.onClick.AddListener(SetElement);
 
 
-    private void PlayParticleView()
-    {
-        _particleView.transform.position = _player.Transform.position;
-        _particleView.transform.rotation = _player.Transform.rotation;
-        _particleView.Play();
-    }
-
     [Inject]
-    private void Constructor(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, IPlayer player, IInteractiveElementFactory elementFactory, IFactoryParticle factoryParticle)
+    private void Constructor(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, IInteractiveElementFactory elementFactory, IFactoryParticle factoryParticle)
     {
-        _coinStorage = coinStorage;
-        _soundContainer = soundContainer;
-        _player = player;
-        _factoryParticle = factoryParticle;
         _pools = new InteractiveElementPool(15, _data, elementFactory);
+        _creator = new InteractiveElementCreator(factoryParticle, _pools, soundContainer, coinStorage);
     }
 
     private void CreateTemplates(InteractiveElementView template, InteractiveElementData[] data)
@@ -86,18 +69,8 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private void PurchaseElement()
     {
-        if (_currentData == null)
-            return;
-
-        if (_coinStorage.TrySpend(_currentData.Price))
-        {
-            InteractiveElement element = _pools.Get(_currentData.Prefab);
-            element.IsPurchased = true;
-            _elements.Enqueue(element);
+        if (_creator.TryPurchaseElement(_currentData))
             _elementSetter.AddSprite(_currentData.Sprite);
-
-            _soundContainer.Play(SoundName.SpendCoin);
-        }  
     }
 
     private void OnElementSelected(InteractiveElementData data)
@@ -110,23 +83,7 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private void SetElement()
     {
-        if (_elements.Count == 0)
-            return;
-
-        CreateInteractiveElement();
-        PlayParticleView();
-    }
-
-    private void CreateInteractiveElement()
-    {
-        var prefab = _elements.Dequeue();
-        prefab.transform.position = _player.Transform.position;
-        prefab.transform.rotation = _player.Transform.rotation;
-
-        prefab.IsPurchased = false;
-        prefab.gameObject.SetActive(true);
-        _soundContainer.Play(SoundName.Building);
-
+        _creator.SetElement(Vector3.zero);
         _elementSetter.ShowNextSprite();
     }
 }

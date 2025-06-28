@@ -8,6 +8,8 @@ public class InteractiveElementSetterView : MonoBehaviour
 
     private readonly Queue<Sprite> _sprites = new Queue<Sprite>(10);
 
+    private Sprite _defaultSprite;
+
     private void OnValidate()
     {
         _image ??= GetComponent<Image>();
@@ -17,8 +19,6 @@ public class InteractiveElementSetterView : MonoBehaviour
     {
         _defaultSprite = GetComponent<Image>().sprite;
     }
-
-    private Sprite _defaultSprite;
 
     public void AddSprite(Sprite sprite)
     {

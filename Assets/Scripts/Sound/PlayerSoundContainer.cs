@@ -10,6 +10,8 @@ public class PlayerSoundContainer : MonoBehaviour, IPlayerSoundContainer
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameSound[] _gameSounds;
 
+    private const float VolumeScale = 0.75f;
+
     private Dictionary<BulletType, AudioClip> _bulletSoundMap;
     private Dictionary<string, AudioClip> _gameSoundMap;
     private BulletType _currentBulletType;
@@ -83,6 +85,6 @@ public class PlayerSoundContainer : MonoBehaviour, IPlayerSoundContainer
     private void PlayCurrent()
     {
         if (_audioSource.clip != null)
-            _audioSource.PlayOneShot(_audioSource.clip);
+            _audioSource.PlayOneShot(_audioSource.clip, VolumeScale);
     }
 }

@@ -3,13 +3,22 @@ using UnityEngine;
 
 public class CameraProvider : MonoBehaviour, ICameraProvider
 {
+    [SerializeField] private Vector3 _defaultTopPosition = new Vector3(0, 48, 0);
+    [SerializeField] private Quaternion _defaultTopRotation = new Quaternion(90, 0, 0, 0);
+
     private Camera _camera;
-    private readonly Vector3 PunchVector = new Vector3(0.1f, 0.1f, 0);
-    private readonly Vector3 ShakeVector = new Vector3(0.1f, 0.1f, 0);
+    private readonly Vector3 _punchVector = new Vector3(0.1f, 0.1f, 0);
+    private readonly Vector3 _shakeVector = new Vector3(0.1f, 0.1f, 0);
+
+    private Vector3 _defaultPosition;
+    private Quaternion _defaultRotation;
 
     private void Awake()
     {
         _camera = Camera.main;
+
+        _defaultPosition = _camera.transform.position;
+        _defaultRotation = _camera.transform.rotation;
     }
 
     public void Punch()
@@ -18,7 +27,7 @@ public class CameraProvider : MonoBehaviour, ICameraProvider
             return;
 
         _camera.transform.DOPunchPosition(
-            punch: PunchVector,
+            punch: _punchVector,
             duration: 0.5f,
             vibrato: 10,
             elasticity: 0.25f)
@@ -32,7 +41,7 @@ public class CameraProvider : MonoBehaviour, ICameraProvider
 
         _camera.transform.DOShakePosition(
             duration: 1f,
-            strength: ShakeVector,
+            strength: _shakeVector,
             vibrato: 50,
             randomness: 90,
             snapping: false,
@@ -40,7 +49,17 @@ public class CameraProvider : MonoBehaviour, ICameraProvider
             .SetUpdate(UpdateType.Normal, true);
     }
 
-    public void SetPosition(Vector3 position, Quaternion quaternion)
+    public void SetDefaultPosition()
+    {
+        SetPosition(_defaultPosition, _defaultRotation);
+    }
+
+    public void SetTopView()
+    {
+        SetPosition(_defaultTopPosition, _defaultTopRotation);
+    }
+
+    private void SetPosition(Vector3 position, Quaternion quaternion)
     {
         _camera.transform.position = position;
         _camera.transform.rotation = quaternion;
