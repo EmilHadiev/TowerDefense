@@ -8,10 +8,10 @@ public class InteractiveElementViewContainer : MonoBehaviour
     [SerializeField] private InteractiveElementView _template;
     [SerializeField] private Transform _container;
     [SerializeField] private Button _buttonPurchase;
-    [SerializeField] private Button _setElementButton;
-    [SerializeField] private InteractiveElementSetterView _elementSetter;
-    [SerializeField] private InteractiveElementData[] _data;
-
+    [SerializeField] private InteractiveElementSetterView _setterView;
+    [SerializeField] private InteractiveElementPositionSetter _setPosition;
+    [SerializeField] private InteractiveElementData[] _data;  
+    
     private readonly List<InteractiveElementView> _views = new List<InteractiveElementView>();
     private InteractiveElementPool _pools;
 
@@ -19,15 +19,17 @@ public class InteractiveElementViewContainer : MonoBehaviour
 
     private InteractiveElementData _currentData;
 
+    public bool IsAvailableElementPresent => _creator.IsElementPresent;
+
     private void OnValidate()
     {
-        _elementSetter ??= FindObjectOfType<InteractiveElementSetterView>();
+        _setterView ??= FindObjectOfType<InteractiveElementSetterView>();
+        _setPosition ??= FindAnyObjectByType<InteractiveElementPositionSetter>();
     }
 
     private void Awake()
     {
         CreateTemplates(_template, _data);
-        _setElementButton.onClick.AddListener(SetElement);
     }
 
     private void OnEnable()
@@ -45,9 +47,6 @@ public class InteractiveElementViewContainer : MonoBehaviour
         foreach (var view in _views)
             view.Selected -= OnElementSelected;
     }
-
-    private void OnDestroy() => 
-        _setElementButton.onClick.AddListener(SetElement);
 
 
     [Inject]
@@ -70,7 +69,7 @@ public class InteractiveElementViewContainer : MonoBehaviour
     private void PurchaseElement()
     {
         if (_creator.TryPurchaseElement(_currentData))
-            _elementSetter.AddSprite(_currentData.Sprite);
+            _setterView.AddSprite(_currentData.Sprite);
     }
 
     private void OnElementSelected(InteractiveElementData data)
@@ -81,9 +80,9 @@ public class InteractiveElementViewContainer : MonoBehaviour
             view.HideSelectBackground();
     }
 
-    private void SetElement()
+    public void SetElement()
     {
-        _creator.SetElement(Vector3.zero);
-        _elementSetter.ShowNextSprite();
+        _creator.SetElement(_setPosition.Position);
+        _setterView.ShowNextSprite();
     }
 }

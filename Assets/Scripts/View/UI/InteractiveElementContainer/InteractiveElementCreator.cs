@@ -10,7 +10,9 @@ public class InteractiveElementCreator
     private readonly InteractiveElementPool _pools;
     private readonly ICoinStorage _coinStorage;
 
-    public InteractiveElementCreator(IFactoryParticle factoryParticle, InteractiveElementPool pools, ISoundContainer soundContainer, ICoinStorage coinStorage    )
+    public bool IsElementPresent => _elements.Count > 0;
+
+    public InteractiveElementCreator(IFactoryParticle factoryParticle, InteractiveElementPool pools, ISoundContainer soundContainer, ICoinStorage coinStorage)
     {
         _factoryParticle = factoryParticle;
         _soundContainer = soundContainer;
@@ -26,7 +28,7 @@ public class InteractiveElementCreator
 
     public void SetElement(Vector3 position)
     {
-        if (_elements.Count == 0)
+        if (IsElementPresent == false)
             return;
 
         PlayParticleView(position);

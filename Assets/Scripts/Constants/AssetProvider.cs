@@ -17,6 +17,7 @@
     public const string ParticleSpawnRunePath = "Particles/SpawnRune";
     public const string ParticleMagicShieldPath = "Particles/MagicShield";
     public const string ParticleBuildPath = "Particles/BuildParticle";
+    public const string ParticleInteractiveElementPlacePath = "Particles/InteractiveElementPlace";
 
     public const string MobileInputAttackPath = "Input/Rotate Joystick";
     public const string MobileInputMoverPath = "Input/Move Joystick";
