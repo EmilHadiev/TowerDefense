@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d621641e5c7614bae26441beb1cb52, type: 3}
   m_Name: DemonKnightStat
   m_EditorClassIdentifier: 
-  Health: 60
-  Damage: 16
+  Health: 300
+  Damage: 35
   Speed: 6.5
   AttackRadius: 5
-  Point: 3
+  Point: 10
   <EnemyType>k__BackingField: 1
   <SoundAttack>k__BackingField: {fileID: 8300000, guid: b97909cc05dccfc498d076e1bd2efe90, type: 3}

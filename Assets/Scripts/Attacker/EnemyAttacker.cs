@@ -6,8 +6,8 @@ public class EnemyAttacker : MonoBehaviour
     [SerializeField] private EnemyAttackZone _attackZone;
 
     private const float AdditionalY = 0.5f;
-    private const int MaxTargets = 2;
-
+    private const int MaxTargets = 1;
+    private const int AdditionalAttackDistance = 3;
     private LayerMask _layers;
     private IPlayer _player;
     private IEnemySoundContainer _soundContainer;
@@ -84,7 +84,7 @@ public class EnemyAttacker : MonoBehaviour
             _hits[i] = null;
     }
 
-    private Vector3 GetStartPoint() => new Vector3(transform.position.x, transform.position.y + AdditionalY, transform.position.z) + transform.forward;
+    private Vector3 GetStartPoint() => new Vector3(transform.position.x, transform.position.y + AdditionalY, transform.position.z) + transform.forward* AdditionalAttackDistance;
 
     /// <summary>
     /// called from animation
