@@ -57,7 +57,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         PhysicsToggle(true);
 
         _observer.Entered += OnTargetHit;
-        _movable.Reflected += OnReflected;
 
         _timer.StartTimer(Data.LifeTime);
     }
@@ -67,7 +66,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         PhysicsToggle(false);
 
         _observer.Entered -= OnTargetHit;
-        _movable.Reflected -= OnReflected;
         ResetValues();
     }
 
@@ -114,7 +112,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         if (Data.Damage == 0)
             return 0;
 
-        float totalDamage = Data.Damage + _playerStat.Damage + GetReflectedDamage();
+        float totalDamage = Data.Damage + _playerStat.Damage;
         return totalDamage + totalDamage * (_gunPlace.CurrentGun.DamagePercent / 100);
     }
 
@@ -123,10 +121,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
         _observer.UnLock();
         gameObject.SetActive(false);
     }
-
-    private void OnReflected() => _reflectCalculator.UpCoefficient();
-
-    private float GetReflectedDamage() => (Data.Damage + _playerStat.Damage) * _reflectCalculator.Coefficient;
 
     private void ResetValues()
     {
