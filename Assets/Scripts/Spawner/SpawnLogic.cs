@@ -51,7 +51,7 @@ public class SpawnLogic : ISpawnLogic
 
     public bool TrySpawn()
     { 
-        return TrySpawnElite() || TrySpawnSkeleton() || TrySpawnRandomOther();
+        return TrySpawnSkeleton() || TrySpawnRandomOther() || TrySpawnElite();
     }
 
     private bool TrySpawnSkeleton()

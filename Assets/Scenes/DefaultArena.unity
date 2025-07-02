@@ -3491,37 +3491,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1584678413819941256, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584678413819941256, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584678413819941256, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584678413819941256, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1584678413819941256, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252719390506991345, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8278252901586325055, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
       propertyPath: m_Name
       value: DemonKnight
       objectReference: {fileID: 0}
     - target: {fileID: 8278252901586325055, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8458727562972235586, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3533,7 +3509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8458727562972235586, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.117333
+      value: 18.66
       objectReference: {fileID: 0}
     - target: {fileID: 8458727562972235586, guid: f850de1ad7aad5943af7fc3db901e5c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4123,7 +4099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 12261289}
+  m_AnchoredPosition: {x: 0, y: 13248749}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &649304518
@@ -6787,7 +6763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -502.41183}
+  m_AnchoredPosition: {x: 0, y: -525.91064}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065

@@ -5,7 +5,9 @@ using Zenject;
 public class EliteAbilityContainer : MonoBehaviour
 {
     [SerializeField] private EnemyRenderViewer _renderView;
+    [SerializeField] private EnemyHealth _health;
     [SerializeField] private ParticleView _bloodyAura;
+    [SerializeField] private PoisonAura _poisonAura;
     [SerializeField] private EliteShield _eliteShield;
 
     private readonly List<EliteEnemy> _eliteEnemies = new List<EliteEnemy>(4);
@@ -15,13 +17,15 @@ public class EliteAbilityContainer : MonoBehaviour
 
     private void OnValidate()
     {
+        _health ??= GetComponent<EnemyHealth>();
         _renderView ??= GetComponent<EnemyRenderViewer>();
     }
 
     private void Awake()
     {
-        _eliteEnemies.Add(new BloodyLord(Color.red, _renderView, _bloodyAura, transform, _soundContainer));
-        _eliteEnemies.Add(new ArmorLord(Color.cyan, _renderView, _eliteShield));
+        //_eliteEnemies.Add(new BloodyLord(Color.red, _renderView, _bloodyAura, transform, _soundContainer));
+        //_eliteEnemies.Add(new ArmorLord(Color.cyan, _renderView, _eliteShield));
+        _eliteEnemies.Add(new PoisonLord(Color.green, _renderView, _poisonAura, _health));
     }
 
     private void OnEnable()
