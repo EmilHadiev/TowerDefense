@@ -10,6 +10,7 @@ public class PoisonAura : MonoBehaviour
 
     private const int Radius = 5;
     private const int Interval = 2000;
+    private const int DamageReducer = 2;
 
     private Collider[] _hits = new Collider[1];
 
@@ -24,6 +25,11 @@ public class PoisonAura : MonoBehaviour
     {
         _mask = LayerMask.GetMask("Player");
         _enemyStat = GetComponentInParent<Enemy>().Stat;
+    }
+
+    private void OnDestroy()
+    {
+        StopAttackCycle();
     }
 
     [Inject]
@@ -46,7 +52,7 @@ public class PoisonAura : MonoBehaviour
 
     public void Separate()
     {
-        _mask = LayerMask.GetMask("Enemy");
+        _mask = LayerMask.GetMask("Player", "Enemy");
         _hits = new Collider[Constants.MaxEnemies];
         transform.parent = null;
         _isSeparated = true;
@@ -91,7 +97,7 @@ public class PoisonAura : MonoBehaviour
         if (targetCount == 0)
             return;
 
-        _player.Health.TakeDamage(_enemyStat.Damage);
+        _player.Health.TakeDamage(GetDamage());
     }
 
     private void AttackAll()
@@ -103,7 +109,7 @@ public class PoisonAura : MonoBehaviour
 
         for (int i = 0; i < targetCount; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(_enemyStat.Damage);
+                health.TakeDamage(GetDamage());
     }
 
     private int GetTargetCountAndDrawDebug()
@@ -113,8 +119,8 @@ public class PoisonAura : MonoBehaviour
         return targetCount;
     }
 
-    private void OnDestroy()
+    private float GetDamage()
     {
-        StopAttackCycle();
+        return _enemyStat.Damage / 2;
     }
 }
