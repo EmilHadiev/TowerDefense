@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WaveData
   m_EditorClassIdentifier: 
   _maxWaves: 4
-  _waitingTime: 01000000030000000500000007000000
+  _waitingTime: 01000000020000000300000004000000
   _maxMonsters: 080000000c0000001000000014000000

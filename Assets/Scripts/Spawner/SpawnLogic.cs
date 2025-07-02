@@ -8,7 +8,7 @@ public class SpawnLogic : ISpawnLogic
     private readonly Dictionary<EnemyType, EnemySpawner> _spawners = new Dictionary<EnemyType, EnemySpawner>();
     private readonly List<Transform> _positions = new List<Transform>(6);
 
-    EnemyType[] _otherEnemies = { EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage };
+    EnemyType[] _otherEnemies = { EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage, EnemyType.ArmorKnight };
 
     private int _skeletons;
     private int _mageAndKnightAndDragon;
@@ -30,20 +30,28 @@ public class SpawnLogic : ISpawnLogic
         int maxEnemies = _waveData.MaxEnemies;
         int total = maxEnemies;
 
-        _skeletons = Convert.ToInt32(maxEnemies * 0.5f);
-
+        _skeletons = Convert.ToInt32(maxEnemies / 2);
         int others = maxEnemies - _skeletons;
 
-        _mageAndKnightAndDragon = Convert.ToInt32(others * 0.3f);
-        _elite = others - (_mageAndKnightAndDragon * 3);
-        
+        if (_waveData.IsFinalWave)
+        {
+            _elite = 1;
+            _mageAndKnightAndDragon = others - _elite;
+        }
+        else
+        {
+            _elite = 0;
+            _mageAndKnightAndDragon = others;
+        }
+
+        // Распределяем оставшихся (если есть)
         total -= (_skeletons + _mageAndKnightAndDragon + _elite);
         _mageAndKnightAndDragon += total;
     }
 
     public bool TrySpawn()
     { 
-        return TrySpawnSkeleton() || TrySpawnRandomOther() || TrySpawnElite();
+        return TrySpawnElite() || TrySpawnSkeleton() || TrySpawnRandomOther();
     }
 
     private bool TrySpawnSkeleton()

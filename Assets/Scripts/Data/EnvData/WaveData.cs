@@ -12,6 +12,7 @@ public class WaveData : ScriptableObject
     private int _currentWave;
 
     public bool IsWaveEnded => _currentWave >= _maxWaves;
+    public bool IsFinalWave => _currentWave + 1 >= _maxWaves;
 
     public int MaxEnemies => _maxMonsters[_currentWave];
     public int WaitingTime => _waitingTime[_currentWave];

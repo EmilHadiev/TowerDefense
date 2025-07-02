@@ -6,20 +6,24 @@ using UnityEngine;
 public class BloodyLord : EliteEnemy
 {
     private const int Radius = 10;
-    private const int Interval = 1500;
+    private const int Interval = 2000;
     private const float HealthPercentage = 0.1f;
 
     private readonly Collider[] _hits = new Collider[Constants.MaxEnemies];
     private readonly LayerMask _mask;
     private readonly ParticleView _bloodyAura;
+    private readonly Transform _transform;
+    private readonly IEnemySoundContainer _soundContainer;
 
     private CancellationTokenSource _healCts;
 
-    public BloodyLord(Color viewColor, EnemyRenderViewer renderViewer, Transform transform, IEnemySoundContainer soundContainer, ParticleView particleView) 
-        : base(viewColor, renderViewer, transform, soundContainer)
+    public BloodyLord(Color viewColor, EnemyRenderViewer renderViewer, ParticleView bloodyAura, Transform transform, IEnemySoundContainer enemySoundContainer) 
+        : base(viewColor, renderViewer)
     {
         _mask = LayerMask.GetMask("Enemy");
-        _bloodyAura = particleView;
+        _transform = transform;
+        _bloodyAura = bloodyAura;
+        _soundContainer = enemySoundContainer;
         _bloodyAura.Stop();
     }
 
@@ -60,14 +64,14 @@ public class BloodyLord : EliteEnemy
 
     private void HealAllies()
     {
-        int enemiesCount = Physics.OverlapSphereNonAlloc(Transform.position, Radius, _hits, _mask);
+        int enemiesCount = Physics.OverlapSphereNonAlloc(_transform.position, Radius, _hits, _mask);
 
         if (enemiesCount == 0)
             return;
 
-        PhysicsDebug.DrawDebug(Transform.position, Radius, 1, Color.yellow);
+        PhysicsDebug.DrawDebug(_transform.position, Radius, 1, Color.yellow);
 
-        SoundContainer.Play(SoundName.BloodHealing);
+        _soundContainer.Play(SoundName.BloodHealing);
 
         for (int i = 0; i < enemiesCount; i++)
         {
