@@ -24,9 +24,9 @@ public class EliteAbilityContainer : MonoBehaviour
 
     private void Awake()
     {
-        //_eliteEnemies.Add(new BloodyLord(Color.red, _renderView, _bloodyAura, transform, _soundContainer));
-        //_eliteEnemies.Add(new ArmorLord(Color.cyan, _renderView, _eliteShield));
-        //_eliteEnemies.Add(new PoisonLord(Color.green, _renderView, _poisonAura, _health));
+        _eliteEnemies.Add(new BloodyLord(Color.red, _renderView, _bloodyAura, transform, _soundContainer));
+        _eliteEnemies.Add(new ArmorLord(Color.cyan, _renderView, _eliteShield));
+        _eliteEnemies.Add(new PoisonLord(Color.green, _renderView, _poisonAura, _health));
         _eliteEnemies.Add(new DarkLord(Color.black, _renderView, _blackHoleAura, _health));
     }
 

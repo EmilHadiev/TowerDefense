@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(ReflectiveObstacle))]
 public class EliteShield : MonoBehaviour
@@ -8,6 +9,7 @@ public class EliteShield : MonoBehaviour
     [SerializeField] private EliteShieldHealthView _view;
 
     private ShieldHealth _shieldHealth;
+    private IEnemySoundContainer _soundContainer;
 
     private void Awake()
     {
@@ -27,9 +29,16 @@ public class EliteShield : MonoBehaviour
         _shieldHealth.HealthChanged -= OnShieldHealthChanged;
     }
 
+    [Inject]
+    private void Constructor(IEnemySoundContainer soundContainer)
+    {
+        _soundContainer = soundContainer;
+    }
+
     private void OnShieldHealthChanged(int health)
     {
         _view.SetHealth(health);
+        _soundContainer.Play(SoundName.ShieldDamageImpact);
     }
 
     private void OnShielDestroy()

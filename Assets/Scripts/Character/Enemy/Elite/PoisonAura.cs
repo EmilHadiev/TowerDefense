@@ -17,6 +17,7 @@ public class PoisonAura : MonoBehaviour
     private EnemyStat _enemyStat;
     private LayerMask _mask;
     private IPlayer _player;
+    private IEnemySoundContainer _soundContainer;
     private CancellationTokenSource _attackCts;
 
     private bool _isSeparated;
@@ -33,9 +34,10 @@ public class PoisonAura : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IPlayer player)
+    private void Constructor(IPlayer player, IEnemySoundContainer soundContainer)
     {
         _player = player;
+        _soundContainer = soundContainer;
     }
 
     public void Activate()
@@ -95,8 +97,12 @@ public class PoisonAura : MonoBehaviour
         int targetCount = GetTargetCountAndDrawDebug();
 
         if (targetCount == 0)
+        {
+            ClearTargets();
             return;
+        }
 
+        _soundContainer.Play(SoundName.PoisonAura);
         _player.Health.TakeDamage(GetDamage());
     }
 
@@ -105,8 +111,12 @@ public class PoisonAura : MonoBehaviour
         int targetCount = GetTargetCountAndDrawDebug();
 
         if (targetCount == 0)
+        {
+            ClearTargets();
             return;
+        }
 
+        _soundContainer.Play(SoundName.PoisonAura);
         for (int i = 0; i < targetCount; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
                 health.TakeDamage(GetDamage());
@@ -121,6 +131,12 @@ public class PoisonAura : MonoBehaviour
 
     private float GetDamage()
     {
-        return _enemyStat.Damage / 2;
+        return _enemyStat.Damage / DamageReducer;
+    }
+
+    private void ClearTargets()
+    {
+        for (int i = 0; i < _hits.Length; i++)
+            _hits[i] = null;
     }
 }

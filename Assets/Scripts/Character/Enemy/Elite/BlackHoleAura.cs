@@ -11,13 +11,15 @@ public class BlackHoleAura : MonoBehaviour
     private const int Interval = 100;
 
     private IPlayer _player;
+    private IEnemySoundContainer _soundContainer;
     private CancellationTokenSource _attractionCts;
     private bool _isActive;
 
     [Inject]
-    private void Constructor(IPlayer player)
+    private void Constructor(IPlayer player, IEnemySoundContainer soundContainer)
     {
         _player = player;
+        _soundContainer = soundContainer;
     }
 
     public void Activate()
@@ -72,6 +74,7 @@ public class BlackHoleAura : MonoBehaviour
         if (distance <= MinDistance)
             return;
 
+        _soundContainer.Play(SoundName.BlackHoleAura);
         Vector3 force = direction.normalized * AttractionForce * Time.deltaTime;
         force.y = 0;
         _player.Transform.position += force;
