@@ -1,15 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GunData", menuName = "GunData")]
-public class GunData : ScriptableObject, IPurchasable
+public class GunData : ScriptableObject, ILootable
 {
     [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public Sprite Sprite { get; private set; }
     [field: SerializeField, Range(0, 2)] public float BaseAttackSpeed { get; private set; }
     [field: SerializeField, Range(0, 100)] public int DamagePercent { get; private set; }
     [field: SerializeField] public Gun Prefab { get; private set; }
-    [field: SerializeField] public int Price { get; private set; }
-    [field: SerializeField] public bool IsPurchased { get; set; }
+    [field: SerializeField] public bool IsDropped { get; set; }
 
     [SerializeField] private LocalizedText[] _texts;
 

@@ -6,7 +6,5 @@ public interface IBulletDescription
     string FullDescription { get; }
     string Name { get; }
     Sprite Sprite { get; }
-    int Price { get; }
-    bool IsPurchased { get; set; }
     LocalizedText GetLocalizedText(LanguageType languageType = LanguageType.none, string language = "none");
 }

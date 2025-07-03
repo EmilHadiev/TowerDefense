@@ -39,7 +39,7 @@ public class GunItemSaver
                 throw new System.NullReferenceException($"GunItem with ID {_gunsData[i].ID} not found in _items");
             }
 
-            _gunsData[i].IsPurchased = item.IsPurchased;
+            _gunsData[i].IsDropped = item.IsDropped;
         }
     }
 
@@ -51,15 +51,15 @@ public class GunItemSaver
             var item = new GunItem
             {
                 Id = _gunsData[i].ID,
-                IsPurchased = _gunsData[i].IsPurchased
+                IsDropped = _gunsData[i].IsDropped
             };
 
             _items.Add(item);
         }
     }
 
-    private void UpdateAvailable(IPurchasable gun, GunItem gunItem)
+    private void UpdateAvailable(ILootable gun, GunItem gunItem)
     {
-        gunItem.IsPurchased = gun.IsPurchased;
+        gunItem.IsDropped = gun.IsDropped;
     }
 }

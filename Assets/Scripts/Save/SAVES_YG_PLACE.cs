@@ -19,7 +19,7 @@ public class BulletItem
 public class GunItem
 {
     public int Id;
-    public bool IsPurchased;
+    public bool IsDropped;
 }
 
 [Serializable]

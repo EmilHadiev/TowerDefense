@@ -12,19 +12,17 @@ public class GunViewContainer : MonoBehaviour
     private GunData[] _data;
     private IGunPlace _gunPlace;
     private IGunFactory _gunFactory;
-    private IPurchaser _purchaser;
     private IPlayerSoundContainer _soundContainer;
 
     private readonly Dictionary<Gun, Gun> _guns = new Dictionary<Gun, Gun>(10);
     private readonly List<GunView> _views = new List<GunView>(10);
 
     [Inject]
-    private void Constructor(GunData[] gunData, IPlayer player, IGunFactory gunFactory, IPurchaser purchaser, IPlayerSoundContainer playerSoundContainer)
+    private void Constructor(GunData[] gunData, IPlayer player, IGunFactory gunFactory, IPlayerSoundContainer playerSoundContainer)
     {
         _data = gunData;
         _gunPlace = player.GunPlace;
         _gunFactory = gunFactory;
-        _purchaser = purchaser;
         _soundContainer = playerSoundContainer;
     }
 
@@ -49,8 +47,11 @@ public class GunViewContainer : MonoBehaviour
     {
         for (int i = 0; i < _data.Length; i++)
         {
+            if (_data[i].IsDropped == false)
+                continue;
+
             GunView view = Instantiate(_gunView, _container);
-            view.Initialize(_data[i], _purchaser, _soundContainer, _shopItemDescriptionContainer);
+            view.Initialize(_data[i], _soundContainer, _shopItemDescriptionContainer);
             _views.Add(view);
         }
     }
@@ -84,7 +85,7 @@ public class GunViewContainer : MonoBehaviour
 
     public Gun CreateAndSetAvailableGun()
     {
-        GunData data = _data.FirstOrDefault(data => data.IsPurchased);
+        GunData data = _data.FirstOrDefault(data => data.IsDropped);
         _guns.Add(data.Prefab, CreateGun(data.Prefab));
 
         var gun = _guns[data.Prefab];
