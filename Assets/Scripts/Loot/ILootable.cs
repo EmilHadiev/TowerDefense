@@ -1,4 +1,4 @@
 public interface ILootable
 {
-    public bool IsDropped { get; }
+    public bool IsDropped { get; set; }
 }

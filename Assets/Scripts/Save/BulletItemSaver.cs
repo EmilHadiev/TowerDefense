@@ -30,7 +30,7 @@ class BulletItemSaver
     private void DefaultInit()
     {
         for (int i = 0; i < _bullets.Length; i++)
-            _bullets[i].BulletDescription.IsPurchased = _items[i].IsPurchased;
+            _bullets[i].BulletDescription.IsDropped = _items[i].IsDropped;
     }
 
     private void FirstInit()
@@ -40,12 +40,12 @@ class BulletItemSaver
             var item = new BulletItem
             {
                 Type = _bullets[i].Type,
-                IsPurchased = _bullets[i].BulletDescription.IsPurchased
+                IsDropped = _bullets[i].BulletDescription.IsDropped
             };
 
             _items.Add(item);
         }
     }
 
-    private void UpdateAvailable(BulletItem item, IBulletDefinition bullet) => item.IsPurchased = bullet.BulletDescription.IsPurchased;
+    private void UpdateAvailable(BulletItem item, IBulletDefinition bullet) => item.IsDropped = bullet.BulletDescription.IsDropped;
 }

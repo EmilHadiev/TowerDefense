@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 6
   <Sprite>k__BackingField: {fileID: 21300000, guid: 813c47bc5fb05f24e8a5754c74fc5630, type: 3}
-  <BaseAttackSpeed>k__BackingField: 0.5
+  <BaseAttackSpeed>k__BackingField: 0.6
   <DamagePercent>k__BackingField: 22
   <Prefab>k__BackingField: {fileID: 3416578373548854326, guid: 9f133a4e28aea334e8ad6beb4c4dabf8, type: 3}
-  <Price>k__BackingField: 1500
-  <IsPurchased>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: SPAS-12

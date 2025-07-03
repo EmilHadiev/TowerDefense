@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 
 public class BulletCreator
@@ -14,10 +16,15 @@ public class BulletCreator
         get => _bullets[index];
     }
 
+    /// <summary>
+    /// Dropped bullets. Where IsDropped (ILootable) is true
+    /// </summary>
+    public IEnumerable<Bullet> AvailableBullets => _bullets;
+
     public BulletCreator(IInstantiator instantiator, Bullet[] bullets, BulletPoolContainer pools, BulletEffectSetter effectSetter, Action<int> setEffect)
     {
         _pools = pools;
-        _bullets = bullets;
+        _bullets = GetDroppedBullets(bullets);
         _effectSetter = effectSetter;
         _setEffect = setEffect;
         _instantiator = instantiator;
@@ -26,13 +33,25 @@ public class BulletCreator
     public void FirstInit(int poolSize = 30)
     {
         for (int i = 0; i < _bullets.Length; i++)
+        {
+            if (_bullets[i].BulletDescription.IsDropped == false)
+                continue;
+
             CreateBullets(poolSize, i);
+        }
     }
 
     public void CreateBullets(int poolSize, int index)
     {
         for (int i = 0; i < poolSize; i++)
-            CreateTemplate(GetBulletByIndex(index), _pools[index]);
+        {
+            Bullet template = GetBulletByIndex(index);
+
+            if (template.BulletDescription.IsDropped == false)
+                continue;
+
+            CreateTemplate(template, _pools[index]);
+        }
     }
 
     public bool TryGetSelectBullet(int selectIndex, out Bullet bullet)
@@ -54,4 +73,7 @@ public class BulletCreator
     }
 
     private Bullet GetBulletByIndex(int index) => _bullets[index];
+
+    private Bullet[] GetDroppedBullets(Bullet[] bullets) =>
+        bullets.Where(bullet => bullet.BulletDescription.IsDropped == true).ToArray();
 }

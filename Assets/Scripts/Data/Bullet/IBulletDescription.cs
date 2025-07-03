@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IBulletDescription
+public interface IBulletDescription : ILootable
 {
     string Description { get; }
     string FullDescription { get; }

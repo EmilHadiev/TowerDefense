@@ -12,7 +12,7 @@ public class UpgradeItem
 public class BulletItem
 {
     public BulletType Type;
-    public bool IsPurchased;
+    public bool IsDropped;
 }
 
 [Serializable]

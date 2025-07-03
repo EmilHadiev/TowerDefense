@@ -15,18 +15,6 @@ public class BulletPurchaseHandler : IBulletPurchaseHandler
 
     public bool TryPurchase(IBulletDescription data)
     {
-        if (data.IsPurchased)
-            return false;
-
-        if (_coinStorage.TrySpend(data.Price))
-        {
-            _soundContainer.Play(SoundName.SpendCoin);
-            data.IsPurchased = true;
-
-            Purchased?.Invoke(data);
-            return true;
-        }
-
         return false;
     }
 }

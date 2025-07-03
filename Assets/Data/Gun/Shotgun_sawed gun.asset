@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 5
   <Sprite>k__BackingField: {fileID: 21300000, guid: 813c47bc5fb05f24e8a5754c74fc5630, type: 3}
-  <BaseAttackSpeed>k__BackingField: 0.48
+  <BaseAttackSpeed>k__BackingField: 0.58
   <DamagePercent>k__BackingField: 20
   <Prefab>k__BackingField: {fileID: 5463924245513988381, guid: 668888ef21b4df94f96e002d2ef6241e, type: 3}
-  <Price>k__BackingField: 1400
-  <IsPurchased>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: "\u041E\u0431\u0440\u0435\u0437"

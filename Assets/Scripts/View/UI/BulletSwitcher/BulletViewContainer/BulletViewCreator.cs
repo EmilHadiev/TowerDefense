@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class BulletViewCreator : IBulletViewCreator
 {
-    private readonly ICoinStorage _coinStorage;
     private readonly IPlayerSoundContainer _soundContainer;
     private readonly BulletView _template;
     private readonly Transform _container;
 
-    public BulletViewCreator(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, BulletView template, Transform container)
+    public BulletViewCreator(IPlayerSoundContainer soundContainer, BulletView template, Transform container)
     {
-        _coinStorage = coinStorage;
         _soundContainer = soundContainer;
         _template = template;
         _container = container;
@@ -23,10 +21,12 @@ public class BulletViewCreator : IBulletViewCreator
 
         foreach (var description in data)
         {
-            IBulletView template = GameObject.Instantiate(_template, _container);
-            IBulletPurchaseHandler purchaseHander = new BulletPurchaseHandler(_coinStorage, _soundContainer);
+            if (description.IsDropped == false)
+                continue;
 
-            template.Initialize(description, index, purchaseHander, _soundContainer);
+            IBulletView template = GameObject.Instantiate(_template, _container);
+
+            template.Initialize(description, index, _soundContainer);
             index++;
             views.Add(template);
         }

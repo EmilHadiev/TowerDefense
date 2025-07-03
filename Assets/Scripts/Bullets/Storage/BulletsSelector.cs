@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class BulletsSelector : IDisposable, IBulletsSelector
 {
@@ -7,10 +10,11 @@ public class BulletsSelector : IDisposable, IBulletsSelector
 
     public event Action<int> BulletSwitched;
 
-    public BulletsSelector(IBulletSwitchHandler input, Bullet[] bulletTemplates)
+    public BulletsSelector(IBulletSwitchHandler input, IEnumerable<Bullet> availableBullets)
     {
         _input = input;
-        _bullets = bulletTemplates;
+        _bullets = availableBullets.ToArray();
+        Debug.Log(_bullets.Length + " размер!");
         _input.SwitchBulletButtonClicked += OnBulletSwitched;
     }
 
@@ -25,6 +29,7 @@ public class BulletsSelector : IDisposable, IBulletsSelector
         if (SelectBulletIndex == -1)
             throw new ArgumentOutOfRangeException(nameof(index));
 
+        Debug.Log("Выбранный индекс - " + SelectBulletIndex);
         BulletSwitched?.Invoke(SelectBulletIndex);
     }
 
@@ -32,23 +37,20 @@ public class BulletsSelector : IDisposable, IBulletsSelector
     {
         int index = -1;
 
-        if (bulletIndex < 0 || bulletIndex >= _bullets.Length)
-            index = -1;
+        if (bulletIndex < 0 || bulletIndex >= _bullets.Length || IsDropped(SelectBulletIndex) == false)
+            index = GetDroppedIndex();
         else
             index = bulletIndex;
-
-        if (IsPurchasedBullet(SelectBulletIndex) == false || SelectBulletIndex == -1)
-            index = GetPurchasedIndex();
 
         return index;
     }
 
-    private bool IsPurchasedBullet(int bulletIndex) => _bullets[bulletIndex].BulletDescription.IsPurchased;
+    private bool IsDropped(int bulletIndex) => _bullets[bulletIndex].BulletDescription.IsDropped;
 
-    private int GetPurchasedIndex()
+    private int GetDroppedIndex()
     {
         for (int i = 0; i < _bullets.Length; i++)
-            if (_bullets[i].BulletDescription.IsPurchased)
+            if (_bullets[i].BulletDescription.IsDropped)
                 return i;
 
         throw new ArgumentOutOfRangeException(nameof(_bullets));

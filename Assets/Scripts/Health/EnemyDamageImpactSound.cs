@@ -29,8 +29,11 @@ public class EnemyDamageImpactSound : MonoBehaviour
         _soundContainer = soundContainer;
     }
 
-    private void OnDamageApplied(float arg1)
+    private void OnDamageApplied(float damage)
     {
+        if (damage <= 0)
+            return;
+
         _soundContainer.Play(_damageImpactSound);
     }
 }

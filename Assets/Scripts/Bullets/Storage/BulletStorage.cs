@@ -48,7 +48,7 @@ public class BulletStorage : MonoBehaviour
         _effectSetter = new BulletEffectSetter();
         BulletPoolContainer poolContainer = new BulletPoolContainer();
         _bulletsCreator = new BulletCreator(instantiator, bullets, poolContainer, _effectSetter, SetEffect);
-        _indexator = new BulletsSelector(inputSystem, bullets);
+        _indexator = new BulletsSelector(inputSystem, _bulletsCreator.AvailableBullets);
     }
 
     private void InitializeEffects()
