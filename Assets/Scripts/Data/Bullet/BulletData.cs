@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletData : ScriptableObject, IBulletData, IBulletDescription, ILootable
 {
     [field: SerializeField, Range(1, 100f)] public float Speed { get; private set; }
-    [field: SerializeField, Range(0, 100f)] public float Damage { get; private set; }
     [field: SerializeField, Range(1, 5)] public int LifeTime { get; private set; }
     [field: SerializeField] public Color Color { get; private set; }
     [field: SerializeField] public AudioClip Clip { get; private set; }

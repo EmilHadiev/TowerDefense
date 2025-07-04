@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   MaxHealth: 100
-  <BonusAttackSpeed>k__BackingField: 55
+  <BonusAttackSpeed>k__BackingField: 0
   Damage: 10
   Speed: 5

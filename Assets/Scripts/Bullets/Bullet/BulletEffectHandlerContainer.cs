@@ -41,8 +41,8 @@ public class BulletEffectHandlerContainer : MonoBehaviour
         {
             [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
             [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
-            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_bullet.Data, _playerStat),
-            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _bullet.Data, _playerStat),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_playerStat),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(transform, _playerStat),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(transform),
             [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
             [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),

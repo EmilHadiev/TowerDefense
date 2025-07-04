@@ -109,10 +109,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private float GetDamage()
     {
-        if (Data.Damage == 0)
-            return 0;
-
-        float totalDamage = Data.Damage + _playerStat.Damage;
+        float totalDamage = _playerStat.Damage;
         return totalDamage + totalDamage * (_gunPlace.CurrentGun.DamagePercent / 100);
     }
 
