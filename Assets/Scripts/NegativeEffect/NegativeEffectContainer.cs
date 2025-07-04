@@ -10,7 +10,7 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
 
     private Dictionary<Type, INegativeEffect> _negativeEffects;
     private INegativeEffect _effect;
-    private PlayerStat _playerStat;
+    private IGunPlace _gunPlace;
 
     private IHealth _enemyHealth;
 
@@ -26,7 +26,7 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
         _negativeEffects = new Dictionary<Type, INegativeEffect>(10)
         {
             [typeof(FreezingEffect)] = new FreezingEffect(_speed, _view),
-            [typeof(PoisonEffect)] = new PoisonEffect(_view, _playerStat, _enemyHealth),
+            [typeof(PoisonEffect)] = new PoisonEffect(_view, _gunPlace, _enemyHealth),
         };
     }
 
@@ -37,9 +37,9 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat)
+    private void Constructor(IPlayer player)
     {
-        _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
     }
 
     public void Activate<T>() where T : INegativeEffect

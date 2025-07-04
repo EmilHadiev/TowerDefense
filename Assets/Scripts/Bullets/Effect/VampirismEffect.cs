@@ -2,13 +2,15 @@
 
 class VampirismEffect : IBulletEffectHandler
 {
-    private readonly IHealth _playerHealth;
-    private readonly PlayerStat _playerStat;
+    private const int DamageReducer = 2;
 
-    public VampirismEffect(IHealth playerHealth, PlayerStat playerStat)
+    private readonly IHealth _playerHealth;
+    private readonly IGunPlace _gunPlace;
+
+    public VampirismEffect(IHealth playerHealth, IGunPlace gunPlace)
     {
         _playerHealth = playerHealth;
-        _playerStat = playerStat;
+        _gunPlace = gunPlace;
     }
 
     public void HandleEffect(Collider enemy)
@@ -22,5 +24,5 @@ class VampirismEffect : IBulletEffectHandler
         }
     }
 
-    private float GetHalfDamage() => _playerStat.Damage / 2;
+    private float GetHalfDamage() => _gunPlace.CurrentGun.Damage / DamageReducer;
 }

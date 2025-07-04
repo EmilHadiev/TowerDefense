@@ -5,12 +5,13 @@ public class ExplosionBarrel : InteractiveObstacle
 {
     private const int ExplosionRadius = 5;
     private const string EnemyMask = "Enemy";
+    private const int DamageMultiplier = 2;
 
-    private PlayerStat _playerStat;
     private ICameraProvider _cameraProvider;
     private IFactoryParticle _factoryParticle;
     private IPlayerSoundContainer _soundContainer;
     private ParticleView _view;
+    private IGunPlace _gunPlace;
 
     private readonly Collider[] _hits = new Collider[10];
 
@@ -25,9 +26,9 @@ public class ExplosionBarrel : InteractiveObstacle
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat, ICameraProvider cameraProvider, IFactoryParticle factoryParticle, IPlayerSoundContainer playerSoundContainer)
+    private void Constructor(IPlayer player, ICameraProvider cameraProvider, IFactoryParticle factoryParticle, IPlayerSoundContainer playerSoundContainer)
     {
-        _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
         _cameraProvider = cameraProvider;
         _factoryParticle = factoryParticle;
         _soundContainer = playerSoundContainer;
@@ -75,8 +76,7 @@ public class ExplosionBarrel : InteractiveObstacle
 
     private float GetDamage()
     {
-        int damageMultiplier = 2;
-        return _playerStat.Damage * damageMultiplier;
+        return _gunPlace.CurrentGun.Damage * DamageMultiplier;
     }
 
     private void ResetTargets()

@@ -43,12 +43,12 @@ public class BulletEffectHandlerContainer : MonoBehaviour
         {
             [typeof(EmptyBulletEffect)] = new EmptyBulletEffect(),
             [typeof(SlowdownBulletEffect)] = new SlowdownBulletEffect(),
-            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_gunPlace, _playerStat),
-            [typeof(SplashBulletEffect)] = new SplashBulletEffect(_gunPlace, transform, _playerStat),
+            [typeof(ExtraDamageBulletEffect)] = new ExtraDamageBulletEffect(_gunPlace),
+            [typeof(SplashBulletEffect)] = new SplashBulletEffect(_gunPlace, transform),
             [typeof(PushingBulletEffect)] = new PushingBulletEffect(transform),
             [typeof(DeadlyBulletEffect)] = new DeadlyBulletEffect(),
             [typeof(PoisonBulletEffect)] = new PoisonBulletEffect(),
-            [typeof(VampirismEffect)] = new VampirismEffect(_playerHealth, _playerStat),
+            [typeof(VampirismEffect)] = new VampirismEffect(_playerHealth, _gunPlace),
             [typeof(GoldenBulletEffect)] = new GoldenBulletEffect(_coinStorage),
             [typeof(RandomBulletEffect)] = new RandomBulletEffect(_setEffect)
         };

@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     private IBulletMovable _movable;
     private IBulletEffectHandler _currentEffect;
 
-    private PlayerStat _playerStat;
     private IGunPlace _gunPlace;
 
     private IReadOnlyDictionary<Type, IBulletEffectHandler> _bulletEffects;
@@ -70,9 +69,8 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     }
 
     [Inject]
-    private void Constructor(PlayerStat stat, IPlayer player)
+    private void Constructor(IPlayer player)
     {
-        _playerStat = stat;
         _gunPlace = player.GunPlace;
     }
 
@@ -109,8 +107,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
 
     private float GetDamage()
     {
-        float totalDamage = _playerStat.Damage;
-        return totalDamage + _gunPlace.CurrentGun.Damage;
+        return _gunPlace.CurrentGun.Damage;
     }
 
     private void HideAfterCollided()

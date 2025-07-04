@@ -6,12 +6,12 @@ public class ShotGun : Gun
     private const int AttackRadius = 3;
     private readonly Collider[] _targets = new Collider[Constants.MaxEnemies];
 
-    private PlayerStat _stat;
+    private IGunPlace _gunPlace;
 
     [Inject]
-    private void Constructor(PlayerStat stat)
+    private void Constructor(IPlayer player)
     {
-        _stat = stat;
+        _gunPlace = player.GunPlace;
     }
 
     public override void HandleAttack(Collider collider)
@@ -23,7 +23,7 @@ public class ShotGun : Gun
 
         for (int i = 0; i < count; i++)
             if (_targets[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(_stat.Damage / count);
+                health.TakeDamage(_gunPlace.CurrentGun.Damage / count);
 
         PhysicsDebug.DrawDebug(collider.transform.position, AttackRadius);
     }

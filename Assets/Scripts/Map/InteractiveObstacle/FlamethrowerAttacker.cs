@@ -12,7 +12,7 @@ public class FlamethrowerAttacker : MonoBehaviour
 
     private const int DamageInterval = 300;
     private CancellationTokenSource _attackCts;
-    private PlayerStat _playerStat;
+    private IGunPlace _gunPlace;
 
     private void OnValidate()
     {
@@ -31,9 +31,9 @@ public class FlamethrowerAttacker : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat)
+    private void Constructor(IPlayer player)
     {
-        _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
     }
 
     private async UniTaskVoid AttackLoop(CancellationToken ct)
@@ -50,11 +50,9 @@ public class FlamethrowerAttacker : MonoBehaviour
 
                     if (enemy.TryGetComponent(out IHealth health))
                     {
-                        health.TakeDamage(_playerStat.Damage);
+                        health.TakeDamage(_gunPlace.CurrentGun.Damage);
                     }
                 }
-
-                
             }
         }
         catch (OperationCanceledException)

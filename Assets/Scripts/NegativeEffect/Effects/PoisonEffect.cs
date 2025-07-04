@@ -10,7 +10,7 @@ public class PoisonEffect : INegativeEffect
     private const float DamageImprover = 1.3f;
 
     private readonly EnemyRenderViewer _view;
-    private readonly PlayerStat _playerStat;
+    private readonly IGunPlace _gunPlace;
     private readonly IHealth _health;
     private readonly Color _poisonColor = Color.green;
 
@@ -20,11 +20,11 @@ public class PoisonEffect : INegativeEffect
     private int _damageMultiplier;
     private bool _isActive;
 
-    public PoisonEffect(EnemyRenderViewer view, PlayerStat playerStat, IHealth health)
+    public PoisonEffect(EnemyRenderViewer view, IGunPlace gunPlace, IHealth health)
     {
         _view = view;
-        _playerStat = playerStat;
         _health = health;
+        _gunPlace = gunPlace;
     }
 
     public void StartEffect()
@@ -77,7 +77,7 @@ public class PoisonEffect : INegativeEffect
         }
     }
 
-    private int CalculateDamage() => (int)(_playerStat.Damage * DamageImprover * _damageMultiplier);
+    private int CalculateDamage() => (int)(_gunPlace.CurrentGun.Damage * DamageImprover * _damageMultiplier);
 
     private void StartPoison()
     {

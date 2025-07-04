@@ -10,11 +10,11 @@ public class ExplosionMine : InteractiveElement
 
     private readonly Collider[] _hits = new Collider[5];
 
-    private PlayerStat _playerStat;
     private IPlayerSoundContainer _soundContainer;
     private IFactoryParticle _factoryParticle;
     private ParticleView _particle;
     private ICameraProvider _cameraProvider;
+    private IGunPlace _gunPlace;
 
     private void OnValidate()
     {
@@ -39,9 +39,9 @@ public class ExplosionMine : InteractiveElement
     }
 
     [Inject]
-    private void Constructor(IPlayerSoundContainer playerSoundContainer, IFactoryParticle factoryParticle, PlayerStat playerStat, ICameraProvider cameraProvider)
+    private void Constructor(IPlayerSoundContainer playerSoundContainer, IFactoryParticle factoryParticle, ICameraProvider cameraProvider, IPlayer player)
     {
-        _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
         _factoryParticle = factoryParticle;
         _soundContainer = playerSoundContainer;
         _cameraProvider = cameraProvider;
@@ -64,7 +64,7 @@ public class ExplosionMine : InteractiveElement
 
         for (int i = 0; i < count; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(_playerStat.Damage);
+                health.TakeDamage(_gunPlace.CurrentGun.Damage);
 
         gameObject.SetActive(false);
     }

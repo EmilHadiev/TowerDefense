@@ -44,7 +44,6 @@ namespace YG
         #region PlayerStat
         public float playerHealth = 100;
         public int playerBonusAttackSpeed = 0;
-        public float playerDamage = 10;
         #endregion
 
         #region EnemyLevelData
