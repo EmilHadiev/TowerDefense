@@ -16,9 +16,9 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: e0628802d1c8dc8429c6174e65d13373, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.9
   <DamagePercent>k__BackingField: 75
+  <BaseDamage>k__BackingField: 15
   <Prefab>k__BackingField: {fileID: -7223686035882586214, guid: af59d9765573efe4084ed973f26ef0f7, type: 3}
-  <Price>k__BackingField: 3000
-  <IsPurchased>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: M200

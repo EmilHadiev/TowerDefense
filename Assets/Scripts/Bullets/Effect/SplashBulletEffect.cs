@@ -10,10 +10,12 @@ public class SplashBulletEffect : IBulletEffectHandler
     private readonly Collider[] _hits;
     private readonly Transform _bullet;
     private readonly PlayerStat _playerStat;
+    private readonly IGunPlace _gunPlace;
 
-    public SplashBulletEffect(Transform bullet, PlayerStat playerStat)
+    public SplashBulletEffect(IGunPlace gunPlace, Transform bullet, PlayerStat playerStat)
     {
         _bullet = bullet;
+        _gunPlace = gunPlace;
 
         _enemyMask = LayerMask.GetMask(EnemyMask);
         _hits = new Collider[MaxEnemies];
@@ -43,6 +45,6 @@ public class SplashBulletEffect : IBulletEffectHandler
 
     private float GetDamage()
     {
-        return _playerStat.Damage;
+        return _playerStat.Damage + _gunPlace.CurrentGun.Damage;
     }
 }

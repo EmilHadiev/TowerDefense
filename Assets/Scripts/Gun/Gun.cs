@@ -2,14 +2,14 @@ using UnityEngine;
 
 public abstract class Gun : MonoBehaviour, IGun
 {
-    public float DamagePercent { get; private set; }
+    private GunData _gunData;
 
-    public float BaseAttackSpeed { get; private set; }
+    public float AttackSpeed => _gunData.BaseAttackSpeed;
+    public float Damage => _gunData.GetTotalDamage();
 
     public void SetData(GunData gunData)
     {
-        DamagePercent = gunData.DamagePercent;
-        BaseAttackSpeed = gunData.BaseAttackSpeed;
+        _gunData = gunData;
     }
 
     public virtual void HandleAttack(Collider collider)

@@ -16,6 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 813c47bc5fb05f24e8a5754c74fc5630, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.58
   <DamagePercent>k__BackingField: 20
+  <BaseDamage>k__BackingField: 5
   <Prefab>k__BackingField: {fileID: 5463924245513988381, guid: 668888ef21b4df94f96e002d2ef6241e, type: 3}
   <IsDropped>k__BackingField: 0
   _texts:

@@ -16,9 +16,9 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 54bab0fd44ab6b94e9a2885cfc0346d0, type: 3}
   <BaseAttackSpeed>k__BackingField: 0.27
   <DamagePercent>k__BackingField: 10
+  <BaseDamage>k__BackingField: 10
   <Prefab>k__BackingField: {fileID: 3017346369579148224, guid: cf9c031fcfaee7f45bf6744c7209a3bc, type: 3}
-  <Price>k__BackingField: 1600
-  <IsPurchased>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: G36C

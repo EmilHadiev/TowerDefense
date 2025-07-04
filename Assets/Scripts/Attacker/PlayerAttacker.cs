@@ -68,7 +68,7 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 
     private void OnGunSwitched(IGun gun)
     {
-        float gunSpeed = gun.BaseAttackSpeed;
+        float gunSpeed = gun.AttackSpeed;
         int playerSpeed = _playerStat.BonusAttackSpeed;
         AttackSpeed = gunSpeed * MathF.Pow(AttackSpeedFactor, playerSpeed);
 
