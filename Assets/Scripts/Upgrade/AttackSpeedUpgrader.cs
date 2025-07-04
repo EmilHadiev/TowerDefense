@@ -10,6 +10,7 @@ public class AttackSpeedUpgrader : Upgrader
     public AttackSpeedUpgrader(PlayerStat stat, UpgradeData data) : base(stat, data)
     {
         UpgradeType = UpgradeType.AttackSpeed;
+        Debug.Log("ДОДЕЛАТЬ АПГРЕЙД СКОРОСТИ АТАКИ!");
     }
 
     public override void Upgrade()
@@ -20,14 +21,15 @@ public class AttackSpeedUpgrader : Upgrader
 
     public override string GetUpgradeDescription()
     {
-        float attackSpeed = Stat.BonusAttackSpeed;
-        return $"{attackSpeed} > {attackSpeed + UpgradePercent}%";
+        //float attackSpeed = Stat.BonusAttackSpeed;
+        //return $"{attackSpeed} > {attackSpeed + UpgradePercent}%";
+        return $"НАДО ДОДЕЛАТЬ!";
     }
 
     private void CalculateAttackSpeedValue()
     {
         GetUpgradeDescription();
-        Stat.BonusAttackSpeed += UpgradePercent;
-        Debug.Log(Stat.BonusAttackSpeed);
+        //Stat.BonusAttackSpeed += UpgradePercent;
+        //Debug.Log(Stat.BonusAttackSpeed);
     }
 }

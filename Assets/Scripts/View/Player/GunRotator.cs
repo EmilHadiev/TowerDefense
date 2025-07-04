@@ -6,8 +6,8 @@ public class GunRotator : MonoBehaviour
     private const int SpeedBooster = 10;
     private const float StopRotateDelay = 0.5f;
 
-    private PlayerStat _playerStat;
     private IAttackable _attackable;
+    private IGunPlace _gunPlace;
 
     private bool _isAttacking;
 
@@ -27,9 +27,9 @@ public class GunRotator : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat, IAttackable attackable)
+    private void Constructor(IPlayer player, IAttackable attackable)
     {
-        _playerStat = playerStat;
+        _gunPlace = player.GunPlace;
         _attackable = attackable;
     }
 
@@ -49,7 +49,7 @@ public class GunRotator : MonoBehaviour
             _isAttacking = false;
     }
 
-    private float GetSpeed() => _playerStat.BonusAttackSpeed * SpeedBooster;
+    private float GetSpeed() => _gunPlace.CurrentGun.AttackSpeed * SpeedBooster;
 
     private void OnAttacked()
     {

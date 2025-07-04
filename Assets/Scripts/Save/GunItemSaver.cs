@@ -16,7 +16,7 @@ public class GunItemSaver
     public void Save()
     {
         for (int i = 0; i < _items.Count; i++)
-            UpdateAvailable(_gunsData[i], _items[i]);
+            UpdateData(_gunsData[i], _items[i]);
     }
 
     private void Init()
@@ -51,15 +51,19 @@ public class GunItemSaver
             var item = new GunItem
             {
                 Id = _gunsData[i].ID,
-                IsDropped = _gunsData[i].IsDropped
+                IsDropped = _gunsData[i].IsDropped,
+                AttackSpeedPercent = _gunsData[i].AttackSpeedPercent,
+                BaseDamage =_gunsData[i].BaseDamage,
             };
 
             _items.Add(item);
         }
     }
 
-    private void UpdateAvailable(ILootable gun, GunItem gunItem)
+    private void UpdateData(GunData gun, GunItem gunItem)
     {
         gunItem.IsDropped = gun.IsDropped;
+        gunItem.BaseDamage = gun.BaseDamage;
+        gunItem.AttackSpeedPercent = gun.AttackSpeedPercent;
     }
 }

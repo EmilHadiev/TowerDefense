@@ -4,7 +4,7 @@ public abstract class Gun : MonoBehaviour, IGun
 {
     private GunData _gunData;
 
-    public float AttackSpeed => _gunData.BaseAttackSpeed;
+    public float AttackSpeed => _gunData.GetTotalAttackSpeed();
     public float Damage => _gunData.GetTotalDamage();
 
     public void SetData(GunData gunData)

@@ -20,6 +20,8 @@ public class GunItem
 {
     public int Id;
     public bool IsDropped;
+    public float BaseDamage;
+    public float AttackSpeedPercent;
 }
 
 [Serializable]
@@ -43,7 +45,6 @@ namespace YG
 
         #region PlayerStat
         public float playerHealth = 100;
-        public int playerBonusAttackSpeed = 0;
         #endregion
 
         #region EnemyLevelData

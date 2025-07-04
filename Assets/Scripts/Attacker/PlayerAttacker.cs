@@ -4,8 +4,6 @@ using Zenject;
 
 public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackable
 {
-    private const float AttackSpeedFactor = 0.99f;
-
     private readonly IInput _input;
     private readonly PlayerStat _playerStat;
     private readonly IGunPlace _gunPlace;
@@ -68,12 +66,8 @@ public class PlayerAttacker : IInitializable, IDisposable, ITickable, IAttackabl
 
     private void OnGunSwitched(IGun gun)
     {
-        float gunSpeed = gun.AttackSpeed;
-        int playerSpeed = _playerStat.BonusAttackSpeed;
-        AttackSpeed = gunSpeed * MathF.Pow(AttackSpeedFactor, playerSpeed);
+        AttackSpeed = gun.AttackSpeed;
 
-        Debug.Log("Скорость атаки игрока: " + playerSpeed);
-        Debug.Log("Скорость атаки оружия: " + gunSpeed);
         Debug.Log("Текущая скорость атаки: " + AttackSpeed);
         Debug.Log(new string('-', 10));
     }
