@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using Zenject;
 
@@ -53,6 +52,15 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         }
     }
 
+    [Inject]
+    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen, IPlayer player, ITrainingMode trainingMode)
+    {
+        _upgrader = upgrader;
+        _loadingScreen = loadingScreen;
+        _player = player;
+        _trainingMode = trainingMode;
+    }
+
     private void StartLevel()
     {
         _loadingScreen.Show();
@@ -67,15 +75,6 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     {
         _trainingMode.InitTraining(this);
         _trainingMode.ShowNextTraining();
-    }
-
-    [Inject]
-    private void Constructor(EnemyUpgrader upgrader, LoadingScreen loadingScreen, IPlayer player, ITrainingMode trainingMode)
-    {
-        _upgrader = upgrader;
-        _loadingScreen = loadingScreen;
-        _player = player;
-        _trainingMode = trainingMode;
     }
 
     #if UNITY_WEBGL

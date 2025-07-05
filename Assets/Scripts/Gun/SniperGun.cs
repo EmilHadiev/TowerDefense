@@ -5,7 +5,8 @@ public class SniperGun : Gun
 {
     [SerializeField] private ParticleView _criticalStrikeView;
 
-    private const int CriticalChance = 20;
+    private const int CriticalChance = 15;
+    private const int DamageMultiplier = 2;
 
     private IGunPlace _gunPlace;
 
@@ -39,6 +40,6 @@ public class SniperGun : Gun
     private float GetCriticalStrike()
     {
         int randomValue = Random.Range(0, 100);
-        return CriticalChance >= randomValue ? _gunPlace.CurrentGun.Damage * CriticalChance + CriticalChance : 0;
+        return CriticalChance >= randomValue ? _gunPlace.CurrentGun.Damage * DamageMultiplier : 0;
     }
 }

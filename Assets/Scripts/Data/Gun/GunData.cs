@@ -5,7 +5,7 @@ public class GunData : ScriptableObject, ILootable
 {
     [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public Sprite Sprite { get; private set; }
-    [field: SerializeField, Range(0, 2)] public float BaseAttackSpeed { get; private set; }
+    [field: SerializeField, Range(0, 3)] public float BaseAttackSpeed { get; private set; }
     [field: SerializeField, Range(0, 100)] public int AttackSpeedPercent { get; set; }
     [field: SerializeField, Range(0, 20)] public float BaseDamage { get; set; }
     [field: SerializeField, Range(0, 100)] public int DamagePercent { get; private set; }
@@ -15,6 +15,8 @@ public class GunData : ScriptableObject, ILootable
     [SerializeField] private LocalizedText[] _texts;
 
     private const float AttackSpeedFactor = 0.99f;
+    private const string DamageReplacer = "_dmg_";
+    private const string AttackSpeedReplacer = "_as_";
 
     public LocalizedText GetLocalizedText(string language)
     {
@@ -43,6 +45,6 @@ public class GunData : ScriptableObject, ILootable
 
     private string ChangeDescription(string description)
     {
-        return description.Replace("!!!", DamagePercent.ToString()).Replace("___", BaseAttackSpeed.ToString());
+        return description.Replace(DamageReplacer, GetTotalDamage().ToString()).Replace(AttackSpeedReplacer, GetTotalAttackSpeed().ToString());
     }
 }
