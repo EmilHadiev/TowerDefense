@@ -2,7 +2,7 @@
 
 public class DeadlyBulletEffect : IBulletEffectHandler
 {
-    private const int ChanceToKill = 35;
+    private const int ChanceToKill = 15;
 
     public void HandleEffect(Collider enemy)
     {

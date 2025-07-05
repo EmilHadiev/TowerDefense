@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PoisonEffect : INegativeEffect
 {
-    private const int BasePoisonDuration = 5;
+    private const int BasePoisonDuration = 3;
     private const int Tick = 1000;
     private const float DamageImprover = 1.3f;
 

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ElectricBulletData
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 25
-  <Damage>k__BackingField: 10
   <LifeTime>k__BackingField: 2
   <Color>k__BackingField: {r: 0.44313726, g: 0.73333335, b: 0.9019608, a: 1}
   <Clip>k__BackingField: {fileID: 8300000, guid: f68f1adcd2f671f428d3fe35bfa26809, type: 3}
@@ -45,21 +44,20 @@ MonoBehaviour:
       \u0443\u0440\u043E\u043D \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0438\u043C
       \u043F\u044F\u0442\u0435\u0440\u044B\u043C \u0432\u0440\u0430\u0433\u0430\u043C,
       \u0432 \u0440\u0430\u0434\u0438\u0443\u0441\u0435 5 \u043C\u0435\u0442\u0440\u043E\u0432.
-      \u0421\u043E\u0437\u0434\u0430\u043D\u043D\u0430\u044F \u0446\u0435\u043F\u043D\u0430\u044F
-      \u043C\u043E\u043B\u043D\u0438\u044F, \u043D\u0430\u043D\u043E\u0441\u0438\u0442
-      50% \u043E\u0442 \u0442\u0435\u043A\u0443\u0449\u0435\u0433\u043E \u0443\u0440\u043E\u043D\u0430
-      \u0438\u0433\u0440\u043E\u043A\u0430"
+      \u041F\u043E\u043B\u043E\u0432\u0438\u043D\u0430 \u0443\u0440\u043E\u043D\u0430
+      \u043D\u0430\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u0432 \u043E\u0441\u043D\u043E\u0432\u043D\u0443\u044E
+      \u0446\u0435\u043B\u044C, \u0434\u0440\u0443\u0433\u0430\u044F \u043F\u043E\u043B\u043E\u0432\u0438\u043D\u0430
+      \u0440\u0430\u0432\u043D\u043E\u043C\u0435\u0440\u043D\u043E \u0440\u0430\u0441\u043F\u0440\u0435\u0434\u0435\u043B\u044F\u0435\u0442\u0441\u044F"
   - <Language>k__BackingField: 1
     <Name>k__BackingField: Spark
     <ShortDescription>k__BackingField: Deals area damage
-    <FullDescription>k__BackingField: When hitting an enemy, creates a chain lightning
-      in them that deals damage to the nearest five enemies within a 5 meter radius.
-      The created chain lightning deals 50% of the player's current damage
+    <FullDescription>k__BackingField: On hit, creates a chain lightning inside the
+      enemy that deals damage to the five nearest enemies within a 5-meter radius.
+      Half the damage is dealt to the main target, the other half is evenly distributed
   - <Language>k__BackingField: 2
     <Name>k__BackingField: "K\u0131v\u0131lc\u0131m"
     <ShortDescription>k__BackingField: "Anla\u015Fmalar alan hasar\u0131"
-    <FullDescription>k__BackingField: "Bir d\xFC\u015Fmana \xE7arpt\u0131\u011F\u0131nda,
-      d\xFC\u015Fman\u0131n i\xE7inde 5 metrelik yar\u0131\xE7ap i\xE7indeki en yak\u0131n
-      be\u015F d\xFC\u015Fmana hasar veren bir zincir y\u0131ld\u0131r\u0131m c\u0131vatas\u0131
-      olu\u015Fturur. Oyuncunun mevcut hasar\u0131n\u0131n %50'sini veren zincir
-      y\u0131ld\u0131r\u0131m yarat\u0131r"
+    <FullDescription>k__BackingField: "Vuru\u015Fta, d\xFC\u015Fman\u0131n i\xE7inde
+      bir \u015Fim\u015Fek zinciri olu\u015Fturur ve 5 metre yar\u0131\xE7ap\u0131ndaki
+      en yak\u0131n be\u015F d\xFC\u015Fmana hasar verir. Hasar\u0131n yar\u0131s\u0131
+      ana hedefe verilir, di\u011Fer yar\u0131s\u0131 e\u015Fit olarak da\u011F\u0131t\u0131l\u0131r"

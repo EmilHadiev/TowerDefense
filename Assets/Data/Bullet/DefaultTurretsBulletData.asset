@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: DefaultTurretsBulletData
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 30
-  <Damage>k__BackingField: 10
   <LifeTime>k__BackingField: 3
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   <Clip>k__BackingField: {fileID: 8300000, guid: c41ffa734fb24c444b49cee4f812e171, type: 3}
@@ -41,9 +40,9 @@ MonoBehaviour:
     <Name>k__BackingField: Standard
     <ShortDescription>k__BackingField: Reliable ammunition
     <FullDescription>k__BackingField: This ammunition does not have any special effects,
-      but nevertheless, it is extremely reliable and effective.
+      but nevertheless, it is extremely reliable and effective
   - <Language>k__BackingField: 2
     <Name>k__BackingField: Standart
     <ShortDescription>k__BackingField: "G\xFCvenilir m\xFChimmat"
     <FullDescription>k__BackingField: "Bu m\xFChimmat\u0131n hi\xE7bir \xF6zel etkisi
-      yoktur, ancak yine de son derece g\xFCvenilir ve etkilidir."
+      yoktur, ancak yine de son derece g\xFCvenilir ve etkilidir"
