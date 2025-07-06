@@ -28,7 +28,6 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     {
         _states.Add(typeof(EnemySpawnerContainer), _spawnerContainer);
         _states.Add(typeof(WaitingLevelState), _waitingState);
-        _states.Add(typeof(EnemyUpgradeState), new EnemyUpgradeState(_upgrader, this));
     }
 
     private void OnEnable()
@@ -67,6 +66,7 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
         StopHideCanvas();
         SetPlayerPosition();
         SetGunToPlayer();
+        TryUpgradeEnemy();
 
         _loadingScreen.Hide();
     }
@@ -119,6 +119,12 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     private void SetPlayerPosition() => _player.Transform.position = _spawnPosition.transform.position;
 
     private void SetGunToPlayer() => _player.GunPlace.SetGun(_gunContainer.CreateAndSetAvailableGun());
+
+    private void TryUpgradeEnemy()
+    {
+        _upgrader.LevelUp();
+        _upgrader.TryUpgrade();
+    }
 
     private void OnLoaded()
     {
