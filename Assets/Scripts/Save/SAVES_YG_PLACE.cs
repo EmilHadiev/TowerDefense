@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 
 [Serializable]
-public class UpgradeItem
-{
-    public int Cost;
-    public UpgradeType Type;
-}
-
-[Serializable]
 public class BulletItem
 {
     public BulletType Type;
@@ -37,10 +30,6 @@ namespace YG
     {
         #region Coins
         public int coins = 0;
-        #endregion
-
-        #region UpgradeData
-        public List<UpgradeItem> UpgradeItems = new List<UpgradeItem>(3);
         #endregion
 
         #region PlayerStat

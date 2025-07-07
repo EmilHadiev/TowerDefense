@@ -1,4 +1,4 @@
 ﻿public interface IUpgradeView
 {
-    void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand, IUpgrader upgrader);
+    void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand, Upgrader upgrader);
 }

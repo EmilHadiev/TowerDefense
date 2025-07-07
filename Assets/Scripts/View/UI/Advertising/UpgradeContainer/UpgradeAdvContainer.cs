@@ -13,11 +13,12 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
     private ICoinStorage _coinStorage;
 
     [Inject]
-    private void Constructor(IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data, ICoinStorage coinStorage)
+    private void Constructor(IPlayerSoundContainer soundContainer, ICoinStorage coinStorage)
     {
         _soundContainer = soundContainer;
-        _priceCalculator = new UpgradePriceCalculator(data);
+        //_priceCalculator = new UpgradePriceCalculator(data);
         _coinStorage = coinStorage;
+        Debug.Log("Контейнер для рекламы тоже надо доделать! " + nameof(UpgradeAdvContainer));
     }
 
     private void Start()

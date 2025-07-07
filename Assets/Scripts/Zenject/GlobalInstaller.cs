@@ -7,7 +7,6 @@ public class GlobalInstaller : MonoInstaller
 {
     [SerializeField] private CoroutinePerformer _performer;
     [SerializeField] private LoadingScreen _loadingScreen;
-    [SerializeField] private UpgradeData[] _data;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
     [SerializeField] private EnemyLevelData _enemyLevel;
@@ -21,7 +20,6 @@ public class GlobalInstaller : MonoInstaller
         BindCoroutinePerformer();
         BindSceneSwitcher();       
         BindCoinStorage();
-        BindUpgradeData();
         BindPlayerData();
         BindEnvironmentData();
         BindEnemyData();
@@ -78,19 +76,6 @@ public class GlobalInstaller : MonoInstaller
     private void BindEnvironmentData()
     {
         Container.Bind<EnvironmentData>().FromScriptableObject(_evnData).AsSingle();
-    }
-
-    private void BindUpgradeData()
-    {
-        List<UpgradeData> data = new List<UpgradeData>(_data.Length);
-
-        for (int i = 0; i < _data.Length; i++)
-        {
-            var stat = Instantiate(_data[i]);
-            data.Add(_data[i]);
-        }
-
-        Container.Bind<IEnumerable<UpgradeData>>().FromInstance(_data);
     }
 
     private void BindCoinStorage()

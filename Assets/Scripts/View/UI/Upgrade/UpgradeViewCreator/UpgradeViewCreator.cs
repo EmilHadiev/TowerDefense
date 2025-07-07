@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class UpgradeViewCreator : IUpgradeViewCreator
 {
     private readonly UpgradeView _template;
-    private readonly IEnumerable<IUpgrader> _upgraders;
+    private readonly IEnumerable<Upgrader> _upgraders;
     private readonly IUpgradePurchaseHandler _purchaseHandler;
     private readonly UpgradeAdvContainer _advContainer;
     private readonly Transform _container;
 
-    public UpgradeViewCreator(UpgradeView template, IEnumerable<IUpgrader> upgraders, IUpgradePurchaseHandler purchaseHandler, UpgradeAdvContainer advContainer, Transform container)
+    public UpgradeViewCreator(UpgradeView template, IEnumerable<Upgrader> upgraders, IUpgradePurchaseHandler purchaseHandler, UpgradeAdvContainer advContainer, Transform container)
     {
         _template = template;
         _upgraders = upgraders;

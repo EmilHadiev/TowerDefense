@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class UpgradePriceCalculator : IUpgradePriceCalculator
 {
-    private readonly IEnumerable<UpgradeData> _data;
-
-    public UpgradePriceCalculator(IEnumerable<UpgradeData> data)
+    public UpgradePriceCalculator()
     {
-        _data = data;
+        Debug.Log("Калькулятор апгрейдов тоже нужно? возможно удалить + " + nameof(UpgradePriceCalculator));
     }
 
     public int CalculatePrice()
     {
         float totalPrice = 0;
 
-        foreach (var data in _data)
-            totalPrice += data.Cost;
+        //foreach (var data in _data)
+            //totalPrice += data.Cost;
 
         totalPrice = totalPrice * Constants.AdvUpgradeCoefficient + Constants.UpgradeStartPrice;
         return Convert.ToInt32(totalPrice);

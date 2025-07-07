@@ -9,7 +9,7 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
 
     private IUpgradePurchaseHandler _upgradePurchaseHandler;
     private IRewardUpdateCommand _updateCommand;
-    private IUpgrader _upgrader;
+    private Upgrader _upgrader;
 
     private void OnValidate()
     {
@@ -26,13 +26,14 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
         _buyButton.onClick.RemoveListener(OnTryBuyUpgrade);
     }
 
-    public void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand, IUpgrader upgrader)
+    public void Initialize(IUpgradePurchaseHandler purchaseHandler, IRewardUpdateCommand updateCommand,Upgrader upgrader)
     {
         _upgradePurchaseHandler = purchaseHandler;
         _updateCommand = updateCommand;
         _upgrader = upgrader;
 
         _render.Initialize(_upgrader);
+        Debug.Log("Надо доделать " + nameof(UpgradeView));
         Show();
     }
 
@@ -44,11 +45,11 @@ public class UpgradeView : MonoBehaviour, IUpgradeView
 
     private void OnTryBuyUpgrade()
     {
-        if (_upgradePurchaseHandler.TryUpgrade(_upgrader.Data))
+        /*if (_upgradePurchaseHandler.TryUpgrade(_upgrader.Data))
         {
             Upgrade();
             UpdateDescription();
-        }
+        }*/
     }
 
     private void UpdateDescription()

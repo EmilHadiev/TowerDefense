@@ -6,7 +6,6 @@ using YG;
 public class YandexSaver : ISavable, IDisposable
 {
     private readonly ICoinStorage _coinStorage;
-    private readonly IEnumerable<UpgradeData> _data;
     private readonly PlayerStat _playerStat;
     private readonly EnemyLevelData _levelData;
     private readonly IBulletDefinition[] _bullets;
@@ -14,7 +13,6 @@ public class YandexSaver : ISavable, IDisposable
     private readonly PlayerData[] _playerData;
     private readonly TrainingData _trainingData;
 
-    private UpgradeItemsSaver _upgradeSaver;
     private BulletItemSaver _bulletSaver;
     private GunItemSaver _gunSaver;
     private PlayerDataSaver _playerDataSaver;
@@ -27,10 +25,9 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, IEnumerable<UpgradeData> data, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData, TrainingData trainingData)
+    public YandexSaver(ICoinStorage coinStorage, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData, TrainingData trainingData)
     {
         _coinStorage = coinStorage;
-        _data = data;
         _playerStat = playerStat;
         _levelData = levelData;
         _bullets = bullets;
@@ -44,7 +41,6 @@ public class YandexSaver : ISavable, IDisposable
     public void LoadProgress()
     {
         LoadCoins();
-        LoadUpgraders();
         LoadPlayerStat();
         LoadEnemyLevel();        
         InitBullets();
@@ -67,7 +63,6 @@ public class YandexSaver : ISavable, IDisposable
     private void SaveData()
     {
         SaveCoins();
-        SaveUpgraders();
         SavePlayerStat();
         SaveEnemyLevel();
         SaveBullets();
@@ -83,19 +78,6 @@ public class YandexSaver : ISavable, IDisposable
             _coinStorage.Add(Coins);
     }
     private void SaveCoins() => Coins = _coinStorage.Coins;
-    #endregion
-
-    #region Upgraders
-    private void LoadUpgraders() => InitUpgraders();
-
-    private void InitUpgraders() => _upgradeSaver = new UpgradeItemsSaver(YG2.saves.UpgradeItems, _data);
-
-    private void SaveUpgraders()
-    {
-        Debug.Log(_upgradeSaver == null);
-        _upgradeSaver.Save();
-    }
-
     #endregion
 
     #region PlayerStat

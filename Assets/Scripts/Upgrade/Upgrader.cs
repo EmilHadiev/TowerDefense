@@ -1,21 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Upgrader : IUpgrader
+public abstract class Upgrader
 {
     protected readonly PlayerStat Stat;
-    protected readonly UpgradeData _data;
 
     private int _countOfUpgraders = 0;
 
-    protected abstract UpgradeType UpgradeType { get; }
-
-    public UpgradeData Data => _data;
-
-    public Upgrader(PlayerStat stat, UpgradeData data)
+    public Upgrader(PlayerStat stat)
     {
         Stat = stat;
-        _data = data;
+        Debug.Log("Надо доделать и удалить" + nameof(Upgrader));
     }
 
     public abstract void Upgrade();

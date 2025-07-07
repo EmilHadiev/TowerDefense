@@ -17,12 +17,13 @@ public class UpgradeViewContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, IEnumerable<UpgradeData> data)
+    private void Constructor(PlayerStat playerStat, ICoinStorage coinStorage, IPlayerSoundContainer soundContainer)
     {
-        UpgraderContainer upgraderContainer = new UpgraderContainer(playerStat, data);
+        UpgraderContainer upgraderContainer = new UpgraderContainer(playerStat);
         IUpgradePurchaseHandler purchaseHandler = new UpgradePurchaseHandler(coinStorage, soundContainer);
 
         _creator = new UpgradeViewCreator(_template, GetUpgraders(upgraderContainer), purchaseHandler, _upgradeAdvContainer, _container);
+        Debug.Log("Надо доделать " + nameof(UpgradeViewContainer));
     }
 
     private void CreateTemplates()
@@ -30,6 +31,6 @@ public class UpgradeViewContainer : MonoBehaviour
         _creator.CreateViews();
     }
 
-    private IEnumerable<IUpgrader> GetUpgraders(UpgraderContainer container) => 
+    private IEnumerable<Upgrader> GetUpgraders(UpgraderContainer container) => 
         container.Upgraders.Select(upgrader => upgrader.Value);
 }

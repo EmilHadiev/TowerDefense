@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class UpgradePurchaseHandler : IUpgradePurchaseHandler
 {
     private readonly ICoinStorage _coinStorage;
@@ -7,15 +9,16 @@ public class UpgradePurchaseHandler : IUpgradePurchaseHandler
     {
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;
+        Debug.Log("Надо доделать " + nameof(UpgradePurchaseHandler));
     }
 
-    public bool TryUpgrade(UpgradeData data)
+    public bool TryUpgrade(/*UpgradeData data*/)
     {
-        if (_coinStorage.TrySpend(data.Cost))
+        /*/if (_coinStorage.TrySpend(data.Cost))
         {
             _soundContainer.Play(SoundName.SpendCoin);
             return true;
-        }
+        }*/
 
         return false;
     }

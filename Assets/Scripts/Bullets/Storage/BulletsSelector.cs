@@ -14,7 +14,6 @@ public class BulletsSelector : IDisposable, IBulletsSelector
     {
         _input = input;
         _bullets = availableBullets.ToArray();
-        Debug.Log(_bullets.Length + " размер!");
         _input.SwitchBulletButtonClicked += OnBulletSwitched;
     }
 
