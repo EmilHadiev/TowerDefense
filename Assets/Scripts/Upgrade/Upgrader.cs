@@ -1,27 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 public abstract class Upgrader
 {
-    protected readonly PlayerStat Stat;
+    public const int UpgradePrice = 50;
 
-    private int _countOfUpgraders = 0;
+    protected readonly GunData[] GunData;
 
-    public Upgrader(PlayerStat stat)
+    public Upgrader(IEnumerable<GunData> gunData)
     {
-        Stat = stat;
-        Debug.Log("Надо доделать и удалить" + nameof(Upgrader));
+        GunData = gunData.ToArray();
     }
 
     public abstract void Upgrade();
 
     public abstract string GetUpgradeDescription();
-
-    protected int GetRaisePrice(int currentPrice)
-    {
-        int additionalPercent = Convert.ToInt32((float)currentPrice / 100 * Constants.AdditionalUpgradePercentage);
-        _countOfUpgraders++;
-        Debug.Log($"Количество улучшений: {_countOfUpgraders}");
-        return currentPrice + additionalPercent + Constants.AdditionalUpgradePrice;
-    }
 }

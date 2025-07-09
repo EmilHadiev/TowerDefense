@@ -1,35 +1,41 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpgradeViewCreator : IUpgradeViewCreator
 {
     private readonly UpgradeView _template;
-    private readonly IEnumerable<Upgrader> _upgraders;
-    private readonly IUpgradePurchaseHandler _purchaseHandler;
-    private readonly UpgradeAdvContainer _advContainer;
+    private readonly GunData[] _gunData;
+    private readonly ICoinStorage _coinStorage;
     private readonly Transform _container;
+    private readonly IPlayerSoundContainer _soundContainer;
+    private readonly List<UpgradeView> _views;
 
-    public UpgradeViewCreator(UpgradeView template, IEnumerable<Upgrader> upgraders, IUpgradePurchaseHandler purchaseHandler, UpgradeAdvContainer advContainer, Transform container)
+    public UpgradeViewCreator(UpgradeView template, IEnumerable<GunData> gunData, ICoinStorage coinStorage, 
+        IPlayerSoundContainer soundContainer, Transform container)
     {
-        _template = template;
-        _upgraders = upgraders;
-        _purchaseHandler = purchaseHandler;
-        _advContainer = advContainer;
+        _template = template;        
+        _coinStorage = coinStorage;
+        _soundContainer = soundContainer;
         _container = container;
+
+        _gunData = gunData.ToArray();
+        _views = new List<UpgradeView>(_gunData.Length);
+        InitViews();
     }
 
-    public IReadOnlyCollection<IUpgradeView> CreateViews()
+    private void InitViews()
     {
-        List<IUpgradeView> views = new List<IUpgradeView>();
-
-        foreach (var upgrader in _upgraders)
+        for (int i = 0; i < _gunData.Length; i++)
         {
-            IUpgradeView upgradeView = GameObject.Instantiate(_template, _container);
-            upgradeView.Initialize(_purchaseHandler, _advContainer, upgrader);
-
-            views.Add(upgradeView);
+            UpgradeView upgradeView = GameObject.Instantiate(_template, _container);
+            upgradeView.Initialize(_coinStorage, _gunData[i], _soundContainer);
+            _views.Add(upgradeView);
         }
+    }
 
-        return views;
+    public IReadOnlyCollection<UpgradeView> CreateViews()
+    {
+        return _views;
     }
 }

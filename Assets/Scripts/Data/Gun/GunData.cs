@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GunData", menuName = "GunData")]
@@ -13,6 +14,9 @@ public class GunData : ScriptableObject, ILootable
     [field: SerializeField] public bool IsDropped { get; set; }
 
     [SerializeField] private LocalizedText[] _texts;
+
+    public readonly int DamageUpgradeValue = 5;
+    public readonly int AttackSpeedPercentageUpgradeValue = 2;
 
     private const float AttackSpeedFactor = 0.99f;
     private const string DamageReplacer = "_dmg_";
@@ -39,7 +43,7 @@ public class GunData : ScriptableObject, ILootable
 
     public float GetTotalAttackSpeed()
     {
-        float attackSpeed = BaseAttackSpeed * System.MathF.Pow(AttackSpeedFactor, AttackSpeedPercent);
+        float attackSpeed = BaseAttackSpeed * MathF.Pow(AttackSpeedFactor, AttackSpeedPercent);
         return attackSpeed;
     }
 

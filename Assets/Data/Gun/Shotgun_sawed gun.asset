@@ -19,7 +19,7 @@ MonoBehaviour:
   <BaseDamage>k__BackingField: 5
   <DamagePercent>k__BackingField: 20
   <Prefab>k__BackingField: {fileID: 5463924245513988381, guid: 668888ef21b4df94f96e002d2ef6241e, type: 3}
-  <IsDropped>k__BackingField: 0
+  <IsDropped>k__BackingField: 1
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: "\u041E\u0431\u0440\u0435\u0437"

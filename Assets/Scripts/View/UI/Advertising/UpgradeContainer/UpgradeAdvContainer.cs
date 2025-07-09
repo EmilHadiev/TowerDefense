@@ -3,38 +3,30 @@ using UnityEngine;
 using YG;
 using Zenject;
 
-public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
+public class UpgradeAdvContainer : AdvertisingContainer
 {
     [SerializeField] private RewardedAdvLockTimer _lockTimer;
     [SerializeField] private GameObject _advCooldownContainer;
 
     private IPlayerSoundContainer _soundContainer;
-    private IUpgradePriceCalculator _priceCalculator;
     private ICoinStorage _coinStorage;
 
     [Inject]
     private void Constructor(IPlayerSoundContainer soundContainer, ICoinStorage coinStorage)
     {
         _soundContainer = soundContainer;
-        //_priceCalculator = new UpgradePriceCalculator(data);
         _coinStorage = coinStorage;
-        Debug.Log("Контейнер для рекламы тоже надо доделать! " + nameof(UpgradeAdvContainer));
     }
 
     private void Start()
     {
-        UpdateReward();
+        SetRewardValueText(Constants.UpgradePrice.ToString());
         _lockTimer.Activated += OnTimerActivated;
     }
 
     private void OnDestroy()
     {
         _lockTimer.Activated -= OnTimerActivated;
-    }
-
-    public void UpdateReward()
-    {
-        SetRewardValueText(GetPrice().ToString());
     }
 
     protected override void OnClick() => ShowAdv();
@@ -49,11 +41,9 @@ public class UpgradeAdvContainer : AdvertisingContainer, IRewardUpdateCommand
 
     private void OnTimerActivated(bool isOn) => _advCooldownContainer.SetActive(isOn);
 
-    private int GetPrice() => _priceCalculator.CalculatePrice();
-
     private void GiveCoinsToPlayer()
     {
-        _coinStorage.Add(GetPrice());
+        _coinStorage.Add(Constants.UpgradePrice);
         PlaySpendCoin();
     }
 }

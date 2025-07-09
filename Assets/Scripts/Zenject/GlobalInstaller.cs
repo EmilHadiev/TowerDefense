@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -116,7 +117,8 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindGuns()
     {
-        Container.Bind<GunData[]>().FromInstance(_gunData).AsSingle();
+        GunData[] gunData = _gunData.ToArray();
+        Container.Bind<GunData[]>().FromInstance(gunData).AsSingle();
     }
 
     private void BindPlayers()

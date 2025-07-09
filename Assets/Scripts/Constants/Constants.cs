@@ -22,6 +22,8 @@
     public const int UpgradeStartPrice = 10;
     public const int AdditionalUpgradePrice = 5;
 
+    public const int UpgradePrice = 50;
+
     public const int StartScene = 1;
 
     public const int MaxEnemies = 20;

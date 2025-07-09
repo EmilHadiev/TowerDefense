@@ -2,44 +2,39 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using YG.LanguageLegacy;
 
-[RequireComponent(typeof(LanguageYG))]
 public class UpgradeViewRender : MonoBehaviour
 {
-    [SerializeField] private Image _upgradeImage;
-    [SerializeField] private TMP_Text _upgradeNameText;
-    [SerializeField] private TMP_Text _upgradeDescriptionText;
-    [SerializeField] private TMP_Text _costText;
+    [SerializeField] private Image _gunImage;
+    [SerializeField] private TMP_Text _gunNameText;
+    [SerializeField] private TMP_Text _gunUpgradeDamageText;
+    [SerializeField] private TMP_Text _gunUpgradeAttackSpeedText;
 
-    private Upgrader _upgrader;
+    private GunData _gunData;
 
-    public void Initialize(Upgrader data)
+    public void Initialize(GunData data)
     {
-        _upgrader = data;
+        _gunData = data;
 
-        //ShowData(_upgrader.Data);
-        Translate();
-        Debug.Log("Надо доделать " + nameof(UpgradeViewRender));
+        ShowData();
     }
 
-    public void UpdatePrice()
+    public void UpdateDescription()
     {
-        //_costText.text = _upgrader.Data.Cost.ToString();
+        _gunUpgradeDamageText.text = $"{_gunData.BaseDamage} > {_gunData.BaseDamage + _gunData.DamageUpgradeValue}";
+        _gunUpgradeAttackSpeedText.text = $"{_gunData.AttackSpeedPercent} > {_gunData.AttackSpeedPercent + _gunData.AttackSpeedPercentageUpgradeValue}";
     }
 
-    public void UpdateDescription() => 
-        _upgradeDescriptionText.text = _upgrader.GetUpgradeDescription();
-
-    private void ShowData(/*UpgradeData data*/)
+    private void ShowData()
     {
-        //_upgradeImage.sprite = data.Sprite;
-        //_upgradeNameText.text = data.Name;
+        LocalizedText text = GetLocalizedText();
+
+        _gunNameText.text = text.Name;
+
+        _gunImage.sprite = _gunData.Sprite;
+        UpdateDescription();
     }
 
-    private void Translate()
-    {
-        //LocalizedText localizedText = _upgrader.Data.GetLocalizedText(YG2.lang);
-        //_upgradeNameText.text = localizedText.Name;
-    }
+    private LocalizedText GetLocalizedText() =>
+        _gunData.GetLocalizedText(YG2.lang);
 }
