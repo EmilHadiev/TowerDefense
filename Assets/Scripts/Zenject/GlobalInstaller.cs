@@ -10,7 +10,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
-    [SerializeField] private EnemyLevelData _enemyLevel;
+    [SerializeField] private LevelTracker _enemyLevel;
     [SerializeField] private TrainingData _trainingData;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private GunData[] _gunData;
@@ -106,7 +106,7 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindEnemyData()
     {
-        Container.Bind<EnemyLevelData>().FromNewScriptableObject(_enemyLevel).AsSingle();
+        Container.Bind<LevelTracker>().FromNewScriptableObject(_enemyLevel).AsSingle();
     }
 
     private void BindBullets()

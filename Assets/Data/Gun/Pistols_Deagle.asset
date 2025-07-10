@@ -18,6 +18,8 @@ MonoBehaviour:
   <AttackSpeedPercent>k__BackingField: 0
   <BaseDamage>k__BackingField: 10
   <DamagePercent>k__BackingField: 0
+  <DamageLevel>k__BackingField: 0
+  <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 8778938807218465219, guid: b142b221040c9264487b38099a37d426, type: 3}
   <IsDropped>k__BackingField: 1
   _texts:

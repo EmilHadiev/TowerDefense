@@ -7,7 +7,7 @@ public class YandexSaver : ISavable, IDisposable
 {
     private readonly ICoinStorage _coinStorage;
     private readonly PlayerStat _playerStat;
-    private readonly EnemyLevelData _levelData;
+    private readonly LevelTracker _levelData;
     private readonly IBulletDefinition[] _bullets;
     private readonly GunData[] _guns;
     private readonly PlayerData[] _playerData;
@@ -25,7 +25,7 @@ public class YandexSaver : ISavable, IDisposable
         set => YG2.saves.coins = value;
     }
 
-    public YandexSaver(ICoinStorage coinStorage, PlayerStat playerStat, EnemyLevelData levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData, TrainingData trainingData)
+    public YandexSaver(ICoinStorage coinStorage, PlayerStat playerStat, LevelTracker levelData, IBulletDefinition[] bullets, GunData[] guns, PlayerData[] playerData, TrainingData trainingData)
     {
         _coinStorage = coinStorage;
         _playerStat = playerStat;
@@ -94,9 +94,9 @@ public class YandexSaver : ISavable, IDisposable
 
     #region EnemyLevel
 
-    private void LoadEnemyLevel() => _levelData.Level = YG2.saves.enemyLevel;
+    private void LoadEnemyLevel() => _levelData.EnemyLevel = YG2.saves.enemyLevel;
 
-    private void SaveEnemyLevel() => YG2.saves.enemyLevel = _levelData.Level;
+    private void SaveEnemyLevel() => YG2.saves.enemyLevel = _levelData.EnemyLevel;
     #endregion
 
     #region Bullets

@@ -18,9 +18,9 @@ public class UpgradeViewContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, GunData[] gunData)
+    private void Constructor(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, GunData[] gunData, IPlayer player)
     {
-        _creator = new UpgradeViewCreator(_template, GetGunData(gunData), coinStorage, soundContainer, _container);
+        _creator = new UpgradeViewCreator(_template, GetGunData(gunData), coinStorage, soundContainer, _container, player.GunPlace);
         Debug.Log("Надо доделать " + nameof(UpgradeViewContainer));
     }
 

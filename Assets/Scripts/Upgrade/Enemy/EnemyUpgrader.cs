@@ -4,13 +4,13 @@ using UnityEngine;
 
 class EnemyUpgrader
 {
-    private const int ImprovementFactor = 5;
+    private const int ImprovementFactor = 7;
 
     private readonly IEnumerable<EnemyStat> _stats;
-    private readonly EnemyLevelData _levelData;
+    private readonly LevelTracker _levelData;
     private readonly Dictionary<EnemyType, EnemyData> _data;
 
-    public EnemyUpgrader(IEnumerable<EnemyStat> stat, EnemyLevelData level)
+    public EnemyUpgrader(IEnumerable<EnemyStat> stat, LevelTracker level)
     {
         _stats = stat;
         _levelData = level;
@@ -30,10 +30,10 @@ class EnemyUpgrader
             }
         }
 
-        Debug.Log($"Текущий уровень улучшения: {_levelData.Level}");
+        Debug.Log($"Текущий уровень улучшения: {_levelData.EnemyLevel}");
     }
 
-    public void LevelUp() => _levelData.Level++;
+    public void LevelUp() => _levelData.EnemyLevel++;
 
     private void InitData()
     {
@@ -43,15 +43,15 @@ class EnemyUpgrader
 
     private struct EnemyData
     {
-        private readonly EnemyLevelData _levelData;
+        private readonly LevelTracker _levelData;
 
         private readonly float _startHealth;
         private readonly float _startDamage;
 
-        public float Damage => _startDamage + _levelData.Level;
-        public float Health => _startHealth + (_levelData.Level * ImprovementFactor);
+        public float Damage => _startDamage + _levelData.EnemyLevel;
+        public float Health => _startHealth + (_levelData.EnemyLevel * ImprovementFactor);
 
-        public EnemyData(EnemyLevelData data, EnemyStat stat)
+        public EnemyData(LevelTracker data, EnemyStat stat)
         {
             _levelData = data;
 

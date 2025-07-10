@@ -15,23 +15,21 @@ public class UpgradeView : MonoBehaviour
 
     private void OnEnable()
     {
-        _handler.Upgraded += Show;
+        _handler.Upgraded += _render.UpdateDescription;
+        _handler.AttackSpeedFilled += _render.ShowFilledAttackSpeed;
+        _handler.DamageFilled += _render.ShowFilledDamage;
     }
 
     private void OnDisable()
     {
-        _handler.Upgraded -= Show;
+        _handler.Upgraded -= _render.UpdateDescription;
+        _handler.AttackSpeedFilled -= _render.ShowFilledAttackSpeed;
+        _handler.DamageFilled -= _render.ShowFilledDamage;
     }
 
-    public void Initialize(ICoinStorage coinStorage, GunData gunData, IPlayerSoundContainer playerSoundContainer)
+    public void Initialize(ICoinStorage coinStorage, GunData gunData, IPlayerSoundContainer playerSoundContainer, IGunPlace gunPlace)
     {
         _render.Initialize(gunData);
-        _handler.Initialize(gunData, coinStorage, playerSoundContainer);
-        Show();
-    }
-
-    private void Show()
-    {
-        _render.UpdateDescription();
+        _handler.Initialize(gunData, coinStorage, playerSoundContainer, gunPlace);
     }
 }

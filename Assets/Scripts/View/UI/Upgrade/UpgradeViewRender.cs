@@ -10,7 +10,12 @@ public class UpgradeViewRender : MonoBehaviour
     [SerializeField] private TMP_Text _gunUpgradeDamageText;
     [SerializeField] private TMP_Text _gunUpgradeAttackSpeedText;
 
+    private const string EmojiMaxLevel = "<sprite=3>";
+
     private GunData _gunData;
+
+    private bool _isDamageFilled;
+    private bool _isAttackSpeedFilled;
 
     public void Initialize(GunData data)
     {
@@ -21,8 +26,23 @@ public class UpgradeViewRender : MonoBehaviour
 
     public void UpdateDescription()
     {
-        _gunUpgradeDamageText.text = $"{_gunData.BaseDamage} > {_gunData.BaseDamage + _gunData.DamageUpgradeValue}";
-        _gunUpgradeAttackSpeedText.text = $"{_gunData.AttackSpeedPercent} > {_gunData.AttackSpeedPercent + _gunData.AttackSpeedPercentageUpgradeValue}";
+        if (_isDamageFilled == false)
+            _gunUpgradeDamageText.text = $"{_gunData.BaseDamage} > {_gunData.BaseDamage + _gunData.DamageUpgradeValue}";
+
+        if (_isAttackSpeedFilled == false)
+            _gunUpgradeAttackSpeedText.text = $"{_gunData.AttackSpeedPercent} > {_gunData.AttackSpeedPercent + _gunData.AttackSpeedPercentageUpgradeValue}%";
+    }
+
+    public void ShowFilledDamage()
+    {
+        _isDamageFilled = true;
+        _gunUpgradeDamageText.text = $"{EmojiMaxLevel}{_gunData.BaseDamage}{EmojiMaxLevel}";
+    }
+
+    public void ShowFilledAttackSpeed()
+    {
+        _isAttackSpeedFilled = true;
+        _gunUpgradeAttackSpeedText.text = $"{EmojiMaxLevel}{_gunData.AttackSpeedPercent}%{EmojiMaxLevel}";
     }
 
     private void ShowData()

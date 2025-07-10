@@ -10,10 +10,12 @@ public class UpgradeViewCreator : IUpgradeViewCreator
     private readonly Transform _container;
     private readonly IPlayerSoundContainer _soundContainer;
     private readonly List<UpgradeView> _views;
+    private readonly IGunPlace _gunPlace;
 
     public UpgradeViewCreator(UpgradeView template, IEnumerable<GunData> gunData, ICoinStorage coinStorage, 
-        IPlayerSoundContainer soundContainer, Transform container)
+        IPlayerSoundContainer soundContainer, Transform container, IGunPlace gunPlace)
     {
+        _gunPlace = gunPlace;
         _template = template;        
         _coinStorage = coinStorage;
         _soundContainer = soundContainer;
@@ -29,7 +31,7 @@ public class UpgradeViewCreator : IUpgradeViewCreator
         for (int i = 0; i < _gunData.Length; i++)
         {
             UpgradeView upgradeView = GameObject.Instantiate(_template, _container);
-            upgradeView.Initialize(_coinStorage, _gunData[i], _soundContainer);
+            upgradeView.Initialize(_coinStorage, _gunData[i], _soundContainer, _gunPlace);
             _views.Add(upgradeView);
         }
     }

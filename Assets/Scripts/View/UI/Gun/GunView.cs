@@ -14,7 +14,6 @@ public class GunView : MonoBehaviour
     
     private ShopItemDescriptionContainer _descriptionContainer;
     private GunData _gunData;
-    private IPlayerSoundContainer _playerSoundContainer;
 
     public event Action<Gun> Selected;
 
@@ -31,10 +30,9 @@ public class GunView : MonoBehaviour
         _descriptionButton.onClick.RemoveListener(ShowDescription);
     } 
 
-    public void Initialize(GunData gunData, IPlayerSoundContainer playerSoundContainer, ShopItemDescriptionContainer shopItemDescriptionContainer)
+    public void Initialize(GunData gunData, ShopItemDescriptionContainer shopItemDescriptionContainer)
     {
         _gunData = gunData;
-        _playerSoundContainer = playerSoundContainer;
         _descriptionContainer = shopItemDescriptionContainer;
 
         LocalizedText text = gunData.GetLocalizedText(YG2.lang);

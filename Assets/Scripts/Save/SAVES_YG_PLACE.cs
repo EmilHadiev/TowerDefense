@@ -15,6 +15,8 @@ public class GunItem
     public bool IsDropped;
     public float BaseDamage;
     public float AttackSpeedPercent;
+    public int DamageLevel;
+    public int AttackSpeedLevel;
 }
 
 [Serializable]

@@ -10,32 +10,53 @@ public class UpgradeHandler : MonoBehaviour
     private ICoinStorage _coinStorage;
     private IPlayerSoundContainer _soundContainer;
     private GunData _gunData;
+    private IGunPlace _gunPlace;
 
     public event Action Upgraded;
+
+    public event Action DamageFilled;
+    public event Action AttackSpeedFilled;
 
     private void OnDestroy()
     {
         _upgradeDamageButton?.onClick.RemoveListener(UpgradeDamage);
-        _upgradeAttackSpeedButton?.onClick.RemoveListener(UpgradeAttackSpeed);
+        _upgradeAttackSpeedButton?.onClick.RemoveListener(TryUpgradeAttackSpeed);
     }
 
-    public void Initialize(GunData gunData, ICoinStorage coinStorage, IPlayerSoundContainer playerSoundContainer)
+    public void Initialize(GunData gunData, ICoinStorage coinStorage, IPlayerSoundContainer playerSoundContainer, IGunPlace gunPlace)
     {
+        _gunPlace = gunPlace;
         _gunData = gunData;
         _coinStorage = coinStorage;
         _soundContainer = playerSoundContainer;
 
         _upgradeDamageButton.onClick.AddListener(UpgradeDamage);
-        _upgradeAttackSpeedButton.onClick.AddListener(UpgradeAttackSpeed);
+        _upgradeAttackSpeedButton.onClick.AddListener(TryUpgradeAttackSpeed);
+
+        CheckAttackSpeedMaxLevel();
+        CheckDamageMaxLevel();
     }
 
-    private void UpgradeAttackSpeed()
+    private void TryUpgradeAttackSpeed()
     {
         if (_coinStorage.TrySpend(Constants.UpgradePrice))
         {
             _gunData.AttackSpeedPercent += _gunData.AttackSpeedPercentageUpgradeValue;
+            _gunData.AttackSpeedLevel += 1;
             _soundContainer.Play(SoundName.SpendCoin);
+            _gunPlace.UpdateCurrentGunAttackSpeed();
             Upgraded?.Invoke();
+        }
+
+        CheckAttackSpeedMaxLevel();
+    }
+
+    private void CheckAttackSpeedMaxLevel()
+    {
+        if (_gunData.IsAttackSpeedMaxLevel == false)
+        {
+            AttackSpeedFilled?.Invoke();
+            _upgradeAttackSpeedButton.gameObject.SetActive(false);
         }
     }
 
@@ -44,8 +65,20 @@ public class UpgradeHandler : MonoBehaviour
         if (_coinStorage.TrySpend(Constants.UpgradePrice))
         {
             _gunData.BaseDamage += _gunData.DamageUpgradeValue;
+            _gunData.DamageLevel += 1;
             _soundContainer.Play(SoundName.SpendCoin);
             Upgraded?.Invoke();
+        }
+
+        CheckDamageMaxLevel();
+    }
+
+    private void CheckDamageMaxLevel()
+    {
+        if (_gunData.IsDamageMaxLevel == false)
+        {
+            DamageFilled?.Invoke();
+            _upgradeDamageButton.gameObject.SetActive(false);
         }
     }
 }

@@ -6,21 +6,30 @@ public class GunData : ScriptableObject, ILootable
 {
     [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public Sprite Sprite { get; private set; }
+    [field: Header("Attack speed")]
     [field: SerializeField, Range(0, 3)] public float BaseAttackSpeed { get; private set; }
     [field: SerializeField, Range(0, 100)] public int AttackSpeedPercent { get; set; }
-    [field: SerializeField, Range(0, 20)] public float BaseDamage { get; set; }
+    [field: Header("Damage")]
+    [field: SerializeField, Range(0, 100)] public float BaseDamage { get; set; }
     [field: SerializeField, Range(0, 100)] public int DamagePercent { get; private set; }
+    [field: Header("UpgradeLevel")]
+    [field: SerializeField, Range(0, Constants.MaxUpgradeLevel)] public int DamageLevel { get; set; } = 0;
+    [field: SerializeField, Range(0, Constants.MaxUpgradeLevel)] public int AttackSpeedLevel { get; set; } = 0;
+    [field: Header("Info")]
     [field: SerializeField] public Gun Prefab { get; private set; }
     [field: SerializeField] public bool IsDropped { get; set; }
 
     [SerializeField] private LocalizedText[] _texts;
 
-    public readonly int DamageUpgradeValue = 5;
-    public readonly int AttackSpeedPercentageUpgradeValue = 2;
-
     private const float AttackSpeedFactor = 0.99f;
     private const string DamageReplacer = "_dmg_";
     private const string AttackSpeedReplacer = "_as_";
+
+    public readonly int DamageUpgradeValue = 5;
+    public readonly int AttackSpeedPercentageUpgradeValue = 2;
+
+    public bool IsDamageMaxLevel => DamageLevel < Constants.MaxUpgradeLevel;
+    public bool IsAttackSpeedMaxLevel => AttackSpeedLevel < Constants.MaxUpgradeLevel;
 
     public LocalizedText GetLocalizedText(string language)
     {

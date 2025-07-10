@@ -40,4 +40,6 @@ public class GunPlace : MonoBehaviour, IGunPlace
         gun.transform.localRotation = originalLocalRotation;
         gun.transform.localScale = originalLocalScale;
     }
+
+    public void UpdateCurrentGunAttackSpeed() => GunSwitched?.Invoke(CurrentGun);
 }

@@ -53,7 +53,9 @@ public class GunItemSaver
                 Id = _gunsData[i].ID,
                 IsDropped = _gunsData[i].IsDropped,
                 AttackSpeedPercent = _gunsData[i].AttackSpeedPercent,
-                BaseDamage =_gunsData[i].BaseDamage,
+                BaseDamage = _gunsData[i].BaseDamage,
+                DamageLevel = _gunsData[i].DamageLevel,
+                AttackSpeedLevel = _gunsData[i].AttackSpeedLevel
             };
 
             _items.Add(item);
@@ -65,5 +67,7 @@ public class GunItemSaver
         gunItem.IsDropped = gun.IsDropped;
         gunItem.BaseDamage = gun.BaseDamage;
         gunItem.AttackSpeedPercent = gun.AttackSpeedPercent;
+        gunItem.DamageLevel = gun.DamageLevel;
+        gunItem.AttackSpeedLevel = gun.AttackSpeedLevel;
     }
 }

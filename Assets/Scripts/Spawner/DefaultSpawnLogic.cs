@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnLogic : ISpawnLogic
+public class DefaultSpawnLogic : ISpawnLogic
 {
     private readonly WaveData _waveData;
     private readonly Dictionary<EnemyType, EnemySpawner> _spawners = new Dictionary<EnemyType, EnemySpawner>();
@@ -14,7 +14,7 @@ public class SpawnLogic : ISpawnLogic
     private int _mageAndKnightAndDragon;
     private int _elite;
 
-    public SpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners)
+    public DefaultSpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners)
     {
         _waveData = waveData;
 
@@ -44,7 +44,6 @@ public class SpawnLogic : ISpawnLogic
             _mageAndKnightAndDragon = others;
         }
 
-        // Распределяем оставшихся (если есть)
         total -= (_skeletons + _mageAndKnightAndDragon + _elite);
         _mageAndKnightAndDragon += total;
     }

@@ -39,7 +39,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         _switcher = switcher;
         _trainingMode = trainingMode;
 
-        _spawnLogic = new SpawnLogic(waveData, _spawners);
+        _spawnLogic = new DefaultSpawnLogic(waveData, _spawners);
     }
 
     public void Enter()
