@@ -21,6 +21,8 @@ class EnemyUpgrader
 
     public void TryUpgrade()
     {
+        LevelUp();
+
         foreach (var stat in _stats)
         {
             if (_data.TryGetValue(stat.EnemyType, out EnemyData data))
@@ -33,7 +35,7 @@ class EnemyUpgrader
         Debug.Log($"Текущий уровень улучшения: {_levelData.EnemyLevel}");
     }
 
-    public void LevelUp() => _levelData.EnemyLevel++;
+    private void LevelUp() => _levelData.EnemyLevel++;
 
     private void InitData()
     {

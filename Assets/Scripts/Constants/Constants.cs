@@ -21,6 +21,7 @@
 
     public const int MaxUpgradeLevel = 50;
     public const int UpgradePrice = 50;
+    public const int AdditionalHealthToPlayer = 20;
 
     public const int StartScene = 1;
 

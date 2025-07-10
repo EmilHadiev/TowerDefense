@@ -106,7 +106,7 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindEnemyData()
     {
-        Container.Bind<LevelTracker>().FromNewScriptableObject(_enemyLevel).AsSingle();
+        Container.Bind<LevelTracker>().FromInstance(_enemyLevel).AsSingle();
     }
 
     private void BindBullets()

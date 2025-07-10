@@ -122,8 +122,8 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 
     private void TryUpgradeEnemy()
     {
-        _upgrader.LevelUp();
-        _upgrader.TryUpgrade();
+        Debug.Log("Временно отключаю улучшения!");
+        //_upgrader.TryUpgrade();
     }
 
     private void OnLoaded()

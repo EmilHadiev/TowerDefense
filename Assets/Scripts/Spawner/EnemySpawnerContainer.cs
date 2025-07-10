@@ -10,7 +10,9 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private const int SpawnDelay = (int)(Constants.EnemySpawnDelay * 1000);
 
-    private ISpawnLogic _spawnLogic;
+    private SpawnLogic _spawnLogic;
+    private SpawnLogicFactory _spawnLogicFactory;
+    private LevelTracker _levelTracker;
     private EnemyCounter _counter;
     private ILevelStateSwitcher _switcher;
     private ITrainingMode _trainingMode;
@@ -33,13 +35,15 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     }
 
     [Inject]
-    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode, WaveData waveData)
+    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode, WaveData waveData, LevelTracker levelTracker, ICoinStorage coinStorage)
     {
+        _levelTracker = levelTracker;
         _counter = counter;
         _switcher = switcher;
         _trainingMode = trainingMode;
 
-        _spawnLogic = new DefaultSpawnLogic(waveData, _spawners);
+        _spawnLogicFactory = new SpawnLogicFactory(_levelTracker, waveData, _spawners, coinStorage);
+        _spawnLogic = _spawnLogicFactory.Create();
     }
 
     public void Enter()
@@ -91,5 +95,32 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             _trainingMode.ShowNextTraining();
         else
             _switcher.SwitchState<WaitingLevelState>();
+    }
+
+    private class SpawnLogicFactory
+    {
+        private readonly LevelTracker _levelTracker;
+        private readonly WaveData _waveData;
+        private readonly EnemySpawner[] _spawners;
+        private readonly ICoinStorage _coinStorage;
+
+        public SpawnLogicFactory(LevelTracker levelTracker, WaveData waveData, EnemySpawner[] spawners, ICoinStorage coinStorage)
+        {
+            _coinStorage = coinStorage;
+            _levelTracker = levelTracker;
+            _waveData = waveData;
+            _spawners = spawners;
+        }
+
+        public SpawnLogic Create()
+        {
+            switch (_levelTracker.NumberLevelsCompleted)
+            {
+                case 0:
+                    return new TrainingSpawnLogic(_waveData, _spawners, _coinStorage);
+                default:
+                    return new DefaultSpawnLogic(_waveData, _spawners);
+            }
+        }
     }
 }
