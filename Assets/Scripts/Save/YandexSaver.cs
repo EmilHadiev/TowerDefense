@@ -42,7 +42,7 @@ public class YandexSaver : ISavable, IDisposable
     {
         LoadCoins();
         LoadPlayerStat();
-        LoadEnemyLevel();        
+        LoadCompletedLevel();        
         InitBullets();
         InitGuns();
         InitPlayerData();
@@ -64,7 +64,7 @@ public class YandexSaver : ISavable, IDisposable
     {
         SaveCoins();
         SavePlayerStat();
-        SaveEnemyLevel();
+        SaveCompletedLevel();
         SaveBullets();
         SaveGuns();
         SavePlayerData();
@@ -94,9 +94,9 @@ public class YandexSaver : ISavable, IDisposable
 
     #region EnemyLevel
 
-    private void LoadEnemyLevel() => _levelData.EnemyLevel = YG2.saves.enemyLevel;
+    private void LoadCompletedLevel() => _levelData.NumberLevelsCompleted = YG2.saves.compltetedLevels;
 
-    private void SaveEnemyLevel() => YG2.saves.enemyLevel = _levelData.EnemyLevel;
+    private void SaveCompletedLevel() => YG2.saves.compltetedLevels = _levelData.NumberLevelsCompleted;
     #endregion
 
     #region Bullets

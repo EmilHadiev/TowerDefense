@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class DefaultSpawnLogic : SpawnLogic
+public class BossLevelSpawnLogic : SpawnLogic
 {
     private int _skeletons;
-    private int _mageAndKnightAndDragon;
+    private int _others;
     private int _elite;
 
-    public DefaultSpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners) : base(waveData, spawners)
+    public BossLevelSpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners) : base(waveData, spawners)
     {
     }
 
@@ -23,22 +22,22 @@ public class DefaultSpawnLogic : SpawnLogic
         if (WaveData.IsFinalWave)
         {
             _elite = 1;
-            _mageAndKnightAndDragon = others - _elite;
+            _others = others - _elite;
         }
         else
         {
             _elite = 0;
-            _mageAndKnightAndDragon = others;
+            _others = others;
         }
 
-        total -= (_skeletons + _mageAndKnightAndDragon + _elite);
-        _mageAndKnightAndDragon += total;
+        total -= (_skeletons + _others + _elite);
+        _others += total;
     }
 
     public override bool TrySpawn()
     { 
         return TrySpawn(_skeletons, EnemyType.Skeleton) 
-            || TrySpawnRandom(_mageAndKnightAndDragon, EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage, EnemyType.ArmorKnight) 
+            || TrySpawnRandom(_others, EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage, EnemyType.ArmorKnight) 
             || TrySpawn(_elite, EnemyType.DemonKnight);
     }
 }

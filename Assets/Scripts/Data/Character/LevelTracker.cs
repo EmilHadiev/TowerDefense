@@ -6,6 +6,5 @@
 [CreateAssetMenu(menuName = "Data/LevelTracker", fileName = "LevelTracker")]
 public class LevelTracker : ScriptableObject
 {
-    [field: SerializeField] public int EnemyLevel { get; set; }
     [field: SerializeField] public int NumberLevelsCompleted { get; set; }
 }

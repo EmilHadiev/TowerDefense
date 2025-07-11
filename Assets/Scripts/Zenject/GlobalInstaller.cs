@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
-    [SerializeField] private LevelTracker _enemyLevel;
+    [SerializeField] private LevelTracker _levelTracker;
     [SerializeField] private TrainingData _trainingData;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private GunData[] _gunData;
@@ -23,7 +22,7 @@ public class GlobalInstaller : MonoInstaller
         BindCoinStorage();
         BindPlayerData();
         BindEnvironmentData();
-        BindEnemyData();
+        BindLevelTrackerData();
         BindTrainingData();
         BindBullets();
         BindGuns();
@@ -104,9 +103,9 @@ public class GlobalInstaller : MonoInstaller
         Container.Bind<PlayerStat>().FromNewScriptableObject(_playerStat).AsSingle();
     }
 
-    private void BindEnemyData()
+    private void BindLevelTrackerData()
     {
-        Container.Bind<LevelTracker>().FromInstance(_enemyLevel).AsSingle();
+        Container.Bind<LevelTracker>().FromNewScriptableObject(_levelTracker).AsSingle();
     }
 
     private void BindBullets()
@@ -117,8 +116,15 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindGuns()
     {
-        GunData[] gunData = _gunData.ToArray();
-        Container.Bind<GunData[]>().FromInstance(gunData).AsSingle();
+        List<GunData> guns = new List<GunData>(_gunData.Length);
+
+        for (int i = 0; i < _gunData.Length; i++)
+        {
+            var gun = Instantiate(_gunData[i]);
+            guns.Add(gun);
+        }
+
+        Container.Bind<GunData[]>().FromInstance(guns.ToArray()).AsSingle();
     }
 
     private void BindPlayers()

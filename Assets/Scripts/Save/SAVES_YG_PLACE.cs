@@ -39,7 +39,7 @@ namespace YG
         #endregion
 
         #region EnemyLevelData
-        public int enemyLevel = 0;
+        public int compltetedLevels = 0;
         #endregion
 
         #region Bullets

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using Zenject;
@@ -104,23 +105,30 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         private readonly EnemySpawner[] _spawners;
         private readonly ICoinStorage _coinStorage;
 
+        private readonly Dictionary<int, SpawnLogic> _spawnLogics = new Dictionary<int, SpawnLogic>();
+
         public SpawnLogicFactory(LevelTracker levelTracker, WaveData waveData, EnemySpawner[] spawners, ICoinStorage coinStorage)
         {
             _coinStorage = coinStorage;
             _levelTracker = levelTracker;
             _waveData = waveData;
             _spawners = spawners;
+
+            _spawnLogics.Add(0, new TrainingSpawnLogic(_waveData, _spawners, _coinStorage));
+            _spawnLogics.Add(1, new FirstLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(2, new SecondLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(3, new ThirdLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(-1, new BossLevelSpawnLogic(_waveData, _spawners));
         }
 
         public SpawnLogic Create()
         {
-            switch (_levelTracker.NumberLevelsCompleted)
-            {
-                case 0:
-                    return new TrainingSpawnLogic(_waveData, _spawners, _coinStorage);
-                default:
-                    return new DefaultSpawnLogic(_waveData, _spawners);
-            }
+            int currentLevel = _levelTracker.NumberLevelsCompleted;
+
+            if (currentLevel >= _spawnLogics.Count - 1)
+                return _spawnLogics[-1];
+
+            return _spawnLogics[currentLevel];
         }
     }
 }

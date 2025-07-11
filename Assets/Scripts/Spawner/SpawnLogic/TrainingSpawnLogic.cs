@@ -3,7 +3,7 @@
 public class TrainingSpawnLogic : SpawnLogic
 {
     private const int ArmorKnightsCount = 2;
-    private const int AdditionalCoins = 125;
+    private const int AdditionalCoins = 75;
 
     private int _skeletons;
     private int _armorKnights;
