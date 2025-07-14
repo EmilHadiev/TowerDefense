@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class GlobalInstaller : MonoInstaller
         BindLoadingScreen();
         BindPurchaser();
         BindPlayers();
+        BindAwardGiver();
 
         #region DefferentPlatforms
         BindAdvertising();
@@ -67,6 +69,11 @@ public class GlobalInstaller : MonoInstaller
         #endif
     }
     #endregion
+
+    private void BindAwardGiver()
+    {
+        Container.Bind<AwardGiver>().AsSingle();
+    }
 
     private void BindLoadingScreen()
     {

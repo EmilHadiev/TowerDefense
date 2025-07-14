@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,12 @@ public class PlayerInstaller : MonoInstaller
         BindOptimization();
         BindPlayer();
         BindProfits();
+        BindHealthUpgrader();
+    }
+
+    private void BindHealthUpgrader()
+    {
+        Container.Bind<HealthUpgrader>().AsSingle();
     }
 
     private void BindProfits()
