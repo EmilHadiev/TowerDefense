@@ -39,7 +39,7 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
 
     private void AddLevel()
     {
-        _levelTracker.NumberLevelsCompleted += 1;
+        _levelTracker.TryAddCompletedLevel();
     }
 
     private void RewardPlayer()

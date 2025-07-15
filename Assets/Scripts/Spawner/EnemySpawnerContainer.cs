@@ -118,7 +118,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             _spawnLogics.Add(1, new FirstLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(2, new SecondLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(3, new ThirdLevelSpawnLogic(_waveData, _spawners));
-            _spawnLogics.Add(-1, new BossLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(4, new BossLevelSpawnLogic(_waveData, _spawners));
         }
 
         public SpawnLogic Create()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class SkinSelectorEntryPoint : MonoBehaviour
+public class DefaultEntryPoint : MonoBehaviour
 {
     private LoadingScreen _loadingScreen;
 

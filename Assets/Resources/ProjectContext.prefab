@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ad78546e766a1419e21b4694a927e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _performer: {fileID: 2097464550127242616, guid: f528980225d2f15499cbe71aea5a3fe1, type: 3}
+  _awardGiver: {fileID: -2154936824827286334, guid: 2cc53ecb620958d4a861ff339847447a, type: 3}
   _loadingScreen: {fileID: 385612833250185692, guid: 1ad780dd9a69a2a46b9b07f9e5957252, type: 3}
   _playerStat: {fileID: 11400000, guid: 5c36c3f28b4406247b387b6ac5dd53a5, type: 2}
   _evnData: {fileID: 11400000, guid: 2524bf427d30e1b4ebbaeef29112468e, type: 2}
@@ -82,11 +82,11 @@ MonoBehaviour:
   _trainingData: {fileID: 11400000, guid: 5a252f78ebc6de1498d1a3d4d888fb11, type: 2}
   _bullets:
   - {fileID: 4734834810357473392, guid: a1a8f9d1421abb140b7af105937449ac, type: 3}
-  - {fileID: 678141454919090991, guid: 75a92030a687dd846b458be41bb679dd, type: 3}
   - {fileID: 7184111560625082921, guid: 5c0f706279c102c46903a97e7e2e05b8, type: 3}
-  - {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
   - {fileID: 5800508498983936449, guid: 5400a793350f179469317c2855c45fe1, type: 3}
+  - {fileID: 678141454919090991, guid: 75a92030a687dd846b458be41bb679dd, type: 3}
   - {fileID: 1789773434517705490, guid: 0229c757d6387fe40b50c8b1a7b8c8a1, type: 3}
+  - {fileID: 1622790923035417216, guid: df72db367ff79c447aba49127feeef99, type: 3}
   - {fileID: 5239498764060803648, guid: 72a481a480b428749b2f7d9428a5487e, type: 3}
   - {fileID: 5366412411476431833, guid: 7cbb7a2a9d661584bbac433f67c6b4b2, type: 3}
   - {fileID: 2313333593945244418, guid: 9c4de4f0958498a4dbe6368aff7ae9cb, type: 3}

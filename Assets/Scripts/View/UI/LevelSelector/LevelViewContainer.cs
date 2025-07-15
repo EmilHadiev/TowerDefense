@@ -1,55 +1,47 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class LevelViewContainer : MonoBehaviour
 {
     [SerializeField] private LevelView _template;
     [SerializeField] private Transform _container;
-    [SerializeField] private ScriptableObject[] _loots;
+    [SerializeField] private Button _buttonLaunch;
 
-    private readonly List<ILootable> _lootables = new List<ILootable>();
+    private readonly List<LevelView> _views = new List<LevelView>(60);
 
     private LevelTracker _levelTracker;
-
-    private void OnValidate()
-    {
-        for (int i = 0; i < _loots.Length; i++)
-        {
-            if (CheckLootable(_loots[i]) == false)
-                break;
-        }
-    }
+    private AwardGiver _awardGiver;
+    private ISceneLoader _sceneLoader;
 
     private void Awake()
     {
-        for (int i = 0; i < _loots.Length; i++)
-        {
-            if (CheckLootable(_loots[i]) == false)
-                break;
-
-            _lootables.Add(_loots[i] as ILootable);
-        }
-
         CreateTemplates();
     }
 
-    [Inject]
-    private void Constructor(LevelTracker levelTracker)
+    private void OnEnable()
     {
-        _levelTracker = levelTracker;
+        foreach (var view in _views)
+            view.SelectedLevel += OnSelectedLevel;
+
+        _buttonLaunch.onClick.AddListener(LoadLevel);
     }
 
-    private bool CheckLootable(ScriptableObject so)
+    private void OnDisable()
     {
-        if (so is ILootable == false)
-        {
-            so = null;
-            Debug.LogError($"{so.name} does not contain interface ILootable!!!");
-            return false;
-        }
+        foreach (var view in _views)
+            view.SelectedLevel -= OnSelectedLevel;
 
-        return true;
+        _buttonLaunch.onClick.RemoveListener(LoadLevel);
+    }
+
+    [Inject]
+    private void Constructor(LevelTracker levelTracker, AwardGiver awardGiver, ISceneLoader sceneLoader)
+    {
+        _levelTracker = levelTracker;
+        _awardGiver = awardGiver;
+        _sceneLoader = sceneLoader;
     }
 
     private void CreateTemplates()
@@ -57,7 +49,51 @@ public class LevelViewContainer : MonoBehaviour
         for (int i = 0; i < 60; i++)
         {
             LevelView view = Instantiate(_template, _container);
+            _views.Add(view);
+
             view.Initialize(_levelTracker, i);
+
+            if (TryGetGunData(i, out GunData gunData))
+                view.InitializeAward(gunData.Sprite);
+
+            if (TryGetBulletData(i, out IBulletDefinition bulletData))
+                view.InitializeAward(bulletData.BulletDescription.Sprite);
         }
+    }
+
+    private bool TryGetBulletData(int levelNumber, out IBulletDefinition bulletData)
+    {
+        bulletData = null;
+
+        if (_awardGiver.Bullets.TryGetValue(levelNumber, out IBulletDefinition data))
+        {
+            bulletData = data;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetGunData(int levelNumber, out GunData gunData)
+    {
+        gunData = null;
+
+        if (_awardGiver.Guns.TryGetValue(levelNumber, out GunData data))
+        {
+            gunData = data;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnSelectedLevel(int level)
+    {
+        _levelTracker.CurrentLevel = level;
+    }
+
+    private void LoadLevel() 
+    {
+        _sceneLoader.SwitchTo(AssetProvider.SceneDefaultArena);
     }
 }

@@ -24,4 +24,5 @@
 
     public const string SceneDefaultArena = "DefaultArena";
     public const string SceneSkinSelector = "SkinSelector";
+    public const string SceneLevelSelector = "LevelSelector";
 }

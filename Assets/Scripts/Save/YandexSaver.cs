@@ -94,7 +94,11 @@ public class YandexSaver : ISavable, IDisposable
 
     #region EnemyLevel
 
-    private void LoadCompletedLevel() => _levelData.NumberLevelsCompleted = YG2.saves.compltetedLevels;
+    private void LoadCompletedLevel()
+    {
+        _levelData.NumberLevelsCompleted = YG2.saves.compltetedLevels;
+        _levelData.CurrentLevel = YG2.saves.compltetedLevels;
+    }
 
     private void SaveCompletedLevel() => YG2.saves.compltetedLevels = _levelData.NumberLevelsCompleted;
     #endregion

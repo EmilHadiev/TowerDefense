@@ -6,7 +6,7 @@ using Zenject;
 
 public class GlobalInstaller : MonoInstaller
 {
-    [SerializeField] private CoroutinePerformer _performer;
+    [SerializeField] private AwardGiver _awardGiver;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private PlayerStat _playerStat;
     [SerializeField] private EnvironmentData _evnData;
@@ -18,7 +18,6 @@ public class GlobalInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindCoroutinePerformer();
         BindSceneSwitcher();       
         BindCoinStorage();
         BindPlayerData();
@@ -72,7 +71,7 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindAwardGiver()
     {
-        Container.Bind<AwardGiver>().AsSingle();
+        Container.Bind<AwardGiver>().FromComponentInNewPrefab(_awardGiver).AsSingle();
     }
 
     private void BindLoadingScreen()
@@ -95,11 +94,6 @@ public class GlobalInstaller : MonoInstaller
         Container.BindInterfacesTo<SceneAsyncLoader>().AsSingle();
     }
 
-    private void BindCoroutinePerformer()
-    {
-        Container.BindInterfacesTo<CoroutinePerformer>().FromComponentInNewPrefab(_performer).AsSingle();
-    }
-
     private void BindTrainingData()
     {
         Container.Bind<TrainingData>().FromNewScriptableObject(_trainingData).AsSingle();
@@ -112,7 +106,11 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindLevelTrackerData()
     {
-        Container.Bind<LevelTracker>().FromNewScriptableObject(_levelTracker).AsSingle();
+        #if UNITY_EDITOR
+            Container.Bind<LevelTracker>().FromInstance(_levelTracker).AsSingle();
+        #else
+            Container.Bind<LevelTracker>().FromNewScriptableObject(_levelTracker).AsSingle();
+        #endif
     }
 
     private void BindBullets()

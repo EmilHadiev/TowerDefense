@@ -30,7 +30,7 @@ class EnemyUpgrader
             }
         }
 
-        Debug.Log($"Текущий уровень улучшения: {_levelData.NumberLevelsCompleted}");
+        Debug.Log($"Текущий уровень улучшения: {_levelData.CurrentLevel}");
     }
 
     private void InitData()
@@ -46,8 +46,8 @@ class EnemyUpgrader
         private readonly float _startHealth;
         private readonly float _startDamage;
 
-        public float Damage => _startDamage + _levelData.NumberLevelsCompleted;
-        public float Health => _startHealth + (_levelData.NumberLevelsCompleted * ImprovementFactor);
+        public float Damage => _startDamage + _levelData.CurrentLevel;
+        public float Health => _startHealth + (_levelData.CurrentLevel * ImprovementFactor);
 
         public EnemyData(LevelTracker data, EnemyStat stat)
         {
