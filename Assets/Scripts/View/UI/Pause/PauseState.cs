@@ -18,9 +18,12 @@ public class PauseState : UIState
 
     [Header("Victory")]
     [SerializeField] private TMP_Text _victoryText;
+    [SerializeField] private TMP_Text _nextText;
+    [SerializeField] private TMP_Text _restartText;
     [SerializeField] private Button _rewardProfitButton;
     [SerializeField] private GameObject _rewardProfitContainer;
     [SerializeField] private ProfitsView _profitsView;
+    [SerializeField] private AwardViewContainer _awardView;
 
     private ISavable _savable;
     private ISceneLoader _sceneLoader;
@@ -90,7 +93,7 @@ public class PauseState : UIState
 
     private void RewardContinueToggle(bool isOn)
     {
-        TextEnableToggle(false, true, false);
+        TextPauseStateToggle(false, true, false);
 
         _rewardContinueButton.gameObject.SetActive(isOn);
         _rewardContinueContainer.gameObject.SetActive(isOn);
@@ -98,14 +101,28 @@ public class PauseState : UIState
 
     private void ProfitsToggle(bool isOn)
     {
-        TextEnableToggle(false, false, true);
+        TextPauseStateToggle(false, false, true);
 
-        _rewardProfitButton.gameObject.SetActive(isOn);
-        _profitsView.gameObject.SetActive(isOn);
-        _rewardProfitContainer.gameObject.SetActive(isOn);
+        if (_awardView.TryShow() == false)
+        {
+            _profitsView.gameObject.SetActive(isOn);
+            _rewardProfitButton.gameObject.SetActive(isOn);
+            _rewardProfitContainer.gameObject.SetActive(isOn);
+        }
+        else
+        {
+            TextProfitsTextToggle(false, true);
+            _continueButton.gameObject.SetActive(false);
+        }
     }
 
-    private void TextEnableToggle(bool isPause, bool isDefeat, bool isVictory)
+    private void TextProfitsTextToggle(bool isRestartText, bool isNextText)
+    {
+        _restartText.gameObject.SetActive(isRestartText);
+        _nextText.gameObject.SetActive(isNextText);
+    }
+
+    private void TextPauseStateToggle(bool isPause, bool isDefeat, bool isVictory)
     {
         _pauseText.gameObject.SetActive(isPause);
         _defeatText.gameObject.SetActive(isDefeat);
@@ -130,7 +147,7 @@ public class PauseState : UIState
             {
                 _player.Resurrectable.Resurrect();            
                 RewardContinueToggle(false);
-                TextEnableToggle(true, false, false);
+                TextPauseStateToggle(true, false, false);
                 Exit();
             });
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using YG;
 using Zenject;
 
 public class AwardGiver : MonoBehaviour
@@ -9,6 +10,8 @@ public class AwardGiver : MonoBehaviour
     private const int SkipGun = 2;
 
     private const int AwardStep = 6;
+
+    private LevelTracker _levelTracker;
 
     private IBulletDefinition[] _bulletData;
     private GunData[] _gunData;
@@ -28,15 +31,71 @@ public class AwardGiver : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(Bullet[] bullets, GunData[] gunData)
+    private void Constructor(Bullet[] bullets, GunData[] gunData, LevelTracker levelTracker)
     {
+        _levelTracker = levelTracker;
         _bulletData = bullets.Skip(SkipBullet).ToArray();
         _gunData = gunData.Skip(SkipGun).ToArray();
     }
 
-    public void GiveAward()
+    public void GiveReward()
     {
-        
+        ILootable lootable = GetCurrentAward();
+        lootable.IsDropped = true;
+    }
+
+    public bool IsRewardLevel()
+    {
+        ILootable lootable = GetCurrentAward();
+
+        Debug.Log(lootable == null);
+        Debug.Log(_levelTracker.IsNotCompletedLevel == false);
+
+        if (lootable == null || _levelTracker.IsNotCompletedLevel == false)
+            return false;
+
+        return true;
+    }
+
+    public string GetRewardDescription()
+    {
+        int completedLevel = _levelTracker.NumberLevelsCompleted;
+
+        if (Guns.TryGetValue(completedLevel, out GunData gunData))
+            return gunData.GetLocalizedText(YG2.lang).Name;
+
+        if (Bullets.TryGetValue(completedLevel, out IBulletDefinition bulletData))
+            return bulletData.BulletDescription.GetLocalizedText(language: YG2.lang).Name;
+
+        Debug.LogError($"{completedLevel} does not contain a reward");
+        return "";
+    }
+
+    public Sprite GetRewardSprite()
+    {
+        int completedLevel = _levelTracker.NumberLevelsCompleted;
+
+        if (Guns.TryGetValue(completedLevel, out GunData gunData))
+            return gunData.Sprite;
+
+        if (Bullets.TryGetValue(completedLevel, out IBulletDefinition bulletData))
+            return bulletData.BulletDescription.Sprite;
+
+        Debug.LogError($"{completedLevel} does not contain a reward");
+        return null;
+    }
+
+    private ILootable GetCurrentAward()
+    {
+        int completedLevel = _levelTracker.NumberLevelsCompleted;
+
+        if (Guns.TryGetValue(completedLevel, out GunData gunData))
+            return gunData;
+
+        if (Bullets.TryGetValue(completedLevel, out IBulletDefinition bulletData))
+            return bulletData.BulletDescription;
+
+        return null;
     }
 
     private void PrepareGunData()

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BulletData", menuName = "Bullet")]
-public class BulletData : ScriptableObject, IBulletData, IBulletDescription, ILootable
+public class BulletData : ScriptableObject, IBulletData, IBulletDescription
 {
     [field: SerializeField, Range(1, 100f)] public float Speed { get; private set; }
     [field: SerializeField, Range(1, 5)] public int LifeTime { get; private set; }

@@ -14,6 +14,8 @@ public class LevelView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _lockerImage;
     [SerializeField] private Sprite _levelCompletedSprite;
 
+    private Color _defaultRedColor;
+
     private const string CompletedText = "<sprite=3>";
 
     private int _currentLevel;
@@ -23,6 +25,7 @@ public class LevelView : MonoBehaviour, IPointerClickHandler
 
     public void Initialize(LevelTracker levelTracker, int currentLevel)
     {
+        _defaultRedColor = _backgroundRed.color;
         _levelText.text = (currentLevel+1).ToString();
         _currentLevel = currentLevel;
         _lockerImage.enabled = false;
@@ -45,6 +48,7 @@ public class LevelView : MonoBehaviour, IPointerClickHandler
     private void ChangeViewColor()
     {
         _levelText.color = _currentLevelColor;
+        ChangeSelectColor();
     }
 
     private void ChangeTextToCompleted()
@@ -64,5 +68,16 @@ public class LevelView : MonoBehaviour, IPointerClickHandler
             return;
 
         SelectedLevel?.Invoke(_currentLevel);
+        ChangeSelectColor();
+    }
+
+    public void Deselect()
+    {
+        _backgroundRed.color = _defaultRedColor;
+    }
+
+    private void ChangeSelectColor()
+    {
+        _backgroundRed.color = _currentLevelColor;
     }
 }

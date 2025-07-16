@@ -106,20 +106,38 @@ public class YandexSaver : ISavable, IDisposable
     #region Bullets
     private void InitBullets() => _bulletSaver = new BulletItemSaver(_bullets, YG2.saves.BulletItems);
 
-    private void SaveBullets() => _bulletSaver.Save();
+    private void SaveBullets()
+    {
+        if (_bulletSaver == null)
+            Debug.Log($"{nameof(_bulletSaver)} is null");
+        else
+            _bulletSaver?.Save();
+    }
     #endregion
 
     #region Guns
     private void InitGuns() => _gunSaver = new GunItemSaver(_guns, YG2.saves.GunItems);
 
-    private void SaveGuns() => _gunSaver.Save();
+    private void SaveGuns()
+    {
+        if (_gunSaver == null)
+            Debug.Log($"{nameof(_gunSaver)} is null");
+        else
+            _gunSaver?.Save();
+    }
 
     #endregion
 
     #region PlayerData
     private void InitPlayerData() => _playerDataSaver = new PlayerDataSaver(_playerData, YG2.saves.PlayerDataItems);
 
-    private void SavePlayerData() => _playerDataSaver.Save();
+    private void SavePlayerData()
+    {
+        if (_playerDataSaver == null)
+            Debug.Log($"{nameof(_playerDataSaver)} is null");
+        else
+            _playerDataSaver?.Save();
+    }
     #endregion
 
     #region Training

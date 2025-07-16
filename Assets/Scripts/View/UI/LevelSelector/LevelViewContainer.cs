@@ -90,6 +90,9 @@ public class LevelViewContainer : MonoBehaviour
     private void OnSelectedLevel(int level)
     {
         _levelTracker.CurrentLevel = level;
+
+        foreach (var view in _views)
+            view.Deselect();
     }
 
     private void LoadLevel() 

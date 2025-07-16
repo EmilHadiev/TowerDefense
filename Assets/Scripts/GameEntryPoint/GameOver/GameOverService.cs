@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using YG;
 using Zenject;
 
@@ -25,16 +26,16 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
 
     public void GameOver()
     {
-        YG2.onCloseAnyAdv();
         PlayerLost?.Invoke();
+        YG2.onCloseAnyAdv();
     }
 
     public void GameCompleted()
     {
-        AddLevel();
-        RewardPlayer();
-        YG2.onCloseAnyAdv();
         PlayerWon?.Invoke();
+        YG2.onCloseAnyAdv();
+        RewardPlayer();
+        AddLevel();
     }
 
     private void AddLevel()
@@ -45,6 +46,8 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
     private void RewardPlayer()
     {
         _upgrader.Upgrade();
-        _awardGiver.GiveAward();
+
+        if (_awardGiver.IsRewardLevel())
+            _awardGiver.GiveReward();
     }
 }
