@@ -36,14 +36,14 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     }
 
     [Inject]
-    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode, WaveData waveData, LevelTracker levelTracker, ICoinStorage coinStorage)
+    private void Constructor(EnemyCounter counter, ILevelStateSwitcher switcher, ITrainingMode trainingMode, WaveData waveData, LevelTracker levelTracker, ICoinStorage coinStorage, AwardGiver awardGiver)
     {
         _levelTracker = levelTracker;
         _counter = counter;
         _switcher = switcher;
         _trainingMode = trainingMode;
 
-        _spawnLogicFactory = new SpawnLogicFactory(_levelTracker, waveData, _spawners, coinStorage);
+        _spawnLogicFactory = new SpawnLogicFactory(_levelTracker, waveData, _spawners, coinStorage, awardGiver);
         _spawnLogic = _spawnLogicFactory.Create();
     }
 
@@ -100,15 +100,19 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private class SpawnLogicFactory
     {
+        private const int AwardLevel = 4;
+
         private readonly LevelTracker _levelTracker;
         private readonly WaveData _waveData;
         private readonly EnemySpawner[] _spawners;
         private readonly ICoinStorage _coinStorage;
+        private readonly AwardGiver _awardGiver;
 
         private readonly Dictionary<int, SpawnLogic> _spawnLogics = new Dictionary<int, SpawnLogic>();
 
-        public SpawnLogicFactory(LevelTracker levelTracker, WaveData waveData, EnemySpawner[] spawners, ICoinStorage coinStorage)
+        public SpawnLogicFactory(LevelTracker levelTracker, WaveData waveData, EnemySpawner[] spawners, ICoinStorage coinStorage, AwardGiver awardGiver)
         {
+            _awardGiver = awardGiver;
             _coinStorage = coinStorage;
             _levelTracker = levelTracker;
             _waveData = waveData;
@@ -118,7 +122,8 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             _spawnLogics.Add(1, new FirstLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(2, new SecondLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(3, new ThirdLevelSpawnLogic(_waveData, _spawners));
-            _spawnLogics.Add(4, new BossLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(AwardLevel, new BossLevelSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(-1, new DefaultSpawnLogic(_waveData, _spawners));
         }
 
         public SpawnLogic Create()
@@ -129,6 +134,17 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
                 return _spawnLogics[-1];
 
             return _spawnLogics[currentLevel];
+        }
+
+        private bool IsAwardLevel(int currentLevel)
+        {
+            if (_awardGiver.Bullets.TryGetValue(currentLevel, out IBulletDefinition data))
+                return true;
+
+            if (_awardGiver.Guns.TryGetValue(currentLevel, out GunData gunData))
+                return true;
+
+            return false;
         }
     }
 }

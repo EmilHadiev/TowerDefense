@@ -20,7 +20,7 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     private void Start()
     {
-        SetRewardValueText(Constants.UpgradePrice.ToString());
+        SetRewardValueText(Constants.StartUpgradePrice.ToString());
         _lockTimer.Activated += OnTimerActivated;
     }
 
@@ -43,7 +43,7 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     private void GiveCoinsToPlayer()
     {
-        _coinStorage.Add(Constants.UpgradePrice);
+        _coinStorage.Add(Constants.StartUpgradePrice);
         PlaySpendCoin();
     }
 }

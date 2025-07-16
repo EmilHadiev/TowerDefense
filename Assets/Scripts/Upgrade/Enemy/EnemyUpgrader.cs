@@ -4,7 +4,7 @@ using UnityEngine;
 
 class EnemyUpgrader
 {
-    private const int ImprovementFactor = 15;
+    private const int ImprovementFactor = 20;
 
     private readonly IEnumerable<EnemyStat> _stats;
     private readonly LevelTracker _levelData;

@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class UpgradeViewContainer : MonoBehaviour
 {
     [SerializeField] private UpgradeView _template;
     [SerializeField] private Transform _container;
-    [SerializeField] private ScrollRect _rect; 
 
     private IUpgradeViewCreator _creator;
 
@@ -21,7 +19,6 @@ public class UpgradeViewContainer : MonoBehaviour
     private void Constructor(ICoinStorage coinStorage, IPlayerSoundContainer soundContainer, GunData[] gunData, IPlayer player)
     {
         _creator = new UpgradeViewCreator(_template, GetGunData(gunData), coinStorage, soundContainer, _container, player.GunPlace);
-        Debug.Log("Надо доделать " + nameof(UpgradeViewContainer));
     }
 
     private void CreateTemplates()

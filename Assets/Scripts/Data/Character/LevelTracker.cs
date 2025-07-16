@@ -9,12 +9,14 @@ public class LevelTracker : ScriptableObject
     [field: SerializeField] public int NumberLevelsCompleted { get; set; }
     [field: SerializeField] public int CurrentLevel { get; set; }
 
+    /// <summary>
+    /// return false if NumberLevelsCompleted != CurrentLevel
+    /// </summary>
     public bool IsNotCompletedLevel => NumberLevelsCompleted == CurrentLevel;
 
     /// <summary>
     /// increase the value of completed levels
     /// </summary>
-
     public void TryAddCompletedLevel()
     {
         if (IsNotCompletedLevel)
