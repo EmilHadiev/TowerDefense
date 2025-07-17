@@ -48,9 +48,6 @@ public class AwardGiver : MonoBehaviour
     {
         ILootable lootable = GetCurrentAward();
 
-        Debug.Log(lootable == null);
-        Debug.Log(_levelTracker.IsNotCompletedLevel == false);
-
         if (lootable == null || _levelTracker.IsNotCompletedLevel == false)
             return false;
 

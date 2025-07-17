@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 3
   <Sprite>k__BackingField: {fileID: 21300000, guid: 54bab0fd44ab6b94e9a2885cfc0346d0, type: 3}
-  <BaseAttackSpeed>k__BackingField: 0.24
+  <BaseAttackSpeed>k__BackingField: 0.21
   <AttackSpeedPercent>k__BackingField: 0
-  <BaseDamage>k__BackingField: 10
-  <DamagePercent>k__BackingField: 12
+  <BaseDamage>k__BackingField: 25
+  <DamagePercent>k__BackingField: 15
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 7938466019392146760, guid: 6be4273c52347c344b976ca42e40a500, type: 3}

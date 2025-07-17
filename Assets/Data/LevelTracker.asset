@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LevelTracker
   m_EditorClassIdentifier: 
   <NumberLevelsCompleted>k__BackingField: 5
-  <CurrentLevel>k__BackingField: 5
+  <CurrentLevel>k__BackingField: 6

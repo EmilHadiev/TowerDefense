@@ -87,7 +87,12 @@ public class PauseState : UIState
     private void OnPlayerWon()
     {
         RewardContinueToggle(false);
-        ProfitsToggle(true);
+
+        if (_awardView.IsRewardLevel())
+            ShowRewardView();
+        else
+            ProfitsToggle(true);
+
         Enter();
     }
 
@@ -101,19 +106,27 @@ public class PauseState : UIState
 
     private void ProfitsToggle(bool isOn)
     {
-        TextPauseStateToggle(false, false, true);
+        PlayerWonView();
 
-        if (_awardView.TryShow() == false)
-        {
-            _profitsView.gameObject.SetActive(isOn);
-            _rewardProfitButton.gameObject.SetActive(isOn);
-            _rewardProfitContainer.gameObject.SetActive(isOn);
-        }
-        else
-        {
-            TextProfitsTextToggle(false, true);
-            _continueButton.gameObject.SetActive(false);
-        }
+        _profitsView.gameObject.SetActive(isOn);
+        _rewardProfitButton.gameObject.SetActive(isOn);
+        _rewardProfitContainer.gameObject.SetActive(isOn);
+    }
+
+    private void ShowRewardView()
+    {
+        if (_awardView.IsRewardLevel() == false)
+            return;
+
+        PlayerWonView();
+        _awardView.Show();
+    }
+
+    private void PlayerWonView()
+    {
+        TextPauseStateToggle(false, false, true);
+        TextProfitsTextToggle(false, true);
+        _continueButton.gameObject.SetActive(false);
     }
 
     private void TextProfitsTextToggle(bool isRestartText, bool isNextText)

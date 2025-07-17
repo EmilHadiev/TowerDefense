@@ -15,12 +15,12 @@ public class RewardSystem
 
     public void HandleEnemyDeath(int enemyPoint)
     {
+        if (_levelTracker.IsNotCompletedLevel)
+        {
+            _coinStorage.Add(enemyPoint);
+            _profitContainer.IncreaseProfits(enemyPoint);
+        }
+
         _enemyCounter.Remove();
-
-        if (_levelTracker.IsNotCompletedLevel == false)
-            return;
-
-        _coinStorage.Add(enemyPoint);
-        _profitContainer.IncreaseProfits(enemyPoint);
     }
 }

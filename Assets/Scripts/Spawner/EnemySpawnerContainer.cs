@@ -100,7 +100,10 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
     private class SpawnLogicFactory
     {
-        private const int AwardLevel = 4;
+        private const int AwardLevel = -2;
+        private const int TrainingLevel = 0;
+        private const int DefaultLevel = -1;
+        private const int AdditionalCoins = 75;
 
         private readonly LevelTracker _levelTracker;
         private readonly WaveData _waveData;
@@ -112,39 +115,53 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
         public SpawnLogicFactory(LevelTracker levelTracker, WaveData waveData, EnemySpawner[] spawners, ICoinStorage coinStorage, AwardGiver awardGiver)
         {
-            _awardGiver = awardGiver;
             _coinStorage = coinStorage;
             _levelTracker = levelTracker;
             _waveData = waveData;
-            _spawners = spawners;
+            _spawners = spawners; 
+            _awardGiver = awardGiver;
 
-            _spawnLogics.Add(0, new TrainingSpawnLogic(_waveData, _spawners, _coinStorage));
+            _spawnLogics.Add(TrainingLevel, new TrainingSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(1, new FirstLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(2, new SecondLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(3, new ThirdLevelSpawnLogic(_waveData, _spawners));
             _spawnLogics.Add(AwardLevel, new BossLevelSpawnLogic(_waveData, _spawners));
-            _spawnLogics.Add(-1, new DefaultSpawnLogic(_waveData, _spawners));
+            _spawnLogics.Add(DefaultLevel, new DefaultSpawnLogic(_waveData, _spawners));            
         }
 
         public SpawnLogic Create()
         {
             int currentLevel = _levelTracker.NumberLevelsCompleted;
 
-            if (currentLevel >= _spawnLogics.Count - 1)
-                return _spawnLogics[-1];
+            if (IsTrainingLevel(currentLevel))
+            {
+                Debug.Log("Тренировочный уровень");
+                _coinStorage.Add(AdditionalCoins);
+                currentLevel = TrainingLevel;
+            }
+            else if (IsRewardLevel())
+            {
+                Debug.Log("Уровень с наградой");
+                currentLevel = AwardLevel;
+            }
+            else if (_spawnLogics.TryGetValue(currentLevel, out SpawnLogic value) == false)
+            {
+                currentLevel = DefaultLevel;
+                Debug.Log("Стандартный уровень");
+            }
+            else
+            {
+                Debug.Log("Ничего не меняю!");
+            }
 
             return _spawnLogics[currentLevel];
         }
 
-        private bool IsAwardLevel(int currentLevel)
+        private bool IsTrainingLevel(int currentLevel) => currentLevel == TrainingLevel;
+
+        private bool IsRewardLevel()
         {
-            if (_awardGiver.Bullets.TryGetValue(currentLevel, out IBulletDefinition data))
-                return true;
-
-            if (_awardGiver.Guns.TryGetValue(currentLevel, out GunData gunData))
-                return true;
-
-            return false;
+            return _awardGiver.IsRewardLevel();
         }
     }
 }

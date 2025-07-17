@@ -32,6 +32,16 @@ public class NegativeEffectContainer : MonoBehaviour, INegativeEffectContainer
 
     private void OnEnable()
     {
+        StopCurrentEffect();
+    }
+
+    private void OnDisable()
+    {
+        StopCurrentEffect();
+    }
+
+    private void StopCurrentEffect()
+    {
         if (_effect != null)
             _effect.StopEffect();
     }

@@ -10,12 +10,17 @@ public class ProfitsView : MonoBehaviour
 
     private void OnEnable()
     {
-        _profitsVew.text = _profitContainer.Profits.ToString();
+        ShowProfits();
     }
 
     [Inject]
     private void Constructor(IProfitContainer profitContainer)
     {
         _profitContainer = profitContainer;
+    }
+
+    public void ShowProfits()
+    {
+        _profitsVew.text = _profitContainer.Profits.ToString();
     }
 }

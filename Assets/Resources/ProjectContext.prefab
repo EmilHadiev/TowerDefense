@@ -94,15 +94,15 @@ MonoBehaviour:
   _gunData:
   - {fileID: 11400000, guid: bbc873999c3a33e418526b5ff1768068, type: 2}
   - {fileID: 11400000, guid: 0c668a68d6819a840851ba52cb6890c3, type: 2}
-  - {fileID: 11400000, guid: 63324fd48542df846a0624b93b7277d1, type: 2}
   - {fileID: 11400000, guid: e72128d2352f24e4aa59f49d93afb8d3, type: 2}
   - {fileID: 11400000, guid: 233ee853b2532bd4f9c922d693803100, type: 2}
-  - {fileID: 11400000, guid: 30579ea483932ed49adfb9772c490efb, type: 2}
+  - {fileID: 11400000, guid: 63324fd48542df846a0624b93b7277d1, type: 2}
   - {fileID: 11400000, guid: 151d59ed751eeef4b80ac798a2551dcf, type: 2}
   - {fileID: 11400000, guid: e50d05975dee34f46811599f63669611, type: 2}
-  - {fileID: 11400000, guid: 807e6523baa56cc47a1b02b70f25ebaa, type: 2}
+  - {fileID: 11400000, guid: 30579ea483932ed49adfb9772c490efb, type: 2}
   - {fileID: 11400000, guid: b5315cb99acff654ab863e0f18149586, type: 2}
   - {fileID: 11400000, guid: 81435ea42f544c847938fb0e7a1ed5c8, type: 2}
+  - {fileID: 11400000, guid: 807e6523baa56cc47a1b02b70f25ebaa, type: 2}
   _playerData:
   - {fileID: 11400000, guid: 46941b934899d59458a02b71a440c4c4, type: 2}
   - {fileID: 11400000, guid: 308bf87a361c2b3418890a127dba56f5, type: 2}

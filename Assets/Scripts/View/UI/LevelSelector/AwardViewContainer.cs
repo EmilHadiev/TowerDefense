@@ -16,16 +16,13 @@ public class AwardViewContainer : MonoBehaviour
         _awardGiver = awardGiver;
     }
 
-    public bool TryShow()
+    public void Show()
     {
-        if (_awardGiver.IsRewardLevel() == false)
-            return false;            
-
         gameObject.SetActive(true);       
 
         _awardImage.sprite = _awardGiver.GetRewardSprite();
         _awardNameText.text = _awardGiver.GetRewardDescription();
-
-        return true;
     }
+
+    public bool IsRewardLevel() => _awardGiver.IsRewardLevel();
 }

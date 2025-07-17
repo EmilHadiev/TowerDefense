@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
   <Sprite>k__BackingField: {fileID: 21300000, guid: 54bab0fd44ab6b94e9a2885cfc0346d0, type: 3}
-  <BaseAttackSpeed>k__BackingField: 0.27
+  <BaseAttackSpeed>k__BackingField: 0.24
   <AttackSpeedPercent>k__BackingField: 0
-  <BaseDamage>k__BackingField: 10
+  <BaseDamage>k__BackingField: 20
   <DamagePercent>k__BackingField: 10
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0

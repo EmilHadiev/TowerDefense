@@ -3,14 +3,13 @@
 public class TrainingSpawnLogic : SpawnLogic
 {
     private const int ArmorKnightsCount = 2;
-    private const int AdditionalCoins = 75;
 
     private int _skeletons;
     private int _armorKnights;
 
-    public TrainingSpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners, ICoinStorage coinStorage) : base(waveData, spawners)
+    public TrainingSpawnLogic(WaveData waveData, IEnumerable<EnemySpawner> spawners) : base(waveData, spawners)
     {
-        coinStorage.Add(AdditionalCoins);
+        
     }
 
     public override void CalculateNextWave()
