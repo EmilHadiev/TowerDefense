@@ -31,9 +31,10 @@ public class PauseState : UIState
     private IAdvertising _advertising;
     private IPlayer _player;
     private IProfitContainer _profit;
+    private LevelTracker _tracker;
 
     [Inject]
-    private void Constructor(ISavable savable, ISceneLoader sceneSwitcher, IGameOver gameOver, IAdvertising advertising, IPlayer player, IProfitContainer profit)
+    private void Constructor(ISavable savable, ISceneLoader sceneSwitcher, IGameOver gameOver, IAdvertising advertising, IPlayer player, IProfitContainer profit, LevelTracker tracker)
     {
         _savable = savable;
         _sceneLoader = sceneSwitcher;
@@ -41,6 +42,7 @@ public class PauseState : UIState
         _gameOver = gameOver;
         _player = player;
         _profit = profit;
+        _tracker = tracker;
     }
 
     public override void Enter()
@@ -87,13 +89,12 @@ public class PauseState : UIState
     private void OnPlayerWon()
     {
         RewardContinueToggle(false);
+        Enter();
 
         if (_awardView.IsRewardLevel())
             ShowRewardView();
         else
             ProfitsToggle(true);
-
-        Enter();
     }
 
     private void RewardContinueToggle(bool isOn)
@@ -107,6 +108,9 @@ public class PauseState : UIState
     private void ProfitsToggle(bool isOn)
     {
         PlayerWonView();
+
+        if (_tracker.IsNotCompletedLevel == false)
+            return;
 
         _profitsView.gameObject.SetActive(isOn);
         _rewardProfitButton.gameObject.SetActive(isOn);

@@ -9,6 +9,9 @@ public class UpgradeViewRender : MonoBehaviour
     [SerializeField] private TMP_Text _gunNameText;
     [SerializeField] private TMP_Text _gunUpgradeDamageText;
     [SerializeField] private TMP_Text _gunUpgradeAttackSpeedText;
+    [Header("UpgradePrice")]
+    [SerializeField] private TMP_Text _gunUpgradeDamagePriceText;
+    [SerializeField] private TMP_Text _gunUpgradeAttackSpeedPriceText;
 
     private const string EmojiMaxLevel = "<sprite=3>";
 
@@ -27,10 +30,17 @@ public class UpgradeViewRender : MonoBehaviour
     public void UpdateDescription()
     {
         if (_isDamageFilled == false)
+        {
             _gunUpgradeDamageText.text = $"{_gunData.BaseDamage} > {_gunData.BaseDamage + _gunData.DamageUpgradeValue}";
+            Debug.Log(_gunData.BaseDamage + _gunData.name);
+            _gunUpgradeDamagePriceText.text = _gunData.DamageUpgradePrice.ToString();
+        }
 
         if (_isAttackSpeedFilled == false)
+        {
             _gunUpgradeAttackSpeedText.text = $"{_gunData.AttackSpeedPercent} > {_gunData.AttackSpeedPercent + _gunData.AttackSpeedPercentageUpgradeValue}%";
+            _gunUpgradeAttackSpeedPriceText.text = _gunData.AttackSpeedUpgradePrice.ToString();
+        }
     }
 
     public void ShowFilledDamage()

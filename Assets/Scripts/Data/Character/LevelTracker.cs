@@ -15,14 +15,13 @@ public class LevelTracker : ScriptableObject
     public bool IsNotCompletedLevel => NumberLevelsCompleted == CurrentLevel;
 
     /// <summary>
-    /// increase the value of completed levels
+    /// increase the value of completed levels and currentLevel
     /// </summary>
     public void TryAddCompletedLevel()
     {
         if (IsNotCompletedLevel)
-        {
-            NumberLevelsCompleted += 1;
-            CurrentLevel = NumberLevelsCompleted;
-        }
+            ++NumberLevelsCompleted;
+
+        ++CurrentLevel;
     }
 }

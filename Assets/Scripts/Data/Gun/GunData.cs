@@ -21,12 +21,16 @@ public class GunData : ScriptableObject, ILootable
 
     [SerializeField] private LocalizedText[] _texts;
 
-    private const float AttackSpeedFactor = 0.99f;
     private const string DamageReplacer = "_dmg_";
     private const string AttackSpeedReplacer = "_as_";
 
+    private const float AttackSpeedFactor = 0.99f;
+
     public readonly int DamageUpgradeValue = 5;
     public readonly int AttackSpeedPercentageUpgradeValue = 2;
+
+    public int DamageUpgradePrice => Constants.StartUpgradePrice + DamageLevel;
+    public int AttackSpeedUpgradePrice => Constants.StartUpgradePrice + AttackSpeedLevel;
 
     public bool IsDamageMaxLevel => DamageLevel < Constants.MaxUpgradeLevel;
     public bool IsAttackSpeedMaxLevel => AttackSpeedLevel < Constants.MaxUpgradeLevel;
@@ -59,5 +63,17 @@ public class GunData : ScriptableObject, ILootable
     private string ChangeDescription(string description)
     {
         return description.Replace(DamageReplacer, GetTotalDamage().ToString()).Replace(AttackSpeedReplacer, GetTotalAttackSpeed().ToString());
+    }
+
+    public void UpgradeAttackSpeed()
+    {
+        AttackSpeedPercent += AttackSpeedPercentageUpgradeValue;
+        AttackSpeedLevel += 1;
+    }
+
+    public void UpgradeDamage()
+    {
+        BaseDamage += DamageUpgradeValue;
+        DamageLevel += 1;
     }
 }

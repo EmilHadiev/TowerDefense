@@ -6,7 +6,7 @@ public class ExplosionMine : InteractiveElement
 {
     [SerializeField] private TriggerObserver _observer;
 
-    private const int Radius = 3;
+    private const int Radius = 5;
 
     private readonly Collider[] _hits = new Collider[5];
 

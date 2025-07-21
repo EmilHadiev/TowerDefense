@@ -15,17 +15,15 @@ public class SkinViewContainer : MonoBehaviour
     private PlayerData[] _playerData;
     private readonly List<SkinView> _views = new List<SkinView>(9);
     private PlayerData _currentData;
-    private ISceneLoader _sceneLoader;
     private IPurchaser _purchaser;
     private EnvironmentData _envData;
     private ICoinStorage _coinStorage;
     private ISavable _savable;
 
     [Inject]
-    private void Constructor(PlayerData[] playerData, ISceneLoader sceneLoader, EnvironmentData environmentData, IPurchaser purchaser, ISavable savable)
+    private void Constructor(PlayerData[] playerData, EnvironmentData environmentData, IPurchaser purchaser, ISavable savable)
     {
         _playerData = playerData;
-        _sceneLoader = sceneLoader;
         _envData = environmentData;
         _purchaser = purchaser;
         _savable = savable;
@@ -56,6 +54,7 @@ public class SkinViewContainer : MonoBehaviour
             var prefab = Instantiate(_template, _container);
             prefab.Init(_playerData[i]);
             _views.Add(prefab);
+
         }
     }
 
@@ -98,6 +97,8 @@ public class SkinViewContainer : MonoBehaviour
         }
 
         _envData.PlayerData = _currentData;
-        _sceneLoader.SwitchTo(AssetProvider.SceneDefaultArena);
+
+        foreach (var view in _views)
+            view.TryChangeBackground(_currentData);
     }
 }

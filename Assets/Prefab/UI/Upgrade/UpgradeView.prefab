@@ -359,6 +359,8 @@ MonoBehaviour:
   _gunNameText: {fileID: 0}
   _gunUpgradeDamageText: {fileID: 0}
   _gunUpgradeAttackSpeedText: {fileID: 0}
+  _gunUpgradeDamagePriceText: {fileID: 0}
+  _gunUpgradeAttackSpeedPriceText: {fileID: 0}
 --- !u!114 &650108883417894794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,7 +1290,7 @@ GameObject:
   - component: {fileID: 6895251095522884923}
   - component: {fileID: 3930209119284088475}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1573,7 +1575,7 @@ GameObject:
   - component: {fileID: 8892468936933435843}
   - component: {fileID: 3726376442780113893}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2041,6 +2043,8 @@ MonoBehaviour:
   _gunNameText: {fileID: 3689498375712174539}
   _gunUpgradeDamageText: {fileID: 3930209119284088475}
   _gunUpgradeAttackSpeedText: {fileID: 3726376442780113893}
+  _gunUpgradeDamagePriceText: {fileID: 8771342050442134839}
+  _gunUpgradeAttackSpeedPriceText: {fileID: 1467324203158839664}
 --- !u!114 &8031455311501101038
 MonoBehaviour:
   m_ObjectHideFlags: 0

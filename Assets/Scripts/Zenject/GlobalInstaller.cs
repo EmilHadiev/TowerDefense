@@ -106,11 +106,7 @@ public class GlobalInstaller : MonoInstaller
 
     private void BindLevelTrackerData()
     {
-        #if UNITY_EDITOR
-            Container.Bind<LevelTracker>().FromInstance(_levelTracker).AsSingle();
-        #else
-            Container.Bind<LevelTracker>().FromNewScriptableObject(_levelTracker).AsSingle();
-        #endif
+        Container.Bind<LevelTracker>().FromNewScriptableObject(_levelTracker).AsSingle();
     }
 
     private void BindBullets()

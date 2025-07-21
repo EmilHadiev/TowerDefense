@@ -3,7 +3,7 @@ using Zenject;
 
 public class ExplosionBarrel : InteractiveObstacle
 {
-    private const int ExplosionRadius = 5;
+    private const int ExplosionRadius = 7;
     private const string EnemyMask = "Enemy";
     private const int DamageMultiplier = 2;
 

@@ -39,10 +39,10 @@ public class UpgradeHandler : MonoBehaviour
 
     private void TryUpgradeAttackSpeed()
     {
-        if (_coinStorage.TrySpend(Constants.StartUpgradePrice))
+        if (_coinStorage.TrySpend(_gunData.AttackSpeedUpgradePrice))
         {
-            _gunData.AttackSpeedPercent += _gunData.AttackSpeedPercentageUpgradeValue;
-            _gunData.AttackSpeedLevel += 1;
+            
+            _gunData.UpgradeAttackSpeed();
             _soundContainer.Play(SoundName.SpendCoin);
             _gunPlace.UpdateCurrentGunAttackSpeed();
             Upgraded?.Invoke();
@@ -62,10 +62,9 @@ public class UpgradeHandler : MonoBehaviour
 
     private void UpgradeDamage()
     {
-        if (_coinStorage.TrySpend(Constants.StartUpgradePrice))
-        {
-            _gunData.BaseDamage += _gunData.DamageUpgradeValue;
-            _gunData.DamageLevel += 1;
+        if (_coinStorage.TrySpend(_gunData.DamageUpgradePrice))
+        {            
+            _gunData.UpgradeDamage();
             _soundContainer.Play(SoundName.SpendCoin);
             Upgraded?.Invoke();
         }

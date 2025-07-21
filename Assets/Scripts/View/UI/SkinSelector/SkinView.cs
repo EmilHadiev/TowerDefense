@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SkinView : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Transform _container;
+    [SerializeField] private Image _borderImage;
     [SerializeField] private Image _backgroundImage;
 
     public event Action<PlayerData> Selected;
@@ -31,6 +32,14 @@ public class SkinView : MonoBehaviour, IPointerClickHandler
 
     public void BackgroundImageToggle(bool isOn)
     {
-        _backgroundImage.enabled = isOn;
+        _borderImage.enabled = isOn;
+    }
+
+    public void TryChangeBackground(PlayerData playerData)
+    {
+        if (playerData == _playerData)
+            _backgroundImage.color = new Color(1, 0.8431373f, 0, 1);
+        else
+            _backgroundImage.color = new Color(0.254902f, 0.2352941f, 0.3529412f, 1);           
     }
 }
