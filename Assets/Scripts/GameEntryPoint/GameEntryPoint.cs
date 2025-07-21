@@ -12,13 +12,15 @@ public class YandexGameEntryPoint : IEntryPoint
     private readonly ISceneLoader _sceneLoader;
     private readonly ISavable _savable;
     private readonly GameplayMarkup _markup;
+    private readonly LevelTracker _tracker;
 
-    public YandexGameEntryPoint(ISceneLoader sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData)
+    public YandexGameEntryPoint(ISceneLoader sceneSwitcher, ISavable savable, GameplayMarkup markup, EnvironmentData envData, LevelTracker levelTracker)
     {
         _sceneLoader = sceneSwitcher;
         _envData = envData;
         _savable = savable;
         _markup = markup;
+        _tracker = levelTracker;
     }
 
     public void Start()
@@ -42,7 +44,7 @@ public class YandexGameEntryPoint : IEntryPoint
             while (YG2.isSDKEnabled == false)
                 await UniTask.Yield(_cts.Token);
 
-            ResetProgress();
+            //ResetProgress();
             Debug.Log("ÂĞÅÌÅÍÍÎ ÑÁÀĞÑÛÂÀÅÌ ÏĞÎÃĞÅÑÑ!");
 
             HideStickyBanners();
@@ -79,7 +81,13 @@ public class YandexGameEntryPoint : IEntryPoint
 
     private void OpenAuthDialog() => YG2.OpenAuthDialog();
 
-    private void SwitchToStartScene() => _sceneLoader.SwitchTo(AssetProvider.SceneSkinSelector);
+    private void SwitchToStartScene()
+    {
+        if (_tracker.NumberLevelsCompleted > 0)
+            _sceneLoader.SwitchTo(AssetProvider.SceneMainMenu);
+        else
+            _sceneLoader.SwitchTo(AssetProvider.SceneDefaultArena);
+    }
 
     private void StartGameplay() => _markup.Ready();
 

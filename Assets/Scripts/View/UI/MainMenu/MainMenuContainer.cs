@@ -11,14 +11,13 @@ public class MainMenuContainer : MonoBehaviour
     private ISceneLoader _sceneLoader;
     private LevelTracker _tracker;
     private LoadingScreen _loadingScreen;
-
-    private void Awake()
-    {
-        _loadingScreen.Hide();
-    }
+    private Pause _pause;
 
     private void OnEnable()
     {
+        _pause.Continue();
+        _loadingScreen.Hide();
+
         _continueButton.onClick.AddListener(Continue);
         _selectLevelButton.onClick.AddListener(SelectLevel);
         _selectSkinButton.onClick.AddListener(SelectSkin);
@@ -32,11 +31,12 @@ public class MainMenuContainer : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(ISceneLoader sceneLoader, LevelTracker levelTracker, LoadingScreen loadingScreen)
+    private void Constructor(ISceneLoader sceneLoader, LevelTracker levelTracker, LoadingScreen loadingScreen, Pause pause)
     {
         _sceneLoader = sceneLoader;
         _tracker = levelTracker;
         _loadingScreen = loadingScreen;
+        _pause = pause;
     }
 
     private void Continue()

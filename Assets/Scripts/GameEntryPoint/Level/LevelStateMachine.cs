@@ -12,6 +12,8 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
     [Header("Player")]
     [SerializeField] private PlayerSpawnPosition _spawnPosition;
     [SerializeField] private GunViewContainer _gunContainer;
+
+    private bool _isLoaded = false;
     
 
     private ITrainingMode _trainingMode;
@@ -127,6 +129,11 @@ public class LevelStateMachine : MonoBehaviour, ILevelStateSwitcher
 
     private void OnLoaded()
     {
+        if (_isLoaded)
+            return;
+
+        _isLoaded = true;
+
         ActivatePlatformOptions();
 
         if (_trainingMode.IsTrainingProcess())

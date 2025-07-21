@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce95a7a4a05a45d4b8aad7850b827fc2, type: 3}
   m_Name: LevelTracker
   m_EditorClassIdentifier: 
-  <NumberLevelsCompleted>k__BackingField: 2
-  <CurrentLevel>k__BackingField: 0
+  <NumberLevelsCompleted>k__BackingField: 1
+  <CurrentLevel>k__BackingField: 2

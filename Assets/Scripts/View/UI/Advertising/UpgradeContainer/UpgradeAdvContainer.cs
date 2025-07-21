@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using YG;
 using Zenject;
 
@@ -7,6 +6,8 @@ public class UpgradeAdvContainer : AdvertisingContainer
 {
     [SerializeField] private RewardedAdvLockTimer _lockTimer;
     [SerializeField] private GameObject _advCooldownContainer;
+
+    private const int RewardValue = 100;
 
     private IPlayerSoundContainer _soundContainer;
     private ICoinStorage _coinStorage;
@@ -20,8 +21,11 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     private void Start()
     {
-        SetRewardValueText(Constants.StartUpgradePrice.ToString());
+        SetRewardValueText(RewardValue.ToString());
         _lockTimer.Activated += OnTimerActivated;
+
+        if (_lockTimer.timerComplete == false)
+            OnTimerActivated(true);
     }
 
     private void OnDestroy()
@@ -43,7 +47,7 @@ public class UpgradeAdvContainer : AdvertisingContainer
 
     private void GiveCoinsToPlayer()
     {
-        _coinStorage.Add(Constants.StartUpgradePrice);
+        _coinStorage.Add(RewardValue);
         PlaySpendCoin();
     }
 }

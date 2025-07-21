@@ -32,7 +32,6 @@ public class UpgradeViewRender : MonoBehaviour
         if (_isDamageFilled == false)
         {
             _gunUpgradeDamageText.text = $"{_gunData.BaseDamage} > {_gunData.BaseDamage + _gunData.DamageUpgradeValue}";
-            Debug.Log(_gunData.BaseDamage + _gunData.name);
             _gunUpgradeDamagePriceText.text = _gunData.DamageUpgradePrice.ToString();
         }
 

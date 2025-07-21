@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 300613395}
   - component: {fileID: 300613394}
   m_Layer: 5
-  m_Name: ButtonSelectSkin (1)
+  m_Name: ButtonSecret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,7 +618,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2068293794}
-  m_Father: {fileID: 2079335809}
+  m_Father: {fileID: 1204866615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3062614, y: 0.032669973}
   m_AnchorMax: {x: 0.6933204, y: 0.10372607}
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25490198, g: 0.23529412, b: 0.3529412, a: 0.392}
+  m_Color: {r: 0.25490198, g: 0.23529412, b: 0.3529412, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1287,6 +1287,7 @@ RectTransform:
   - {fileID: 1611160731}
   - {fileID: 1940201950}
   - {fileID: 2012719266}
+  - {fileID: 300613393}
   m_Father: {fileID: 2079335809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1307,14 +1308,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36862746, g: 0.34117648, b: 0.50980395, a: 0.39215687}
+  m_Color: {r: 0.36862746, g: 0.34117648, b: 0.50980395, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2452,7 +2453,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1204866615}
-  - {fileID: 300613393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2475,6 +2475,7 @@ MonoBehaviour:
   _continueButton: {fileID: 1611160732}
   _selectLevelButton: {fileID: 1940201951}
   _selectSkinButton: {fileID: 2012719267}
+  _background: {fileID: 0}
 --- !u!1 &2091872818
 GameObject:
   m_ObjectHideFlags: 0
