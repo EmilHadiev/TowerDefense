@@ -7,6 +7,7 @@ using Zenject;
 
 public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 {
+    [SerializeField] private MapEventsContainer _eventsContainer;
     [SerializeField] private EnemySpawner[] _spawners;
 
     private const int SpawnDelay = (int)(Constants.EnemySpawnDelay * 1000);
@@ -19,6 +20,8 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
     private ITrainingMode _trainingMode;
 
     private CancellationTokenSource _spawnCts;
+
+    private bool _isEventActivated;
 
     private void OnEnable()
     {
@@ -53,6 +56,8 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         _counter.Reset();
         Exit();
 
+        TryActivateEvent();
+
         _spawnCts = new CancellationTokenSource();
         SpawnEnemiesAsync(_spawnCts.Token).Forget();
     }
@@ -85,6 +90,19 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         catch (Exception)
         {
             
+        }
+    }
+
+    private void TryActivateEvent()
+    {
+        if (_spawnLogicFactory.IsNotDefaultLevel() && _isEventActivated == false)
+        {
+            _eventsContainer.TryActivateEvent();
+            _isEventActivated = true;
+        }
+        else
+        {
+            _eventsContainer.Deactivate();
         }
     }
 
@@ -144,7 +162,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
                 Debug.Log("Уровень с наградой");
                 currentLevel = AwardLevel;
             }
-            else if (_spawnLogics.TryGetValue(currentLevel, out SpawnLogic value) == false)
+            else if (IsNotDefaultLevel())
             {
                 currentLevel = DefaultLevel;
                 Debug.Log("Стандартный уровень");
@@ -162,6 +180,12 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
         private bool IsRewardLevel()
         {
             return _awardGiver.IsRewardLevel();
+        }
+
+        public bool IsNotDefaultLevel()
+        {
+            int currentLevel = _levelTracker.NumberLevelsCompleted;
+            return _spawnLogics.TryGetValue(currentLevel, out SpawnLogic value) == false;
         }
     }
 }

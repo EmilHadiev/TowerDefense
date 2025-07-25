@@ -7,4 +7,5 @@ public abstract class MapEventObject : MonoBehaviour
     protected EnemyCounter EnemyCounter;
 
     public abstract void Activate();
+    public virtual void Deactivate() { }
 }

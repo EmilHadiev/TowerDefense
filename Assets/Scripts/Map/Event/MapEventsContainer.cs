@@ -10,6 +10,8 @@ public class MapEventsContainer : MonoBehaviour
 
     private readonly List<MapEventObject> _objets = new List<MapEventObject>();
 
+    private MapEventObject _event;
+
     [Inject]
     private IInstantiator _instantitator;
 
@@ -31,14 +33,23 @@ public class MapEventsContainer : MonoBehaviour
     public void TryActivateEvent()
     {
         int random = Random.Range(0, 100);
-
+        
         if (ChangeToActivate >= random)
-            GetRandomEvent().Activate();
+        {
+            _event = GetRandomEvent();
+            _event.gameObject.SetActive(true);
+            _event.Activate();
+        }
+    }
+
+    public void Deactivate()
+    {
+        _event?.gameObject.SetActive(false);
     }
 
     private MapEventObject GetRandomEvent()
     {
-        int randomIndex = Random.Range(0, 100);
-        return _eventObjects[randomIndex];
+        int randomIndex = Random.Range(0, _objets.Count);
+        return _objets[randomIndex];
     }
 }

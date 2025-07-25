@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7393c27f55bc0a41b6d055b4c5dfa68, type: 3}
   m_Name: WaveData
   m_EditorClassIdentifier: 
-  _maxWaves: 1
+  _maxWaves: 4
   _waitingTime: 01000000020000000300000004000000
-  _maxMonsters: 01000000010000000100000001000000
+  _maxMonsters: 080000000c0000001000000014000000

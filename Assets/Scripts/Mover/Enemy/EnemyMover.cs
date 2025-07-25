@@ -47,8 +47,12 @@ public class EnemyMover : MonoBehaviour, IMovable
 
     public void SetMover(IMover mover)
     {
-        _mover?.StopMove();
+        StopMove();
         _mover = mover;
-        _mover.StartMove();
+        StartMove();
     }
+
+    public void StartMove() => _mover?.StartMove();
+
+    public void StopMove() => _mover?.StopMove();
 }

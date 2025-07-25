@@ -1798,6 +1798,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TakeDamageImpactMetal
       objectReference: {fileID: 0}
+    - target: {fileID: 8486146591966344815, guid: 8b3be30743702684ca3811d93549b96a, type: 3}
+      propertyPath: _particles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486146591966344815, guid: 8b3be30743702684ca3811d93549b96a, type: 3}
+      propertyPath: _particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 6534268885669760930}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1806,6 +1814,11 @@ PrefabInstance:
 --- !u!4 &240180870998470362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 645942174257765150, guid: 8b3be30743702684ca3811d93549b96a, type: 3}
+  m_PrefabInstance: {fileID: 838676438455875012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6534268885669760930 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5840589448263055974, guid: 8b3be30743702684ca3811d93549b96a, type: 3}
   m_PrefabInstance: {fileID: 838676438455875012}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &9108330804679623595 stripped

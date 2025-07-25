@@ -2231,6 +2231,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8458727562972235586}
     m_Modifications:
+    - target: {fileID: -635917312272154049, guid: 75d6284ead917c743a57136d921f8b3c, type: 3}
+      propertyPath: _particles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -635917312272154049, guid: 75d6284ead917c743a57136d921f8b3c, type: 3}
+      propertyPath: _particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 6570401416096399709}
     - target: {fileID: 6041578360273224699, guid: 75d6284ead917c743a57136d921f8b3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2283,6 +2291,11 @@ PrefabInstance:
 --- !u!4 &4960882040765998056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6041578360273224699, guid: 75d6284ead917c743a57136d921f8b3c, type: 3}
+  m_PrefabInstance: {fileID: 1661661604527022099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6570401416096399709 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5485851819716075854, guid: 75d6284ead917c743a57136d921f8b3c, type: 3}
   m_PrefabInstance: {fileID: 1661661604527022099}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6927570859649557036 stripped
