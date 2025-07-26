@@ -113,7 +113,7 @@ public class Bullet : MonoBehaviour, IBulletDefinition
     private void HideAfterCollided()
     {
         _observer.UnLock();
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void ResetValues()

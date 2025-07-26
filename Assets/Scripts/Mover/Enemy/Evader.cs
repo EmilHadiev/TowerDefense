@@ -9,7 +9,6 @@ public class Evader : MonoBehaviour, IEvadable
     [SerializeField] private float _dodgeDuration = 0.5f;
     [SerializeField] private int _dodgeInterval = 1;
 
-    private IAttackable _attackable;
     private IMovable _movable;
     private bool _isDodging;
     private Tween _activeTween;
@@ -20,20 +19,15 @@ public class Evader : MonoBehaviour, IEvadable
     private void Awake()
     {
         _movable = GetComponent<IMovable>();
-
-        if (_movable == null)
-            Debug.LogError("IMovable component not found!", this);
     }
 
     private void OnEnable()
     {
-        _attackable.Attacked += OnAttacked;
         ResetInterval();
     }
 
     private void OnDisable()
     {
-        _attackable.Attacked -= OnAttacked; 
         _activeTween?.Kill();
     }
 
@@ -41,12 +35,13 @@ public class Evader : MonoBehaviour, IEvadable
     {
         if (_timeAfterDodge >= _dodgeDistance)
             ResetInterval();
+
+        _timeAfterDodge += Time.deltaTime;
     }
 
     [Inject]
-    private void Construct(IAttackable attackable, IPlayer player)
+    private void Construct(IPlayer player)
     {
-        _attackable = attackable;
         _player = player;
     }
 
@@ -84,7 +79,7 @@ public class Evader : MonoBehaviour, IEvadable
         _activeTween?.Kill();
     }
 
-    private bool CanDodge() => _isDodging == false && _timeAfterDodge < _dodgeInterval;
+    private bool CanDodge() => _isDodging == false && _timeAfterDodge >= _dodgeInterval;
 
     private bool TryGetDodgePosition(out Vector3 result)
     {

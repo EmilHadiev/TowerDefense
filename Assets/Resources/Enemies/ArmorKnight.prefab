@@ -925,6 +925,7 @@ GameObject:
   - component: {fileID: 7877131086949579752}
   - component: {fileID: 1674407721918280246}
   - component: {fileID: 569071960484312886}
+  - component: {fileID: 441614124074132418}
   m_Layer: 6
   m_Name: ArmorKnight
   m_TagString: Untagged
@@ -1196,6 +1197,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageImpactSound: MetalDamageImpact
+--- !u!114 &441614124074132418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5812026724909341604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b5bb45bace0b04182241f7c247b5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dodgeDistance: 3
+  _dodgeDuration: 0.5
+  _dodgeInterval: 5
 --- !u!1 &6144642258767119259
 GameObject:
   m_ObjectHideFlags: 0

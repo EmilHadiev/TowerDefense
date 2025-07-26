@@ -1879,6 +1879,7 @@ GameObject:
   - component: {fileID: 5512278686139476760}
   - component: {fileID: 930754403841352372}
   - component: {fileID: 5676429046475414938}
+  - component: {fileID: 4838454084565666089}
   m_Layer: 6
   m_Name: DemonKnight
   m_TagString: Untagged
@@ -2160,6 +2161,21 @@ MonoBehaviour:
   _poisonAura: {fileID: 1941732169512757752}
   _eliteShield: {fileID: 7171320189058716252}
   _blackHoleAura: {fileID: 3968820187034610022}
+--- !u!114 &4838454084565666089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278252901586325055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b5bb45bace0b04182241f7c247b5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dodgeDistance: 3
+  _dodgeDuration: 0.5
+  _dodgeInterval: 6
 --- !u!1 &8647128331072361629
 GameObject:
   m_ObjectHideFlags: 0

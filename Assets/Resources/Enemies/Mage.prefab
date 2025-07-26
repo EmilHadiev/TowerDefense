@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 1886503380992069617}
   - component: {fileID: 670060244685158122}
   - component: {fileID: 4320605427695655421}
+  - component: {fileID: 4585121027497989201}
   m_Layer: 6
   m_Name: Mage
   m_TagString: Untagged
@@ -653,6 +654,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageImpactSound: FlashDamageImpact
+--- !u!114 &4585121027497989201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800228524858163852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b5bb45bace0b04182241f7c247b5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dodgeDistance: 3
+  _dodgeDuration: 0.5
+  _dodgeInterval: 3
 --- !u!1 &2194448728759348101
 GameObject:
   m_ObjectHideFlags: 0
