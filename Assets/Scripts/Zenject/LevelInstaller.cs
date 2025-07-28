@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -21,11 +22,17 @@ public class LevelInstaller : MonoInstaller
     {
         BindLevelEntryPoint();
         BindEnemyCounter();
+        BindComboSystem();
         BindGameOverService();
         BindTrainingMode();
         BindWaveData();
         BindWaveCounter();
         BindCameraProvider();
+    }
+
+    private void BindComboSystem()
+    {
+        Container.BindInterfacesTo<ComboSystem>().AsSingle();
     }
 
     private void BindCameraProvider()

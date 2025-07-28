@@ -28,7 +28,7 @@ public class EnemyFactory : IEnemyFactory
             throw new ArgumentOutOfRangeException(nameof(_enemyPaths));
     }
 
-    public Enemy Get(EnemyType enemyType)
+    public Enemy Create(EnemyType enemyType)
     {
         if (_enemyPaths.TryGetValue(enemyType, out string path))
             return GetEnemy(path);

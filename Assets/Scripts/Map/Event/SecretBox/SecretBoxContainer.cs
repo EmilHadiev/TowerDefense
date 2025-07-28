@@ -36,10 +36,13 @@ public class SecretBoxContainer : MapEventObject
     }
 
     [Inject]
-    private void Constructor(IPlayerSoundContainer playerSoundContainer, IEnemySoundContainer enemySound, ICoinStorage coinStorage, IPlayer player)
+    private void Constructor(IPlayerSoundContainer playerSoundContainer, IEnemySoundContainer enemySound, 
+        ICoinStorage coinStorage, IPlayer player, ICameraProvider cameraProvider, IFactoryParticle factoryParticle, IEnemyFactory enemyFactory)
     {
         _boxes.Add(new SecretBoxGold(playerSoundContainer, coinStorage));
         _boxes.Add(new SecretBoxHealing(enemySound, player.Health));
+        _boxes.Add(new SecretBoxExplosion(enemySound, transform, player.GunPlace, cameraProvider, factoryParticle));
+        _boxes.Add(new SecretBoxSpawner(enemySound, EnemyCounter, enemyFactory, coinStorage));
     }
 
     private void OnDamageApllied(float damage)

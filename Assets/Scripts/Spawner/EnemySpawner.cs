@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateEnemy()
     {
-        Enemy enemy = _factory.Get(EnemyType);
+        Enemy enemy = _factory.Create(EnemyType);
         _pool.Add(enemy);
         enemy.gameObject.SetActive(false);
         SetPosition(enemy);

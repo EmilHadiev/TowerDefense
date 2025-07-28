@@ -24,7 +24,7 @@ public class EnemySpawnerAbility
     {
         for (int i = 0; i < _maxEnemies; i++)
         {
-            Enemy enemy = _factory.Get(Type);
+            Enemy enemy = _factory.Create(Type);
             enemy.gameObject.SetActive(false);
             _pool.Add(enemy);
         }

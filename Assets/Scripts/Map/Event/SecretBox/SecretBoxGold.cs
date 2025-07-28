@@ -1,6 +1,6 @@
 ﻿public class SecretBoxGold : SecretBox
 {
-    private const int Coins = 50;
+    private const int Coins = 100;
     private readonly ICoinStorage _coinStorage;
 
     public SecretBoxGold(ISoundContainer soundContainer, ICoinStorage coinStorage) : base(soundContainer)

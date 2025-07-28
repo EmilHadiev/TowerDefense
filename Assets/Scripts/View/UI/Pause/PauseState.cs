@@ -81,8 +81,7 @@ public class PauseState : UIState
 
     private void OnPlayerDied()
     {
-        ProfitsToggle(false);
-        RewardContinueToggle(true);
+        PlayerLostView();
         Enter();
     }
 
@@ -131,6 +130,13 @@ public class PauseState : UIState
         TextPauseStateToggle(false, false, true);
         TextProfitsTextToggle(false, true);
         _continueButton.gameObject.SetActive(false);
+    }
+
+    private void PlayerLostView()
+    {
+        ProfitsToggle(false);
+        RewardContinueToggle(true);
+        TextProfitsTextToggle(true, false);
     }
 
     private void TextProfitsTextToggle(bool isRestartText, bool isNextText)

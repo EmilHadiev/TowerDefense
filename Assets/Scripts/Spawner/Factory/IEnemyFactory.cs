@@ -1,4 +1,4 @@
 ﻿public interface IEnemyFactory
 {
-    Enemy Get(EnemyType type);
+    Enemy Create(EnemyType type);
 }
