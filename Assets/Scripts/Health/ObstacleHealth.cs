@@ -54,6 +54,7 @@ public class ObstacleHealth : MonoBehaviour, IHealth
 
     private void Die()
     {
+        Died?.Invoke();
         gameObject.SetActive(false);
     }
 }

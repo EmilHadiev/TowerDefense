@@ -4,6 +4,7 @@ public static class SoundName
     public const string SpendCoin = "SpendCoin";
     public const string Resurrect = "Resurrect";
     public const string Building = "Building";
+    public const string Ricochet = "Ricochet";
 
     public const string FireExplosion = "FireExplosion";
     public const string BoneDamageImpact = "BoneDamageImpact";
