@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -28,6 +27,12 @@ public class LevelInstaller : MonoInstaller
         BindWaveData();
         BindWaveCounter();
         BindCameraProvider();
+        BindLeaderBoards();
+    }
+
+    private void BindLeaderBoards()
+    {
+        Container.BindInterfacesAndSelfTo<YGLeaderBoardService>().AsSingle();
     }
 
     private void BindComboSystem()

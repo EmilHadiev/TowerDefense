@@ -9,16 +9,18 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
     private readonly LevelTracker _levelTracker;
     private readonly HealthUpgrader _upgrader;
     private readonly AwardGiver _awardGiver;
+    private readonly ILeaderBoardSevrice _leaderBoards;
 
     public event Action PlayerLost;
     public event Action PlayerWon;
 
-    public GameOverService(IPlayer player, LevelTracker levelTracker, HealthUpgrader upgrader, AwardGiver awardGiver)
+    public GameOverService(IPlayer player, LevelTracker levelTracker, HealthUpgrader upgrader, AwardGiver awardGiver, ILeaderBoardSevrice leaderBoardSevrice)
     {
         _playerHealth = player.Health;
         _levelTracker = levelTracker;
         _upgrader = upgrader;
         _awardGiver = awardGiver;
+        _leaderBoards = leaderBoardSevrice;
     }
 
     public void Initialize() => _playerHealth.Died += GameOver;
@@ -26,12 +28,14 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
 
     public void GameOver()
     {
+        _leaderBoards.TrySaveValue();
         PlayerLost?.Invoke();
         YG2.onCloseAnyAdv();
     }
 
     public void GameCompleted()
     {
+        _leaderBoards.TrySaveValue();
         PlayerWon?.Invoke();
         YG2.onCloseAnyAdv();
         RewardPlayer();

@@ -44,8 +44,8 @@ public class YandexGameEntryPoint : IEntryPoint
             while (YG2.isSDKEnabled == false)
                 await UniTask.Yield(_cts.Token);
 
-            ResetProgress();
-            Debug.Log("бпелеммн яаюпяшбюел опнцпеяя!");
+            //ResetProgress();
+            //Debug.Log("бпелеммн яаюпяшбюел опнцпеяя!");
 
             HideStickyBanners();
             OpenAuthDialog();
