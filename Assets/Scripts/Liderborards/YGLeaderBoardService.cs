@@ -14,6 +14,6 @@ public class YGLeaderBoardService : ILeaderBoardSevrice
     public void TrySaveValue()
     {
         if (_levelTracker.IsNotCompletedLevel)
-            YG2.SetLeaderboard(TableName, _levelTracker.NumberLevelsCompleted);
+            YG2.SetLeaderboard(TableName, _levelTracker.NumberLevelsCompleted + 1);
     }
 }

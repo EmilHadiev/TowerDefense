@@ -9,7 +9,6 @@ public class Evader : MonoBehaviour, IEvadable
     [SerializeField] private float _dodgeDuration = 0.5f;
     [SerializeField] private int _dodgeInterval = 1;
 
-    private IMovable _movable;
     private bool _isDodging;
     private Tween _activeTween;
     private IPlayer _player;
@@ -18,7 +17,7 @@ public class Evader : MonoBehaviour, IEvadable
 
     private void Awake()
     {
-        _movable = GetComponent<IMovable>();
+        //_movable = GetComponent<IMovable>();
     }
 
     private void OnEnable()
@@ -75,7 +74,7 @@ public class Evader : MonoBehaviour, IEvadable
 
     private void StopDodge()
     {
-        _movable.StopMove(); // Отключаем движение через интерфейс
+        //_movable.StopMove(); // Отключаем движение через интерфейс
         _activeTween?.Kill();
     }
 
@@ -126,13 +125,13 @@ public class Evader : MonoBehaviour, IEvadable
 
     private void CompleteDodge()
     {
-        _movable.StartMove(); // Включаем движение через интерфейс
+        //_movable.StartMove(); // Включаем движение через интерфейс
         _isDodging = false;
     }
 
     private void ResetDodgeState()
     {
-        _movable?.StartMove(); // Всегда восстанавливаем движение
+        //_movable?.StartMove(); // Всегда восстанавливаем движение
         _isDodging = false;
     }
 
