@@ -53,6 +53,9 @@ public class GunViewContainer : MonoBehaviour
             GunView view = Instantiate(_gunView, _container);
             view.Initialize(_data[i], _shopItemDescriptionContainer);
             _views.Add(view);
+
+            if (i == 0)
+                view.BackgroundToggle(true);
         }
     }
 

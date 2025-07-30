@@ -5078,6 +5078,7 @@ MonoBehaviour:
   _setterView: {fileID: 2081578470}
   _setPosition: {fileID: 234858646}
   _data:
+  - {fileID: 11400000, guid: 85f4753bc11624f4e80e6581013f0a04, type: 2}
   - {fileID: 11400000, guid: 8293f5237d0838e4095ad82d0bfc5fe5, type: 2}
   - {fileID: 11400000, guid: 4ba454836f728a94ca1c97febc9d2ec1, type: 2}
   - {fileID: 11400000, guid: bae89b825ed834e418ebe5dddd25980d, type: 2}
@@ -8077,7 +8078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.2012767}
+  m_AnchoredPosition: {x: 0, y: -13.0836315}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1117965065
@@ -8772,7 +8773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.238549, y: 0}
+  m_AnchoredPosition: {x: -918.7689, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1178876171
@@ -10263,7 +10264,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.85
+  m_fontSize: 42.05
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1

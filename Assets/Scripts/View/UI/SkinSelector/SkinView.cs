@@ -21,6 +21,11 @@ public class SkinView : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Select();
+    }
+
+    public void Select()
+    {
         Selected?.Invoke(_playerData);
         BackgroundImageToggle(true);
     }

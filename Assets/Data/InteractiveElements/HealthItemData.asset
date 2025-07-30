@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32d8b7de783acbe43b1e27a642dc5b73, type: 3}
-  m_Name: ReflecterData
+  m_Name: HealthItemData
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 43f345a3bc00ae843ab26076b8eaf302, type: 3}
-  <Price>k__BackingField: 5
-  <Prefab>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: c17d9836a3625bf4d9bbd6dcfb616fbe, type: 3}
+  <Price>k__BackingField: 100
+  <Prefab>k__BackingField: {fileID: 3996669821629308461, guid: b76c90fcca41bb4439820c947ef98f97, type: 3}
   _localizeTexts:
   - <Language>k__BackingField: 0
-    <Name>k__BackingField: "\u041E\u0442\u0440\u0430\u0436\u0430\u0435\u0442 \u043F\u0443\u043B\u0438"
+    <Name>k__BackingField: "\u0417\u0434\u043E\u0440\u043E\u0432\u044C\u0435 \u0434\u043B\u044F
+      \u0438\u0433\u0440\u043E\u043A\u0430"
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 1
-    <Name>k__BackingField: Reflects bullets
+    <Name>k__BackingField: Health for the player
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 
   - <Language>k__BackingField: 2
-    <Name>k__BackingField: "Mermileri yans\u0131t\u0131r"
+    <Name>k__BackingField: "Oyuncunun sa\u011Fl\u0131\u011F\u0131"
     <ShortDescription>k__BackingField: 
     <FullDescription>k__BackingField: 

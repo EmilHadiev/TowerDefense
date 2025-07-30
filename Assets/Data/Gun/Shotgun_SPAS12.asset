@@ -21,7 +21,7 @@ MonoBehaviour:
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 3416578373548854326, guid: 9f133a4e28aea334e8ad6beb4c4dabf8, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: SPAS-12

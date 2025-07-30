@@ -21,7 +21,7 @@ MonoBehaviour:
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: -7223686035882586214, guid: af59d9765573efe4084ed973f26ef0f7, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: M200

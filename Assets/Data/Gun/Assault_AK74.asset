@@ -21,7 +21,7 @@ MonoBehaviour:
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: -5971381423991182823, guid: 6f9e1b08305855c4795ad4f03a133804, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: AK74

@@ -8,6 +8,7 @@ public class BulletView : MonoBehaviour, IBulletView
     [SerializeField] private BulletViewRender _render;
     [SerializeField] private Button _useButton;
     [SerializeField] private Button _showDescriptionButton;
+    [SerializeField] private Image _background;
 
     private IBulletDescription _data;
     private IPlayerSoundContainer _soundContainer;
@@ -52,8 +53,14 @@ public class BulletView : MonoBehaviour, IBulletView
     {
         Used?.Invoke(_index);
         _soundContainer.Play(SoundName.SwitchBullet);
+        BackgroundToggle(true);
     }
 
     private void OnClicked() =>
         Clicked?.Invoke(_render.TranslatedDescription);
+
+    public void BackgroundToggle(bool isOn)
+    {
+        _background.enabled = isOn;
+    }
 }

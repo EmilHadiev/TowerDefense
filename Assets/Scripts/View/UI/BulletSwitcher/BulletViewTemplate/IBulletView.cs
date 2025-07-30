@@ -6,4 +6,6 @@ public interface IBulletView
     event Action<int> Used;
 
     void Initialize(IBulletDescription bulletDescription, int index, IPlayerSoundContainer soundContainer);
+
+    void BackgroundToggle(bool isOn);
 }

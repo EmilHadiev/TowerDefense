@@ -21,7 +21,7 @@ MonoBehaviour:
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: -1070504417259154230, guid: 1fa9417927fc95345b2df2a4fe68b35b, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: "\u0421\u0412\u0414"

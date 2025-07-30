@@ -16,4 +16,4 @@ MonoBehaviour:
   <Price>k__BackingField: 500
   <Prefab>k__BackingField: {fileID: 3967382274278080016, guid: 401949e4b764a834f83b4b110ed2fd04, type: 3}
   <StickmanView>k__BackingField: {fileID: 1635003197568463443, guid: cb84abb31fb45c24bbd9b566c274dea5, type: 3}
-  <IsPurchased>k__BackingField: 1
+  <IsPurchased>k__BackingField: 0

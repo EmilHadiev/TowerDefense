@@ -31,8 +31,7 @@ public class InteractiveElementPositionSetter : MonoBehaviour
         if (_isWork == false)
             return;
 
-        if (_isDesktop)
-            GetMousePosition();
+        GetMousePosition();
     }
 
     [Inject]
@@ -75,7 +74,7 @@ public class InteractiveElementPositionSetter : MonoBehaviour
         }
     }
 
-     void PlayerView()
+    void PlayerView()
     {
         _particle.transform.position = Position;
         _particle.Play();

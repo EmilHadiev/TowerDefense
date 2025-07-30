@@ -27,8 +27,13 @@ public class BulletViewCreator : IBulletViewCreator
             IBulletView template = GameObject.Instantiate(_template, _container);
 
             template.Initialize(description, index, _soundContainer);
+
+            if (index == 0)
+                template.BackgroundToggle(true);
+
             index++;
             views.Add(template);
+
         }
 
         return views;

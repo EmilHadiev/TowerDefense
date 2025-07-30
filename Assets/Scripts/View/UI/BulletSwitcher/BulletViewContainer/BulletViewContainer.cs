@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class BulletViewContainer : MonoBehaviour
     [Inject]
     private void Constructor(IBulletSwitchHandler input, IBulletDefinition[] bullets, IPlayerSoundContainer soundContainer)
     {
-        _bullets = bullets;
+        _bullets = bullets;        
         _viewCreator = new BulletViewCreator(soundContainer, _bulletViewTemplate, _container);
         _viewHandler = new BulletViewHandler(input, _descriptionContainer);
     }
@@ -57,6 +58,7 @@ public class BulletViewContainer : MonoBehaviour
         for (int i = 0; i < _switchViews.Count; i++)
         {
             _switchViews[i].Used += _viewHandler.HandleViewUsed;
+            _switchViews[i].Used += HideBackground;
             _switchViews[i].Clicked += _viewHandler.HandleViewClicked;
         }
     }
@@ -66,8 +68,15 @@ public class BulletViewContainer : MonoBehaviour
         for (int i = 0; i < _switchViews.Count; i++)
         {
             _switchViews[i].Used -= _viewHandler.HandleViewUsed;
+            _switchViews[i].Used -= HideBackground;
             _switchViews[i].Clicked -= _viewHandler.HandleViewClicked;
         }
+    }
+
+    private void HideBackground(int obj)
+    {
+        foreach (var view in _switchViews)
+            view.BackgroundToggle(false);
     }
 
     private void ResetScrollPosition() => 

@@ -55,6 +55,8 @@ public class SkinViewContainer : MonoBehaviour
             prefab.Init(_playerData[i]);
             _views.Add(prefab);
 
+            if (_playerData[i] == _envData.PlayerData)
+                prefab.Select();
         }
     }
 

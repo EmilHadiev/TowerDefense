@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class BulletViewHandler : IBulletViewHandler
 {
     private readonly IBulletSwitchHandler _input;
@@ -9,7 +11,10 @@ public class BulletViewHandler : IBulletViewHandler
         _descriptionContainer = descriptionContainer;
     }
 
-    public void HandleViewUsed(int index) => _input.SwitchTo(index);
+    public void HandleViewUsed(int index)
+    {
+        _input.SwitchTo(index);
+    }
     public void HandleViewClicked(string fullDescription)
     {
         _descriptionContainer.EnableToggle(true);

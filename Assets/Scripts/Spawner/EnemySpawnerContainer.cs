@@ -154,7 +154,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             if (IsTrainingLevel(currentLevel))
             {
                 Debug.Log("Тренировочный уровень");
-                _coinStorage.Add(AdditionalCoins);
+                TryAddAdditionalCoins();
                 currentLevel = TrainingLevel;
             }
             else if (IsRewardLevel())
@@ -173,6 +173,14 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
             }
 
             return _spawnLogics[currentLevel];
+        }
+
+        private void TryAddAdditionalCoins()
+        {
+            if (_coinStorage.Coins >= AdditionalCoins)
+                return;
+
+            _coinStorage.Add(AdditionalCoins);
         }
 
         private bool IsTrainingLevel(int currentLevel) => currentLevel == TrainingLevel;

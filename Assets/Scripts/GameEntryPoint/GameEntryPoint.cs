@@ -44,12 +44,13 @@ public class YandexGameEntryPoint : IEntryPoint
             while (YG2.isSDKEnabled == false)
                 await UniTask.Yield(_cts.Token);
 
+            TryRemoveTestProgress();
             //ResetProgress();
             //Debug.Log("ВРЕМЕННО СБАРСЫВАЕМ ПРОГРЕСС!");
 
             HideStickyBanners();
             OpenAuthDialog();
-            LoadProgress();
+            LoadProgress();            
             SetEnvData();
             SwitchToStartScene();
             StartGameplay();
@@ -58,6 +59,12 @@ public class YandexGameEntryPoint : IEntryPoint
         {
             Debug.Log("Аутентификация отменена");
         }
+    }
+
+    private void TryRemoveTestProgress()
+    {
+        if (YG2.saves.compltetedLevels == 0)
+            ResetProgress();
     }
 
     private void SetEnvData()

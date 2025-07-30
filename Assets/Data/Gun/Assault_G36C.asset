@@ -21,7 +21,7 @@ MonoBehaviour:
   <DamageLevel>k__BackingField: 0
   <AttackSpeedLevel>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 3017346369579148224, guid: cf9c031fcfaee7f45bf6744c7209a3bc, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _texts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: G36C

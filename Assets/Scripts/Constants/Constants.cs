@@ -23,8 +23,8 @@
     public const int StartUpgradePrice = 50;
     public const int AdditionalUpgradePrice = 5;
     public const int AdditionalHealthToPlayer = 20;
-    public const int GiveFirstBulletAwardLevel = 5;
-    public const int GiveFirstGunAwardLevel = 8;
+    public const int GiveFirstBulletAwardLevel = 2;
+    public const int GiveFirstGunAwardLevel = 5;
 
     public const int StartScene = 1;
 
