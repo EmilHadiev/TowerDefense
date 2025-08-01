@@ -49,9 +49,9 @@ public class YandexGameEntryPoint : IEntryPoint
             //Debug.Log("ÂÐÅÌÅÍÍÎ ÑÁÀÐÑÛÂÀÅÌ ÏÐÎÃÐÅÑÑ!");
 
             HideStickyBanners();
-            OpenAuthDialog();
-            LoadProgress();            
+
             SetEnvData();
+            LoadProgress();            
             SwitchToStartScene();
             StartGameplay();
         }
@@ -85,8 +85,6 @@ public class YandexGameEntryPoint : IEntryPoint
     private void HideStickyBanners() => YG2.StickyAdActivity(false);
 
     private void LoadProgress() => _savable.LoadProgress();
-
-    private void OpenAuthDialog() => YG2.OpenAuthDialog();
 
     private void SwitchToStartScene()
     {

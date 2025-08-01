@@ -29,15 +29,15 @@ public class GameOverService : IGameOver, IInitializable, IDisposable
     public void GameOver()
     {
         _leaderBoards.TrySaveValue();
+        YG2.SkipNextInterAdCall();
         PlayerLost?.Invoke();
-        YG2.onCloseAnyAdv();
     }
 
     public void GameCompleted()
     {
         _leaderBoards.TrySaveValue();
+        YG2.SkipNextInterAdCall();
         PlayerWon?.Invoke();
-        YG2.onCloseAnyAdv();
         RewardPlayer();
         AddLevel();
     }
