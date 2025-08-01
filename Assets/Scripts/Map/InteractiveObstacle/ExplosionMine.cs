@@ -7,6 +7,7 @@ public class ExplosionMine : InteractiveElement
     [SerializeField] private TriggerObserver _observer;
 
     private const int Radius = 5;
+    private const float DamageMultiplyer = 1.5f;
 
     private readonly Collider[] _hits = new Collider[5];
 
@@ -64,7 +65,7 @@ public class ExplosionMine : InteractiveElement
 
         for (int i = 0; i < count; i++)
             if (_hits[i].TryGetComponent(out IHealth health))
-                health.TakeDamage(_gunPlace.CurrentGun.Damage);
+                health.TakeDamage(_gunPlace.CurrentGun.Damage * DamageMultiplyer);
 
         gameObject.SetActive(false);
     }

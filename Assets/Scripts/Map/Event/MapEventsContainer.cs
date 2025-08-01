@@ -6,7 +6,7 @@ public class MapEventsContainer : MonoBehaviour
 {
     [SerializeField] private MapEventObject[] _eventObjects;
 
-    private const int ChangeToActivate = 100;
+    private const int ChangeToActivate = 30;
 
     private readonly List<MapEventObject> _objets = new List<MapEventObject>();
 

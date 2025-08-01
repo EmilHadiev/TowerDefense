@@ -177,7 +177,7 @@ public class EnemySpawnerContainer : MonoBehaviour,  ILevelState
 
         private void TryAddAdditionalCoins()
         {
-            if (_coinStorage.Coins >= AdditionalCoins)
+            if (_levelTracker.NumberLevelsCompleted > 0)
                 return;
 
             _coinStorage.Add(AdditionalCoins);

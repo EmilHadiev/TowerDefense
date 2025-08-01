@@ -19,7 +19,7 @@ public class ProfitContainer : IProfitContainer, IInitializable
         _playerSound.Play(SoundName.SpendCoin);
     }
 
-    public int GetBoostProfits(int multiplier = 2) => Profits * multiplier;
+    public int GetBoostProfits(int multiplier = 1) => Profits * multiplier;
 
     public void IncreaseProfits(int profits) => Profits += profits;
 

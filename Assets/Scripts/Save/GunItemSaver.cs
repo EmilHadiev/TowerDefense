@@ -39,6 +39,10 @@ public class GunItemSaver
                 throw new System.NullReferenceException($"GunItem with ID {_gunsData[i].ID} not found in _items");
             }
 
+            _gunsData[i].BaseDamage = item.BaseDamage;
+            _gunsData[i].AttackSpeedPercent =(int)item.AttackSpeedPercent;
+            _gunsData[i].DamageLevel = item.DamageLevel;
+            _gunsData[i].AttackSpeedLevel = item.AttackSpeedLevel;
             _gunsData[i].IsDropped = item.IsDropped;
         }
     }

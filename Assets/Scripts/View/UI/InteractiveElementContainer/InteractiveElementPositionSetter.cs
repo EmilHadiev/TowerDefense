@@ -7,9 +7,7 @@ public class InteractiveElementPositionSetter : MonoBehaviour
     private readonly RaycastHit[] _hits = new RaycastHit[1];
 
     private Camera _camera;
-    private bool _isDesktop;
 
-    private EnvironmentData _envData;
     private IFactoryParticle _particleFactory;
     private ParticleView _particle;
 
@@ -20,7 +18,6 @@ public class InteractiveElementPositionSetter : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
-        _isDesktop = _envData.IsDesktop;
 
         _particle = _particleFactory.Create(AssetProvider.ParticleInteractiveElementPlacePath);
         StopParticle();
@@ -35,10 +32,9 @@ public class InteractiveElementPositionSetter : MonoBehaviour
     }
 
     [Inject]
-    private void Constructor(IFactoryParticle factory, EnvironmentData environment, IInput input)
+    private void Constructor(IFactoryParticle factory)
     {
         _particleFactory = factory;
-        _envData = environment;
     }
 
     public void EnableToggle(bool isWork)
@@ -47,11 +43,6 @@ public class InteractiveElementPositionSetter : MonoBehaviour
 
         if (_isWork == false)
             StopParticle();
-    }
-
-    private void GetTouchPosition()
-    {
-
     }
 
     private void GetMousePosition()

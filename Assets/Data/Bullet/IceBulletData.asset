@@ -17,7 +17,7 @@ MonoBehaviour:
   <Color>k__BackingField: {r: 0.7254902, g: 0.9098039, b: 0.91764706, a: 1}
   <Clip>k__BackingField: {fileID: 8300000, guid: 11c3487e98b8f174997dad5679151c59, type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: cf81f956e7dd3ca429042d4ec8447419, type: 3}
-  <IsDropped>k__BackingField: 1
+  <IsDropped>k__BackingField: 0
   _localizedTexts:
   - <Language>k__BackingField: 0
     <Name>k__BackingField: "\u0421\u043D\u0435\u0436\u0438\u043D\u043A\u0430"

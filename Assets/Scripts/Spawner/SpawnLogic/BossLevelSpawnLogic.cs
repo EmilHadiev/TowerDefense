@@ -35,9 +35,9 @@ public class BossLevelSpawnLogic : SpawnLogic
     }
 
     public override bool TrySpawn()
-    { 
-        return TrySpawn(_skeletons, EnemyType.Skeleton) 
-            || TrySpawnRandom(_others, EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage, EnemyType.ArmorKnight) 
-            || TrySpawn(_elite, EnemyType.DemonKnight);
+    {
+        return TrySpawn(_elite, EnemyType.DemonKnight)
+            || TrySpawn(_skeletons, EnemyType.Skeleton)
+            || TrySpawnRandom(_others, EnemyType.Dragon, EnemyType.BlackKnight, EnemyType.Mage, EnemyType.ArmorKnight);
     }
 }
